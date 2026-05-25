@@ -22,3 +22,8 @@ frontend-dist/
 *.AppImage
 *.deb
 *.snap
+
+# Generated artifacts (engine output, Python cache)
+apps/*/output/
+__pycache__/
+*.pyc
