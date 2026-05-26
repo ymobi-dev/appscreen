@@ -32,6 +32,10 @@
       [
         "Tema **Claro e Escuro**",
         "Escolha o visual que mais combina com seu momento de leitura."
+      ],
+      [
+        "Lista de **Devocionais**",
+        "Veja seus planos em um só lugar."
       ]
     ]
   },
@@ -68,6 +72,10 @@
       [
         "Tema **Claro e Escuro**",
         "Escolhe o visual que mais combina com o teu momento de leitura."
+      ],
+      [
+        "Lista de **Devocionais**",
+        "Vê os teus planos num só lugar."
       ]
     ]
   },
@@ -104,6 +112,10 @@
       [
         "**Light and Dark** Theme",
         "Choose the look that best fits your reading moment."
+      ],
+      [
+        "**Devotionals**",
+        "See all your plans in one place."
       ]
     ]
   },
@@ -140,6 +152,10 @@
       [
         "Tema **Claro y Oscuro**",
         "Elige el diseño que mejor se adapte a tu momento de lectura."
+      ],
+      [
+        "**Devocionales**",
+        "Todos tus planes en un solo lugar."
       ]
     ]
   },
@@ -176,6 +192,10 @@
       [
         "Thème **Clair et Sombre**",
         "Choisissez le look qui convient le mieux à votre moment de lecture."
+      ],
+      [
+        "**Dévotionnels**",
+        "Tous vos plans en un seul endroit."
       ]
     ]
   },
@@ -212,6 +232,10 @@
       [
         "Tema **Terang dan Gelap**",
         "Pilih tampilan yang paling sesuai com momen membaca Anda."
+      ],
+      [
+        "**Renungan**",
+        "Semua rencana Anda di satu tempat."
       ]
     ]
   },
@@ -248,6 +272,10 @@
       [
         "**Light at Dark** Theme",
         "Piliin ang hitsura na pinaka-bagay sa iyong sandali ng pagbabasa."
+      ],
+      [
+        "**Mga Debosyon**",
+        "Lahat ng iyong plano sa isang lugar."
       ]
     ]
   },
@@ -284,6 +312,10 @@
       [
         "**Hell- und Dunkelmodus**",
         "Wählen Sie den Look, der am besten zu Ihrem Lesemoment passt."
+      ],
+      [
+        "**Andachten**",
+        "Alle Deine Pläne auf einen Blick."
       ]
     ]
   },
@@ -320,6 +352,10 @@
       [
         "Mandhari **Nyepesi na Giza**",
         "Chagua mwonekano unaolingana na wakati wako wa kusoma."
+      ],
+      [
+        "**Masomo ya Kila Siku**",
+        "Ona mipango yako yote mahali pamoja."
       ]
     ]
   },
@@ -356,6 +392,250 @@
       [
         "Chủ đề **Sáng và Tối**",
         "Chọn giao diện phù hợp với thời điểm đọc của bạn."
+      ],
+      [
+        "**Tĩnh Nguyện**",
+        "Xem tất cả các kế hoạch ở một nơi."
+      ]
+    ]
+  },
+  "it-IT": {
+    "slides": [
+      [
+        "Bibbia 365 **(Diodati 1649)**",
+        "L'abitudine che finalmente completerai. Leggi tutta la Bibbia in un anno!"
+      ],
+      [
+        "**Salmo 91** e Promesse",
+        "Ispirazione quotidiana e fede per rafforzare il tuo cammino ogni mattina."
+      ],
+      [
+        "Leggi in **5 Minuti**",
+        "Capitoli divisi in parti brevi. Senza stress, con vero progresso."
+      ],
+      [
+        "Bibbia **Audio narrata**",
+        "Ascolta Dio in macchina o al lavoro. Audio offline di alta qualità."
+      ],
+      [
+        "**Diodati** e Altro",
+        "Le migliori versioni **100% offline**. La Parola sempre con te."
+      ],
+      [
+        "**Famiglia** e Amici",
+        "Condividi versetti bellissimi e meditazioni. Edifica chi ami."
+      ],
+      [
+        "La Parola sempre con Te",
+        "Salva ciò che tocca il tuo cuore. Accedi ovunque, **senza internet**."
+      ],
+      [
+        "Tema **Chiaro e Scuro**",
+        "Scegli il look che si adatta meglio al tuo momento di lettura."
+      ],
+      [
+        "**Devozionali**",
+        "Vedi tutti i tuoi piani in un unico posto."
+      ]
+    ]
+  },
+  "nl-NL": {
+    "slides": [
+      [
+        "Bijbel 365 **(Statenvertaling)**",
+        "De gewoonte die je eindelijk afmaakt. Lees de hele Bijbel in één jaar!"
+      ],
+      [
+        "**Psalm 91** & Beloften",
+        "Dagelijkse inspiratie en geloof om je reis elke ochtend te versterken."
+      ],
+      [
+        "Lees in **5 Minuten**",
+        "Hoofdstukken verdeeld in kleine stukken. Geen overweldiging, echte vooruitgang."
+      ],
+      [
+        "**Gesproken Audio** Bijbel",
+        "Luister naar God in de auto of op het werk. Hoogwaardig offline audio."
+      ],
+      [
+        "**Statenvertaling** & Meer",
+        "De beste versies **100% offline**. Gods Woord altijd bij je."
+      ],
+      [
+        "**Familie** & Vrienden",
+        "Deel mooie verzen en meditaties. Bouw degenen op die je liefhebt."
+      ],
+      [
+        "Gods Woord altijd bij Je",
+        "Sla op wat je hart raakt. Toegang overal, **zonder internet**."
+      ],
+      [
+        "**Licht en Donker** Thema",
+        "Kies de uitstraling die het beste past bij jouw leesmoment."
+      ],
+      [
+        "**Dagboeken**",
+        "Zie al je plannen op één plek."
+      ]
+    ]
+  },
+  "sv-SE": {
+    "slides": [
+      [
+        "Bibeln 365 **(Svenska Bibeln)**",
+        "Vanan du äntligen avslutar. Läs hela Bibeln på ett år!"
+      ],
+      [
+        "**Psalm 91** & Löften",
+        "Daglig inspiration och tro för att stärka din resa varje morgon."
+      ],
+      [
+        "Läs på **5 Minuter**",
+        "Kapitel uppdelade i korta delar. Ingen överväldigande, verkliga framsteg."
+      ],
+      [
+        "**Uppläst** Bibel",
+        "Lyssna på Gud i bilen eller på jobbet. Högkvalitativt offline-ljud."
+      ],
+      [
+        "**Svenska Bibeln** & Mer",
+        "De bästa versionerna **100% offline**. Guds Ord alltid med dig."
+      ],
+      [
+        "**Familj** & Vänner",
+        "Dela vackra verser och meditationer. Uppmuntra dem du älskar."
+      ],
+      [
+        "Guds Ord alltid med Dig",
+        "Spara vad som rör ditt hjärta. Åtkomst var som helst, **utan internet**."
+      ],
+      [
+        "**Ljust och Mörkt** Tema",
+        "Välj utseendet som passar bäst för ditt läsögonblick."
+      ],
+      [
+        "**Andakter**",
+        "Se alla dina planer på ett ställe."
+      ]
+    ]
+  },
+  "pl-PL": {
+    "slides": [
+      [
+        "Biblia 365 **(Gdańska 1632)**",
+        "Nawyk, który w końcu ukończysz. Przeczytaj całą Biblię w rok!"
+      ],
+      [
+        "**Psalm 91** i Obietnice",
+        "Codzienna inspiracja i wiara, aby wzmocnić Twoją drogę każdego ranka."
+      ],
+      [
+        "Czytaj w **5 Minut**",
+        "Rozdziały podzielone na krótkie części. Bez przeciążenia, z prawdziwym postępem."
+      ],
+      [
+        "Biblia **Audio mówiona**",
+        "Słuchaj Boga w samochodzie lub w pracy. Wysokiej jakości audio offline."
+      ],
+      [
+        "**Gdańska** i Więcej",
+        "Najlepsze wersje **100% offline**. Słowo Boże zawsze z Tobą."
+      ],
+      [
+        "**Rodzina** i Przyjaciele",
+        "Dziel się pięknymi wersetami i medytacjami. Buduj tych, których kochasz."
+      ],
+      [
+        "Słowo Boże zawsze z Tobą",
+        "Zapisz to, co dotyka Twego serca. Dostęp gdziekolwiek, **bez internetu**."
+      ],
+      [
+        "Motyw **Jasny i Ciemny**",
+        "Wybierz wygląd, który najlepiej pasuje do Twojej chwili czytania."
+      ],
+      [
+        "**Dewocjonały**",
+        "Zobacz wszystkie swoje plany w jednym miejscu."
+      ]
+    ]
+  },
+  "uk-UA": {
+    "slides": [
+      [
+        "Біблія 365 **(Огієнко)**",
+        "Звичка, яку ти нарешті завершиш. Прочитай всю Біблію за рік!"
+      ],
+      [
+        "**Псалом 91** і Обіцянки",
+        "Щоденне натхнення і віра, щоб зміцнити свій шлях кожного ранку."
+      ],
+      [
+        "Читай за **5 Хвилин**",
+        "Розділи, поділені на короткі частини. Без перевантаження, з реальним прогресом."
+      ],
+      [
+        "Біблія з **Аудіо**",
+        "Слухай Бога в машині або на роботі. Якісне офлайн аудіо."
+      ],
+      [
+        "**Огієнко** та Інше",
+        "Найкращі версії **100% офлайн**. Слово Боже завжди з тобою."
+      ],
+      [
+        "**Сім'я** та Друзі",
+        "Діліться красивими віршами і роздумами. Підтримуйте тих, кого любите."
+      ],
+      [
+        "Слово Боже завжди з Тобою",
+        "Зберігай те, що торкається твого серця. Доступ будь-де, **без інтернету**."
+      ],
+      [
+        "Тема **Світла та Темна**",
+        "Обери вигляд, який найкраще підходить для твого часу читання."
+      ],
+      [
+        "**Відданість**",
+        "Переглянь усі свої плани в одному місці."
+      ]
+    ]
+  },
+  "am": {
+    "slides": [
+      [
+        "መጽሐፍ ቅዱስ 365 **(AMH1962)**",
+        "የምትጨርሰው ልምድ። በአንድ ዓመት ሙሉ መጽሐፍ ቅዱሱን አንብቡ!"
+      ],
+      [
+        "**መዝሙር 91** እና ቃልኪዳኖች",
+        "ጉዞዎን ለማጠናከር ዕለታዊ መንፈሳዊ ምገባ።"
+      ],
+      [
+        "ለ**5 ደቂቃ** ያንብቡ",
+        "ምዕራፎቹ ወደ አጭር ክፍሎች ተከፋፍለዋል። ሳይጠናከሩ፣ እውነተኛ እድገት።"
+      ],
+      [
+        "**ድምጽ** መጽሐፍ ቅዱስ",
+        "በመኪና ወይም ሥራ ላይ እግዚአብሔርን ያዳምጡ። ከፍተኛ ጥራት ያለው ኦፍላይን ድምጽ።"
+      ],
+      [
+        "**AMH1962** እና ተጨማሪ",
+        "ምርጥ ትርጉሞች **100% ኦፍላይን**። የእግዚአብሔር ቃል ሁልጊዜ ከእርስዎ ጋር።"
+      ],
+      [
+        "**ቤተሰብ** እና ወዳጆች",
+        "ቆንጆ ጥቅሶችን እና ሃሳቦችን ያጋሩ። ሚወዷቸውን ያበረቱ።"
+      ],
+      [
+        "የእግዚአብሔር ቃል ሁልጊዜ ከእርስዎ",
+        "ልብዎን የሚነካ ያስቀምጡ። ሁሉም ቦታ ይድረሱ፣ **ኢንተርኔት ሳይጠቀሙ**።"
+      ],
+      [
+        "**ብርሃን እና ጨለማ** ጭብጥ",
+        "ለንባብዎ ጊዜ ምርጥ ዲዛይን ይምረጡ።"
+      ],
+      [
+        "**ጸሎቶች**",
+        "ሁሉም እቅዶቹ በአንድ ቦታ ይሆናሉ።"
       ]
     ]
   }
