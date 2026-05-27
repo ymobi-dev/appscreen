@@ -1474,7 +1474,6 @@ async function init() {
 
 // Set up event listeners immediately (don't wait for async init)
 function initSync() {
-    if (window.applyBiblia365Theme) window.applyBiblia365Theme();
     setupEventListeners();
     setupElementEventListeners();
     setupPopoutEventListeners();
