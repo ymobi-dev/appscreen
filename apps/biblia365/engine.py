@@ -19,7 +19,9 @@ LOCALE_TO_FOLDER = {
     "en-US": "en", "en-GB": "en", "en-AU": "en", "en-CA": "en",
     "es-419": "es", "es-ES": "es", "es-MX": "es",
     "fr-FR": "fr", "fr-CA": "fr",
-    "id": "id", "fil": "fil", "de-DE": "de", "sw": "sw", "vi": "vi"
+    "id": "id", "fil": "fil", "de-DE": "de", "sw": "sw", "vi": "vi",
+    "it-IT": "it", "nl-NL": "nl", "sv-SE": "sv",
+    "pl-PL": "pl", "uk-UA": "uk", "am": "am"
 }
 
 # COREOGRAFIA CINEMATOGRÁFICA (8 SLIDES)
@@ -32,6 +34,7 @@ SLIDE_CONFIGS = {
     5: {"scale": 0.86, "angle": 4,  "x_off": -40},  # Social
     6: {"scale": 0.89, "angle": 0,  "x_off": 0},    # Favoritos
     7: {"scale": 0.86, "angle": -3, "x_off": 30},   # Tema Dark/Light
+    8: {"scale": 0.86, "angle": 0,  "x_off": 0},    # Lista de Devocionais
 }
 
 def get_fonts():
@@ -202,7 +205,8 @@ def run_factory(target_platform=None, target_locale=None):
             ["Biblia.png", "Bíblia.png"],
             ["Compartilhar Versiculo.png", "Compartilhar Versículo.png"],
             ["Favoritos.png"],
-            ["Tema Dark.png"]
+            ["Tema Dark.png"],
+            ["Lista de Devocionais.png", "Lista de Devocionais (novo).png"]
         ]
         if slide_idx >= len(possible_names): return None
         for name in possible_names[slide_idx]:
@@ -237,5 +241,13 @@ def run_factory(target_platform=None, target_locale=None):
         os.system(f"open {BASE_OUTPUT_DIR}/{target_platform}/{target_locale}/slide_1.png")
 
 if __name__ == "__main__":
-    # Rodar apenas pt-BR do iPhone conforme solicitado
-    run_factory(target_platform="ios", target_locale="pt-BR")
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--platform", choices=["android", "ios", "all"], default="android")
+    parser.add_argument("--locale", default="pt-BR")
+    args = parser.parse_args()
+
+    target_platform = None if args.platform == "all" else args.platform
+    target_locale = None if args.locale == "all" else args.locale
+    run_factory(target_platform=target_platform, target_locale=target_locale)
