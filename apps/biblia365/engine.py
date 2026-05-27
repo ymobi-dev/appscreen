@@ -37,7 +37,16 @@ SLIDE_CONFIGS = {
     8: {"scale": 0.86, "angle": 0,  "x_off": 0},    # Lista de Devocionais
 }
 
-def get_fonts():
+def get_fonts(locale=None):
+    # Para amárico, usar Kefa III (especializada em Ge'ez)
+    if locale == "am":
+        f_bold = "/System/Library/Fonts/Supplemental/KefaIII.ttf"
+        f_semi = "/System/Library/Fonts/Supplemental/KefaIII.ttf"
+        if not os.path.exists(f_bold): f_bold = "/System/Library/Fonts/Supplemental/Arial.ttf"
+        if not os.path.exists(f_semi): f_semi = "/System/Library/Fonts/Supplemental/Arial.ttf"
+        return ImageFont.truetype(f_bold, 95), ImageFont.truetype(f_semi, 52)
+
+    # Para outros idiomas, usar Montserrat
     f_bold = os.path.join(FONTS_DIR, "montserrat_bold.ttf")
     f_semi = os.path.join(FONTS_DIR, "montserrat_semibold.ttf")
     if not os.path.exists(f_bold): f_bold = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
@@ -128,7 +137,7 @@ def process_screenshot(locale, idx, headline, subheadline, input_path, output_pa
     canvas.paste(vignette, (0, 0), vignette)
 
     draw = ImageDraw.Draw(canvas)
-    f_h, f_s = get_fonts()
+    f_h, f_s = get_fonts(locale)
     
     h_lines = wrap_text(headline, draw, f_h, TEXT_WIDTH)
     s_lines = wrap_text(subheadline, draw, f_s, TEXT_WIDTH)
