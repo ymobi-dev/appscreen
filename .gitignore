@@ -27,3 +27,6 @@ frontend-dist/
 apps/*/output/
 __pycache__/
 *.pyc
+
+# Python virtualenv
+apps/biblia365/.venv/
