@@ -204,8 +204,11 @@ def process_screenshot(locale, idx, headline, subheadline, input_path, output_pa
         # MOLDURAS REAIS (IDENTIDADE APPLE VS GOOGLE)
         if platform == "android":
             radius = 45
-            border_col = (42,42,45) # Titanium Dark
-            light_col = (80,80,85)
+            # Titanium claro -- a versão escura (42,42,45) tinha só 1.38:1
+            # de contraste contra o novo fundo (DEEP_NAVY), quase some;
+            # esta passa de 5:1 e mantém a identidade "graphite" do Android
+            border_col = (130, 130, 135)
+            light_col = (190, 190, 195)
         else:
             radius = 80 # iPhone REAL arredondado
             border_col = (210, 210, 215) # Silver Titanium
