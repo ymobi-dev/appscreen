@@ -1,12 +1,38 @@
 import os
 import json
-import shutil
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+import math
+import re
+import numpy as np
+from collections import namedtuple
+from PIL import Image, ImageDraw, ImageFont
 
 # --- CONFIGURAÇÕES GLOBAIS ---
 WIDTH, HEIGHT = 1290, 2796
 TEXT_WIDTH = WIDTH - 260
-ANCHOR_MARGIN = 200 
+ANCHOR_MARGIN = 200
+
+# Variantes escuras e dessaturadas das próprias cores da marca
+# (darkBackgroundColor, primaryColor, secondaryColor em biblia365-config.js),
+# com luminância baixa o bastante pra texto branco/dourado manter contraste
+# AA+ em qualquer ponto do frame -- o fundo inteiro é zona segura, não só
+# uma faixa atrás do texto.
+DEEP_NAVY = (6, 11, 22)     # darkBackgroundColor, como está
+DEEP_PLUM = (35, 21, 46)    # secondaryColor #6A5FA7, escurecida
+DEEP_EMBER = (44, 23, 15)   # primaryColor #CB7835, escurecida
+
+# Ajuste fino do layout de texto
+TEXT_TOP_MARGIN = 160
+HEADLINE_LINE_HEIGHT_RATIO = 1.08
+SUBHEAD_LINE_HEIGHT_RATIO = 1.35
+HEADLINE_SUBHEAD_GAP_RATIO = 0.32
+DEVICE_Y_MAX = 800
+DEVICE_Y_FALLBACK = 750
+GRADIENT_ANGLE_DEG = 132
+
+GOLD_HIGHLIGHT = (255, 197, 92)
+TextStyle = namedtuple("TextStyle", "color shadow_alpha")
+HEADLINE_STYLE = TextStyle(color=(253, 253, 253), shadow_alpha=90)
+SUBHEAD_STYLE = TextStyle(color=(210, 210, 220), shadow_alpha=70)
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 FONTS_DIR = os.path.join(APP_ROOT, "fonts")
@@ -32,9 +58,9 @@ SLIDE_CONFIGS = {
     3: {"scale": 0.86, "angle": 6,  "x_off": -70},  # Áudio
     4: {"scale": 0.86, "angle": -5, "x_off": 50},   # Traduções
     5: {"scale": 0.86, "angle": 4,  "x_off": -40},  # Social
-    6: {"scale": 0.89, "angle": 0,  "x_off": 0},    # Favoritos
-    7: {"scale": 0.86, "angle": -3, "x_off": 30},   # Tema Dark/Light
-    8: {"scale": 0.86, "angle": 0,  "x_off": 0},    # Lista de Devocionais
+    6: {"scale": 0.89, "angle": 0,  "x_off": 0},    # Tema Dark/Light
+    7: {"scale": 0.86, "angle": -3, "x_off": 30},   # slot extra (não usado nas 7 telas atuais)
+    8: {"scale": 0.86, "angle": 0,  "x_off": 0},    # slot extra (não usado nas 7 telas atuais)
 }
 
 def get_fonts(locale=None):
@@ -46,16 +72,24 @@ def get_fonts(locale=None):
         if not os.path.exists(f_semi): f_semi = "/System/Library/Fonts/Supplemental/Arial.ttf"
         return ImageFont.truetype(f_bold, 95), ImageFont.truetype(f_semi, 52)
 
-    # Para outros idiomas, usar Montserrat
+    # Para outros idiomas, usar Montserrat (bold no título, regular no
+    # subtítulo -- contraste de peso é o que separa manchete de apoio,
+    # não precisa mais do glow pra isso)
     f_bold = os.path.join(FONTS_DIR, "montserrat_bold.ttf")
-    f_semi = os.path.join(FONTS_DIR, "montserrat_semibold.ttf")
+    f_reg = os.path.join(FONTS_DIR, "montserrat.ttf")
     if not os.path.exists(f_bold): f_bold = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
-    if not os.path.exists(f_semi): f_semi = "/System/Library/Fonts/Supplemental/Arial.ttf"
-    return ImageFont.truetype(f_bold, 110), ImageFont.truetype(f_semi, 58)
+    if not os.path.exists(f_reg): f_reg = "/System/Library/Fonts/Supplemental/Arial.ttf"
+    return ImageFont.truetype(f_bold, 108), ImageFont.truetype(f_reg, 52)
+
+def expand_bold_spans(text):
+    """Um trecho **com várias palavras** é tokenizado como um bloco só pelo
+    wrap_text, então um título todo em negrito e largo o bastante (ex.:
+    "Hell- und Dunkelmodus" em alemão) não quebra linha e vaza pra fora do
+    frame. Separar cada trecho em **tags** por palavra mantém a cor
+    dourada em cada uma e deixa a quebra de linha normal funcionar."""
+    return re.sub(r'\*\*([^*]+)\*\*', lambda m: ' '.join(f'**{w}**' for w in m.group(1).split()), text)
 
 def wrap_text(text, draw, font, max_width):
-    raw_tokens = os.path.join(APP_ROOT, "engine.py") # ignore, just internal ref
-    import re
     raw_tokens = re.findall(r'\*\*[^*]+\*\*|\S+', text)
     lines = []
     current = []
@@ -76,8 +110,7 @@ def wrap_text(text, draw, font, max_width):
         lines.append(' '.join(current))
     return lines
 
-def _draw_line_centered(draw, line, font, y, width):
-    import re
+def _draw_line_centered(draw, line, font, y, width, style):
     space_w = draw.textlength(' ', font=font)
     parts = re.findall(r'\*\*[^*]+\*\*|\S+', line)
     segments = []
@@ -92,70 +125,73 @@ def _draw_line_centered(draw, line, font, y, width):
             total_w += space_w
 
     x = (width - total_w) / 2
-    for i, (visible, is_hl, w) in enumerate(segments):
-        # Cores e Glows do usuário (Dourado para Destaque)
-        color = (255, 200, 80) if is_hl else (253, 253, 253)
-        glow_color = (255, 220, 130, 220) if is_hl else (255, 255, 255, 140)
-        shadow_color = (0, 0, 0, 115) if is_hl else (0, 0, 0, 65)
-        radius = 3 if is_hl else 2
+    for visible, is_hl, w in segments:
+        fill = GOLD_HIGHLIGHT if is_hl else style.color
+        # Sombra suave única -- o contraste já vem do fundo (ver
+        # draw_brand_background), não precisa mais do glow em 8 direções
+        draw.text((x + 3, y + 3), visible, font=font, fill=(0, 0, 0, style.shadow_alpha))
+        draw.text((x, y), visible, font=font, fill=fill)
+        x += w + space_w
 
-        # Sombra
-        draw.text((x + 4, y + 4), visible, font=font, fill=shadow_color)
-        # Glow
-        for off_x in (-radius, 0, radius):
-            for off_y in (-radius, 0, radius):
-                if off_x == 0 and off_y == 0: continue
-                draw.text((x + off_x, y + off_y), visible, font=font, fill=glow_color)
-        # Texto principal
-        draw.text((x, y), visible, font=font, fill=color)
+def smoothstep(t):
+    t = np.clip(t, 0.0, 1.0)
+    return t * t * (3 - 2 * t)
 
-        x += w + (space_w if i < len(segments) - 1 else 0)
+def draw_brand_background(canvas, angle_deg=GRADIENT_ANGLE_DEG):
+    """Um único gradiente diagonal contínuo entre 3 tons profundos da
+    marca (navy -> ameixa -> âmbar). Cada stop já é escuro o bastante
+    sozinho pra contraste AA+, então o frame inteiro é zona segura --
+    sem costura, sem faixa de transição pra calcular."""
+    xx, yy = np.meshgrid(np.arange(WIDTH), np.arange(HEIGHT))
+    rad = math.radians(angle_deg)
+    proj = xx * math.cos(rad) + yy * math.sin(rad)
+    t = (proj - proj.min()) / (proj.max() - proj.min())
+    t = smoothstep(t)
 
-def create_vignette(width, height):
-    overlay = Image.new('RGBA', (width, height), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(overlay)
-    for i in range(int(height * 0.35)):
-        alpha = int(140 * (1 - (i / (height * 0.35))))
-        draw.line([(0, i), (width, i)], fill=(0, 0, 0, alpha))
-    return overlay
+    out = np.zeros((HEIGHT, WIDTH, 3), dtype=np.float32)
+    half = t < 0.5
+    t1 = np.clip(t / 0.5, 0, 1)
+    t2 = np.clip((t - 0.5) / 0.5, 0, 1)
+    for c in range(3):
+        seg1 = DEEP_NAVY[c] + (DEEP_PLUM[c] - DEEP_NAVY[c]) * t1
+        seg2 = DEEP_PLUM[c] + (DEEP_EMBER[c] - DEEP_PLUM[c]) * t2
+        out[:, :, c] = np.where(half, seg1, seg2)
 
-def process_screenshot(locale, idx, headline, subheadline, input_path, output_path, total_slides, platform="android"):
-    canvas = Image.new('RGB', (WIDTH, HEIGHT))
-    
-    # 1. Panorama Background
-    bg_path = os.path.join(ASSETS_DIR, "background.png")
-    if os.path.exists(bg_path):
-        full_bg = Image.open(bg_path)
-        bg_w, bg_h = full_bg.size
-        target_full_w = int(HEIGHT * (bg_w / bg_h))
-        full_bg_resized = full_bg.resize((target_full_w, HEIGHT), Image.LANCZOS)
-        step = (target_full_w - WIDTH) // (total_slides - 1) if total_slides > 1 else 0
-        left = idx * step
-        canvas.paste(full_bg_resized.crop((left, 0, left + WIDTH, HEIGHT)), (0, 0))
-    
-    vignette = create_vignette(WIDTH, HEIGHT)
-    canvas.paste(vignette, (0, 0), vignette)
+    img = Image.fromarray(out.astype(np.uint8), mode="RGB")
+    canvas.paste(img, (0, 0))
 
+def draw_text_block(canvas, headline, subheadline, f_h, f_s):
+    """Desenha título + subtítulo centralizados e retorna a altura total
+    do bloco, pra quem chamou posicionar o mockup do device logo abaixo."""
     draw = ImageDraw.Draw(canvas)
-    f_h, f_s = get_fonts(locale)
-    
+    headline = expand_bold_spans(headline)
+    subheadline = expand_bold_spans(subheadline)
     h_lines = wrap_text(headline, draw, f_h, TEXT_WIDTH)
     s_lines = wrap_text(subheadline, draw, f_s, TEXT_WIDTH)
-    h_lh, s_lh, gap = 130, 75, 40
-    total_text_h = (len(h_lines) * h_lh) + (len(s_lines) * s_lh) + gap
-    
-    y_text = ANCHOR_MARGIN
-    device_y = y_text + total_text_h + (ANCHOR_MARGIN // 2)
-    if device_y > 800: device_y = 750
+    h_lh = int(f_h.size * HEADLINE_LINE_HEIGHT_RATIO)
+    s_lh = int(f_s.size * SUBHEAD_LINE_HEIGHT_RATIO)
+    gap = int(f_h.size * HEADLINE_SUBHEAD_GAP_RATIO)
 
-    curr_y = y_text
+    curr_y = TEXT_TOP_MARGIN
     for line in h_lines:
-        _draw_line_centered(draw, line, f_h, curr_y, WIDTH)
+        _draw_line_centered(draw, line, f_h, curr_y, WIDTH, HEADLINE_STYLE)
         curr_y += h_lh
     curr_y += gap
     for line in s_lines:
-        _draw_line_centered(draw, line, f_s, curr_y, WIDTH)
+        _draw_line_centered(draw, line, f_s, curr_y, WIDTH, SUBHEAD_STYLE)
         curr_y += s_lh
+
+    return (len(h_lines) * h_lh) + (len(s_lines) * s_lh) + gap
+
+def process_screenshot(locale, idx, headline, subheadline, input_path, output_path, platform="android"):
+    canvas = Image.new('RGB', (WIDTH, HEIGHT))
+    draw_brand_background(canvas)
+
+    f_h, f_s = get_fonts(locale)
+    total_text_h = draw_text_block(canvas, headline, subheadline, f_h, f_s)
+
+    device_y = TEXT_TOP_MARGIN + total_text_h + (ANCHOR_MARGIN // 2)
+    if device_y > DEVICE_Y_MAX: device_y = DEVICE_Y_FALLBACK
 
     if os.path.exists(input_path):
         screen = Image.open(input_path).convert("RGBA")
@@ -208,12 +244,11 @@ def run_factory(target_platform=None, target_locale=None):
     def find_file(platform, folder, slide_idx):
         possible_names = [
             ["Home.png"],
-            ["Versiculo do Dia.png", "Versículo do Dia.png"],
-            ["Leitura por Partes.png"],
+            ["Lista de Devocionais.png", "Versiculo do Dia.png", "Versículo do Dia.png"],
+            ["Leitura por Partes.png", "Devocional por Partes.png"],
             ["Bíblia em Áudio.png", "Bíblia em Áudio.png"],
             ["Biblia.png", "Bíblia.png"],
             ["Compartilhar Versiculo.png", "Compartilhar Versículo.png"],
-            ["Favoritos.png"],
             ["Tema Dark.png"],
             ["Lista de Devocionais.png", "Lista de Devocionais (novo).png"]
         ]
@@ -243,7 +278,7 @@ def run_factory(target_platform=None, target_locale=None):
                 input_path = find_file(platform, folder_name, i)
                 if input_path:
                     output_path = os.path.join(BASE_OUTPUT_DIR, platform, locale, f"slide_{i+1}.png")
-                    process_screenshot(locale, i, slide_text[0], slide_text[1], input_path, output_path, len(slides), platform=platform)
+                    process_screenshot(locale, i, slide_text[0], slide_text[1], input_path, output_path, platform=platform)
     
     print(f"\n🎉 Processamento concluído!")
     if target_platform and target_locale:
