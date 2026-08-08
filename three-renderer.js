@@ -31,21 +31,36 @@ let phoneModelCache = {};  // { deviceType: { model, pivot, screenPlane, baseSca
 const deviceConfigs = {
     iphone: {
         modelPath: 'models/iphone-15-pro-max.glb',
+        // Calibrated to the GLB's physical screen cutout, not the raw capture
+        // resolution — this model's mesh materials aren't reliably named/shaped
+        // to derive the screen bounds automatically (tried it: the "glass"
+        // material also matches camera lens rings, picking a degenerate sliver),
+        // so this stays a tuned constant, verified visually against the model.
         aspectRatio: 1290 / 2796,
         screenHeightFactor: 0.826,
         screenOffset: { x: 0.027, y: 0.745, z: 0.098 },
         positionOffsetFactor: 0.81,
         cornerRadiusFactor: 0.16,
-        modelRotation: { x: 0, y: 0, z: 0 }  // No correction needed
+        modelRotation: { x: 0, y: 0, z: 0 },  // No correction needed
+        // Status bar (time/wifi/battery + Dynamic Island) stays visible per
+        // user call — do not crop the top of the capture.
+        statusBarCropFrac: 0,
+        topPadFrac: 0
     },
     samsung: {
         modelPath: 'models/samsung-galaxy-s25-ultra.glb',
+        // Calibrated to the GLB's physical screen cutout (verified visually —
+        // matching this to the raw capture's own aspect instead clips real UI
+        // text under the bezel, since the model's screen hole isn't that shape).
         aspectRatio: 1440 / 3120,
         screenHeightFactor: 0.66,
         screenOffset: { x: 0, y: 0.0, z: 0.08},  // Will need adjustment
         positionOffsetFactor: 0.5,
         cornerRadiusFactor: 0.04,
-        modelRotation: { x: 0, y: 0, z: 0 }  // Adjust to correct model tilt (in degrees)
+        modelRotation: { x: 0, y: 0, z: 0 },  // Adjust to correct model tilt (in degrees)
+        // Status bar stays visible per user call — do not crop the top.
+        statusBarCropFrac: 0,
+        topPadFrac: 0
     }
 };
 
@@ -265,8 +280,11 @@ function loadPhoneModel() {
                 }
             });
 
-            // Find the front glass - that's where the screen actually is
-            // Don't use black meshes, those are small elements like notch/dynamic island
+            // Find the front glass - that's where the screen actually is.
+            // NOTE: this "glass" material match is unreliable across these GLB
+            // assets (it can match camera lens rings, not the display) and is
+            // kept for diagnostics only — the screen plane size is NOT derived
+            // from it (see deviceConfigs.aspectRatio for why).
             let glassMeshes = [];
             phoneModel.traverse((child) => {
                 if (child.isMesh) {
@@ -282,12 +300,9 @@ function loadPhoneModel() {
                     }
                 }
             });
-
-            // Use the largest glass mesh (front screen glass)
             if (glassMeshes.length > 0) {
                 glassMeshes.sort((a, b) => b.area - a.area);
                 screenMesh = glassMeshes[0].mesh;
-                console.log('  -> Using largest glass mesh as screen:', screenMesh.name);
             }
 
             // Create a pivot group for rotation around screen center
@@ -608,17 +623,46 @@ function createScreenOverlay() {
     console.log('Plane size:', planeWidth.toFixed(4), 'x', planeHeight.toFixed(4));
 }
 
-// Create a rounded corner version of the screenshot
-function createRoundedScreenImage(image, cornerRadius) {
+// Pure cover-crop math: return the source rect (image pixels) that fills the
+// target aspect ratio while preserving the image's native aspect, aligned to
+// the TOP (keeps the app header, crops the bottom overflow). topCutFrac drops
+// a status-bar band off the top first (see deviceConfigs statusBarCropFrac).
+// Kept pure so it can be verified outside the DOM.
+function computeCoverCrop(imgW, imgH, targetAspect, topCutFrac = 0) {
+    const topCut = Math.round(imgH * topCutFrac);
+    const usableH = imgH - topCut;
+    const imgAspect = imgW / usableH;
+    if (Math.abs(imgAspect - targetAspect) < 0.001) {
+        return { sx: 0, sy: topCut, sw: imgW, sh: usableH };
+    }
+    if (imgAspect > targetAspect) {
+        // Image wider than the screen: crop horizontal, center it, keep full height.
+        const sw = Math.round(usableH * targetAspect);
+        return { sx: Math.round((imgW - sw) / 2), sy: topCut, sw, sh: usableH };
+    }
+    // Image taller than the screen: crop vertical from the bottom (top-aligned).
+    const sh = Math.round(imgW / targetAspect);
+    return { sx: 0, sy: topCut, sw: imgW, sh: Math.min(sh, usableH) };
+}
+
+// Create a rounded corner version of the screenshot, cover-cropped to the
+// device screen aspect ratio first so the texture never stretches/distorts.
+// topPadFrac adds a solid quiet-zone strip after the status-bar crop, for
+// screens whose real content (a heading, no hero photo) sits right under the
+// status bar in the raw capture and would otherwise land flush against the
+// device's top bezel curve.
+function createRoundedScreenImage(image, cornerRadius, targetAspect, topCutFrac = 0, topPadFrac = 0) {
+    const crop = targetAspect ? computeCoverCrop(image.width, image.height, targetAspect, topCutFrac) : null;
+    const w = crop ? crop.sw : image.width;
+    const h = crop ? crop.sh : image.height;
+
     const canvas = document.createElement('canvas');
-    canvas.width = image.width;
-    canvas.height = image.height;
+    canvas.width = w;
+    canvas.height = h;
     const ctx = canvas.getContext('2d');
 
-    // Draw rounded rectangle path
-    const w = canvas.width;
-    const h = canvas.height;
-    const r = cornerRadius;
+    // Draw rounded rectangle path (radius scales with the cropped width)
+    const r = Math.round(cornerRadius * (crop ? crop.sw / image.width : 1));
 
     ctx.beginPath();
     ctx.moveTo(r, 0);
@@ -632,9 +676,23 @@ function createRoundedScreenImage(image, cornerRadius) {
     ctx.quadraticCurveTo(0, 0, r, 0);
     ctx.closePath();
 
-    // Clip to rounded rectangle and draw image
+    // Clip to rounded rectangle and draw (cropped) image
     ctx.clip();
-    ctx.drawImage(image, 0, 0);
+    if (crop) {
+        const padPx = Math.min(Math.round(h * topPadFrac), Math.round(crop.sh * 0.5));
+        if (padPx > 0) {
+            const sample = document.createElement('canvas');
+            sample.width = 1;
+            sample.height = 1;
+            sample.getContext('2d').drawImage(image, crop.sx + crop.sw / 2, crop.sy + 1, 1, 1, 0, 0, 1, 1);
+            const [sr, sg, sb] = sample.getContext('2d').getImageData(0, 0, 1, 1).data;
+            ctx.fillStyle = `rgb(${sr}, ${sg}, ${sb})`;
+            ctx.fillRect(0, 0, w, padPx);
+        }
+        ctx.drawImage(image, crop.sx, crop.sy, crop.sw, crop.sh - padPx, 0, padPx, w, crop.sh - padPx);
+    } else {
+        ctx.drawImage(image, 0, 0);
+    }
 
     return canvas;
 }
@@ -656,10 +714,15 @@ function updateScreenTexture() {
         screenTexture.dispose();
     }
 
-    // Create rounded corner version of the image using device-specific corner radius
+    // Create rounded corner version of the image using device-specific corner
+    // radius. The plane height stays fixed to the physical bezel (screenHeightFactor);
+    // the width is derived from this screenshot's own aspect ratio (after the
+    // status-bar crop) so nothing gets force-cropped to a hardcoded device spec.
     const config = deviceConfigs[currentDeviceModel] || deviceConfigs.iphone;
     const cornerRadius = Math.round(screenshotImage.width * config.cornerRadiusFactor);
-    const roundedImage = createRoundedScreenImage(screenshotImage, cornerRadius);
+    const topCutFrac = config.statusBarCropFrac || 0;
+    const contentAspect = screenshotImage.width / (screenshotImage.height * (1 - topCutFrac));
+    const roundedImage = createRoundedScreenImage(screenshotImage, cornerRadius, contentAspect, topCutFrac, config.topPadFrac);
 
     screenTexture = new THREE.Texture(roundedImage);
     screenTexture.needsUpdate = true;
@@ -675,9 +738,15 @@ function updateScreenTexture() {
 
     // Apply to custom screen plane (preferred)
     if (customScreenPlane) {
+        const planeHeight = 4.3 * config.screenHeightFactor;
+        const planeWidth = planeHeight * contentAspect;
+        if (Math.abs(customScreenPlane.geometry.parameters.width - planeWidth) > 0.0005) {
+            customScreenPlane.geometry.dispose();
+            customScreenPlane.geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+        }
         customScreenPlane.material.dispose();
         customScreenPlane.material = screenMaterial;
-        console.log('Applied rounded texture to custom screen plane');
+        console.log('Applied rounded texture to custom screen plane, width:', planeWidth.toFixed(4), 'height:', planeHeight.toFixed(4), 'aspect:', contentAspect.toFixed(4));
     }
 
     // Trigger render update
@@ -797,6 +866,7 @@ function renderThreeJSToCanvas(targetCanvas, width, height) {
 
     // Draw to target canvas (compositing the 3D phone onto existing content)
     const ctx = targetCanvas.getContext('2d');
+    drawPhoneContactShadow(ctx, dims, threeCamera, customScreenPlane?.parent || phonePivot);
     ctx.drawImage(threeRenderer.domElement, 0, 0, dims.width, dims.height);
 
     // Restore size, background, and model transforms
@@ -807,6 +877,53 @@ function renderThreeJSToCanvas(targetCanvas, width, height) {
     phonePivot.position.copy(originalPosition);
     phonePivot.scale.copy(originalScale);
     phonePivot.rotation.copy(originalRotation);
+}
+
+// Draw a soft contact shadow under the phone so it sits on the floor instead of floating.
+// Projects the model's world-space bottom to screen pixels, then paints a soft radial ellipse.
+function drawPhoneContactShadow(ctx, dims, camera, model) {
+    if (!ctx || !camera || !model) return;
+    const box = new THREE.Box3().setFromObject(model);
+    if (box.isEmpty()) return;
+
+    const bottomY = box.min.y;
+    const center = new THREE.Vector3((box.min.x + box.max.x) / 2, bottomY, (box.min.z + box.max.z) / 2);
+    const left = new THREE.Vector3(box.min.x, bottomY, box.min.z);
+    const right = new THREE.Vector3(box.max.x, bottomY, box.min.z);
+    center.project(camera);
+    left.project(camera);
+    right.project(camera);
+
+    const cx = (center.x * 0.5 + 0.5) * dims.width;
+    const cy = (center.y * -0.5 + 0.5) * dims.height;
+    const halfW = Math.abs(right.x - left.x) * 0.5 * dims.width;
+    const rx = Math.max(halfW * 0.8, 16);
+    const ry = rx * 0.3;
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.scale(1, ry / rx);
+
+    // Warm light pool first (reads on dark backgrounds where a black shadow
+    // would blend in and disappear), then a tighter dark core for grounding.
+    const poolR = rx * 1.6;
+    const pool = ctx.createRadialGradient(0, 0, 0, 0, 0, poolR);
+    pool.addColorStop(0, 'rgba(203, 120, 53, 0.22)');
+    pool.addColorStop(1, 'rgba(203, 120, 53, 0)');
+    ctx.beginPath();
+    ctx.arc(0, 0, poolR, 0, Math.PI * 2);
+    ctx.fillStyle = pool;
+    ctx.fill();
+
+    const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
+    grad.addColorStop(0, 'rgba(0, 0, 0, 0.35)');
+    grad.addColorStop(0.6, 'rgba(0, 0, 0, 0.14)');
+    grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.beginPath();
+    ctx.arc(0, 0, rx, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+    ctx.restore();
 }
 
 // Render 3D for a specific screenshot index (used for side previews)
@@ -871,7 +988,9 @@ function renderThreeJSForScreenshot(targetCanvas, width, height, screenshotIndex
     const oldMaterial = screenPlaneToUse ? screenPlaneToUse.material : null;
     if (screenshotImage && screenPlaneToUse) {
         const cornerRadius = Math.round(screenshotImage.width * config.cornerRadiusFactor);
-        const roundedImage = createRoundedScreenImage(screenshotImage, cornerRadius);
+        const topCutFrac = config.statusBarCropFrac || 0;
+        const contentAspect = screenshotImage.width / (screenshotImage.height * (1 - topCutFrac));
+        const roundedImage = createRoundedScreenImage(screenshotImage, cornerRadius, contentAspect, topCutFrac, config.topPadFrac);
         const newTexture = new THREE.Texture(roundedImage);
         newTexture.needsUpdate = true;
         newTexture.encoding = THREE.sRGBEncoding;
@@ -882,6 +1001,13 @@ function renderThreeJSForScreenshot(targetCanvas, width, height, screenshotIndex
             side: THREE.FrontSide,
             transparent: true
         });
+        // Same fixed-height/dynamic-width plane sizing as the main texture update.
+        const planeHeight = 4.3 * config.screenHeightFactor;
+        const planeWidth = planeHeight * contentAspect;
+        if (Math.abs(screenPlaneToUse.geometry.parameters.width - planeWidth) > 0.0005) {
+            screenPlaneToUse.geometry.dispose();
+            screenPlaneToUse.geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+        }
         screenPlaneToUse.material = newMaterial;
     }
 
@@ -934,6 +1060,7 @@ function renderThreeJSForScreenshot(targetCanvas, width, height, screenshotIndex
 
     // Draw to target canvas (composite 3D phone onto existing background)
     const ctx = targetCanvas.getContext('2d');
+    drawPhoneContactShadow(ctx, dims, threeCamera, screenPlaneToUse?.parent);
     ctx.drawImage(threeRenderer.domElement, 0, 0, dims.width, dims.height);
 
     // Restore everything

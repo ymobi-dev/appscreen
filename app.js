@@ -7102,6 +7102,28 @@ function renderScreenshotToCanvas(index, targetCanvas, targetCtx, dims, previewS
     drawElementsToContext(targetCtx, dims, elements, 'above-text');
 }
 
+function hexToRgba(hex, alpha) {
+    const h = hex.replace('#', '');
+    const full = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
+    const n = parseInt(full, 16);
+    return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`;
+}
+
+function drawGlowToContext(context, dims, glow) {
+    if (!glow || !glow.color) return;
+    const cx = (glow.x ?? 0.5) * dims.width;
+    const cy = (glow.y ?? 0.5) * dims.height;
+    const r = (glow.radius ?? 0.7) * Math.max(dims.width, dims.height);
+    const opacity = (glow.opacity ?? 40) / 100;
+    // Bright core + soft falloff so it reads as a spotlight, not an even fade.
+    const glowGrad = context.createRadialGradient(cx, cy, 0, cx, cy, r);
+    glowGrad.addColorStop(0, hexToRgba(glow.color, opacity));
+    glowGrad.addColorStop(0.35, hexToRgba(glow.color, opacity * 0.6));
+    glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    context.fillStyle = glowGrad;
+    context.fillRect(0, 0, dims.width, dims.height);
+}
+
 function drawBackgroundToContext(context, dims, bg) {
     if (bg.type === 'gradient') {
         const angle = bg.gradient.angle * Math.PI / 180;
@@ -7117,6 +7139,10 @@ function drawBackgroundToContext(context, dims, bg) {
 
         context.fillStyle = gradient;
         context.fillRect(0, 0, dims.width, dims.height);
+
+        // Optional soft radial glow (spotlight) overlaid on the base gradient.
+        // Anchored consistently across slides so a set reads as one connected scene.
+        drawGlowToContext(context, dims, bg.gradient.glow);
     } else if (bg.type === 'solid') {
         context.fillStyle = bg.solid;
         context.fillRect(0, 0, dims.width, dims.height);
@@ -7709,6 +7735,8 @@ function drawBackground() {
 
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, dims.width, dims.height);
+
+        drawGlowToContext(ctx, dims, bg.gradient.glow);
     } else if (bg.type === 'solid') {
         ctx.fillStyle = bg.solid;
         ctx.fillRect(0, 0, dims.width, dims.height);
