@@ -6,13 +6,13 @@
 const str = (v, d) => process.env[v] || d;
 
 // Shared ASO copy layer (content, independent of style variant). Slide order
-// matches the capture phases of the preview walk: home, scanner chips,
-// scanner confirm sheet, basket, audit input, audit result, audit alert
-// (register overcharged -> EMET flags it).
+// matches the capture phases of the preview walk: home, scanner confirm sheet,
+// basket, audit input, audit result, audit alert (register overcharged -> EMET
+// flags it). The price-compare slide (scanner chips) is intentionally excluded
+// from the Play graphics.
 const copy = {
   'pt-BR': [
     { h: 'EMET', s: 'Seu escudo de preços no mercado.' },
-    { h: 'Escaneie e Compare', s: 'Veja o preço real antes de levar.' },
     { h: 'Preço Certo, Já', s: 'Confirme o valor e evite pegadinha.' },
     { h: 'Cesta Sob Controle', s: 'Acompanhe o total enquanto você escolhe.' },
     { h: 'Confira Antes de Pagar', s: 'Digite o valor do caixa e compare na hora.' },
@@ -21,7 +21,6 @@ const copy = {
   ],
   'en-US': [
     { h: 'EMET', s: 'Your price shield at the store.' },
-    { h: 'Scan. Compare. Save.', s: 'See the real price before you buy.' },
     { h: 'Right Price, Right Now', s: 'Confirm the value and skip the trick.' },
     { h: 'Cart Under Control', s: 'Track the total while you shop.' },
     { h: 'Check Before You Pay', s: 'Type the register total and compare instantly.' },
@@ -100,7 +99,7 @@ module.exports = {
   assetFolders: { 'pt-BR': 'pt', 'en-US': 'en' },
 
   // Slide index -> asset filename (identical names in every locale folder).
-  slideFiles: ['home.png', 'scanner_chips.png', 'scanner_sheet.png', 'basket.png', 'audit_input.png', 'audit_result.png', 'audit_alert.png'],
+  slideFiles: ['home.png', 'scanner_sheet.png', 'basket.png', 'audit_input.png', 'audit_result.png', 'audit_alert.png'],
 
   accents: active.accents,
   theme: active.theme,
