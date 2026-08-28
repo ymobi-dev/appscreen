@@ -256,6 +256,17 @@ TENANT_CONFIGS = {
             ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
             ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
         ]
+    },
+    "realmadrid": {
+        "name": "Quiz para Fãs do Real Madrid",
+        "colors": [(0, 27, 51), (0, 82, 159), (0, 6, 15)],
+        "highlight_color": (254, 190, 16),
+        "slides": [
+            ("Desafie seus conhecimentos **do Real Madrid**", "O quiz definitivo sobre títulos, Galácticos e história merengue"),
+            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+        ]
     }
 }
 
