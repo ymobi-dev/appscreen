@@ -261,12 +261,54 @@ TENANT_CONFIGS = {
         "name": "Quiz para Fãs do Real Madrid",
         "colors": [(0, 27, 51), (0, 82, 159), (0, 6, 15)],
         "highlight_color": (254, 190, 16),
-        "slides": [
-            ("Desafie seus conhecimentos **do Real Madrid**", "O quiz definitivo sobre títulos, Galácticos e história merengue"),
-            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
-        ]
+        # Real Madrid and Barcelona are multi-locale tenants (pt/es/ca) — slides_by_locale
+        # is checked first in run_factory(); the flat "slides" key above is the legacy
+        # single-locale (pt-only) shape still used by every other tenant in this dict.
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Real Madrid**", "O quiz definitivo sobre títulos, Galácticos e história merengue"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Real Madrid**", "El quiz definitivo sobre títulos, Galácticos e historia merengue"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ],
+            "ca": [
+                ("Desafia els teus coneixements **del Real Madrid**", "El quiz definitiu sobre títols, Galàctics i història merenga"),
+                ("Tria la **Quantitat de Preguntes**", "Juga rondes de 5, 10, 15 o 20 preguntes amb o sense pistes"),
+                ("Resultat Detallat i **Temps de Resposta**", "Consulta el teu rendiment i precisió a cada partida"),
+                ("Mantén la teva **Ratxa Diària**", "Entrena cada dia i enforteix la teva marca de Ratxa")
+            ]
+        }
+    },
+    "barcelona": {
+        "name": "Quiz para Fãs do Barcelona",
+        "colors": [(43, 0, 24), (165, 0, 68), (13, 0, 7)],
+        "highlight_color": (237, 187, 0),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Barcelona**", "O quiz definitivo sobre títulos, ídolos e história blaugrana"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Barcelona**", "El quiz definitivo sobre títulos, ídolos e historia blaugrana"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ],
+            "ca": [
+                ("Desafia els teus coneixements **del Barça**", "El quiz definitiu sobre títols, ídols i història blaugrana"),
+                ("Tria la **Quantitat de Preguntes**", "Juga rondes de 5, 10, 15 o 20 preguntes amb o sense pistes"),
+                ("Resultat Detallat i **Temps de Resposta**", "Consulta el teu rendiment i precisió a cada partida"),
+                ("Mantén la teva **Ratxa Diària**", "Entrena cada dia i enforteix la teva marca de Ratxa")
+            ]
+        }
     }
 }
 
@@ -469,9 +511,14 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
     canvas.save(output_path, quality=100, subsampling=0)
     print(f"  ✅ Salvo [{platform.upper()}]: {output_path}")
 
-def run_factory(target_tenant=None, target_platform="all"):
+# Content-locale (used by slides_by_locale / capture-multilocale-screenshots.sh
+# subfolders) -> store-listing locale folder name (store-assets/{tenant}/{locale}/),
+# same convention already used by alefly's ASO metadata and feature-graphic pipelines.
+STORE_LOCALE_BY_CONTENT_LOCALE = {"pt": "pt-BR", "es": "es-ES", "ca": "ca"}
+
+def run_factory(target_tenant=None, target_platform="all", target_locale=None):
     platforms = ["android", "ios", "ipad"] if target_platform == "all" else [target_platform]
-    
+
     print(f"🚀 Fábrica de Screenshots Alefly (Plataformas: {', '.join(platforms).upper()})...")
 
     tenants = [target_tenant] if target_tenant else list(TENANT_CONFIGS.keys())
@@ -486,45 +533,62 @@ def run_factory(target_tenant=None, target_platform="all"):
             config = TENANT_CONFIGS[tenant]
             print(f"  📦 App: {config['name']} ({tenant})")
 
-            base_output_dir = "/Users/yuripacheco/Projetos/alefly/output/store-assets"
-            
-            if platform == "android":
-                raw_screenshots_dir = os.path.join(base_output_dir, tenant, "android", "screenshots")
-                if not os.path.exists(raw_screenshots_dir) or not glob.glob(f"{raw_screenshots_dir}/*.png"):
-                    raw_screenshots_dir = os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone")
-            elif platform == "ipad":
-                raw_screenshots_dir = os.path.join(base_output_dir, tenant, "ios", "screenshots", "ipad")
+            is_multi_locale = "slides_by_locale" in config
+            if is_multi_locale:
+                locales = [target_locale] if target_locale else list(config["slides_by_locale"].keys())
             else:
-                raw_screenshots_dir = os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone")
+                if target_locale and target_locale != "pt":
+                    print(f"  ⚠️ Tenant '{tenant}' só tem slides em pt — ignorando --locale {target_locale}.")
+                locales = ["pt"]
 
-            if not os.path.exists(raw_screenshots_dir):
-                print(f"  ⚠️ Pasta de screenshots crus não encontrada: {raw_screenshots_dir}")
-                continue
+            base_output_dir = "/Users/yuripacheco/Projetos/alefly/output/store-assets"
 
-            maestro_filenames = [
-                "01-home.png",
-                "02-question.png",
-                "03-answer-feedback.png",
-                "04-result-summary.png"
-            ]
+            for locale in locales:
+                slides = config["slides_by_locale"][locale] if is_multi_locale else config["slides"]
+                store_locale = STORE_LOCALE_BY_CONTENT_LOCALE.get(locale, "pt-BR")
+                # Multi-locale tenants archive raw captures per locale (see
+                # scripts/capture-multilocale-screenshots.sh in the alefly repo) —
+                # single-locale tenants keep reading the unsuffixed legacy path so
+                # their existing capture flow needs zero changes.
+                locale_suffix = os.path.join(locale) if is_multi_locale else ""
 
-            screenshots_dir = os.path.join(ALEFLY_STORE_ASSETS, tenant, "pt-BR", "screenshots")
-            output_dir = os.path.join(screenshots_dir, platform)
-
-            for i, (headline, subheadline) in enumerate(config["slides"]):
-                if i < len(maestro_filenames) and os.path.exists(os.path.join(raw_screenshots_dir, maestro_filenames[i])):
-                    input_file = os.path.join(raw_screenshots_dir, maestro_filenames[i])
+                if platform == "android":
+                    raw_screenshots_dir = os.path.join(base_output_dir, tenant, "android", "screenshots", locale_suffix)
+                    if not os.path.exists(raw_screenshots_dir) or not glob.glob(f"{raw_screenshots_dir}/*.png"):
+                        raw_screenshots_dir = os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", locale_suffix)
+                elif platform == "ipad":
+                    raw_screenshots_dir = os.path.join(base_output_dir, tenant, "ios", "screenshots", "ipad", locale_suffix)
                 else:
-                    # Fallback to available files in directory
-                    avail = sorted(glob.glob(f"{raw_screenshots_dir}/*.png"))
-                    input_file = avail[min(i, len(avail)-1)] if avail else None
+                    raw_screenshots_dir = os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", locale_suffix)
 
-                output_file = os.path.join(output_dir, f"slide_{i+1}.png")
+                if not os.path.exists(raw_screenshots_dir):
+                    print(f"  ⚠️ Pasta de screenshots crus não encontrada ({locale}): {raw_screenshots_dir}")
+                    continue
 
-                if input_file and os.path.exists(input_file):
-                    process_screenshot(tenant, i, headline, subheadline, input_file, output_file, platform=platform)
-                else:
-                    print(f"    ⚠️ Screenshot de entrada não encontrada: {input_file}")
+                maestro_filenames = [
+                    "01-home.png",
+                    "02-question.png",
+                    "03-answer-feedback.png",
+                    "04-result-summary.png"
+                ]
+
+                screenshots_dir = os.path.join(ALEFLY_STORE_ASSETS, tenant, store_locale, "screenshots")
+                output_dir = os.path.join(screenshots_dir, platform)
+
+                for i, (headline, subheadline) in enumerate(slides):
+                    if i < len(maestro_filenames) and os.path.exists(os.path.join(raw_screenshots_dir, maestro_filenames[i])):
+                        input_file = os.path.join(raw_screenshots_dir, maestro_filenames[i])
+                    else:
+                        # Fallback to available files in directory
+                        avail = sorted(glob.glob(f"{raw_screenshots_dir}/*.png"))
+                        input_file = avail[min(i, len(avail)-1)] if avail else None
+
+                    output_file = os.path.join(output_dir, f"slide_{i+1}.png")
+
+                    if input_file and os.path.exists(input_file):
+                        process_screenshot(tenant, i, headline, subheadline, input_file, output_file, platform=platform)
+                    else:
+                        print(f"    ⚠️ Screenshot de entrada não encontrada ({locale}): {input_file}")
 
     print("\n🎉 Todas as screenshots para Android, iOS e iPad foram geradas com sucesso nas pastas padrão!")
 
@@ -532,6 +596,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--tenant", default=None, help="Tenant específico para gerar (ex: flamengo, vasco, worldcup, etc)")
     parser.add_argument("--platform", choices=["android", "ios", "ipad", "all"], default="all")
+    parser.add_argument("--locale", default=None, help="Locale específico (pt/es/ca) para tenants multi-idioma; default processa todos os locales do tenant")
     args = parser.parse_args()
 
-    run_factory(target_tenant=args.tenant, target_platform=args.platform)
+    run_factory(target_tenant=args.tenant, target_platform=args.platform, target_locale=args.locale)
