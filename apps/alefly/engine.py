@@ -282,6 +282,12 @@ TENANT_CONFIGS = {
                 ("Tria la **Quantitat de Preguntes**", "Juga rondes de 5, 10, 15 o 20 preguntes amb o sense pistes"),
                 ("Resultat Detallat i **Temps de Resposta**", "Consulta el teu rendiment i precisió a cada partida"),
                 ("Mantén la teva **Ratxa Diària**", "Entrena cada dia i enforteix la teva marca de Ratxa")
+            ],
+            "en": [
+                ("Test your **Real Madrid** knowledge", "The ultimate quiz about titles, Galácticos and Merengue history"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
             ]
         }
     },
@@ -307,6 +313,12 @@ TENANT_CONFIGS = {
                 ("Tria la **Quantitat de Preguntes**", "Juga rondes de 5, 10, 15 o 20 preguntes amb o sense pistes"),
                 ("Resultat Detallat i **Temps de Resposta**", "Consulta el teu rendiment i precisió a cada partida"),
                 ("Mantén la teva **Ratxa Diària**", "Entrena cada dia i enforteix la teva marca de Ratxa")
+            ],
+            "en": [
+                ("Test your **Barcelona** knowledge", "The ultimate quiz about titles, legends and Blaugrana history"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
             ]
         }
     }
@@ -514,7 +526,7 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
 # Content-locale (used by slides_by_locale / capture-multilocale-screenshots.sh
 # subfolders) -> store-listing locale folder name (store-assets/{tenant}/{locale}/),
 # same convention already used by alefly's ASO metadata and feature-graphic pipelines.
-STORE_LOCALE_BY_CONTENT_LOCALE = {"pt": "pt-BR", "es": "es-ES", "ca": "ca"}
+STORE_LOCALE_BY_CONTENT_LOCALE = {"pt": "pt-BR", "es": "es-ES", "ca": "ca", "en": "en-US"}
 
 def run_factory(target_tenant=None, target_platform="all", target_locale=None):
     platforms = ["android", "ios", "ipad"] if target_platform == "all" else [target_platform]
