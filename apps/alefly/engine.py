@@ -288,6 +288,30 @@ TENANT_CONFIGS = {
                 ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
                 ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
                 ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+            ],
+            "id": [
+                ("Uji Pengetahuanmu tentang **Real Madrid**", "Kuis terbaik tentang gelar juara, era Galácticos, dan sejarah Merengue"),
+                ("Pilih **Jumlah Pertanyaan**", "Mainkan ronde 5, 10, 15, atau 20 pertanyaan dengan atau tanpa petunjuk"),
+                ("Hasil Lengkap dan **Waktu Respons**", "Lihat akurasi dan performamu di setiap pertandingan"),
+                ("Pertahankan **Streak Harianmu**", "Latihan setiap hari dan bangun rekor Streak-mu")
+            ],
+            "fr": [
+                ("Défiez vos connaissances sur le **Real Madrid**", "Le quiz ultime sur les titres, les Galáctiques et l'histoire merengue"),
+                ("Choisissez le **Nombre de Questions**", "Jouez des séries de 5, 10, 15 ou 20 questions avec ou sans indices"),
+                ("Résultats Détaillés et **Temps de Réponse**", "Consultez votre précision et vos performances à chaque match"),
+                ("Maintenez votre **Série Quotidienne**", "Entraînez-vous chaque jour et développez votre Streak")
+            ],
+            "de": [
+                ("Teste dein Wissen über **Real Madrid**", "Das ultimative Quiz über Titel, Galácticos und königliche Geschichte"),
+                ("Wähle die **Anzahl der Fragen**", "Spiele Runden mit 5, 10, 15 oder 20 Fragen mit oder ohne Tipps"),
+                ("Detaillierte Ergebnisse und **Antwortzeit**", "Verfolge deine Trefferquote und Leistung in jedem Spiel"),
+                ("Halte deine **Tägliche Serie**", "Trainiere jeden Tag und baue deinen Streak aus")
+            ],
+            "hr": [
+                ("Testirajte svoje znanje o **Real Madridu**", "Vrhunski kviz o trofejima, Galácticosima i povijesti Kraljevskog kluba"),
+                ("Odaberite **Broj Pitanja**", "Igrajte runde od 5, 10, 15 ili 20 pitanja sa ili bez pomoći"),
+                ("Detaljni Rezultati i **Vrijeme Odgovora**", "Pratite svoju točnost i učinak u svakoj igri"),
+                ("Održavajte svoj **Dnevni Niz**", "Igrajte svaki dan i gradite svoj pobjednički Streak")
             ]
         }
     },
@@ -526,7 +550,19 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
 # Content-locale (used by slides_by_locale / capture-multilocale-screenshots.sh
 # subfolders) -> store-listing locale folder name (store-assets/{tenant}/{locale}/),
 # same convention already used by alefly's ASO metadata and feature-graphic pipelines.
-STORE_LOCALE_BY_CONTENT_LOCALE = {"pt": "pt-BR", "es": "es-ES", "ca": "ca", "en": "en-US"}
+STORE_LOCALE_BY_CONTENT_LOCALE = {
+    "pt": "pt-BR",
+    "es": "es-ES",
+    "ca": "ca",
+    "en": "en-US",
+    "id": "id-ID",
+    "fr": "fr-FR",
+    "de": "de-DE",
+    "hr": "hr",
+    "ar": "ar",
+    "zh": "zh-CN",
+    "tr": "tr-TR"
+}
 
 def run_factory(target_tenant=None, target_platform="all", target_locale=None):
     platforms = ["android", "ios", "ipad"] if target_platform == "all" else [target_platform]
