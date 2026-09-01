@@ -173,103 +173,249 @@ TENANT_CONFIGS = {
         "name": "Quiz para Fãs do Corinthians",
         "colors": [(17, 17, 17), (35, 35, 35), (10, 10, 10)],
         "highlight_color": (255, 255, 255),
-        "slides": [
-            ("Desafie seus conhecimentos **do Timão**", "O quiz definitivo sobre a história alvinegra e títulos"),
-            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Timão**", "O quiz definitivo sobre a história alvinegra, mundiais e títulos"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "en": [
+                ("Test your **Corinthians** knowledge", "The ultimate trivia about the 2 World Titles, undefeated Libertadores and idols"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Timão**", "El quiz definitivo sobre el Bicampeonato Mundial, Libertadores e ídolos de Corinthians"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ]
+        }
     },
     "palmeiras": {
         "name": "Quiz para Fãs do Palmeiras",
         "colors": [(0, 71, 36), (0, 100, 55), (0, 36, 18)],
         "highlight_color": (255, 255, 255),
-        "slides": [
-            ("Desafie seus conhecimentos **do Verdão**", "O quiz definitivo sobre a história alviverde e títulos"),
-            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Verdão**", "O quiz definitivo sobre a história alviverde, títulos e ídolos"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "en": [
+                ("Test your **Palmeiras** knowledge", "The ultimate quiz about titles, Copa Libertadores and Verdão legends"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Verdão**", "El quiz definitivo sobre títulos, Copa Libertadores e ídolos de Palmeiras"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ]
+        }
     },
     "saopaulo": {
         "name": "Quiz para Fãs do São Paulo",
         "colors": [(30, 20, 22), (65, 10, 18), (18, 18, 18)],
         "highlight_color": (255, 255, 255),
-        "slides": [
-            ("Desafie seus conhecimentos **do Soberano**", "O quiz definitivo sobre os Mundiais, Libertadores e ídolos do São Paulo"),
-            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Soberano**", "O quiz definitivo sobre os Mundiais, Libertadores e ídolos do São Paulo"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "en": [
+                ("Test your **São Paulo FC** knowledge", "The ultimate trivia about the 3 World Titles, Libertadores and Tricolor idols"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Tricolor**", "El quiz definitivo sobre los 3 Mundiales, Libertadores e ídolos de São Paulo"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ]
+        }
     },
     "santos": {
         "name": "Quiz para Fãs do Santos",
         "colors": [(20, 20, 20), (40, 40, 40), (10, 10, 10)],
         "highlight_color": (255, 255, 255),
-        "slides": [
-            ("Desafie seus conhecimentos **do Peixe**", "O quiz definitivo sobre a Era Pelé, Libertadores e Meninos da Vila"),
-            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Peixe**", "O quiz definitivo sobre a Era Pelé, Libertadores e Meninos da Vila"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "en": [
+                ("Test your **Santos FC** knowledge", "The ultimate quiz about Pelé, Intercontinental Cups and Meninos da Vila"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Peixe**", "El quiz definitivo sobre la Era Pelé, Libertadores y Meninos da Vila"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ]
+        }
     },
     "gremio": {
         "name": "Quiz para Fãs do Grêmio",
         "colors": [(13, 128, 191), (10, 80, 130), (10, 15, 25)],
         "highlight_color": (255, 255, 255),
-        "slides": [
-            ("Desafie seus conhecimentos **do Imortal**", "O quiz definitivo sobre a história tricolor, Libertadores e títulos"),
-            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Imortal**", "O quiz definitivo sobre a história tricolor, Libertadores e títulos"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "en": [
+                ("Test your **Grêmio** knowledge", "The ultimate trivia about the 1983 World Title, 3 Libertadores and Tricolor idols"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Imortal**", "El quiz definitivo sobre el Mundial 1983, 3 Libertadores e ídolos de Grêmio"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ]
+        }
     },
     "internacional": {
         "name": "Quiz para Fãs do Internacional",
         "colors": [(227, 6, 19), (160, 4, 14), (25, 10, 10)],
         "highlight_color": (255, 255, 255),
-        "slides": [
-            ("Desafie seus conhecimentos **do Colorado**", "O quiz definitivo sobre o Mundial, Libertadores e ídolos do Inter"),
-            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Colorado**", "O quiz definitivo sobre o Mundial, Libertadores e ídolos do Inter"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "en": [
+                ("Test your **Internacional** knowledge", "The ultimate trivia about the 2006 World Title, 2 Libertadores and Colorado idols"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Colorado**", "El quiz definitivo sobre el Mundial 2006, 2 Libertadores e ídolos de Inter"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ]
+        }
+    },
+    "athleticopr": {
+        "name": "Quiz para Fãs do Athletico-PR",
+        "colors": [(200, 16, 26), (40, 10, 15), (15, 15, 15)],
+        "highlight_color": (255, 255, 255),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Furacão**", "O quiz definitivo sobre o Brasileirão 2001, Bi da Sul-Americana e ídolos"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "en": [
+                ("Test your **Athletico-PR** knowledge", "The ultimate trivia about the 2001 Brasileirão, 2 Sudamericana titles and Furacão idols"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Furacão**", "El quiz definitivo sobre el Brasileirão 2001, 2 Sudamericanas e ídolos de Athletico"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ]
+        }
     },
     "cruzeiro": {
         "name": "Quiz para Fãs do Cruzeiro",
         "colors": [(0, 58, 148), (0, 35, 100), (10, 15, 30)],
         "highlight_color": (255, 255, 255),
-        "slides": [
-            ("Desafie seus conhecimentos **da Raposa**", "O quiz definitivo sobre o Rei de Copas, Tríplice Coroa e conquistas"),
-            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **da Raposa**", "O quiz definitivo sobre o Rei de Copas, Tríplice Coroa e conquistas"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "en": [
+                ("Test your **Cruzeiro** knowledge", "The ultimate trivia about the Rei de Copas, 2003 Treble and Raposa idols"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **de la Raposa**", "El quiz definitivo sobre el Rei de Copas, Tríplice Coroa e ídolos de Cruzeiro"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ]
+        }
     },
     "atletico-mg": {
         "name": "Quiz para Fãs do Galo",
         "colors": [(17, 17, 17), (35, 35, 35), (10, 10, 10)],
         "highlight_color": (201, 149, 44),
-        "slides": [
-            ("Desafie seus conhecimentos **do Galo**", "O quiz definitivo sobre o Galo Forte e Vingador, Libertadores e títulos"),
-            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Galo**", "O quiz definitivo sobre a Libertadores 2013, Triplete 2021 e ídolos"),
+                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
+                ("Resultado Detallado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
+                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ],
+            "en": [
+                ("Test your **Atlético-MG** knowledge", "The ultimate trivia about the 2013 Libertadores, 2021 Treble and Galo idols"),
+                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
+                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
+                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Galo**", "El quiz definitivo sobre la Libertadores 2013, Triplete 2021 e ídolos de Atlético"),
+                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
+                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
+                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+            ]
+        }
     },
     "realmadrid": {
         "name": "Quiz para Fãs do Real Madrid",
-        "colors": [(0, 27, 51), (0, 82, 159), (0, 6, 15)],
+        # Canvas is deliberately BRIGHTER than the in-app background (#001B33 -> #00060F).
+        # Reusing the app palette here made the phone and the crops melt into the backdrop —
+        # the three highest-installed apps in this niche all separate asset from content,
+        # either with a light canvas or a flat brand colour.
+        "colors": [(0, 60, 120), (0, 110, 200), (0, 40, 85)],
         "highlight_color": (254, 190, 16),
         # Real Madrid and Barcelona are multi-locale tenants (pt/es/ca) — slides_by_locale
         # is checked first in run_factory(); the flat "slides" key above is the legacy
         # single-locale (pt-only) shape still used by every other tenant in this dict.
         "slides_by_locale": {
+            # Eight slots, one feature each, in SLIDE_SOURCES order. Headlines stay at
+            # five to seven words and lead with the benefit — the first three slots are
+            # what Play shows in search results and carry most of the install decision.
             "pt": [
                 ("Desafie seus conhecimentos **do Real Madrid**", "O quiz definitivo sobre títulos, Galácticos e história merengue"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Perguntas sobre **títulos, ídolos e Clássicos**", "De Di Stéfano aos Galácticos e ao elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Real Madrid"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "es": [
                 ("Desafía tus conocimientos **del Real Madrid**", "El quiz definitivo sobre títulos, Galácticos e historia merengue"),
@@ -348,12 +494,143 @@ TENANT_CONFIGS = {
     }
 }
 
+ALEFLY_SEEDS = "/Users/yuripacheco/Projetos/alefly/infra/firebase/seeds/tenants"
+
+
+def _hex_to_rgb(value):
+    value = (value or "").lstrip("#")
+    if len(value) != 6:
+        return None
+    return tuple(int(value[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _relative_luminance(rgb):
+    # WCAG relative luminance, used only to decide dark vs light text on the canvas.
+    channels = []
+    for c in rgb:
+        c = c / 255
+        channels.append(c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4)
+    r, g, b = channels
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def _shade(rgb, factor):
+    if factor >= 1:
+        return tuple(min(255, int(c + (255 - c) * (factor - 1))) for c in rgb)
+    return tuple(max(0, int(c * factor)) for c in rgb)
+
+
+def derive_palette(tenant_key):
+    """Screenshot palette derived from the tenant seed, never hand-picked.
+
+    The app paints its own background with `primaryColor`, so reusing it on the canvas
+    made the phone and the crops melt into the backdrop. `accentColor` is the other
+    brand colour and is what the canvas uses instead — gold behind Real Madrid's blue
+    app, black behind Flamengo's red one — which keeps every tenant on brand while
+    guaranteeing the asset separates from the content.
+
+    Returns None when the seed is missing so the caller keeps its hardcoded colours.
+    """
+    seed_path = os.path.join(ALEFLY_SEEDS, f"{tenant_key}.json")
+    if not os.path.exists(seed_path):
+        return None
+    with open(seed_path, encoding="utf-8") as fh:
+        visual = (json.load(fh).get("visual") or {})
+    accent = _hex_to_rgb(visual.get("accentColor"))
+    primary = _hex_to_rgb(visual.get("primaryColor"))
+    if not accent or not primary:
+        return None
+
+    # Light text on a dark canvas and vice versa — an accent like #FFFFFF or #FEBE10
+    # would swallow the white headline the previous fixed styling assumed.
+    dark_canvas = _relative_luminance(accent) < 0.5
+    return {
+        "colors": [_shade(accent, 0.82), accent, _shade(accent, 0.65)],
+        "headline_color": (255, 255, 255) if dark_canvas else (12, 20, 32),
+        "subhead_color": (222, 228, 238) if dark_canvas else (48, 60, 78),
+        "highlight_color": primary,
+    }
+
+
+ALEFLY_ICONS = "/Users/yuripacheco/Projetos/alefly/tools/tenant-icons-python/icons-1024"
+
+
+def paste_poster_icon(canvas, tenant_key, top_y):
+    """Draws the tenant icon large instead of a device mockup.
+
+    The three highest-installed apps in this niche do not put app UI in the first slot:
+    two show pure key art. That slot carries most of the install decision and a whole
+    screen shrunk to a search thumbnail communicates nothing, so it shows the brand
+    instead. Rounded corners make the square read as an app icon rather than a pasted box.
+    """
+    for ext in ("png", "webp"):
+        icon_path = os.path.join(ALEFLY_ICONS, f"icon_{tenant_key}.{ext}")
+        if os.path.exists(icon_path):
+            break
+    else:
+        return False
+
+    cw, ch = canvas.size
+    size = int(cw * 0.74)
+    icon = Image.open(icon_path).convert("RGBA").resize((size, size), Image.LANCZOS)
+
+    radius = int(size * 0.22)
+    mask = Image.new("L", (size, size), 0)
+    ImageDraw.Draw(mask).rounded_rectangle([0, 0, size, size], radius=radius, fill=255)
+
+    # Sits a fixed breath below the copy instead of centring in the leftover space —
+    # centring left a dead band under the subheadline and crowded the bottom margin.
+    x = (cw - size) // 2
+    y = min(top_y + int(ch * 0.06), ch - size - int(ch * 0.08))
+
+    shadow = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+    ImageDraw.Draw(shadow).rounded_rectangle(
+        [x + 12, y + 18, x + size + 12, y + size + 18], radius=radius, fill=(0, 0, 0, 70))
+    canvas.paste(Image.alpha_composite(canvas.convert("RGBA"), shadow).convert("RGB"), (0, 0))
+    canvas.paste(icon, (x, y), mask)
+    return True
+
+
+# Two zoom levels only, so the set reads as one system instead of six hand-tuned frames.
+# Angle is 0 everywhere: the three highest-installed apps in this niche show the phone
+# straight, and a tilt crops content off the canvas edge.
+#
+# WIDE is for screens whose payload sits in the upper half — the frame can be bigger because
+# nothing important lives near the bottom. TALL is for screens whose payload runs to the
+# bottom edge (share sheet, score plus stats plus CTA, answer explanation, scrolled home):
+# they need the whole screen to fit or the point of the slide is clipped away.
+ZOOM_WIDE = 0.76
+ZOOM_TALL = 0.64
+
 SLIDE_CONFIGS = {
-    0: {"scale": 0.86, "angle": 4,  "x_off": 0},
-    1: {"scale": 0.86, "angle": -4, "x_off": 40},
-    2: {"scale": 0.89, "angle": 0,  "x_off": 0},
-    3: {"scale": 0.86, "angle": 4,  "x_off": -40},
+    0: {"scale": ZOOM_WIDE, "angle": 0, "x_off": 0},
+    1: {"scale": ZOOM_WIDE, "angle": 0, "x_off": 0},
+    2: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
+    3: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
+    4: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
+    5: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
 }
+
+# Store slot -> which Maestro capture it shows. Every slot is a whole screen inside the
+# phone bezel, so each one needs its OWN capture: `crop` exists for the odd case but is
+# unused today, because cropping regions out of a shared file was what let eight slots
+# collapse into four distinct images.
+#
+# Order follows conversion research: the first three slots are what Play shows in search
+# results and carry most of the install decision, so brand, core loop and the
+# differentiator go there. Streak and stats are generic mechanics and sit at the end.
+#
+# Files 05 to 08 are not captured yet — .maestro/android/store-screenshots.yaml already
+# walks through three of those screens without calling takeScreenshot. Missing files are
+# skipped with a warning rather than falling back to a duplicate.
+SLIDE_SOURCES = [
+    {"file": "01-home.png",            "crop": None, "frame": True},
+    {"file": "02-question.png",        "crop": None, "frame": True},
+    {"file": "08-challenge-share.png", "crop": None, "frame": True},
+    {"file": "04-result-summary.png",  "crop": None, "frame": True},
+    {"file": "03-answer-feedback.png", "crop": None, "frame": True},
+    {"file": "05-home-scrolled.png",   "crop": None, "frame": True},
+]
 
 def get_fonts(platform="ios"):
     f_bold = os.path.join(FONTS_DIR, "montserrat_bold.ttf")
@@ -405,7 +682,11 @@ def _draw_line_centered(draw, line, font, y, width, style, highlight_color):
     for visible, is_hl, w in segments:
         col = highlight_color if is_hl else style.color
         # Shadow suave
-        draw.text((cur_x + 3, y + 3), visible, fill=(0, 0, 0, style.shadow_alpha), font=font)
+        # The canvas is RGB, so PIL discards the alpha in `fill` and paints solid black:
+        # shadow_alpha never actually softened anything, it only went unnoticed on dark
+        # backgrounds. Skip the pass entirely when the style asks for no shadow.
+        if style.shadow_alpha:
+            draw.text((cur_x + 3, y + 3), visible, fill=(0, 0, 0), font=font)
         draw.text((cur_x, y), visible, fill=col, font=font)
         cur_x += w + space_w
 
@@ -449,10 +730,13 @@ def draw_brand_background(canvas, colors):
     img = Image.fromarray(out.astype(np.uint8), mode="RGB")
     canvas.paste(img, (0, 0))
 
-def draw_text_block(canvas, headline, subheadline, f_h, f_s, highlight_color, platform="ios"):
+def draw_text_block(canvas, headline, subheadline, f_h, f_s, highlight_color, platform="ios",
+                    headline_style=None, subhead_style=None):
     w, h = canvas.size
     text_w = w - (300 if platform == "ipad" else 220)
     top_margin = 190 if platform == "ipad" else TEXT_TOP_MARGIN
+    headline_style = headline_style or HEADLINE_STYLE
+    subhead_style = subhead_style or SUBHEAD_STYLE
     draw = ImageDraw.Draw(canvas)
     headline = expand_bold_spans(headline)
     subheadline = expand_bold_spans(subheadline)
@@ -464,16 +748,16 @@ def draw_text_block(canvas, headline, subheadline, f_h, f_s, highlight_color, pl
 
     curr_y = top_margin
     for line in h_lines:
-        _draw_line_centered(draw, line, f_h, curr_y, w, HEADLINE_STYLE, highlight_color)
+        _draw_line_centered(draw, line, f_h, curr_y, w, headline_style, highlight_color)
         curr_y += h_lh
     curr_y += gap
     for line in s_lines:
-        _draw_line_centered(draw, line, f_s, curr_y, w, SUBHEAD_STYLE, highlight_color)
+        _draw_line_centered(draw, line, f_s, curr_y, w, subhead_style, highlight_color)
         curr_y += s_lh
 
     return (len(h_lines) * h_lh) + (len(s_lines) * s_lh) + gap
 
-def process_screenshot(tenant_key, idx, headline, subheadline, input_path, output_path, platform="android"):
+def process_screenshot(tenant_key, idx, headline, subheadline, input_path, output_path, platform="android", use_slide_sources=False):
     config = TENANT_CONFIGS[tenant_key]
     if platform == "ipad":
         cw, ch = 2048, 2732
@@ -482,11 +766,28 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
     else:
         cw, ch = WIDTH, HEIGHT
     canvas = Image.new('RGB', (cw, ch))
-    darkened_colors = [darken_color(c) for c in config["colors"]]
-    draw_brand_background(canvas, darkened_colors)
+    palette = derive_palette(tenant_key)
+    if palette:
+        # Already the intended canvas colour — darkening it here would turn Real Madrid's
+        # gold into brown. darken_color() only exists to tame the legacy hardcoded palettes,
+        # which reused the in-app background and needed dimming to sit behind white text.
+        draw_brand_background(canvas, palette["colors"])
+    else:
+        draw_brand_background(canvas, [darken_color(c) for c in config["colors"]])
 
     f_h, f_s = get_fonts(platform=platform)
-    total_text_h = draw_text_block(canvas, headline, subheadline, f_h, f_s, config["highlight_color"], platform=platform)
+    if palette:
+        # Shadows are what keep the text readable over the gradient; on a light canvas a
+        # dark shadow would smear, so it drops with the text colour.
+        dark_canvas = palette["headline_color"] == (255, 255, 255)
+        headline_style = TextStyle(color=palette["headline_color"], shadow_alpha=90 if dark_canvas else 0)
+        subhead_style = TextStyle(color=palette["subhead_color"], shadow_alpha=70 if dark_canvas else 0)
+        highlight = palette["highlight_color"]
+    else:
+        headline_style = subhead_style = None
+        highlight = config["highlight_color"]
+    total_text_h = draw_text_block(canvas, headline, subheadline, f_h, f_s, highlight, platform=platform,
+                                   headline_style=headline_style, subhead_style=subhead_style)
 
     top_margin = 190 if platform == "ipad" else TEXT_TOP_MARGIN
     device_y = top_margin + total_text_h + (ANCHOR_MARGIN // 2)
@@ -498,9 +799,24 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
         device_y_max, device_y_fallback = DEVICE_Y_MAX, DEVICE_Y_FALLBACK
     if device_y > device_y_max: device_y = device_y_fallback
 
-    if os.path.exists(input_path):
+    is_poster = use_slide_sources and idx < len(SLIDE_SOURCES) and SLIDE_SOURCES[idx].get("poster")
+    if is_poster and paste_poster_icon(canvas, tenant_key, device_y):
+        pass
+    elif os.path.exists(input_path):
         screen = Image.open(input_path).convert("RGBA")
         conf = SLIDE_CONFIGS.get(idx, SLIDE_CONFIGS[0])
+
+        # Zoom into one feature before scaling, so the slot reads at thumbnail size
+        # instead of showing a whole screen nobody can parse. Normalized box keeps the
+        # values resolution-independent across capture devices.
+        source = SLIDE_SOURCES[idx] if idx < len(SLIDE_SOURCES) else {}
+        crop = source.get("crop") if use_slide_sources else None
+        if crop:
+            w, h = screen.size
+            x1, y1, x2, y2 = crop
+            screen = screen.crop((int(x1 * w), int(y1 * h), int(x2 * w), int(y2 * h)))
+
+        draw_frame = source.get("frame", True) if use_slide_sources else True
         target_w = int(cw * (conf["scale"] if platform != "ipad" else 0.82))
         aspect = screen.height / screen.width
         target_h = int(target_w * aspect)
@@ -526,18 +842,19 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
         device_layer = Image.new("RGBA", (target_w + (pad*2), target_h + (pad*2)), (0,0,0,0))
         device_layer.paste(screen, (pad, pad), mask)
 
-        border_w = 20 if platform == "ipad" else 22
-        ImageDraw.Draw(device_layer).rounded_rectangle([pad, pad, target_w+pad, target_h+pad], radius=radius, outline=border_col, width=border_w)
-        ImageDraw.Draw(device_layer).rounded_rectangle([pad+2, pad+2, target_w+pad-2, target_h+pad-2], radius=radius, outline=light_col, width=3)
+        if draw_frame:
+            border_w = 20 if platform == "ipad" else 22
+            ImageDraw.Draw(device_layer).rounded_rectangle([pad, pad, target_w+pad, target_h+pad], radius=radius, outline=border_col, width=border_w)
+            ImageDraw.Draw(device_layer).rounded_rectangle([pad+2, pad+2, target_w+pad-2, target_h+pad-2], radius=radius, outline=light_col, width=3)
 
-        cam_x = (target_w + (pad*2)) // 2
-        if platform == "android":
-            ImageDraw.Draw(device_layer).ellipse([cam_x-10, 80, cam_x+10, 100], fill=(15,15,15))
-        elif platform == "ios":
-            island_w, island_h = 135, 38
-            ImageDraw.Draw(device_layer).rounded_rectangle([cam_x-(island_w//2), 75, cam_x+(island_w//2), 75+island_h], radius=18, fill=(10,10,10))
+            cam_x = (target_w + (pad*2)) // 2
+            if platform == "android":
+                ImageDraw.Draw(device_layer).ellipse([cam_x-10, 80, cam_x+10, 100], fill=(15,15,15))
+            elif platform == "ios":
+                island_w, island_h = 135, 38
+                ImageDraw.Draw(device_layer).rounded_rectangle([cam_x-(island_w//2), 75, cam_x+(island_w//2), 75+island_h], radius=18, fill=(10,10,10))
 
-        if conf["angle"] != 0 and platform != "ipad":
+        if draw_frame and conf["angle"] != 0 and platform != "ipad":
             device_layer = device_layer.rotate(conf["angle"], resample=Image.BICUBIC, expand=True)
 
         x_off = int(conf["x_off"] * (cw / REFERENCE_WIDTH))
@@ -623,8 +940,17 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                 screenshots_dir = os.path.join(ALEFLY_STORE_ASSETS, tenant, store_locale, "screenshots")
                 output_dir = os.path.join(screenshots_dir, platform)
 
+                # Tenants migrated to the eight-slot spec declare eight captions and are
+                # driven by SLIDE_SOURCES, which names the capture and region per slot.
+                # Legacy four-caption tenants keep the old positional mapping untouched
+                # until they are migrated one at a time.
+                use_slide_sources = len(slides) == len(SLIDE_SOURCES)
+
                 for i, (headline, subheadline) in enumerate(slides):
-                    if i < len(maestro_filenames) and os.path.exists(os.path.join(raw_screenshots_dir, maestro_filenames[i])):
+                    if use_slide_sources:
+                        candidate = os.path.join(raw_screenshots_dir, SLIDE_SOURCES[i]["file"])
+                        input_file = candidate if os.path.exists(candidate) else None
+                    elif i < len(maestro_filenames) and os.path.exists(os.path.join(raw_screenshots_dir, maestro_filenames[i])):
                         input_file = os.path.join(raw_screenshots_dir, maestro_filenames[i])
                     else:
                         # Fallback to available files in directory
@@ -634,7 +960,8 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                     output_file = os.path.join(output_dir, f"slide_{i+1}.png")
 
                     if input_file and os.path.exists(input_file):
-                        process_screenshot(tenant, i, headline, subheadline, input_file, output_file, platform=platform)
+                        process_screenshot(tenant, i, headline, subheadline, input_file, output_file,
+                                           platform=platform, use_slide_sources=use_slide_sources)
                     else:
                         print(f"    ⚠️ Screenshot de entrada não encontrada ({locale}): {input_file}")
 
