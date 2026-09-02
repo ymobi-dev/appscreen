@@ -53,10 +53,12 @@ TENANT_CONFIGS = {
         "colors": [(26, 0, 0), (122, 0, 0), (26, 26, 26)],
         "highlight_color": (255, 70, 70),
         "slides": [
-            ("Desafie seus conhecimentos **de Futebol**", "O quiz definitivo para a torcida apaixonada"),
-            ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-            ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e tempo em cada partida"),
-            ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+            ("Desafie seus conhecimentos **do Flamengo**", "O quiz definitivo sobre títulos, ídolos e história rubro-negra"),
+            ("Perguntas sobre **títulos, ídolos e clássicos**", "Da fundação ao elenco atual"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "botafogo": {
@@ -64,10 +66,12 @@ TENANT_CONFIGS = {
         "colors": [(13, 11, 6), (30, 26, 16), (10, 10, 10)],
         "highlight_color": (232, 232, 232),
         "slides": [
-            ("Testes sobre a história do **Glorioso**", "O quiz feito para a torcida botafoguense"),
-            ("Configure seu **Modo de Jogo**", "Escolha o número de perguntas e ative dicas extras"),
-            ("Métricas de **Pontuação e Tempo**", "Evolua sua precisão a cada nova rodada"),
-            ("Crie sua **Streak Diária**", "Desafie-se diariamente e acompanhe sua evolução")
+            ("Desafie seus conhecimentos **do Botafogo**", "O quiz definitivo sobre títulos, ídolos e história alvinegra"),
+            ("Perguntas sobre **títulos, ídolos e clássicos**", "Da fundação ao elenco atual"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "fluminense": {
@@ -414,50 +418,100 @@ TENANT_CONFIGS = {
                 ("Perguntas sobre **títulos, ídolos e Clássicos**", "De Di Stéfano aos Galácticos e ao elenco atual"),
                 ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Real Madrid"),
                 ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
                 ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
                 ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "es": [
                 ("Desafía tus conocimientos **del Real Madrid**", "El quiz definitivo sobre títulos, Galácticos e historia merengue"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Preguntas sobre **títulos, ídolos y Clásicos**", "De Di Stéfano a los Galácticos y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Real Madrid"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ],
             "ca": [
                 ("Desafia els teus coneixements **del Real Madrid**", "El quiz definitiu sobre títols, Galàctics i història merenga"),
-                ("Tria la **Quantitat de Preguntes**", "Juga rondes de 5, 10, 15 o 20 preguntes amb o sense pistes"),
-                ("Resultat Detallat i **Temps de Resposta**", "Consulta el teu rendiment i precisió a cada partida"),
-                ("Mantén la teva **Ratxa Diària**", "Entrena cada dia i enforteix la teva marca de Ratxa")
+                ("Preguntes sobre **títols, ídols i Clàssics**", "De Di Stéfano als Galàctics i la plantilla actual"),
+                ("Desafia un amic **per enllaç**", "Envia la partida i descobreix qui en sap més del Real Madrid"),
+                ("El teu marcador a l'instant, **partida a partida**", "Puntuació, percentatge d'encert i evolució a cada ronda"),
+                ("Qui en sap més **arriba al capdamunt**", "Rànquing en temps real entre tu i els teus amics"),
+                ("Has fallat? La resposta ve **explicada**", "Cada pregunta mostra la correcta i el perquè"),
+                ("T'has encallat? **Usa una pista**", "Una ajuda per pregunta, quan la necessitis"),
+                ("Torna cada dia i **manté la teva ratxa**", "Ratxa diària, rànquing i historial de les teves partides")
             ],
             "en": [
-                ("Test your **Real Madrid** knowledge", "The ultimate quiz about titles, Galácticos and Merengue history"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Test your **Real Madrid** knowledge", "The ultimate quiz on titles, Galácticos and Merengue history"),
+                ("Questions on **titles, legends and Clásicos**", "From Di Stéfano to the Galácticos and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Real Madrid best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "id": [
                 ("Uji Pengetahuanmu tentang **Real Madrid**", "Kuis terbaik tentang gelar juara, era Galácticos, dan sejarah Merengue"),
-                ("Pilih **Jumlah Pertanyaan**", "Mainkan ronde 5, 10, 15, atau 20 pertanyaan dengan atau tanpa petunjuk"),
-                ("Hasil Lengkap dan **Waktu Respons**", "Lihat akurasi dan performamu di setiap pertandingan"),
-                ("Pertahankan **Streak Harianmu**", "Latihan setiap hari dan bangun rekor Streak-mu")
+                ("Pertanyaan seputar **gelar juara, legenda, dan Clásico**", "Dari Di Stéfano hingga era Galácticos dan skuad saat ini"),
+                ("Tantang teman **lewat tautan**", "Kirim pertandingan dan lihat siapa yang paling paham Real Madrid"),
+                ("Skormu langsung terlihat, **ronde demi ronde**", "Poin, persentase jawaban benar, dan perkembangan di tiap ronde"),
+                ("Yang paling paham **naik ke puncak**", "Peringkat real-time antara kamu dan teman-temanmu"),
+                ("Salah jawab? Jawabannya **langsung dijelaskan**", "Setiap pertanyaan menampilkan jawaban benar dan alasannya"),
+                ("Buntu? **Gunakan petunjuk**", "Satu bantuan per pertanyaan, saat kamu membutuhkannya"),
+                ("Kembali tiap hari dan **jaga streak-mu**", "Streak harian, peringkat, dan riwayat setiap rondemu")
             ],
             "fr": [
                 ("Défiez vos connaissances sur le **Real Madrid**", "Le quiz ultime sur les titres, les Galáctiques et l'histoire merengue"),
-                ("Choisissez le **Nombre de Questions**", "Jouez des séries de 5, 10, 15 ou 20 questions avec ou sans indices"),
-                ("Résultats Détaillés et **Temps de Réponse**", "Consultez votre précision et vos performances à chaque match"),
-                ("Maintenez votre **Série Quotidienne**", "Entraînez-vous chaque jour et développez votre Streak")
+                ("Questions sur les **titres, légendes et Clásicos**", "De Di Stéfano aux Galáctiques jusqu'à l'effectif actuel"),
+                ("Défiez un ami **par lien**", "Envoyez la partie et voyez qui connaît le mieux le Real Madrid"),
+                ("Votre score à l'instant, **match après match**", "Points, pourcentage de réussite et progression à chaque manche"),
+                ("Le plus fort **grimpe au sommet**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
             ],
             "de": [
                 ("Teste dein Wissen über **Real Madrid**", "Das ultimative Quiz über Titel, Galácticos und königliche Geschichte"),
-                ("Wähle die **Anzahl der Fragen**", "Spiele Runden mit 5, 10, 15 oder 20 Fragen mit oder ohne Tipps"),
-                ("Detaillierte Ergebnisse und **Antwortzeit**", "Verfolge deine Trefferquote und Leistung in jedem Spiel"),
-                ("Halte deine **Tägliche Serie**", "Trainiere jeden Tag und baue deinen Streak aus")
+                ("Fragen zu **Titeln, Legenden und Clásicos**", "Von Di Stéfano bis zu den Galácticos und dem aktuellen Kader"),
+                ("Fordere einen Freund **per Link** heraus", "Schick das Spiel und finde heraus, wer Real Madrid am besten kennt"),
+                ("Dein Ergebnis sofort, **Runde für Runde**", "Punkte, Trefferquote und Fortschritt in jeder Runde"),
+                ("Wer mehr weiß, **steht ganz oben**", "Ranking in Echtzeit zwischen dir und deinen Freunden"),
+                ("Falsch geraten? Die Antwort wird **erklärt**", "Jede Frage zeigt die richtige Lösung und das Warum"),
+                ("Nicht weiter? **Nutze einen Hinweis**", "Eine Hilfe pro Frage, wann immer du sie brauchst"),
+                ("Komm täglich zurück und **halte deinen Streak**", "Täglicher Streak, Ranking und Verlauf deiner Runden")
             ],
             "hr": [
                 ("Testirajte svoje znanje o **Real Madridu**", "Vrhunski kviz o trofejima, Galácticosima i povijesti Kraljevskog kluba"),
-                ("Odaberite **Broj Pitanja**", "Igrajte runde od 5, 10, 15 ili 20 pitanja sa ili bez pomoći"),
-                ("Detaljni Rezultati i **Vrijeme Odgovora**", "Pratite svoju točnost i učinak u svakoj igri"),
-                ("Održavajte svoj **Dnevni Niz**", "Igrajte svaki dan i gradite svoj pobjednički Streak")
+                ("Pitanja o **trofejima, legendama i Klasicima**", "Od Di Stéfana do Galácticosa i sadašnje momčadi"),
+                ("Izazovi prijatelja **putem poveznice**", "Pošalji partiju i saznaj tko bolje poznaje Real Madrid"),
+                ("Tvoj rezultat odmah, **runda za rundom**", "Bodovi, postotak točnih odgovora i napredak u svakoj rundi"),
+                ("Tko zna više **stiže na vrh**", "Ljestvica uživo između tebe i tvojih prijatelja"),
+                ("Pogrešan odgovor? Točan **je objašnjen**", "Svako pitanje prikazuje točan odgovor i razlog"),
+                ("Zapeo si? **Iskoristi pomoć**", "Jedna pomoć po pitanju, kad god ti zatreba"),
+                ("Vrati se svaki dan i **održi svoj niz**", "Dnevni niz, ljestvica i povijest tvojih rundi")
+            ],
+            "ar": [
+                ("اختبر معلوماتك عن **ريال مدريد**", "أفضل اختبار عن الألقاب وحقبة الغالاكتيكوس وتاريخ الفريق الملكي"),
+                ("أسئلة عن **الألقاب والأساطير والكلاسيكو**", "من دي ستيفانو إلى حقبة الغالاكتيكوس والتشكيلة الحالية"),
+                ("تحدَّ صديقًا **عبر رابط**", "أرسل الجولة واكتشف من يعرف ريال مدريد أكثر"),
+                ("نتيجتك فورًا، **جولة بعد جولة**", "النقاط ونسبة الإجابات الصحيحة والتقدم في كل جولة"),
+                ("الأكثر معرفة **يتصدر الترتيب**", "ترتيب مباشر بينك وبين أصدقائك"),
+                ("أخطأت؟ الإجابة **مشروحة**", "كل سؤال يعرض الإجابة الصحيحة وسببها"),
+                ("توقفت؟ **استخدم تلميحًا**", "مساعدة واحدة لكل سؤال، وقتما تحتاجها"),
+                ("عد كل يوم **وحافظ على تتابعك**", "تتابع يومي وترتيب وسجل لجولاتك")
+            ],
+            "tr": [
+                ("**Real Madrid** bilgini test et", "Şampiyonluklar, Galácticos dönemi ve Bernabéu tarihiyle dolu quiz"),
+                ("**Şampiyonluklar, efsaneler ve Clásico'lar** hakkında sorular", "Di Stéfano'dan Galácticos dönemine, bugünkü kadroya kadar"),
+                ("Bir arkadaşını **bağlantıyla** meydan oku", "Maçı gönder ve Real Madrid'i kim daha iyi biliyor gör"),
+                ("Skorun anında elinde, **turdan tura**", "Puan, doğru cevap yüzdesi ve her turdaki gelişimin"),
+                ("En çok bilen **zirveye çıkar**", "Sen ve arkadaşların arasında gerçek zamanlı sıralama"),
+                ("Yanlış mı bildin? Cevap **açıklamalı**", "Her soru doğru cevabı ve nedenini gösterir"),
+                ("Takıldın mı? **İpucunu kullan**", "İhtiyacın olduğunda soru başına bir yardım"),
+                ("Her gün geri dön, **serini sürdür**", "Günlük seri, sıralama ve turlarının geçmişi")
             ]
         }
     },
@@ -609,6 +663,8 @@ SLIDE_CONFIGS = {
     3: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
     4: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
     5: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
+    6: {"scale": ZOOM_WIDE, "angle": 0, "x_off": 0},
+    7: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
 }
 
 # Store slot -> which Maestro capture it shows. Every slot is a whole screen inside the
@@ -628,11 +684,25 @@ SLIDE_SOURCES = [
     {"file": "02-question.png",        "crop": None, "frame": True},
     {"file": "08-challenge-share.png", "crop": None, "frame": True},
     {"file": "04-result-summary.png",  "crop": None, "frame": True},
+    {"file": "07-ranking.png",         "crop": None, "frame": True},
     {"file": "03-answer-feedback.png", "crop": None, "frame": True},
+    {"file": "06-hint-used.png",       "crop": None, "frame": True},
     {"file": "05-home-scrolled.png",   "crop": None, "frame": True},
 ]
 
-def get_fonts(platform="ios"):
+# Locales written right-to-left. Montserrat carries no Arabic glyphs at all — an "ar"
+# slide rendered with it comes out as a row of .notdef boxes, which measures a normal
+# width so only looking at the image catches it.
+RTL_LOCALES = {"ar"}
+ARABIC_FONTS = ("/System/Library/Fonts/SFArabic.ttf", "/System/Library/Fonts/GeezaPro.ttc")
+
+
+def get_fonts(platform="ios", locale="pt"):
+    if locale in RTL_LOCALES:
+        arabic = next((f for f in ARABIC_FONTS if os.path.exists(f)), None)
+        if arabic:
+            size_h, size_s = (148, 70) if platform == "ipad" else (104, 50)
+            return ImageFont.truetype(arabic, size_h), ImageFont.truetype(arabic, size_s)
     f_bold = os.path.join(FONTS_DIR, "montserrat_bold.ttf")
     f_reg = os.path.join(FONTS_DIR, "montserrat.ttf")
     if not os.path.exists(f_bold): f_bold = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
@@ -665,7 +735,17 @@ def wrap_text(text, draw, font, max_width):
         lines.append(' '.join(current))
     return lines
 
-def _draw_line_centered(draw, line, font, y, width, style, highlight_color):
+def _draw_line_centered(draw, line, font, y, width, style, highlight_color, rtl=False):
+    if rtl:
+        # Drawn in one call so Raqm can shape and reorder the run. The per-word cursor
+        # below advances left-to-right, which lays an Arabic line out backwards; the
+        # highlight colour is the price of correct text, and it is the cheaper loss.
+        visible = line.replace('**', '')
+        x = (width - draw.textlength(visible, font=font)) // 2
+        if style.shadow_alpha:
+            draw.text((x + 3, y + 3), visible, fill=(0, 0, 0), font=font)
+        draw.text((x, y), visible, fill=style.color, font=font)
+        return
     space_w = draw.textlength(' ', font=font)
     parts = re.findall(r'\*\*[^*]+\*\*|\S+', line)
     segments = []
@@ -731,13 +811,14 @@ def draw_brand_background(canvas, colors):
     canvas.paste(img, (0, 0))
 
 def draw_text_block(canvas, headline, subheadline, f_h, f_s, highlight_color, platform="ios",
-                    headline_style=None, subhead_style=None):
+                    headline_style=None, subhead_style=None, locale="pt"):
     w, h = canvas.size
     text_w = w - (300 if platform == "ipad" else 220)
     top_margin = 190 if platform == "ipad" else TEXT_TOP_MARGIN
     headline_style = headline_style or HEADLINE_STYLE
     subhead_style = subhead_style or SUBHEAD_STYLE
     draw = ImageDraw.Draw(canvas)
+    rtl = locale in RTL_LOCALES
     headline = expand_bold_spans(headline)
     subheadline = expand_bold_spans(subheadline)
     h_lines = wrap_text(headline, draw, f_h, text_w)
@@ -748,16 +829,16 @@ def draw_text_block(canvas, headline, subheadline, f_h, f_s, highlight_color, pl
 
     curr_y = top_margin
     for line in h_lines:
-        _draw_line_centered(draw, line, f_h, curr_y, w, headline_style, highlight_color)
+        _draw_line_centered(draw, line, f_h, curr_y, w, headline_style, highlight_color, rtl)
         curr_y += h_lh
     curr_y += gap
     for line in s_lines:
-        _draw_line_centered(draw, line, f_s, curr_y, w, subhead_style, highlight_color)
+        _draw_line_centered(draw, line, f_s, curr_y, w, subhead_style, highlight_color, rtl)
         curr_y += s_lh
 
     return (len(h_lines) * h_lh) + (len(s_lines) * s_lh) + gap
 
-def process_screenshot(tenant_key, idx, headline, subheadline, input_path, output_path, platform="android", use_slide_sources=False):
+def process_screenshot(tenant_key, idx, headline, subheadline, input_path, output_path, platform="android", use_slide_sources=False, locale="pt"):
     config = TENANT_CONFIGS[tenant_key]
     if platform == "ipad":
         cw, ch = 2048, 2732
@@ -775,7 +856,7 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
     else:
         draw_brand_background(canvas, [darken_color(c) for c in config["colors"]])
 
-    f_h, f_s = get_fonts(platform=platform)
+    f_h, f_s = get_fonts(platform=platform, locale=locale)
     if palette:
         # Shadows are what keep the text readable over the gradient; on a light canvas a
         # dark shadow would smear, so it drops with the text colour.
@@ -787,7 +868,7 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
         headline_style = subhead_style = None
         highlight = config["highlight_color"]
     total_text_h = draw_text_block(canvas, headline, subheadline, f_h, f_s, highlight, platform=platform,
-                                   headline_style=headline_style, subhead_style=subhead_style)
+                                   headline_style=headline_style, subhead_style=subhead_style, locale=locale)
 
     top_margin = 190 if platform == "ipad" else TEXT_TOP_MARGIN
     device_y = top_margin + total_text_h + (ANCHOR_MARGIN // 2)
@@ -844,8 +925,18 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
 
         if draw_frame:
             border_w = 20 if platform == "ipad" else 22
-            ImageDraw.Draw(device_layer).rounded_rectangle([pad, pad, target_w+pad, target_h+pad], radius=radius, outline=border_col, width=border_w)
-            ImageDraw.Draw(device_layer).rounded_rectangle([pad+2, pad+2, target_w+pad-2, target_h+pad-2], radius=radius, outline=light_col, width=3)
+            # The stroke is centred on the rectangle it is given, so drawing it on the screen's
+            # own bounds ate ~border_w/2 of pixels off each edge — the bezel was cropping the
+            # screenshot instead of surrounding it. Offsetting the rect outward by half the
+            # stroke makes its inner edge land exactly on the screen edge, touching without
+            # overlapping. pad (50) leaves room for the excursion.
+            half = border_w // 2
+            ImageDraw.Draw(device_layer).rounded_rectangle(
+                [pad - half, pad - half, target_w + pad + half, target_h + pad + half],
+                radius=radius + half, outline=border_col, width=border_w)
+            ImageDraw.Draw(device_layer).rounded_rectangle(
+                [pad - border_w, pad - border_w, target_w + pad + border_w, target_h + pad + border_w],
+                radius=radius + border_w, outline=light_col, width=3)
 
             cam_x = (target_w + (pad*2)) // 2
             if platform == "android":
@@ -872,13 +963,17 @@ STORE_LOCALE_BY_CONTENT_LOCALE = {
     "es": "es-ES",
     "ca": "ca",
     "en": "en-US",
-    "id": "id-ID",
+    # "id" and "tr" stay bare on purpose. store-assets/{tenant}/ carries BOTH id/ and
+    # id-ID/, and Play resolves Indonesian as "id" — the longer folder is the one it
+    # ignores, so writing there would hide the screenshots. There is no tr-TR/ folder at
+    # all; the Turkish metadata lives in tr/.
+    "id": "id",
     "fr": "fr-FR",
     "de": "de-DE",
     "hr": "hr",
     "ar": "ar",
     "zh": "zh-CN",
-    "tr": "tr-TR"
+    "tr": "tr",
 }
 
 def run_factory(target_tenant=None, target_platform="all", target_locale=None):
@@ -961,7 +1056,8 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
 
                     if input_file and os.path.exists(input_file):
                         process_screenshot(tenant, i, headline, subheadline, input_file, output_file,
-                                           platform=platform, use_slide_sources=use_slide_sources)
+                                           platform=platform, use_slide_sources=use_slide_sources,
+                                           locale=locale)
                     else:
                         print(f"    ⚠️ Screenshot de entrada não encontrada ({locale}): {input_file}")
 
