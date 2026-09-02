@@ -54,10 +54,12 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 70, 70),
         "slides": [
             ("Desafie seus conhecimentos **do Flamengo**", "O quiz definitivo sobre títulos, ídolos e história rubro-negra"),
-            ("Perguntas sobre **títulos, ídolos e clássicos**", "Da fundação ao elenco atual"),
-            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais"),
+            ("Perguntas sobre **títulos, ídolos e clássicos**", "De Zico a Arrascaeta e ao elenco atual"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Flamengo"),
             ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
             ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
             ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
@@ -67,10 +69,12 @@ TENANT_CONFIGS = {
         "highlight_color": (232, 232, 232),
         "slides": [
             ("Desafie seus conhecimentos **do Botafogo**", "O quiz definitivo sobre títulos, ídolos e história alvinegra"),
-            ("Perguntas sobre **títulos, ídolos e clássicos**", "Da fundação ao elenco atual"),
-            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais"),
+            ("Perguntas sobre **títulos, ídolos e clássicos**", "De Garrincha a Luiz Henrique e ao elenco atual"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Botafogo"),
             ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
             ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
             ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
@@ -79,10 +83,14 @@ TENANT_CONFIGS = {
         "colors": [(13, 4, 5), (74, 14, 26), (10, 5, 5)],
         "highlight_color": (0, 168, 107),
         "slides": [
-            ("Tudo sobre o **Tricolor das Laranjeiras**", "O quiz feito para os torcedores do Fluminense"),
-            ("Personalize a **Sua Rodada**", "Perguntas com ou sem dicas no seu ritmo"),
-            ("Resumo com **Aproveitamento Completo**", "Acompanhe acertos, tempo e pontuação total"),
-            ("Mantenha seu **Ritmo de Estudos**", "Construa sua sequência diária de partidas")
+            ("Desafie seus conhecimentos **do Fluminense**", "O quiz definitivo sobre títulos, ídolos e história tricolor"),
+            ("Perguntas sobre **títulos, ídolos e clássicos**", "De Castilho e Didi ao time campeão da Libertadores 2023"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Fluminense"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "vasco": {
@@ -90,10 +98,14 @@ TENANT_CONFIGS = {
         "colors": [(10, 10, 10), (26, 26, 26), (5, 5, 5)],
         "highlight_color": (224, 224, 224),
         "slides": [
-            ("História Respeitada do **Gigante da Colina**", "Testes desafiadores para os vascaínos"),
-            ("Escolha o **Tamanho do Desafio**", "Partidas personalizadas de 5 a 20 perguntas"),
-            ("Estatísticas e **Score em Tempo Real**", "Analise seu tempo e precisão nas respostas"),
-            ("Fortaleça sua **Sequência Diária**", "Jogue todos os dias para acumular pontos de Streak")
+            ("Desafie seus conhecimentos **do Vasco**", "O quiz definitivo sobre títulos, ídolos e história cruzmaltina"),
+            ("Perguntas sobre **títulos, ídolos e clássicos**", "De Ademir de Menezes ao time campeão da Libertadores 1998"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Vasco"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "worldcup": {
@@ -101,10 +113,14 @@ TENANT_CONFIGS = {
         "colors": [(8, 21, 40), (21, 57, 97), (6, 15, 30)],
         "highlight_color": (46, 204, 113),
         "slides": [
-            ("O Maior Quiz **de Futebol Mundial**", "Reviva todas as edições do maior torneio da Terra"),
-            ("Monte o **Seu Desafio**", "Jogue rodadas rápidas ou longas com opção de dicas"),
-            ("Métricas de **Pontuação e Desempenho**", "Acompanhe seu nível de conhecimento em cada jogo"),
-            ("Crie uma **Sequência Campeã**", "Treine diariamente para manter seu Streak ativo")
+            ("Desafie seus conhecimentos **de Copa**", "O quiz definitivo sobre seleções, craques e história do futebol mundial"),
+            ("Perguntas sobre **craques, seleções e finais**", "De Garrincha e Pelé a Mbappé e o futebol de hoje"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais de futebol mundial"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "bible": {
@@ -112,10 +128,14 @@ TENANT_CONFIGS = {
         "colors": [(8, 21, 40), (22, 46, 84), (6, 15, 30)],
         "highlight_color": (201, 149, 44),
         "slides": [
-            ("Aprenda a **Palavra de Deus** jogando", "Perguntas e respostas sobre o Antigo e Novo Testamento"),
-            ("Ajuste as **Configurações da Rodada**", "Escolha de 5 a 20 perguntas com auxílio de dicas"),
-            ("Resumo com **Tempo e Acertos**", "Acompanhe seu progresso e aproveitamento bíblico"),
-            ("Hábito Diário de **Estudo Bíblico**", "Mantenha sua sequência diária ativada todos os dias")
+            ("Desafie seus conhecimentos **da Bíblia**", "O quiz definitivo sobre o Antigo e o Novo Testamento"),
+            ("Perguntas sobre **personagens, livros e ensinamentos**", "De Gênesis ao Apocalipse, com contexto para aprender"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem conhece mais as Escrituras"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "geography-world": {
@@ -123,10 +143,14 @@ TENANT_CONFIGS = {
         "colors": [(15, 43, 31), (27, 67, 50), (10, 30, 20)],
         "highlight_color": (82, 183, 136),
         "slides": [
-            ("Explore o Mundo com **Desafios Geográficos**", "Bandeiras, capitais, mapas e curiosidades dos países"),
-            ("Partidas **Rápidas e Personalizadas**", "Defina a quantidade de questões e nível de ajuda"),
-            ("Análise de **Aproveitamento Mundial**", "Veja seu tempo médio e total de acertos por quiz"),
-            ("Construa sua **Streak de Conhecimento**", "Pratique diariamente para manter sua sequência viva")
+            ("Desafie seus conhecimentos **de Geografia**", "O quiz definitivo sobre bandeiras, capitais e países do mundo"),
+            ("Perguntas sobre **bandeiras, capitais e mapas**", "De países vizinhos a nações do outro lado do planeta"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem conhece mais o mundo"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "enem-matematica": {
@@ -134,10 +158,14 @@ TENANT_CONFIGS = {
         "colors": [(3, 30, 20), (5, 50, 30), (2, 20, 15)],
         "highlight_color": (0, 229, 117),
         "slides": [
-            ("Domine a prova de **Matemática do ENEM**", "Questões oficiais com gabarito comentado e dicas"),
-            ("Simulados **100% Personalizados**", "Treine rodadas de 5, 10, 15 ou 20 questões no seu ritmo"),
-            ("Estatísticas e **Tempo de Resposta**", "Acompanhe seu aproveitamento e média de tempo por questão"),
-            ("Construa sua **Sequência de Estudos**", "Pratique todos os dias e turbine sua pontuação no ENEM")
+            ("Domine a prova **de Matemática do ENEM**", "O simulado definitivo com questões oficiais e gabarito comentado"),
+            ("Questões sobre **álgebra, geometria e estatística**", "Do básico às questões que mais caem na prova"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem está mais preparado"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "enem-portugues": {
@@ -145,10 +173,14 @@ TENANT_CONFIGS = {
         "colors": [(30, 24, 6), (55, 42, 10), (20, 16, 4)],
         "highlight_color": (255, 208, 67),
         "slides": [
-            ("Domine a prova de **Linguagens do ENEM**", "Questões oficiais de Língua Portuguesa e Literatura"),
-            ("Treine com **Simulados Focados**", "Escolha 5, 10, 15 ou 20 perguntas com dicas inteligentes"),
-            ("Análise de **Desempenho e Acertos**", "Acompanhe sua evolução e tempo de resolução"),
-            ("Mantenha sua **Streak de Estudos**", "Crie o hábito de praticar diariamente para o ENEM")
+            ("Domine a prova **de Linguagens do ENEM**", "O simulado definitivo de Língua Portuguesa e Literatura"),
+            ("Questões sobre **gramática, interpretação e literatura**", "Do básico às questões que mais caem na prova"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem está mais preparado"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "enem-humanas": {
@@ -156,10 +188,14 @@ TENANT_CONFIGS = {
         "colors": [(20, 12, 35), (42, 25, 75), (14, 8, 25)],
         "highlight_color": (167, 139, 250),
         "slides": [
-            ("Domine a prova de **Ciências Humanas**", "Questões de História, Geografia, Filosofia e Sociologia"),
-            ("Simulados no **Seu Próprio Ritmo**", "Rodadas personalizadas com opções de dicas eliminatórias"),
-            ("Resumo Completo de **Aproveitamento**", "Acompanhe acertos, tempo gasto e métricas de precisão"),
-            ("Construa sua **Rotina Diária**", "Estude todos os dias e mantenha sua sequência ativa")
+            ("Domine a prova **de Ciências Humanas**", "O simulado definitivo de História, Geografia, Filosofia e Sociologia"),
+            ("Questões sobre **história, geografia e política**", "Do básico às questões que mais caem na prova"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem está mais preparado"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "enem-natureza": {
@@ -167,10 +203,14 @@ TENANT_CONFIGS = {
         "colors": [(4, 25, 30), (10, 48, 55), (3, 18, 22)],
         "highlight_color": (20, 184, 166),
         "slides": [
-            ("Domine a prova de **Ciências da Natureza**", "Questões oficiais de Biologia, Física e Química"),
-            ("Simulados **Rápidos e Eficientes**", "Treine de 5 a 20 questões com gabarito e dicas"),
-            ("Métricas de **Precisão e Velocidade**", "Analise seu tempo por questão e taxa de acertos"),
-            ("Fortaleça sua **Sequência de Estudos**", "Treine diariamente e conquiste sua vaga na universidade")
+            ("Domine a prova **de Ciências da Natureza**", "O simulado definitivo de Biologia, Física e Química"),
+            ("Questões sobre **biologia, física e química**", "Do básico às questões que mais caem na prova"),
+            ("Desafie um amigo **por link**", "Envie a partida e veja quem está mais preparado"),
+            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
     },
     "corinthians": {
@@ -179,22 +219,34 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 255, 255),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Timão**", "O quiz definitivo sobre a história alvinegra, mundiais e títulos"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Desafie seus conhecimentos **do Corinthians**", "O quiz definitivo sobre a história alvinegra, mundiais e títulos"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Sócrates e Rivellino a Cássio e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Corinthians"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
                 ("Test your **Corinthians** knowledge", "The ultimate trivia about the 2 World Titles, undefeated Libertadores and idols"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Questions on **titles, legends and derbies**", "From Sócrates and Rivellino to Cássio and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Corinthians best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "es": [
-                ("Desafía tus conocimientos **del Timão**", "El quiz definitivo sobre el Bicampeonato Mundial, Libertadores e ídolos de Corinthians"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Desafía tus conocimientos **del Corinthians**", "El quiz definitivo sobre el Bicampeonato Mundial, Libertadores e ídolos de Corinthians"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Sócrates y Rivellino a Cássio y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Corinthians"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -204,22 +256,34 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 255, 255),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Verdão**", "O quiz definitivo sobre a história alviverde, títulos e ídolos"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Desafie seus conhecimentos **do Palmeiras**", "O quiz definitivo sobre a história alviverde, títulos e ídolos"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Ademir da Guia a Dudu e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Palmeiras"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
                 ("Test your **Palmeiras** knowledge", "The ultimate quiz about titles, Copa Libertadores and Verdão legends"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Questions on **titles, legends and derbies**", "From Ademir da Guia to Dudu and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Palmeiras best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "es": [
-                ("Desafía tus conocimientos **del Verdão**", "El quiz definitivo sobre títulos, Copa Libertadores e ídolos de Palmeiras"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Desafía tus conocimientos **del Palmeiras**", "El quiz definitivo sobre títulos, Copa Libertadores e ídolos de Palmeiras"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Ademir da Guia a Dudu y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Palmeiras"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -229,22 +293,34 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 255, 255),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Soberano**", "O quiz definitivo sobre os Mundiais, Libertadores e ídolos do São Paulo"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Desafie seus conhecimentos **do São Paulo**", "O quiz definitivo sobre os Mundiais, Libertadores e ídolos do São Paulo"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Serginho Chulapa a Lucas Moura e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do São Paulo"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
                 ("Test your **São Paulo FC** knowledge", "The ultimate trivia about the 3 World Titles, Libertadores and Tricolor idols"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Questions on **titles, legends and derbies**", "From Serginho Chulapa to Lucas Moura and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows São Paulo best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "es": [
-                ("Desafía tus conocimientos **del Tricolor**", "El quiz definitivo sobre los 3 Mundiales, Libertadores e ídolos de São Paulo"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Desafía tus conocimientos **del São Paulo**", "El quiz definitivo sobre los 3 Mundiales, Libertadores e ídolos de São Paulo"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Serginho Chulapa a Lucas Moura y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del São Paulo"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -254,22 +330,34 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 255, 255),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Peixe**", "O quiz definitivo sobre a Era Pelé, Libertadores e Meninos da Vila"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Desafie seus conhecimentos **do Santos**", "O quiz definitivo sobre a Era Pelé, Libertadores e Meninos da Vila"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Pelé e Pepe a Neymar e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Santos"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
                 ("Test your **Santos FC** knowledge", "The ultimate quiz about Pelé, Intercontinental Cups and Meninos da Vila"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Questions on **titles, legends and derbies**", "From Pelé and Pepe to Neymar and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Santos best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "es": [
-                ("Desafía tus conocimientos **del Peixe**", "El quiz definitivo sobre la Era Pelé, Libertadores y Meninos da Vila"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Desafía tus conocimientos **del Santos**", "El quiz definitivo sobre la Era Pelé, Libertadores y Meninos da Vila"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Pelé y Pepe a Neymar y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Santos"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -279,22 +367,34 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 255, 255),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Imortal**", "O quiz definitivo sobre a história tricolor, Libertadores e títulos"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Desafie seus conhecimentos **do Grêmio**", "O quiz definitivo sobre a história tricolor, Libertadores e títulos"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Renato Gaúcho a Ronaldinho Gaúcho e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Grêmio"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
                 ("Test your **Grêmio** knowledge", "The ultimate trivia about the 1983 World Title, 3 Libertadores and Tricolor idols"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Questions on **titles, legends and derbies**", "From Renato Gaúcho to Ronaldinho Gaúcho and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Grêmio best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "es": [
-                ("Desafía tus conocimientos **del Imortal**", "El quiz definitivo sobre el Mundial 1983, 3 Libertadores e ídolos de Grêmio"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Desafía tus conocimientos **del Grêmio**", "El quiz definitivo sobre el Mundial 1983, 3 Libertadores e ídolos de Grêmio"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Renato Gaúcho a Ronaldinho Gaúcho y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Grêmio"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -304,22 +404,34 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 255, 255),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Colorado**", "O quiz definitivo sobre o Mundial, Libertadores e ídolos do Inter"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Desafie seus conhecimentos **do Internacional**", "O quiz definitivo sobre o Mundial, Libertadores e ídolos do Inter"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Falcão a D'Alessandro e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Internacional"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
                 ("Test your **Internacional** knowledge", "The ultimate trivia about the 2006 World Title, 2 Libertadores and Colorado idols"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Questions on **titles, legends and derbies**", "From Falcão to D'Alessandro and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Internacional best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "es": [
-                ("Desafía tus conocimientos **del Colorado**", "El quiz definitivo sobre el Mundial 2006, 2 Libertadores e ídolos de Inter"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Desafía tus conocimientos **del Internacional**", "El quiz definitivo sobre el Mundial 2006, 2 Libertadores e ídolos de Inter"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Falcão a D'Alessandro y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Internacional"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -329,22 +441,34 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 255, 255),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Furacão**", "O quiz definitivo sobre o Brasileirão 2001, Bi da Sul-Americana e ídolos"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Desafie seus conhecimentos **do Athletico-PR**", "O quiz definitivo sobre o Brasileirão 2001, Bi da Sul-Americana e ídolos"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "Do Brasileirão 2001 ao elenco atual do Furacão"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Athletico-PR"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
                 ("Test your **Athletico-PR** knowledge", "The ultimate trivia about the 2001 Brasileirão, 2 Sudamericana titles and Furacão idols"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Questions on **titles, legends and derbies**", "From the 2001 Brasileirão to today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Athletico-PR best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "es": [
-                ("Desafía tus conocimientos **del Furacão**", "El quiz definitivo sobre el Brasileirão 2001, 2 Sudamericanas e ídolos de Athletico"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Desafía tus conocimientos **del Athletico-PR**", "El quiz definitivo sobre el Brasileirão 2001, 2 Sudamericanas e ídolos de Athletico"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "Del Brasileirão 2001 a la plantilla actual del Furacão"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Athletico-PR"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -354,22 +478,34 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 255, 255),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **da Raposa**", "O quiz definitivo sobre o Rei de Copas, Tríplice Coroa e conquistas"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Desafie seus conhecimentos **do Cruzeiro**", "O quiz definitivo sobre o Rei de Copas, Tríplice Coroa e conquistas"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Tostão e Dirceu Lopes a Ronaldo e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Cruzeiro"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
                 ("Test your **Cruzeiro** knowledge", "The ultimate trivia about the Rei de Copas, 2003 Treble and Raposa idols"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Questions on **titles, legends and derbies**", "From Tostão and Dirceu Lopes to Ronaldo and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Cruzeiro best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "es": [
-                ("Desafía tus conocimientos **de la Raposa**", "El quiz definitivo sobre el Rei de Copas, Tríplice Coroa e ídolos de Cruzeiro"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Desafía tus conocimientos **del Cruzeiro**", "El quiz definitivo sobre el Rei de Copas, Tríplice Coroa e ídolos de Cruzeiro"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Tostão y Dirceu Lopes a Ronaldo y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Cruzeiro"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -379,22 +515,34 @@ TENANT_CONFIGS = {
         "highlight_color": (201, 149, 44),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Galo**", "O quiz definitivo sobre a Libertadores 2013, Triplete 2021 e ídolos"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detallado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Desafie seus conhecimentos **do Atlético-MG**", "O quiz definitivo sobre a Libertadores 2013, Triplete 2021 e ídolos"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Reinaldo e Dadá Maravilha a Hulk e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Atlético-MG"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
                 ("Test your **Atlético-MG** knowledge", "The ultimate trivia about the 2013 Libertadores, 2021 Treble and Galo idols"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Questions on **titles, legends and derbies**", "From Reinaldo and Dadá Maravilha to Hulk and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Atlético-MG best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "es": [
-                ("Desafía tus conocimientos **del Galo**", "El quiz definitivo sobre la Libertadores 2013, Triplete 2021 e ídolos de Atlético"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Desafía tus conocimientos **del Atlético-MG**", "El quiz definitivo sobre la Libertadores 2013, Triplete 2021 e ídolos de Atlético"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Reinaldo y Dadá Maravilha a Hulk y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Atlético-MG"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -532,27 +680,43 @@ TENANT_CONFIGS = {
         "slides_by_locale": {
             "pt": [
                 ("Desafie seus conhecimentos **do Barcelona**", "O quiz definitivo sobre títulos, ídolos e história blaugrana"),
-                ("Escolha a **Quantidade de Perguntas**", "Jogue rodadas de 5, 10, 15 ou 20 questões com ou sem dicas"),
-                ("Resultado Detalhado e **Tempo de Resposta**", "Veja seu aproveitamento e precisão em cada partida"),
-                ("Mantenha sua **Sequência Diária**", "Treine todos os dias e fortaleça sua marca de Streak")
+                ("Perguntas sobre **títulos, ídolos e Clássicos**", "De Cruyff aos craques atuais do Barça"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Barcelona"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "es": [
                 ("Desafía tus conocimientos **del Barcelona**", "El quiz definitivo sobre títulos, ídolos e historia blaugrana"),
-                ("Elige la **Cantidad de Preguntas**", "Juega rondas de 5, 10, 15 o 20 preguntas con o sin pistas"),
-                ("Resultado Detallado y **Tiempo de Respuesta**", "Consulta tu rendimiento y precisión en cada partida"),
-                ("Mantén tu **Racha Diaria**", "Entrena todos los días y fortalece tu marca de Racha")
+                ("Preguntas sobre **títulos, ídolos y Clásicos**", "De Cruyff a las estrellas actuales del Barça"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Barcelona"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ],
             "ca": [
                 ("Desafia els teus coneixements **del Barça**", "El quiz definitiu sobre títols, ídols i història blaugrana"),
-                ("Tria la **Quantitat de Preguntes**", "Juga rondes de 5, 10, 15 o 20 preguntes amb o sense pistes"),
-                ("Resultat Detallat i **Temps de Resposta**", "Consulta el teu rendiment i precisió a cada partida"),
-                ("Mantén la teva **Ratxa Diària**", "Entrena cada dia i enforteix la teva marca de Ratxa")
+                ("Preguntes sobre **títols, ídols i Clàssics**", "De Cruyff a les estrelles actuals del Barça"),
+                ("Desafia un amic **per enllaç**", "Envia la partida i descobreix qui en sap més del Barcelona"),
+                ("El teu marcador a l'instant, **partida a partida**", "Puntuació, percentatge d'encert i evolució a cada ronda"),
+                ("Qui en sap més **arriba al capdamunt**", "Rànquing en temps real entre tu i els teus amics"),
+                ("Has fallat? La resposta ve **explicada**", "Cada pregunta mostra la correcta i el perquè"),
+                ("T'has encallat? **Usa una pista**", "Una ajuda per pregunta, quan la necessitis"),
+                ("Torna cada dia i **manté la teva ratxa**", "Ratxa diària, rànquing i historial de les teves partides")
             ],
             "en": [
                 ("Test your **Barcelona** knowledge", "The ultimate quiz about titles, legends and Blaugrana history"),
-                ("Choose Your **Question Count**", "Play rounds of 5, 10, 15 or 20 questions with or without hints"),
-                ("Detailed Results and **Response Time**", "See your accuracy and performance in every match"),
-                ("Keep Your **Daily Streak**", "Train every day and build up your Streak")
+                ("Questions on **titles, legends and Clásicos**", "From Cruyff to today's Barça stars"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Barcelona best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ]
         }
     }
