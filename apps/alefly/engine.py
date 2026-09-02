@@ -503,6 +503,16 @@ TENANT_CONFIGS = {
                 ("توقفت؟ **استخدم تلميحًا**", "مساعدة واحدة لكل سؤال، وقتما تحتاجها"),
                 ("عد كل يوم **وحافظ على تتابعك**", "تتابع يومي وترتيب وسجل لجولاتك")
             ],
+            "zh": [
+                ("测试你对**皇马**的了解程度", "关于冠军荣誉、银河战舰时代与皇室历史的终极问答"),
+                ("题目涵盖**冠军、传奇球星与国家德比**", "从迪斯蒂法诺到银河战舰时代，直至现今阵容"),
+                ("**通过链接**挑战好友", "发送对局链接，看看谁更懂皇马"),
+                ("成绩**即时呈现，一轮接一轮**", "每轮的得分、正确率与进步一目了然"),
+                ("登上**排行榜**榜首", "你与好友之间的实时排名"),
+                ("答错了？答案**附带解析**", "每道题都会显示正确答案及原因"),
+                ("卡住了？**使用提示**", "每题一次提示，随时可用"),
+                ("每天回来，**保持连续答题**", "每日连续答题、排行榜与对局历史")
+            ],
             "tr": [
                 ("**Real Madrid** bilgini test et", "Şampiyonluklar, Galácticos dönemi ve Bernabéu tarihiyle dolu quiz"),
                 ("**Şampiyonluklar, efsaneler ve Clásico'lar** hakkında sorular", "Di Stéfano'dan Galácticos dönemine, bugünkü kadroya kadar"),
@@ -696,6 +706,10 @@ SLIDE_SOURCES = [
 RTL_LOCALES = {"ar"}
 ARABIC_FONTS = ("/System/Library/Fonts/SFArabic.ttf", "/System/Library/Fonts/GeezaPro.ttc")
 
+# Same .notdef-box failure as Arabic: Montserrat carries no CJK glyphs.
+CJK_LOCALES = {"zh"}
+CJK_FONT = "/System/Library/Fonts/Hiragino Sans GB.ttc"
+
 
 def get_fonts(platform="ios", locale="pt"):
     if locale in RTL_LOCALES:
@@ -703,6 +717,11 @@ def get_fonts(platform="ios", locale="pt"):
         if arabic:
             size_h, size_s = (148, 70) if platform == "ipad" else (104, 50)
             return ImageFont.truetype(arabic, size_h), ImageFont.truetype(arabic, size_s)
+    if locale in CJK_LOCALES and os.path.exists(CJK_FONT):
+        size_h, size_s = (148, 70) if platform == "ipad" else (104, 50)
+        # index 2/0 = W6 (bold) / W3 (regular) faces inside the .ttc.
+        return (ImageFont.truetype(CJK_FONT, size_h, index=2),
+                ImageFont.truetype(CJK_FONT, size_s, index=0))
     f_bold = os.path.join(FONTS_DIR, "montserrat_bold.ttf")
     f_reg = os.path.join(FONTS_DIR, "montserrat.ttf")
     if not os.path.exists(f_bold): f_bold = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
@@ -711,19 +730,63 @@ def get_fonts(platform="ios", locale="pt"):
         return ImageFont.truetype(f_bold, 148), ImageFont.truetype(f_reg, 70)
     return ImageFont.truetype(f_bold, 104), ImageFont.truetype(f_reg, 50)
 
+# CJK Unified Ideographs + common fullwidth punctuation. These scripts carry no spaces
+# between words, so wrapping has to break per character instead of per \S+ token.
+CJK_RE = re.compile(r'[一-鿿㐀-䶿豈-﫿　-〿＀-￯]')
+
+def _is_cjk_char(s):
+    return len(s) == 1 and bool(CJK_RE.match(s))
+
+def _split_words(text):
+    return list(text) if CJK_RE.search(text) else text.split()
+
 def expand_bold_spans(text):
-    return re.sub(r'\*\*([^*]+)\*\*', lambda m: ' '.join(f'**{w}**' for w in m.group(1).split()), text)
+    """Rewrites text into a fully space-delimited token stream.
+
+    For Latin languages the source text already has spaces around **bold** spans, so
+    this only needed to split multi-word spans into individually-highlighted **word**
+    units. CJK text has no spaces anywhere in the source — reusing the old regex
+    substitution left the plain text flush against the `**` markers, and the
+    whitespace-only tokenizer below (`\\S+`) then swallowed marker and neighbouring
+    characters into one dirty token. Walking the string once and re-joining every
+    unit (bold or plain, word or CJK character) with real spaces gives wrap_text a
+    clean, script-agnostic token boundary everywhere.
+    """
+    out = []
+    i, n = 0, len(text)
+    while i < n:
+        if text[i:i + 2] == '**':
+            end = text.find('**', i + 2)
+            if end == -1:
+                out.append(text[i:])
+                break
+            out.extend(f'**{u}**' for u in _split_words(text[i + 2:end]))
+            i = end + 2
+        elif CJK_RE.match(text[i]):
+            out.append(text[i])
+            i += 1
+        else:
+            j = i
+            while j < n and text[j:j + 2] != '**' and not CJK_RE.match(text[j]):
+                j += 1
+            out.extend(text[i:j].split())
+            i = j
+    return ' '.join(out)
 
 def wrap_text(text, draw, font, max_width):
     raw_tokens = re.findall(r'\*\*[^*]+\*\*|\S+', text)
     lines = []
     current = []
     current_w = 0
+    prev_visible = ''
     space_w = draw.textlength(' ', font=font)
     for tok in raw_tokens:
         visible = tok.replace('**', '')
         tok_w = draw.textlength(visible, font=font)
-        added = tok_w + (space_w if current else 0)
+        # No gap between two adjacent bare CJK characters — real spacing would look
+        # like letter-spaced Latin type, which Chinese headlines don't use.
+        gap = 0 if _is_cjk_char(prev_visible) and _is_cjk_char(visible) else space_w
+        added = tok_w + (gap if current else 0)
         if current and current_w + added > max_width:
             lines.append(' '.join(current))
             current = [tok]
@@ -731,6 +794,7 @@ def wrap_text(text, draw, font, max_width):
         else:
             current.append(tok)
             current_w += added
+        prev_visible = visible
     if current:
         lines.append(' '.join(current))
     return lines
@@ -749,17 +813,22 @@ def _draw_line_centered(draw, line, font, y, width, style, highlight_color, rtl=
     space_w = draw.textlength(' ', font=font)
     parts = re.findall(r'\*\*[^*]+\*\*|\S+', line)
     segments = []
+    gaps = []
     total_w = 0
+    prev_visible = ''
     for i, part in enumerate(parts):
         is_hl = part.startswith('**') and part.endswith('**')
         visible = part.replace('**', '')
         w = draw.textlength(visible, font=font)
+        gap = 0 if i > 0 and _is_cjk_char(prev_visible) and _is_cjk_char(visible) else (space_w if i > 0 else 0)
+        gaps.append(gap)
         segments.append((visible, is_hl, w))
-        total_w += w
-    total_w += space_w * (len(parts) - 1) if len(parts) > 1 else 0
+        total_w += w + gap
+        prev_visible = visible
 
     cur_x = (width - total_w) // 2
-    for visible, is_hl, w in segments:
+    for (visible, is_hl, w), gap in zip(segments, gaps):
+        cur_x += gap
         col = highlight_color if is_hl else style.color
         # Shadow suave
         # The canvas is RGB, so PIL discards the alpha in `fill` and paints solid black:
@@ -768,7 +837,7 @@ def _draw_line_centered(draw, line, font, y, width, style, highlight_color, rtl=
         if style.shadow_alpha:
             draw.text((cur_x + 3, y + 3), visible, fill=(0, 0, 0), font=font)
         draw.text((cur_x, y), visible, fill=col, font=font)
-        cur_x += w + space_w
+        cur_x += w
 
 def smoothstep(t):
     t = np.clip(t, 0.0, 1.0)
