@@ -239,7 +239,7 @@ def process_screenshot(locale, idx, headline, subheadline, input_path, output_pa
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     canvas.save(output_path, quality=100, subsampling=0)
 
-def run_factory(target_platform=None, target_locale=None):
+def run_factory(target_platform=None, target_locale=None, target_slide=None):
     trans_path = os.path.join(APP_ROOT, "biblia365-translations.json")
     with open(trans_path, 'r') as f:
         translations = json.load(f)
@@ -261,7 +261,7 @@ def run_factory(target_platform=None, target_locale=None):
             if os.path.exists(p): return p
         return None
 
-    print(f"🚀 Fábrica Bíblia 365 (Filtro: {target_platform or 'Todas'} / {target_locale or 'Todos'})...")
+    print(f"🚀 Fábrica Bíblia 365 (Filtro: {target_platform or 'Todas'} / {target_locale or 'Todos'} / slide {target_slide or 'todos'})...")
     
     platforms = [target_platform] if target_platform else ["android", "ios"]
     
@@ -278,14 +278,15 @@ def run_factory(target_platform=None, target_locale=None):
             print(f"  📦 Locale: {locale}")
             slides = translations[locale]['slides']
             for i, slide_text in enumerate(slides):
+                # Se --slide especificado, pula os outros (converte para 0-indexed)
+                if target_slide is not None and i != target_slide - 1:
+                    continue
                 input_path = find_file(platform, folder_name, i)
                 if input_path:
                     output_path = os.path.join(BASE_OUTPUT_DIR, platform, locale, f"slide_{i+1}.png")
                     process_screenshot(locale, i, slide_text[0], slide_text[1], input_path, output_path, platform=platform)
     
     print(f"\n🎉 Processamento concluído!")
-    if target_platform and target_locale:
-        os.system(f"open {BASE_OUTPUT_DIR}/{target_platform}/{target_locale}/slide_1.png")
 
 if __name__ == "__main__":
     import argparse
@@ -293,8 +294,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--platform", choices=["android", "ios", "all"], default="android")
     parser.add_argument("--locale", default="pt-BR")
+    parser.add_argument("--slide", type=int, default=None, help="Renderizar somente o slide N (1-indexed)")
     args = parser.parse_args()
 
     target_platform = None if args.platform == "all" else args.platform
     target_locale = None if args.locale == "all" else args.locale
-    run_factory(target_platform=target_platform, target_locale=target_locale)
+    run_factory(target_platform=target_platform, target_locale=target_locale, target_slide=args.slide)
