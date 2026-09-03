@@ -22,6 +22,7 @@ HEIGHT = 2796
 # 2288 = 16*143 - integer multiples, ratio is bit-exact, not just close).
 ANDROID_WIDTH, ANDROID_HEIGHT = 1287, 2288
 ANCHOR_MARGIN = 200
+MIN_TEXT_DEVICE_GAP = 48
 
 TEXT_TOP_MARGIN = 160
 HEADLINE_LINE_HEIGHT_RATIO = 1.08
@@ -42,7 +43,8 @@ HEADLINE_STYLE = TextStyle(color=(255, 255, 255), shadow_alpha=90)
 SUBHEAD_STYLE = TextStyle(color=(220, 225, 235), shadow_alpha=70)
 
 # Caminhos base
-ALEFLY_STORE_ASSETS = "/Users/yuripacheco/Projetos/alefly/store-assets"
+ALEFLY_REPO_ROOT = os.environ.get("ALEFLY_REPO_ROOT", "/Users/yuripacheco/Projetos/alefly")
+ALEFLY_STORE_ASSETS = os.path.join(ALEFLY_REPO_ROOT, "store-assets")
 APPSCREEN_ROOT = "/Users/yuripacheco/Projetos/appscreen"
 FONTS_DIR = os.path.join(APPSCREEN_ROOT, "apps", "biblia365", "fonts")
 
@@ -97,16 +99,38 @@ TENANT_CONFIGS = {
         "name": "Quiz para Fãs do Vasco",
         "colors": [(10, 10, 10), (26, 26, 26), (5, 5, 5)],
         "highlight_color": (224, 224, 224),
-        "slides": [
-            ("Desafie seus conhecimentos **do Vasco**", "O quiz definitivo sobre títulos, ídolos e história cruzmaltina"),
-            ("Perguntas sobre **títulos, ídolos e clássicos**", "De Ademir de Menezes ao time campeão da Libertadores 1998"),
-            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Vasco"),
-            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
-            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
-            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
-            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
-            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Vasco**", "O quiz definitivo sobre títulos, ídolos e história cruzmaltina"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Ademir de Menezes ao time campeão da Libertadores 1998"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Vasco"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Vasco** knowledge", "The ultimate quiz on titles, legends and Vasco da Gama history"),
+                ("Questions on **titles, legends and rivalries**", "From Ademir de Menezes to the 1998 Libertadores champions"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Vasco best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Pon a prueba tu conocimiento **del Vasco**", "El quiz definitivo sobre títulos, ídolos e historia del Vasco da Gama"),
+                ("Preguntas sobre **títulos, ídolos y rivalidades**", "De Ademir de Menezes al campeón de la Libertadores de 1998"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Vasco"),
+                ("Tu puntaje al instante, **partida a partida**", "Puntos, precisión y progreso en cada ronda"),
+                ("El que sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Atascado? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de partidas")
+            ]
+        }
     },
     "worldcup": {
         "name": "Quiz para fãs da Copa",
@@ -212,6 +236,87 @@ TENANT_CONFIGS = {
             ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
             ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
         ]
+    },
+    "manchesterunited": {
+        "name": "Quiz para Fãs do Manchester United",
+        "colors": [(51, 0, 0), (218, 2, 14), (13, 0, 0)],
+        "highlight_color": (255, 255, 255),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Manchester United**", "O quiz definitivo sobre títulos, ídolos e história dos Red Devils"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Cristiano Ronaldo a Bruno Fernandes e ao elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Manchester United"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Manchester United** knowledge", "The ultimate quiz on titles, legends and Red Devils history"),
+                ("Questions on **titles, legends and rivalries**", "From Cristiano Ronaldo to Bruno Fernandes and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Manchester United best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ]
+        }
+    },
+    "manchestercity": {
+        "name": "Quiz para Fãs do Manchester City",
+        "colors": [(6, 26, 46), (108, 171, 221), (2, 13, 26)],
+        "highlight_color": (255, 255, 255),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Manchester City**", "O quiz definitivo sobre a Tríplice Coroa, ídolos e história dos Cityzens"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Agüero e De Bruyne a Haaland e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Manchester City"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Manchester City** knowledge", "The ultimate quiz on the Treble, legends and Cityzens history"),
+                ("Questions on **titles, legends and rivalries**", "From Agüero and De Bruyne to Haaland and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Manchester City best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ]
+        }
+    },
+    "juventus": {
+        "name": "Quiz para Fãs da Juventus",
+        "colors": [(17, 17, 17), (35, 35, 35), (10, 10, 10)],
+        "highlight_color": (255, 255, 255),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **da Juventus**", "O quiz definitivo sobre Scudetti, ídolos e história da Vecchia Signora"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Del Piero e Buffon a Cristiano Ronaldo e Dybala"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais da Juventus"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "it": [
+                ("Metti alla prova le tue conoscenze **sulla Juventus**", "Il quiz definitivo su Scudetti, idoli e storia della Vecchia Signora"),
+                ("Domande su **titoli, idoli e derby**", "Da Del Piero e Buffon a Cristiano Ronaldo e Dybala"),
+                ("Sfida un amico **con un link**", "Invia la partita e scopri chi ne sa di più sulla Juventus"),
+                ("Il tuo punteggio subito, **round dopo round**", "Punteggio, percentuale di risposte corrette ed evoluzione a ogni partita"),
+                ("Chi ne sa di più **resta in cima**", "Classifica in tempo reale tra te e i tuoi amici"),
+                ("Hai sbagliato? La risposta arriva **spiegata**", "Ogni domanda mostra quella giusta e il motivo"),
+                ("Bloccato? **Usa un suggerimento**", "Un aiuto per domanda, quando ne hai bisogno"),
+                ("Torna ogni giorno e **mantieni la serie**", "Serie giornaliera, classifica e cronologia delle tue partite")
+            ]
+        }
     },
     "corinthians": {
         "name": "Quiz para Fãs do Corinthians",
@@ -509,7 +614,7 @@ TENANT_CONFIGS = {
             ]
         }
     },
-    "atletico-mg": {
+    "atleticomg": {
         "name": "Quiz para Fãs do Galo",
         "colors": [(17, 17, 17), (35, 35, 35), (10, 10, 10)],
         "highlight_color": (201, 149, 44),
@@ -719,6 +824,89 @@ TENANT_CONFIGS = {
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ]
         }
+    },
+    "chelsea": {
+        "name": "Quiz para Fãs do Chelsea",
+        "colors": [(0, 30, 70), (3, 70, 148), (0, 12, 30)],
+        "highlight_color": (255, 193, 7),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Chelsea**", "O quiz definitivo sobre títulos, ídolos e história do Chelsea FC"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Lampard e Drogba a Hazard e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Chelsea"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Chelsea** knowledge", "The ultimate quiz on titles, legends and Chelsea FC history"),
+                ("Questions on **titles, legends and rivalries**", "From Lampard and Drogba to Hazard and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Chelsea best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ]
+        }
+    },
+    "psg": {
+        "name": "Quiz para Fãs do PSG",
+        "colors": [(0, 16, 37), (0, 65, 112), (0, 8, 18)],
+        "highlight_color": (218, 41, 28),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do PSG**", "O quiz definitivo sobre títulos, ídolos e história do Paris Saint-Germain"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Mbappé e Neymar a Marquinhos e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do PSG"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "fr": [
+                ("Défiez vos connaissances sur le **PSG**", "Le quiz ultime sur les titres, les légendes et l'histoire du Paris Saint-Germain"),
+                ("Questions sur les **titres, légendes et classiques**", "De Mbappé et Neymar à Marquinhos et l'effectif actuel"),
+                ("Défiez un ami **par lien**", "Envoyez la partie et voyez qui connaît le mieux le PSG"),
+                ("Votre score à l'instant, **match après match**", "Points, pourcentage de réussite et progression à chaque manche"),
+                ("Le plus fort **grimpe au sommet**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
+            ]
+        }
+    },
+    "liverpool": {
+        "name": "Quiz para Fãs do Liverpool",
+        # Fallback only — derive_palette() reads visual.primaryColor/accentColor from the
+        # tenant seed (red/white) and wins whenever the seed has them, same as realmadrid.
+        "colors": [(90, 5, 15), (200, 16, 46), (20, 1, 3)],
+        "highlight_color": (200, 16, 46),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Liverpool**", "O quiz definitivo sobre títulos, ídolos e história dos Reds"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Shankly e Gerrard a Salah e ao elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Liverpool"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Liverpool FC** knowledge", "The ultimate quiz on titles, legends and Anfield history"),
+                ("Questions on **titles, legends and rivalries**", "From Shankly and Gerrard to Salah and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Liverpool best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ]
+        }
     }
 }
 
@@ -740,6 +928,14 @@ def _relative_luminance(rgb):
         channels.append(c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4)
     r, g, b = channels
     return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def _contrast_ratio(rgb_a, rgb_b):
+    # WCAG contrast ratio between two colours, e.g. a highlight word against the canvas
+    # it sits on. Order-independent: darker of the two always goes in the denominator.
+    l_a, l_b = _relative_luminance(rgb_a), _relative_luminance(rgb_b)
+    lighter, darker = max(l_a, l_b), min(l_a, l_b)
+    return (lighter + 0.05) / (darker + 0.05)
 
 
 def _shade(rgb, factor):
@@ -772,11 +968,23 @@ def derive_palette(tenant_key):
     # Light text on a dark canvas and vice versa — an accent like #FFFFFF or #FEBE10
     # would swallow the white headline the previous fixed styling assumed.
     dark_canvas = _relative_luminance(accent) < 0.5
+    headline_color = (255, 255, 255) if dark_canvas else (12, 20, 32)
+
+    # Highlight word prefers `primary` for brand pop (e.g. Real Madrid's blue against
+    # its gold canvas), but only when it clears WCAG's large-text floor (3:1) against
+    # the canvas colour it actually sits on. Found via audit (2026-09-03): santos has
+    # primary == accent (both white) — contrast 1.0, the highlight word was literally
+    # invisible; psg (2.17), manchestercity (2.47) and flamengo (2.96) were all
+    # unreadable in practice despite passing a naive "different hue" glance. Below the
+    # floor, reuse the headline colour already proven safe against this exact canvas
+    # instead of a brand colour nobody could read.
+    highlight_color = primary if _contrast_ratio(primary, accent) >= 3.0 else headline_color
+
     return {
         "colors": [_shade(accent, 0.82), accent, _shade(accent, 0.65)],
-        "headline_color": (255, 255, 255) if dark_canvas else (12, 20, 32),
+        "headline_color": headline_color,
         "subhead_color": (222, 228, 238) if dark_canvas else (48, 60, 78),
-        "highlight_color": primary,
+        "highlight_color": highlight_color,
     }
 
 
@@ -1104,14 +1312,7 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
                                    headline_style=headline_style, subhead_style=subhead_style, locale=locale)
 
     top_margin = 190 if platform == "ipad" else TEXT_TOP_MARGIN
-    device_y = top_margin + total_text_h + (ANCHOR_MARGIN // 2)
-    if platform == "ipad":
-        device_y_max, device_y_fallback = 950, 900
-    elif platform == "android":
-        device_y_max, device_y_fallback = DEVICE_Y_MAX_ANDROID, DEVICE_Y_FALLBACK_ANDROID
-    else:
-        device_y_max, device_y_fallback = DEVICE_Y_MAX, DEVICE_Y_FALLBACK
-    if device_y > device_y_max: device_y = device_y_fallback
+    device_y = top_margin + total_text_h + MIN_TEXT_DEVICE_GAP
 
     is_poster = use_slide_sources and idx < len(SLIDE_SOURCES) and SLIDE_SOURCES[idx].get("poster")
     if is_poster and paste_poster_icon(canvas, tenant_key, device_y):
@@ -1207,6 +1408,7 @@ STORE_LOCALE_BY_CONTENT_LOCALE = {
     "ar": "ar",
     "zh": "zh-CN",
     "tr": "tr",
+    "it": "it-IT",
 }
 
 def run_factory(target_tenant=None, target_platform="all", target_locale=None):
@@ -1234,7 +1436,7 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                     print(f"  ⚠️ Tenant '{tenant}' só tem slides em pt — ignorando --locale {target_locale}.")
                 locales = ["pt"]
 
-            base_output_dir = "/Users/yuripacheco/Projetos/alefly/output/store-assets"
+            base_output_dir = os.path.join(ALEFLY_REPO_ROOT, "output/store-assets")
 
             for locale in locales:
                 slides = config["slides_by_locale"][locale] if is_multi_locale else config["slides"]
