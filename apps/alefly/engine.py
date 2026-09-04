@@ -4,9 +4,11 @@ import json
 import math
 import re
 import argparse
+import colorsys
+import itertools
 import numpy as np
 from collections import namedtuple
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 # --- CONFIGURAÇÕES GLOBAIS DE CANVAS ---
 # conf["x_off"]/conf["scale"] in SLIDE_CONFIGS were tuned against this width -
@@ -46,7 +48,6 @@ SUBHEAD_STYLE = TextStyle(color=(220, 225, 235))
 ALEFLY_REPO_ROOT = os.environ.get("ALEFLY_REPO_ROOT", "/Users/yuripacheco/Projetos/alefly")
 ALEFLY_STORE_ASSETS = os.path.join(ALEFLY_REPO_ROOT, "store-assets")
 APPSCREEN_ROOT = "/Users/yuripacheco/Projetos/appscreen"
-FONTS_DIR = os.path.join(APPSCREEN_ROOT, "apps", "biblia365", "fonts")
 
 # TENANTS ATIVOS NAS LOJAS E SUAS CONFIGURAÇÕES DE DESIGN
 TENANT_CONFIGS = {
@@ -944,79 +945,82 @@ def _shade(rgb, factor):
     return tuple(max(0, int(c * factor)) for c in rgb)
 
 
-# WCAG's floor for large/bold text (headline/highlight qualify by size; subhead at 50pt
-# bold on this canvas reads as large too — see the 2026-09-03 contrast audit).
-MIN_TEXT_CONTRAST = 3.0
+# Single comfortable floor for every text role (WCAG AA body text). The headline would
+# legally pass at 3:1 as large text, but the text band is engineered dark enough that
+# 4.5:1 costs nothing and reads better at Play Store thumbnail scale.
+MIN_TEXT_CONTRAST = 4.5
+
+# Text band: the top of the canvas is painted with the accent shaded to this factor —
+# dark, but still carrying the brand hue ("night gold", not brown). Every text role sits
+# on this one flat colour, so contrast is exact, not sampled across a gradient.
+TEXT_BAND_SHADE = 0.18
+# Greys/whites/blacks cannot "highlight" a word by colour, only by weight — anything
+# under this HLS saturation is skipped as a highlight candidate.
+MIN_HIGHLIGHT_SATURATION = 0.15
+# How far below the text band the background takes to reach the full accent colour
+# (fraction of canvas height). The ramp starts exactly at the band's end (where the
+# mockup begins) and is deliberately long — 0.18 read as abrupt (user review 2026-09-03).
+ACCENT_REACH_RATIO = 0.42
+
+WHITE, NEAR_BLACK = (255, 255, 255), (12, 20, 32)
+SUBHEAD_ON_DARK, SUBHEAD_ON_LIGHT = (224, 224, 224), (48, 60, 78)
 
 
-def _worst_contrast(rgb, gradient_stops):
-    """Contrast of `rgb` against whichever gradient stop it clashes with hardest.
+def _saturation(rgb):
+    return colorsys.rgb_to_hls(*(c / 255 for c in rgb))[2]
 
-    The canvas is a 3-stop vertical gradient, not one flat colour — a text colour
-    picked against the *middle* stop (or a single accent luminance sample, the old
-    approach) can still fail against the 65%-shade stop. This checks every stop, so
-    the decision holds across the whole banner, not just the point someone eyeballed.
+
+def _lighten_until_readable(rgb, background, target_contrast, step=0.05):
+    """Raises `rgb`'s HLS lightness just enough to clear `target_contrast` against
+    `background`, pushing saturation toward 1.0 alongside it.
+
+    A dark brand colour (cruzeiro's navy, flamengo's red) on the dark text band cannot
+    pass as-is. A flat RGB blend toward white technically keeps the hue but desaturates
+    as fast as it lightens — the result read as "apagado" (washed-out near-white) rather
+    than "highlighted blue" (user feedback, 2026-09-03). Lightening in HLS while boosting
+    saturation keeps the colour visibly vivid at the same contrast ratio.
     """
-    return min(_contrast_ratio(rgb, stop) for stop in gradient_stops)
-
-
-def _min_scrim_alpha(gradient_stops, target_contrast, step=0.05):
-    """Smallest black-overlay alpha (0-1) that gets white text to `target_contrast`
-    against the worst gradient stop.
-
-    Solved numerically instead of algebraically: relative luminance gamma-expands each
-    channel before summing, so scaling a channel by (1 - alpha) does not scale luminance
-    linearly. A small stepped search is simpler and more obviously correct than inverting
-    that curve, and it only runs once per tenant at palette-derivation time.
-    """
-    alpha = 0.0
-    while alpha < 1.0:
-        darkened = [_shade(stop, 1 - alpha) for stop in gradient_stops]
-        if _worst_contrast((255, 255, 255), darkened) >= target_contrast:
-            return alpha
-        alpha += step
-    return 1.0
-
-
-def _lighten_toward_white(rgb, factor):
-    return tuple(int(c + (255 - c) * factor) for c in rgb)
-
-
-def _lighten_until_readable(rgb, background_stops, target_contrast, step=0.05):
-    """Tints `rgb` toward white just enough to clear `target_contrast`, instead of
-    discarding it for a flat fallback colour.
-
-    Exists because the scrim darkens the whole canvas toward black, which only ever
-    helps colours that were already light — a dark brand primary (cruzeiro's navy blue,
-    for instance) gets WORSE contrast as the canvas darkens under it, not better, so
-    picking between "primary as-is" and "give up, use white" threw away the brand
-    colour on every dark-primary tenant. Blending toward white keeps the hue (still
-    reads as "blue", not grey) while guaranteeing the same floor every other role gets.
-    """
+    h, l, s = colorsys.rgb_to_hls(*(c / 255 for c in rgb))
     factor = 0.0
     while factor < 1.0:
-        candidate = _lighten_toward_white(rgb, factor)
-        if _worst_contrast(candidate, background_stops) >= target_contrast:
+        cr, cg, cb = colorsys.hls_to_rgb(h, l + (1 - l) * factor, min(1.0, s + factor))
+        candidate = (int(cr * 255), int(cg * 255), int(cb * 255))
+        if _contrast_ratio(candidate, background) >= target_contrast:
             return candidate
         factor += step
-    return (255, 255, 255)
+    return WHITE
+
+
+def _pick_highlight(primary, accent, band, headline_color):
+    """Brand colour for the **highlighted** word, measured against the text band.
+
+    Prefers the more saturated of the two brand colours as-is; if neither clears the
+    floor, lightens the most saturated one. Falls back to the headline colour (weight-only
+    emphasis) when the tenant has no saturated colour at all — santos is white-on-white.
+    """
+    candidates = sorted((primary, accent), key=_saturation, reverse=True)
+    vivid = [c for c in candidates if _saturation(c) >= MIN_HIGHLIGHT_SATURATION]
+    if not vivid:
+        return headline_color
+    for color in vivid:
+        if _contrast_ratio(color, band) >= MIN_TEXT_CONTRAST:
+            return color
+    return _lighten_until_readable(vivid[0], band, MIN_TEXT_CONTRAST)
 
 
 def derive_palette(tenant_key):
     """Screenshot palette derived from the tenant seed, never hand-picked.
 
-    The app paints its own background with `primaryColor`, so reusing it on the canvas
-    made the phone and the crops melt into the backdrop. `accentColor` is the other
-    brand colour and is what the canvas uses instead — gold behind Real Madrid's blue
-    app, black behind Flamengo's red one — which keeps every tenant on brand while
-    guaranteeing the asset separates from the content.
+    Layout (2026-09-03 redesign, after scrim + stroke attempts read as amateur): the top
+    of the canvas is a flat dark band in the accent's hue, holding headline + subhead;
+    below the text the background ramps to the full accent (where the mockup sits) and
+    on to a 65% shade at the bottom. The app paints its own background with
+    `primaryColor`, so the canvas uses `accentColor` to keep the phone separating from
+    the backdrop.
 
-    Every text role below is chosen by measuring real WCAG contrast against the actual
-    rendered gradient (all 3 stops, not a single accent sample) and falling back to a
-    role that is proven safe when a brand colour would not read — fully automatic from
-    the tenant's own primary/accent pair, no per-tenant hardcoding. `_draw_line_centered`
-    additionally strokes every glyph in the opposite luminance as a second safety net
-    for whatever this contrast math still misjudges.
+    Text never gets a stroke, shadow or overlay: the band is dark by construction, so
+    white / light-grey / the brand colour are measured against ONE exact colour and
+    pass on their own. `primary`/`accent` order for the highlight is by saturation.
 
     Returns None when the seed is missing so the caller keeps its hardcoded colours.
     """
@@ -1030,66 +1034,21 @@ def derive_palette(tenant_key):
     if not accent or not primary:
         return None
 
-    gradient_stops = [_shade(accent, 0.82), accent, _shade(accent, 0.65)]
-    WHITE, NEAR_BLACK = (255, 255, 255), (12, 20, 32)
-
-    # A medium-luminance canvas (golds, mid-greens, teals) can pass the WCAG floor with
-    # EITHER white or near-black text and still look weak in practice — found via visual
-    # review (2026-09-03) on bible/realmadrid/worldcup/fluminense, all texture-heavy
-    # golds/greens where 3-4.5:1 math didn't translate into a comfortable read. Flat
-    # dark canvases (flamengo, juventus) never had this problem: white text there is
-    # already well past comfortable without any help. So: only reach for the scrim when
-    # plain white text doesn't clear a *comfortable* target (4.5:1, not just the 3:1
-    # floor) on its own — a real dark canvas skips it entirely.
-    COMFORTABLE_CONTRAST = 4.5
-    needs_scrim = _worst_contrast(WHITE, gradient_stops) < COMFORTABLE_CONTRAST
-    scrim_alpha = _min_scrim_alpha(gradient_stops, COMFORTABLE_CONTRAST) if needs_scrim else 0.0
-
-    if needs_scrim:
-        # Under the scrim every stop is darkened toward black by the same alpha, so white
-        # is unconditionally the highest-contrast choice — no more picking between two
-        # imperfect options per tenant.
-        headline_color = WHITE
-        subhead_color = WHITE
-    else:
-        # Pick whichever of the two safe headline candidates wins across the whole
-        # gradient, instead of assuming "light accent -> always use the dark pair" — a
-        # medium-luminance accent can have its darkest stop favour one pair and its
-        # lightest stop favour the other.
-        headline_color = max((WHITE, NEAR_BLACK), key=lambda c: _worst_contrast(c, gradient_stops))
+    band = _shade(accent, TEXT_BAND_SHADE)
+    # Computed, not assumed: at 18% shade even a white accent lands at (46,46,46), so
+    # white wins everywhere today — the max() is what keeps that true if the shade
+    # constant ever moves.
+    headline_color = max((WHITE, NEAR_BLACK), key=lambda c: _contrast_ratio(c, band))
+    subhead_color = SUBHEAD_ON_DARK if headline_color == WHITE else SUBHEAD_ON_LIGHT
+    if _contrast_ratio(subhead_color, band) < MIN_TEXT_CONTRAST:
         subhead_color = headline_color
 
-    # Highlight word prefers `primary` for brand pop (e.g. Real Madrid's blue against
-    # its gold canvas). Found via audit (2026-09-03): santos has primary == accent (both
-    # white) — contrast 1.0, the highlight word was literally invisible; psg (2.17),
-    # manchestercity (2.47) and flamengo (2.96) were all unreadable in practice despite
-    # passing a naive "different hue" glance.
-    #
-    # A scrim darkens the canvas toward black, which only ever helps colours that were
-    # already light — a dark primary (cruzeiro's navy) gets WORSE, not better, so under
-    # a scrim this tints primary toward white until it clears the same comfortable floor
-    # the headline gets, instead of the binary "as-is or give up to plain white" choice
-    # used when there is no scrim. Cruzeiro still reads as blue, just a lighter one.
-    # Highlight keeps the plain WCAG floor even under a scrim, not the headline's
-    # higher comfortable bar — cruzeiro's navy blue and a mid-grey scrim backdrop are
-    # near isoluminant (WCAG contrast only weighs luminance, not hue), so demanding
-    # 4.5:1 here forced the lightening loop past pale-blue all the way to indistinguishable
-    # -from-white before it would ever pass. 3:1 keeps a visible blue tint; text below it
-    # falls through to the headline colour instead of "technically blue but reads as white".
-    effective_stops = [_shade(s, 1 - scrim_alpha) for s in gradient_stops] if needs_scrim else gradient_stops
-    if _worst_contrast(primary, effective_stops) >= MIN_TEXT_CONTRAST:
-        highlight_color = primary
-    elif needs_scrim:
-        highlight_color = _lighten_until_readable(primary, effective_stops, MIN_TEXT_CONTRAST)
-    else:
-        highlight_color = headline_color
-
     return {
-        "colors": gradient_stops,
+        "band": band,
+        "colors": [band, accent, _shade(accent, 0.65)],
         "headline_color": headline_color,
         "subhead_color": subhead_color,
-        "highlight_color": highlight_color,
-        "scrim_alpha": scrim_alpha,
+        "highlight_color": _pick_highlight(primary, accent, band, headline_color),
     }
 
 
@@ -1177,43 +1136,56 @@ SLIDE_SOURCES = [
     {"file": "05-home-scrolled.png",   "crop": None, "frame": True},
 ]
 
-# Locales written right-to-left. Montserrat carries no Arabic glyphs at all — an "ar"
+# Locales written right-to-left. Nunito carries no Arabic glyphs at all — an "ar"
 # slide rendered with it comes out as a row of .notdef boxes, which measures a normal
 # width so only looking at the image catches it.
 RTL_LOCALES = {"ar"}
 ARABIC_FONTS = ("/System/Library/Fonts/SFArabic.ttf", "/System/Library/Fonts/GeezaPro.ttc")
 
-# Same .notdef-box failure as Arabic: Montserrat carries no CJK glyphs.
+# Same .notdef-box failure as Arabic: Nunito carries no CJK glyphs.
 CJK_LOCALES = {"zh"}
 CJK_FONT = "/System/Library/Fonts/Hiragino Sans GB.ttc"
 
 
-def get_fonts(platform="ios", locale="pt"):
-    # Subhead sized/weighted for legibility at real Play Store thumbnail scale (screenshots
-    # render ~4x smaller there than this canvas), not just contrast on this full-size
-    # render — audit (2026-09-03) found the previous 50pt regular weight unreadable once
-    # scaled down, independent of colour/stroke. Bumped size (50->64, ~28%) and swapped
-    # regular for semibold: a heavier stroke-per-glyph survives downscaling and
-    # compression far better than a thin regular face does.
+Fonts = namedtuple("Fonts", "headline highlight subhead")
+
+# The app's own typeface (Android res/font, iOS bundle and web all ship Nunito) — the
+# screenshots used Montserrat until 2026-09-03, which made the listing look like a
+# different product from the app it advertises. Single variable file, weight axis
+# 200-1000, so every weight the app uses is available without extra font files.
+NUNITO_VARIABLE = "/Users/yuripacheco/Projetos/alefly/shared/mobile/src/androidMain/res/font/nunito_variable.ttf"
+# Headline 700 vs highlight 900: at 800 the two Nunito weights sat too close to read
+# as a hierarchy side by side (visual review 2026-09-03).
+HEADLINE_WEIGHT, HIGHLIGHT_WEIGHT, SUBHEAD_WEIGHT = 700, 900, 600
+
+
+def _nunito(size, weight):
+    font = ImageFont.truetype(NUNITO_VARIABLE, size)
+    font.set_variation_by_axes([weight])
+    return font
+
+
+def get_fonts(platform="ios", locale="pt", scale=1.0):
+    # Hierarchy comes from weight + size only (no stroke/shadow): headline 700, the
+    # **highlighted** word 900, subhead 600. Subhead sized for legibility at real Play
+    # Store thumbnail scale (~4x smaller than this canvas) — 50pt regular was unreadable
+    # there (audit 2026-09-03), independent of colour. `scale` < 1 is the auto-fit
+    # fallback in layout_text_block, never a per-tenant choice.
+    size_h, size_s = (148, 88) if platform == "ipad" else (104, 64)
+    size_h, size_s = int(size_h * scale), int(size_s * scale)
     if locale in RTL_LOCALES:
         arabic = next((f for f in ARABIC_FONTS if os.path.exists(f)), None)
         if arabic:
-            size_h, size_s = (148, 88) if platform == "ipad" else (104, 64)
-            return ImageFont.truetype(arabic, size_h), ImageFont.truetype(arabic, size_s)
+            head = ImageFont.truetype(arabic, size_h)
+            return Fonts(head, head, ImageFont.truetype(arabic, size_s))
     if locale in CJK_LOCALES and os.path.exists(CJK_FONT):
-        size_h, size_s = (148, 88) if platform == "ipad" else (104, 64)
         # index 2/0 = W6 (bold) / W3 (regular) faces inside the .ttc. CJK strokes are
-        # already heavier at a given point size than Latin type, so W3 (regular) still
-        # reads fine here even though Latin subhead moved to a semibold weight above.
-        return (ImageFont.truetype(CJK_FONT, size_h, index=2),
-                ImageFont.truetype(CJK_FONT, size_s, index=0))
-    f_bold = os.path.join(FONTS_DIR, "montserrat_bold.ttf")
-    f_semibold = os.path.join(FONTS_DIR, "montserrat_semibold.ttf")
-    if not os.path.exists(f_bold): f_bold = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
-    if not os.path.exists(f_semibold): f_semibold = f_bold
-    if platform == "ipad":
-        return ImageFont.truetype(f_bold, 148), ImageFont.truetype(f_semibold, 88)
-    return ImageFont.truetype(f_bold, 104), ImageFont.truetype(f_semibold, 64)
+        # already heavier at a given point size than Latin type, so W3 still reads fine
+        # for the subhead. No heavier face than W6 in the .ttc, so highlight == headline.
+        head = ImageFont.truetype(CJK_FONT, size_h, index=2)
+        return Fonts(head, head, ImageFont.truetype(CJK_FONT, size_s, index=0))
+    return Fonts(_nunito(size_h, HEADLINE_WEIGHT), _nunito(size_h, HIGHLIGHT_WEIGHT),
+                 _nunito(size_s, SUBHEAD_WEIGHT))
 
 # CJK Unified Ideographs + common fullwidth punctuation. These scripts carry no spaces
 # between words, so wrapping has to break per character instead of per \S+ token.
@@ -1258,50 +1230,98 @@ def expand_bold_spans(text):
             i = j
     return ' '.join(out)
 
-def wrap_text(text, draw, font, max_width):
-    raw_tokens = re.findall(r'\*\*[^*]+\*\*|\S+', text)
-    lines = []
-    current = []
-    current_w = 0
-    prev_visible = ''
-    space_w = draw.textlength(' ', font=font)
-    for tok in raw_tokens:
-        visible = tok.replace('**', '')
-        tok_w = draw.textlength(visible, font=font)
-        # No gap between two adjacent bare CJK characters — real spacing would look
-        # like letter-spaced Latin type, which Chinese headlines don't use.
-        gap = 0 if _is_cjk_char(prev_visible) and _is_cjk_char(visible) else space_w
-        added = tok_w + (gap if current else 0)
-        if current and current_w + added > max_width:
-            lines.append(' '.join(current))
-            current = [tok]
-            current_w = tok_w
+def _measure_units(text, draw, font, hl_font, space_w):
+    """Tokens grouped into unbreakable units, each with its rendered width.
+
+    A `**highlight span**` (expanded to one `**word**` per token by expand_bold_spans)
+    is one unit, so "da **Bíblia**" never lands with "da" on one line and "Bíblia" on
+    the next. Highlight tokens are measured with the heavier face — at weight 900 a word
+    is visibly wider than the body weight, and measuring it with the body font over-fills.
+    """
+    tokens = re.findall(r'\*\*[^*]+\*\*|\S+', text)
+    units, i = [], 0
+    while i < len(tokens):
+        j = i + 1
+        while tokens[i].startswith('**') and j < len(tokens) and tokens[j].startswith('**'):
+            j += 1
+        width, prev = 0, ''
+        for k, tok in enumerate(tokens[i:j]):
+            visible = tok.replace('**', '')
+            # No gap between two adjacent bare CJK characters — real spacing would look
+            # like letter-spaced Latin type, which Chinese headlines don't use.
+            gap = 0 if k == 0 or (_is_cjk_char(prev) and _is_cjk_char(visible)) else space_w
+            width += gap + draw.textlength(visible, font=hl_font if tok.startswith('**') else font)
+            prev = visible
+        units.append((tokens[i:j], width))
+        i = j
+    return units
+
+
+def _greedy_lines(units, max_width, space_w):
+    lines, current, current_w = [], [], 0
+    for tokens, width in units:
+        first, last = tokens[0].replace('**', ''), current[-1].replace('**', '') if current else ''
+        gap = 0 if not current or (_is_cjk_char(last) and _is_cjk_char(first)) else space_w
+        if current and current_w + gap + width > max_width:
+            lines.append(current)
+            current, current_w = list(tokens), width
         else:
-            current.append(tok)
-            current_w += added
-        prev_visible = visible
+            current += tokens
+            current_w += gap + width
     if current:
-        lines.append(' '.join(current))
+        lines.append(current)
     return lines
 
-def _stroke_color_for(rgb):
-    # Opposite-luminance outline so the glyph edge holds up regardless of what the
-    # gradient is doing directly behind it — a fixed offset shadow only darkens, which
-    # does nothing when the text is already the dark side of the pair (see the subhead
-    # contrast audit, 2026-09-03: 13/26 tenants dropped below WCAG 3:1 at some point in
-    # the gradient because the shadow never lightened anything).
-    return (0, 0, 0) if _relative_luminance(rgb) > 0.5 else (255, 255, 255)
+
+def _line_width(units, space_w):
+    width, prev = 0, ''
+    for i, (tokens, w) in enumerate(units):
+        first = tokens[0].replace('**', '')
+        width += w + (0 if i == 0 or (_is_cjk_char(prev) and _is_cjk_char(first)) else space_w)
+        prev = tokens[-1].replace('**', '')
+    return width
 
 
-def _draw_line_centered(draw, line, font, y, width, style, highlight_color, rtl=False, stroke_width=0):
+def wrap_text(text, draw, font, max_width, hl_font=None):
+    """Greedy wrap decides the line count; then every way of breaking the units into
+    that many lines is scored and the most even one wins (CSS `text-wrap: balance`),
+    instead of a full first line and a one-word orphan at the end. Brute force is fine:
+    a headline is ≤ ~12 units and ≤ 4 lines."""
+    space_w = draw.textlength(' ', font=font)
+    units = _measure_units(text, draw, font, hl_font or font, space_w)
+    # A highlight span wider than the column must break like normal words — keeping it
+    # whole overflowed the canvas edge (found on realmadrid slide 2, 2026-09-03).
+    units = [u for tokens, w in units
+             for u in ([(tokens, w)] if w <= max_width else
+                       [([tok], draw.textlength(tok.replace('**', ''), font=hl_font or font)) for tok in tokens])]
+    if not units:
+        return []
+    n_lines = len(_greedy_lines(units, max_width, space_w))
+    best, best_score = None, None
+    for breaks in itertools.combinations(range(1, len(units)), n_lines - 1):
+        bounds = (0, *breaks, len(units))
+        lines = [units[a:b] for a, b in zip(bounds, bounds[1:])]
+        widths = [_line_width(line, space_w) for line in lines]
+        if max(widths) > max_width:
+            continue
+        mean = sum(widths) / len(widths)
+        score = sum((w - mean) ** 2 for w in widths)
+        if best_score is None or score < best_score:
+            best, best_score = lines, score
+    return [' '.join(tok for tokens, _ in line for tok in tokens) for line in best]
+
+def _draw_line_centered(draw, line, font, y, width, style, highlight_color, rtl=False, hl_font=None):
+    # No stroke, no shadow: the text band is dark by construction (see derive_palette),
+    # so plain fills pass contrast on their own. Outlines read as amateur (user review,
+    # 2026-09-03) and a fixed-offset shadow only ever darkened, which never helped.
+    hl_font = hl_font or font
     if rtl:
         # Drawn in one call so Raqm can shape and reorder the run. The per-word cursor
         # below advances left-to-right, which lays an Arabic line out backwards; the
         # highlight colour is the price of correct text, and it is the cheaper loss.
         visible = line.replace('**', '')
         x = (width - draw.textlength(visible, font=font)) // 2
-        draw.text((x, y), visible, fill=style.color, font=font,
-                   stroke_width=stroke_width, stroke_fill=_stroke_color_for(style.color))
+        draw.text((x, y), visible, fill=style.color, font=font)
         return
     space_w = draw.textlength(' ', font=font)
     parts = re.findall(r'\*\*[^*]+\*\*|\S+', line)
@@ -1312,7 +1332,7 @@ def _draw_line_centered(draw, line, font, y, width, style, highlight_color, rtl=
     for i, part in enumerate(parts):
         is_hl = part.startswith('**') and part.endswith('**')
         visible = part.replace('**', '')
-        w = draw.textlength(visible, font=font)
+        w = draw.textlength(visible, font=hl_font if is_hl else font)
         gap = 0 if i > 0 and _is_cjk_char(prev_visible) and _is_cjk_char(visible) else (space_w if i > 0 else 0)
         gaps.append(gap)
         segments.append((visible, is_hl, w))
@@ -1322,12 +1342,8 @@ def _draw_line_centered(draw, line, font, y, width, style, highlight_color, rtl=
     cur_x = (width - total_w) // 2
     for (visible, is_hl, w), gap in zip(segments, gaps):
         cur_x += gap
-        col = highlight_color if is_hl else style.color
-        # PIL's native stroke draws the outline centred on the glyph path in every
-        # direction, unlike the old fixed-offset "shadow" (which only ever darkened
-        # toward bottom-right and did nothing on a background lighter than the text).
-        draw.text((cur_x, y), visible, fill=col, font=font,
-                   stroke_width=stroke_width, stroke_fill=_stroke_color_for(col))
+        draw.text((cur_x, y), visible, fill=highlight_color if is_hl else style.color,
+                  font=hl_font if is_hl else font)
         cur_x += w
 
 def smoothstep(t):
@@ -1370,57 +1386,111 @@ def draw_brand_background(canvas, colors):
     img = Image.fromarray(out.astype(np.uint8), mode="RGB")
     canvas.paste(img, (0, 0))
 
-def _draw_text_scrim(canvas, alpha):
-    """Darkens the whole canvas so white text always has a guaranteed-dark surface to
-    sit on, regardless of the gradient colour underneath — a bounded card behind just
-    the text read as a floating sticker instead of part of the design, so this covers
-    edge to edge like the gradient itself does.
+def draw_band_background(canvas, band, accent, bottom, band_end_y):
+    """Vertical gradient: flat `band` colour from the top down to `band_end_y` (the
+    bottom of the text block), ramping to the full `accent` over ACCENT_REACH_RATIO of
+    the height, then easing to `bottom` at the canvas edge.
 
-    Composited as its own RGBA layer rather than drawn straight onto the RGB canvas —
-    `ImageDraw` on an RGB image ignores alpha entirely and paints the fill opaque, which
-    would hide the gradient instead of just darkening it.
+    The band's extent is measured from the real wrapped text, so a 3-line headline and a
+    1-line one both get exactly the dark surface they need — the mockup starts where the
+    accent begins ("dark on top, lightening from where the mockup sits", user direction
+    2026-09-03). Replaces the diagonal gradient + full-canvas scrim, which darkened the
+    mockup area too and turned vivid accents muddy.
     """
-    overlay = Image.new("RGBA", canvas.size, (0, 0, 0, int(255 * alpha)))
-    canvas.paste(Image.alpha_composite(canvas.convert("RGBA"), overlay).convert("RGB"), (0, 0))
-
-
-def draw_text_block(canvas, headline, subheadline, f_h, f_s, highlight_color, platform="ios",
-                    headline_style=None, subhead_style=None, locale="pt", scrim_alpha=0.0):
     w, h = canvas.size
+    y = np.arange(h, dtype=np.float32)[:, None]
+    reach = max(1.0, h * ACCENT_REACH_RATIO)
+    # smoothstep so the band has no visible seam where the ramp starts.
+    t_accent = smoothstep((y - band_end_y) / reach)
+    t_bottom = np.clip((y - band_end_y - reach) / max(1.0, h - band_end_y - reach), 0.0, 1.0)
+    band, accent, bottom = (np.array(c, dtype=np.float32) for c in (band, accent, bottom))
+    col = band + (accent - band) * t_accent
+    col = col + (bottom - col) * t_bottom
+    rows = np.repeat(col[:, None, :], w, axis=1)
+    canvas.paste(Image.fromarray(rows.astype(np.uint8), mode="RGB"), (0, 0))
+
+
+TextLayout = namedtuple("TextLayout", "fonts h_lines s_lines h_lh s_lh gap total_h")
+
+# Auto-fit: shrink the type in small steps only when a caption would not fit at the
+# nominal size — more lines than the layout is designed for, or a highlight span wider
+# than the column (so it can stay on one line instead of being split). 82% is the floor;
+# below that the caption is a copy problem, not a layout one.
+MAX_HEADLINE_LINES, MAX_SUBHEAD_LINES = 3, 3
+AUTOFIT_SCALES = (1.0, 0.96, 0.92, 0.88, 0.85, 0.82)
+# Keeping a highlight span on one line is worth at most this much shrink; past it the
+# span breaks by word instead, so headline sizes stay consistent across a tenant's set.
+KEEP_SPAN_MIN_SCALE = 0.92
+
+
+def _fits(draw, text, font, hl_font, max_width, max_lines, keep_spans):
+    space_w = draw.textlength(' ', font=font)
+    units = _measure_units(text, draw, font, hl_font, space_w)
+    if keep_spans and any(w > max_width for _, w in units):
+        return False
+    units = [u for tokens, w in units
+             for u in ([(tokens, w)] if w <= max_width else
+                       [([tok], draw.textlength(tok.replace('**', ''), font=hl_font)) for tok in tokens])]
+    return len(_greedy_lines(units, max_width, space_w)) <= max_lines
+
+
+def layout_text_block(canvas, headline, subheadline, platform="ios", locale="pt"):
+    """Wraps both blocks and returns their geometry (plus the fonts actually used, after
+    auto-fit) — split from drawing so the background can be painted to the measured
+    text height before the text goes on."""
+    w, _ = canvas.size
     text_w = w - (300 if platform == "ipad" else 220)
+    draw = ImageDraw.Draw(canvas)
+    headline, subheadline = expand_bold_spans(headline), expand_bold_spans(subheadline)
+    attempts = [(sc, True) for sc in AUTOFIT_SCALES if sc >= KEEP_SPAN_MIN_SCALE] + [(sc, False) for sc in AUTOFIT_SCALES]
+    for scale, keep_spans in attempts:
+        fonts = get_fonts(platform=platform, locale=locale, scale=scale)
+        if (_fits(draw, headline, fonts.headline, fonts.highlight, text_w, MAX_HEADLINE_LINES, keep_spans)
+                and _fits(draw, subheadline, fonts.subhead, fonts.subhead, text_w, MAX_SUBHEAD_LINES, keep_spans)):
+            break
+    h_lines = wrap_text(headline, draw, fonts.headline, text_w, hl_font=fonts.highlight)
+    s_lines = wrap_text(subheadline, draw, fonts.subhead, text_w)
+    h_lh = int(fonts.headline.size * HEADLINE_LINE_HEIGHT_RATIO)
+    s_lh = int(fonts.subhead.size * SUBHEAD_LINE_HEIGHT_RATIO)
+    gap = int(fonts.headline.size * HEADLINE_SUBHEAD_GAP_RATIO)
+    total_h = (len(h_lines) * h_lh) + (len(s_lines) * s_lh) + gap
+    return TextLayout(fonts, h_lines, s_lines, h_lh, s_lh, gap, total_h)
+
+
+def draw_text_block(canvas, layout, highlight_color, platform="ios",
+                    headline_style=None, subhead_style=None, locale="pt"):
+    fonts = layout.fonts
+    w, _ = canvas.size
     top_margin = 190 if platform == "ipad" else TEXT_TOP_MARGIN
     headline_style = headline_style or HEADLINE_STYLE
     subhead_style = subhead_style or SUBHEAD_STYLE
     draw = ImageDraw.Draw(canvas)
     rtl = locale in RTL_LOCALES
-    headline = expand_bold_spans(headline)
-    subheadline = expand_bold_spans(subheadline)
-    h_lines = wrap_text(headline, draw, f_h, text_w)
-    s_lines = wrap_text(subheadline, draw, f_s, text_w)
-    h_lh = int(f_h.size * HEADLINE_LINE_HEIGHT_RATIO)
-    s_lh = int(f_s.size * SUBHEAD_LINE_HEIGHT_RATIO)
-    gap = int(f_h.size * HEADLINE_SUBHEAD_GAP_RATIO)
-    total_text_h = (len(h_lines) * h_lh) + (len(s_lines) * s_lh) + gap
-
-    if scrim_alpha:
-        _draw_text_scrim(canvas, scrim_alpha)
-        draw = ImageDraw.Draw(canvas)  # canvas pixels changed under the old ImageDraw's cache
-
-    # Stroke width scales with font size so it reads the same relative weight on
-    # headline vs subhead instead of a fixed px value looking chunky on the smaller face.
-    h_stroke = max(2, f_h.size // 26)
-    s_stroke = max(2, f_s.size // 20)
 
     curr_y = top_margin
-    for line in h_lines:
-        _draw_line_centered(draw, line, f_h, curr_y, w, headline_style, highlight_color, rtl, stroke_width=h_stroke)
-        curr_y += h_lh
-    curr_y += gap
-    for line in s_lines:
-        _draw_line_centered(draw, line, f_s, curr_y, w, subhead_style, highlight_color, rtl, stroke_width=s_stroke)
-        curr_y += s_lh
+    for line in layout.h_lines:
+        _draw_line_centered(draw, line, fonts.headline, curr_y, w, headline_style, highlight_color, rtl,
+                            hl_font=fonts.highlight)
+        curr_y += layout.h_lh
+    curr_y += layout.gap
+    for line in layout.s_lines:
+        _draw_line_centered(draw, line, fonts.subhead, curr_y, w, subhead_style, highlight_color, rtl)
+        curr_y += layout.s_lh
 
-    return total_text_h
+def _paste_with_shadow(canvas, layer, x, y, blur=28, offset=18, opacity=0.45):
+    """Composites an RGBA layer with a soft drop shadow under it.
+
+    The bezel takes the text band's colour, so on a dark-accent tenant (flamengo,
+    juventus) the device would melt into the band with only the faint rim separating
+    it. A diffuse shadow built from the layer's own alpha separates it on every
+    background without depending on colour.
+    """
+    alpha = layer.getchannel("A").filter(ImageFilter.GaussianBlur(blur)).point(lambda a: int(a * opacity))
+    shadow = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+    shadow.paste(Image.new("RGBA", layer.size, (0, 0, 0, 255)), (x, y + offset), alpha)
+    canvas.paste(Image.alpha_composite(canvas.convert("RGBA"), shadow).convert("RGB"), (0, 0))
+    canvas.paste(layer, (x, y), layer)
+
 
 def process_screenshot(tenant_key, idx, headline, subheadline, input_path, output_path, platform="android", use_slide_sources=False, locale="pt"):
     config = TENANT_CONFIGS[tenant_key]
@@ -1432,32 +1502,24 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
         cw, ch = WIDTH, HEIGHT
     canvas = Image.new('RGB', (cw, ch))
     palette = derive_palette(tenant_key)
-    if palette:
-        # Already the intended canvas colour — darkening it here would turn Real Madrid's
-        # gold into brown. darken_color() only exists to tame the legacy hardcoded palettes,
-        # which reused the in-app background and needed dimming to sit behind white text.
-        draw_brand_background(canvas, palette["colors"])
-    else:
-        draw_brand_background(canvas, [darken_color(c) for c in config["colors"]])
+    layout = layout_text_block(canvas, headline, subheadline, platform=platform, locale=locale)
+    top_margin = 190 if platform == "ipad" else TEXT_TOP_MARGIN
+    device_y = top_margin + layout.total_h + MIN_TEXT_DEVICE_GAP
 
-    f_h, f_s = get_fonts(platform=platform, locale=locale)
     if palette:
-        # Native PIL stroke (drawn in _draw_line_centered) keeps every one of these
-        # readable regardless of canvas luminance now, so there is no dark/light branch
-        # to pick here anymore.
+        band, accent, bottom = palette["colors"]
+        draw_band_background(canvas, band, accent, bottom, device_y)
         headline_style = TextStyle(color=palette["headline_color"])
         subhead_style = TextStyle(color=palette["subhead_color"])
         highlight = palette["highlight_color"]
     else:
+        # Legacy hardcoded palettes reused the in-app background and need dimming to sit
+        # behind white text; darken_color() exists only for them.
+        draw_brand_background(canvas, [darken_color(c) for c in config["colors"]])
         headline_style = subhead_style = None
         highlight = config["highlight_color"]
-    scrim_alpha = palette.get("scrim_alpha", 0.0) if palette else 0.0
-    total_text_h = draw_text_block(canvas, headline, subheadline, f_h, f_s, highlight, platform=platform,
-                                   headline_style=headline_style, subhead_style=subhead_style, locale=locale,
-                                   scrim_alpha=scrim_alpha)
-
-    top_margin = 190 if platform == "ipad" else TEXT_TOP_MARGIN
-    device_y = top_margin + total_text_h + MIN_TEXT_DEVICE_GAP
+    draw_text_block(canvas, layout, highlight, platform=platform,
+                    headline_style=headline_style, subhead_style=subhead_style, locale=locale)
 
     is_poster = use_slide_sources and idx < len(SLIDE_SOURCES) and SLIDE_SOURCES[idx].get("poster")
     if is_poster and paste_poster_icon(canvas, tenant_key, device_y):
@@ -1494,6 +1556,12 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
             radius = 80
             border_col = (210, 210, 215)
             light_col = (245, 245, 250)
+        if palette:
+            # Bezel in the text band's own dark tint with a faint lighter rim, so the
+            # device reads as part of the composition instead of a grey sticker outline
+            # sitting on the brand colour (visual review 2026-09-03).
+            border_col = palette["band"]
+            light_col = _shade(palette["band"], 1.22)
 
         mask = Image.new('L', (target_w, target_h), 0)
         ImageDraw.Draw(mask).rounded_rectangle([0, 0, target_w, target_h], radius=radius, fill=255)
@@ -1528,7 +1596,7 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
             device_layer = device_layer.rotate(conf["angle"], resample=Image.BICUBIC, expand=True)
 
         x_off = int(conf["x_off"] * (cw / REFERENCE_WIDTH))
-        canvas.paste(device_layer, ((cw-device_layer.width)//2 + x_off, device_y), device_layer)
+        _paste_with_shadow(canvas, device_layer, (cw - device_layer.width) // 2 + x_off, device_y)
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     canvas.save(output_path, quality=100, subsampling=0)
@@ -1592,17 +1660,19 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                 # their existing capture flow needs zero changes.
                 locale_suffix = os.path.join(locale) if is_multi_locale else ""
 
+                sub = ("android", "screenshots") if platform == "android" else ("ios", "screenshots", "ipad" if platform == "ipad" else "iphone")
+                # Per-locale folder first; then the unsuffixed legacy folder (a tenant that
+                # became multi-locale after its captures were taken — 14 clubs on 2026-09-03
+                # were silently skipped here); Android last falls back to iPhone captures.
+                candidates = [os.path.join(base_output_dir, tenant, *sub, locale_suffix),
+                              os.path.join(base_output_dir, tenant, *sub)]
                 if platform == "android":
-                    raw_screenshots_dir = os.path.join(base_output_dir, tenant, "android", "screenshots", locale_suffix)
-                    if not os.path.exists(raw_screenshots_dir) or not glob.glob(f"{raw_screenshots_dir}/*.png"):
-                        raw_screenshots_dir = os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", locale_suffix)
-                elif platform == "ipad":
-                    raw_screenshots_dir = os.path.join(base_output_dir, tenant, "ios", "screenshots", "ipad", locale_suffix)
-                else:
-                    raw_screenshots_dir = os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", locale_suffix)
+                    candidates += [os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", locale_suffix),
+                                   os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone")]
+                raw_screenshots_dir = next((d for d in candidates if glob.glob(f"{d}/*.png")), None)
 
-                if not os.path.exists(raw_screenshots_dir):
-                    print(f"  ⚠️ Pasta de screenshots crus não encontrada ({locale}): {raw_screenshots_dir}")
+                if not raw_screenshots_dir:
+                    print(f"  ⚠️ Pasta de screenshots crus não encontrada ({locale}): {candidates[0]}")
                     continue
 
                 maestro_filenames = [
@@ -1643,11 +1713,40 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
 
     print("\n🎉 Todas as screenshots para Android, iOS e iPad foram geradas com sucesso nas pastas padrão!")
 
+def _selfcheck():
+    """Assert-based check over every real seed (no pytest in this repo): headline,
+    subhead and highlight all clear MIN_TEXT_CONTRAST against the text band, and the
+    highlight is genuinely coloured whenever the tenant has a saturated brand colour."""
+    checked = 0
+    for path in sorted(glob.glob(os.path.join(ALEFLY_SEEDS, "*.json"))):
+        tenant = os.path.basename(path)[:-5]
+        palette = derive_palette(tenant)
+        if not palette:
+            continue
+        band = palette["band"]
+        for role in ("headline_color", "subhead_color", "highlight_color"):
+            ratio = _contrast_ratio(palette[role], band)
+            assert ratio >= MIN_TEXT_CONTRAST, f"{tenant}: {role}={palette[role]} vs band={band} contrast={ratio:.2f}"
+        with open(path, encoding="utf-8") as fh:
+            visual = json.load(fh).get("visual") or {}
+        brand = (_hex_to_rgb(visual.get("primaryColor")), _hex_to_rgb(visual.get("accentColor")))
+        if max(_saturation(c) for c in brand) >= MIN_HIGHLIGHT_SATURATION:
+            assert _saturation(palette["highlight_color"]) >= MIN_HIGHLIGHT_SATURATION, \
+                f"{tenant}: highlight {palette['highlight_color']} lost the brand colour"
+        checked += 1
+    assert checked, "no seeds found"
+    print(f"✅ selfcheck ok: {checked} tenants, every text role >= {MIN_TEXT_CONTRAST}:1 on its band")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--tenant", default=None, help="Tenant específico para gerar (ex: flamengo, vasco, worldcup, etc)")
     parser.add_argument("--platform", choices=["android", "ios", "ipad", "all"], default="all")
     parser.add_argument("--locale", default=None, help="Locale específico (pt/es/ca) para tenants multi-idioma; default processa todos os locales do tenant")
+    parser.add_argument("--selfcheck", action="store_true", help="Assert text contrast on every tenant seed and exit")
     args = parser.parse_args()
 
-    run_factory(target_tenant=args.tenant, target_platform=args.platform, target_locale=args.locale)
+    if args.selfcheck:
+        _selfcheck()
+    else:
+        run_factory(target_tenant=args.tenant, target_platform=args.platform, target_locale=args.locale)
