@@ -1,4 +1,5 @@
 import os
+import sys
 import glob
 import json
 import math
@@ -44,7 +45,7 @@ TextStyle = namedtuple("TextStyle", "color")
 HEADLINE_STYLE = TextStyle(color=(255, 255, 255))
 SUBHEAD_STYLE = TextStyle(color=(220, 225, 235))
 
-# Caminhos base
+# Base paths
 ALEFLY_REPO_ROOT = os.environ.get("ALEFLY_REPO_ROOT", "/Users/yuripacheco/Projetos/alefly")
 ALEFLY_STORE_ASSETS = os.path.join(ALEFLY_REPO_ROOT, "store-assets")
 APPSCREEN_ROOT = "/Users/yuripacheco/Projetos/appscreen"
@@ -1024,6 +1025,15 @@ def derive_palette(tenant_key):
 
     Returns None when the seed is missing so the caller keeps its hardcoded colours.
     """
+    brand = _load_brand_colors(tenant_key)
+    if not brand:
+        return None
+    primary, accent = brand
+    return _palette_from_brand(primary, accent)
+
+
+def _load_brand_colors(tenant_key):
+    """(primary, accent) RGB tuples from the tenant seed, or None if either is missing."""
     seed_path = os.path.join(ALEFLY_SEEDS, f"{tenant_key}.json")
     if not os.path.exists(seed_path):
         return None
@@ -1031,9 +1041,10 @@ def derive_palette(tenant_key):
         visual = (json.load(fh).get("visual") or {})
     accent = _hex_to_rgb(visual.get("accentColor"))
     primary = _hex_to_rgb(visual.get("primaryColor"))
-    if not accent or not primary:
-        return None
+    return (primary, accent) if accent and primary else None
 
+
+def _palette_from_brand(primary, accent):
     band = _shade(accent, TEXT_BAND_SHADE)
     # Computed, not assumed: at 18% shade even a white accent lands at (46,46,46), so
     # white wins everywhere today — the max() is what keeps that true if the shade
@@ -1054,6 +1065,14 @@ def derive_palette(tenant_key):
 
 ALEFLY_ICONS = "/Users/yuripacheco/Projetos/alefly/tools/tenant-icons-python/icons-1024"
 
+# Poster slot geometry, as fractions of the canvas: icon takes 74% of the width (reads at
+# search-thumbnail size), corner radius matches the launcher-icon squircle (22%), and the
+# icon sits a fixed 6% below the copy while never crossing an 8% bottom margin.
+POSTER_ICON_WIDTH_RATIO = 0.74
+POSTER_ICON_CORNER_RATIO = 0.22
+POSTER_ICON_TOP_GAP_RATIO = 0.06
+POSTER_ICON_BOTTOM_MARGIN_RATIO = 0.08
+
 
 def paste_poster_icon(canvas, tenant_key, top_y):
     """Draws the tenant icon large instead of a device mockup.
@@ -1071,17 +1090,17 @@ def paste_poster_icon(canvas, tenant_key, top_y):
         return False
 
     cw, ch = canvas.size
-    size = int(cw * 0.74)
+    size = int(cw * POSTER_ICON_WIDTH_RATIO)
     icon = Image.open(icon_path).convert("RGBA").resize((size, size), Image.LANCZOS)
 
-    radius = int(size * 0.22)
+    radius = int(size * POSTER_ICON_CORNER_RATIO)
     mask = Image.new("L", (size, size), 0)
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, size, size], radius=radius, fill=255)
 
     # Sits a fixed breath below the copy instead of centring in the leftover space —
     # centring left a dead band under the subheadline and crowded the bottom margin.
     x = (cw - size) // 2
-    y = min(top_y + int(ch * 0.06), ch - size - int(ch * 0.08))
+    y = min(top_y + int(ch * POSTER_ICON_TOP_GAP_RATIO), ch - size - int(ch * POSTER_ICON_BOTTOM_MARGIN_RATIO))
 
     shadow = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
     ImageDraw.Draw(shadow).rounded_rectangle(
@@ -1135,6 +1154,11 @@ SLIDE_SOURCES = [
     {"file": "06-hint-used.png",       "crop": None, "frame": True},
     {"file": "05-home-scrolled.png",   "crop": None, "frame": True},
 ]
+
+# Four-caption tenants (not yet on the eight-slot spec above) map captions positionally
+# onto these captures. Deliberately a different order from SLIDE_SOURCES: slot 3 there is
+# the share sheet, here it is the answer feedback. Retire together with the last legacy tenant.
+LEGACY_SLIDE_FILES = ["01-home.png", "02-question.png", "03-answer-feedback.png", "04-result-summary.png"]
 
 # Locales written right-to-left. Nunito carries no Arabic glyphs at all — an "ar"
 # slide rendered with it comes out as a row of .notdef boxes, which measures a normal
@@ -1350,6 +1374,9 @@ def smoothstep(t):
     t = np.clip(t, 0.0, 1.0)
     return t * t * (3 - 2 * t)
 
+# Only for the legacy hardcoded palettes (palette is None): those reused the in-app
+# background under white text, and 55% darkening was tuned by eye before derive_palette
+# existed. Every seed-backed tenant goes through derive_palette and its measured contrast.
 BACKGROUND_DARKEN_RATIO = 0.55
 
 def darken_color(color, ratio=BACKGROUND_DARKEN_RATIO):
@@ -1363,7 +1390,7 @@ def draw_brand_background(canvas, colors):
     rad = math.radians(GRADIENT_ANGLE_DEG)
     cos_a, sin_a = math.cos(rad), math.sin(rad)
     
-    # Grid de pixels normalizado
+    # Normalized pixel grid
     y_coords, x_coords = np.mgrid[0:h, 0:w]
     t = ((x_coords - cx) * cos_a + (y_coords - cy) * sin_a) / diag + 0.5
     t = np.clip(t, 0.0, 1.0)
@@ -1600,7 +1627,7 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     canvas.save(output_path, quality=100, subsampling=0)
-    print(f"  ✅ Salvo [{platform.upper()}]: {output_path}")
+    print(f"  ✅ Saved [{platform.upper()}]: {output_path}")
 
 # Content-locale (used by slides_by_locale / capture-multilocale-screenshots.sh
 # subfolders) -> store-listing locale folder name (store-assets/{tenant}/{locale}/),
@@ -1627,15 +1654,16 @@ STORE_LOCALE_BY_CONTENT_LOCALE = {
 def run_factory(target_tenant=None, target_platform="all", target_locale=None):
     platforms = ["android", "ios", "ipad"] if target_platform == "all" else [target_platform]
 
-    print(f"🚀 Fábrica de Screenshots Alefly (Plataformas: {', '.join(platforms).upper()})...")
+    print(f"🚀 Alefly screenshot factory (platforms: {', '.join(platforms).upper()})...")
 
     tenants = [target_tenant] if target_tenant else list(TENANT_CONFIGS.keys())
+    failures = []
 
     for platform in platforms:
-        print(f"\n📱 PLATAFORMA: {platform.upper()}")
+        print(f"\n📱 PLATFORM: {platform.upper()}")
         for tenant in tenants:
             if tenant not in TENANT_CONFIGS:
-                print(f"⚠️ Tenant '{tenant}' não encontrado nas configurações.")
+                print(f"⚠️ Tenant '{tenant}' not found in TENANT_CONFIGS.")
                 continue
 
             config = TENANT_CONFIGS[tenant]
@@ -1646,7 +1674,7 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                 locales = [target_locale] if target_locale else list(config["slides_by_locale"].keys())
             else:
                 if target_locale and target_locale != "pt":
-                    print(f"  ⚠️ Tenant '{tenant}' só tem slides em pt — ignorando --locale {target_locale}.")
+                    print(f"  ⚠️ Tenant '{tenant}' only has pt slides — ignoring --locale {target_locale}.")
                 locales = ["pt"]
 
             base_output_dir = os.path.join(ALEFLY_REPO_ROOT, "output/store-assets")
@@ -1654,33 +1682,25 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
             for locale in locales:
                 slides = config["slides_by_locale"][locale] if is_multi_locale else config["slides"]
                 store_locale = STORE_LOCALE_BY_CONTENT_LOCALE.get(locale, "pt-BR")
-                # Multi-locale tenants archive raw captures per locale (see
-                # scripts/capture-multilocale-screenshots.sh in the alefly repo) —
-                # single-locale tenants keep reading the unsuffixed legacy path so
-                # their existing capture flow needs zero changes.
-                locale_suffix = os.path.join(locale) if is_multi_locale else ""
 
                 sub = ("android", "screenshots") if platform == "android" else ("ios", "screenshots", "ipad" if platform == "ipad" else "iphone")
                 # Per-locale folder first; then the unsuffixed legacy folder (a tenant that
                 # became multi-locale after its captures were taken — 14 clubs on 2026-09-03
                 # were silently skipped here); Android last falls back to iPhone captures.
-                candidates = [os.path.join(base_output_dir, tenant, *sub, locale_suffix),
+                # The capture script archives per locale whenever the SEED lists several
+                # locales, independent of whether TENANT_CONFIGS has slides_by_locale — so the
+                # locale folder is tried first for every tenant (flamengo has slides in pt only
+                # here but pt/en/es in the seed; its fresh captures live in screenshots/pt/).
+                candidates = [os.path.join(base_output_dir, tenant, *sub, locale),
                               os.path.join(base_output_dir, tenant, *sub)]
                 if platform == "android":
-                    candidates += [os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", locale_suffix),
+                    candidates += [os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", locale),
                                    os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone")]
                 raw_screenshots_dir = next((d for d in candidates if glob.glob(f"{d}/*.png")), None)
 
                 if not raw_screenshots_dir:
-                    print(f"  ⚠️ Pasta de screenshots crus não encontrada ({locale}): {candidates[0]}")
+                    print(f"  ⚠️ Raw screenshots folder not found ({locale}): {candidates[0]}")
                     continue
-
-                maestro_filenames = [
-                    "01-home.png",
-                    "02-question.png",
-                    "03-answer-feedback.png",
-                    "04-result-summary.png"
-                ]
 
                 screenshots_dir = os.path.join(ALEFLY_STORE_ASSETS, tenant, store_locale, "screenshots")
                 output_dir = os.path.join(screenshots_dir, platform)
@@ -1695,8 +1715,8 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                     if use_slide_sources:
                         candidate = os.path.join(raw_screenshots_dir, SLIDE_SOURCES[i]["file"])
                         input_file = candidate if os.path.exists(candidate) else None
-                    elif i < len(maestro_filenames) and os.path.exists(os.path.join(raw_screenshots_dir, maestro_filenames[i])):
-                        input_file = os.path.join(raw_screenshots_dir, maestro_filenames[i])
+                    elif i < len(LEGACY_SLIDE_FILES) and os.path.exists(os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])):
+                        input_file = os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])
                     else:
                         # Fallback to available files in directory
                         avail = sorted(glob.glob(f"{raw_screenshots_dir}/*.png"))
@@ -1704,14 +1724,24 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
 
                     output_file = os.path.join(output_dir, f"slide_{i+1}.png")
 
-                    if input_file and os.path.exists(input_file):
+                    if not input_file or not os.path.exists(input_file):
+                        failures.append(f"{tenant}/{locale}/{platform} slide {i + 1}: raw capture missing ({input_file})")
+                        print(f"    ⚠️ Input screenshot not found ({locale}): {input_file}")
+                        continue
+                    try:
                         process_screenshot(tenant, i, headline, subheadline, input_file, output_file,
                                            platform=platform, use_slide_sources=use_slide_sources,
                                            locale=locale)
-                    else:
-                        print(f"    ⚠️ Screenshot de entrada não encontrada ({locale}): {input_file}")
+                    except Exception as exc:  # keep rendering the rest, report everything at the end
+                        failures.append(f"{tenant}/{locale}/{platform} slide {i + 1}: {exc!r}")
+                        print(f"    ❌ Failed to render slide {i + 1} ({locale}): {exc!r}")
 
-    print("\n🎉 Todas as screenshots para Android, iOS e iPad foram geradas com sucesso nas pastas padrão!")
+    if failures:
+        print("\n❌ Missing or failed slides:")
+        for failure in failures:
+            print(f"  - {failure}")
+        sys.exit(1)
+    print("\n🎉 All screenshots generated into store-assets for the requested platforms.")
 
 def _selfcheck():
     """Assert-based check over every real seed (no pytest in this repo): headline,
