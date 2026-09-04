@@ -909,6 +909,60 @@ TENANT_CONFIGS = {
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ]
         }
+    },
+    "bocajuniors": {
+        "name": "Quiz para Fãs do Boca Juniors",
+        "colors": [(0, 8, 20), (0, 19, 38), (5, 5, 13)],
+        "highlight_color": (252, 180, 21),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Boca Juniors**", "O quiz definitivo sobre títulos, ídolos e história Xeneize"),
+                ("Perguntas sobre **títulos, ídolos e Superclássicos**", "De Maradona e Riquelme ao elenco atual da Bombonera"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Boca"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "es": [
+                ("Poné a prueba lo que sabés **del Boca Juniors**", "El quiz definitivo sobre títulos, ídolos e historia Xeneize"),
+                ("Preguntas sobre **títulos, ídolos y Superclásicos**", "De Maradona y Riquelme al plantel actual de la Bombonera"),
+                ("Desafiá a un amigo **por enlace**", "Mandale la partida y fijate quién sabe más del Boca"),
+                ("Tu puntaje al instante, **partida a partida**", "Puntos, porcentaje de acierto y evolución en cada ronda"),
+                ("El que más sabe **llega a la cima**", "Clasificación en tiempo real entre vos y tus amigos"),
+                ("¿Te equivocaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te trabaste? **Usá una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Volvé todos los días y **mantené tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
+    },
+    "riverplate": {
+        "name": "Quiz para Fãs do River Plate",
+        "colors": [(38, 4, 5), (13, 1, 2), (5, 1, 2)],
+        "highlight_color": (235, 28, 36),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do River Plate**", "O quiz definitivo sobre títulos, ídolos e história do Millonario"),
+                ("Perguntas sobre **títulos, ídolos e Superclássicos**", "De Di Stéfano e Francescoli ao elenco atual do Monumental"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do River"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "es": [
+                ("Poné a prueba lo que sabés **del River Plate**", "El quiz definitivo sobre títulos, ídolos e historia Millonaria"),
+                ("Preguntas sobre **títulos, ídolos y Superclásicos**", "De Di Stéfano y Francescoli al plantel actual del Monumental"),
+                ("Desafiá a un amigo **por enlace**", "Mandale la partida y fijate quién sabe más del River"),
+                ("Tu puntaje al instante, **partida a partida**", "Puntos, porcentaje de acierto y evolución en cada ronda"),
+                ("El que más sabe **llega a la cima**", "Clasificación en tiempo real entre vos y tus amigos"),
+                ("¿Te equivocaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te trabaste? **Usá una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Volvé todos los días y **mantené tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
     }
 }
 
@@ -1629,6 +1683,14 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
     canvas.save(output_path, quality=100, subsampling=0)
     print(f"  ✅ Saved [{platform.upper()}]: {output_path}")
 
+# Per-tenant override of STORE_LOCALE_BY_CONTENT_LOCALE below. Argentine clubs' "es" content
+# (voseo, Rioplatense Spanish) targets Google Play's "es-419" (Latin America) listing locale,
+# not "es-ES" (Spain) -- the global default used by Spain-based tenants like realmadrid/barcelona.
+TENANT_STORE_LOCALE_OVERRIDES = {
+    "bocajuniors": {"es": "es-419"},
+    "riverplate": {"es": "es-419"},
+}
+
 # Content-locale (used by slides_by_locale / capture-multilocale-screenshots.sh
 # subfolders) -> store-listing locale folder name (store-assets/{tenant}/{locale}/),
 # same convention already used by alefly's ASO metadata and feature-graphic pipelines.
@@ -1681,7 +1743,8 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
 
             for locale in locales:
                 slides = config["slides_by_locale"][locale] if is_multi_locale else config["slides"]
-                store_locale = STORE_LOCALE_BY_CONTENT_LOCALE.get(locale, "pt-BR")
+                store_locale = TENANT_STORE_LOCALE_OVERRIDES.get(tenant, {}).get(locale) \
+                    or STORE_LOCALE_BY_CONTENT_LOCALE.get(locale, "pt-BR")
 
                 sub = ("android", "screenshots") if platform == "android" else ("ios", "screenshots", "ipad" if platform == "ipad" else "iphone")
                 # Per-locale folder first; then the unsuffixed legacy folder (a tenant that
