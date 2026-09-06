@@ -1044,6 +1044,43 @@ TENANT_CONFIGS = {
                 ("Vuelve todos los días y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
+    },
+    "alahly": {
+        "name": "Quiz para Fãs do Al Ahly",
+        "colors": [(38, 3, 3), (179, 16, 16), (13, 0, 0)],
+        "highlight_color": (255, 255, 255),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Al Ahly**", "O quiz definitivo sobre o Clube do Século, seus títulos e sua história"),
+                ("Perguntas sobre **títulos, ídolos e o Derby do Cairo**", "Da hegemonia na CAF Champions League a ídolos como Aboutrika"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Al Ahly"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Al Ahly** knowledge", "The ultimate quiz on the Club of the Century, its titles and history"),
+                ("Questions on **titles, legends and the Cairo Derby**", "From CAF Champions League dominance to legends like Aboutrika"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Al Ahly best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "ar": [
+                ("اختبر معلوماتك عن **الأهلي**", "أفضل اختبار عن نادي القرن وألقابه وتاريخه العريق"),
+                ("أسئلة عن **الألقاب والأساطير وديربي القاهرة**", "من هيمنة دوري أبطال أفريقيا إلى أساطير مثل أبو تريكة"),
+                ("تحدَّ صديقًا **عبر رابط**", "أرسل الجولة واكتشف من يعرف الأهلي أكثر"),
+                ("نتيجتك فورًا، **جولة بعد جولة**", "النقاط ونسبة الإجابات الصحيحة والتقدم في كل جولة"),
+                ("الأكثر معرفة **يتصدر الترتيب**", "ترتيب مباشر بينك وبين أصدقائك"),
+                ("أخطأت؟ الإجابة **مشروحة**", "كل سؤال يعرض الإجابة الصحيحة وسببها"),
+                ("توقفت؟ **استخدم تلميحًا**", "مساعدة واحدة لكل سؤال، وقتما تحتاجها"),
+                ("عد كل يوم **وحافظ على تتابعك**", "تتابع يومي وترتيب وسجل لجولاتك")
+            ]
+        }
     }
 }
 
