@@ -1145,6 +1145,33 @@ TENANT_CONFIGS = {
                 ("Her gün geri gel, **serini koru**", "Günlük seri, sıralama ve tur geçmişin")
             ]
         }
+    },
+    "celtic": {
+        "name": "Quiz para Fãs do Celtic",
+        "colors": [(5, 26, 7), (27, 94, 32), (2, 13, 4)],
+        "highlight_color": (255, 255, 255),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Celtic**", "O quiz definitivo sobre títulos, ídolos e história dos Bhoys"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "Dos Lisbon Lions de 1967 ao Old Firm contra o Rangers"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Celtic"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Celtic** knowledge", "The ultimate quiz on titles, legends and the Hoops' history"),
+                ("Questions on **titles, legends and the Old Firm**", "From the 1967 Lisbon Lions to today's clashes with Rangers"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Celtic best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ]
+        }
     }
 }
 
@@ -1873,6 +1900,7 @@ TENANT_STORE_LOCALE_OVERRIDES = {
     "riverplate": {"es": "es-419"},
     "clubamerica": {"es": "es-419"},
     "chivas": {"es": "es-419"},
+    "celtic": {"en": "en-GB"},
 }
 
 # Content-locale (used by slides_by_locale / capture-multilocale-screenshots.sh
