@@ -1081,6 +1081,33 @@ TENANT_CONFIGS = {
                 ("عد كل يوم **وحافظ على تتابعك**", "تتابع يومي وترتيب وسجل لجولاتك")
             ]
         }
+    },
+    "galatasaray": {
+        "name": "Quiz para Fãs do Galatasaray",
+        "colors": [(38, 3, 10), (169, 4, 50), (13, 1, 4)],
+        "highlight_color": (253, 185, 18),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Galatasaray**", "O quiz definitivo sobre títulos, ídolos e história do Cimbom"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "Da conquista da Copa da UEFA em 2000 ao elenco atual do Aslan"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Galatasaray"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "tr": [
+                ("**Galatasaray** bilgini test et", "Cimbom'un tarihi, kupaları ve efsaneleri üzerine en kapsamlı bilgi yarışması"),
+                ("**Kupalar, efsaneler ve klasikler** üzerine sorular", "2000 UEFA Kupası zaferinden Aslan'ın bugünkü kadrosuna kadar"),
+                ("Bir arkadaşını **linkle** meydan oku", "Turu gönder, Galatasaray'ı kim daha iyi biliyor gör"),
+                ("Skorun anında, **tur be tur**", "Puan, doğru cevap yüzdesi ve her turdaki gelişimin"),
+                ("Daha çok bilen **zirveye çıkar**", "Sen ve arkadaşların arasında gerçek zamanlı sıralama"),
+                ("Yanlış mı bildin? Cevap **açıklamalı gelir**", "Her soru doğru cevabı ve nedenini gösterir"),
+                ("Takıldın mı? **İpucu kullan**", "Her soru için bir yardım, ihtiyacın olduğunda"),
+                ("Her gün geri gel, **serini koru**", "Günlük seri, sıralama ve tur geçmişin")
+            ]
+        }
     }
 }
 
