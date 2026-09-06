@@ -780,6 +780,33 @@ TENANT_CONFIGS = {
             ]
         }
     },
+    "bayern": {
+        "name": "Quiz para Fãs do Bayern",
+        "colors": [(20, 0, 5), (150, 0, 20), (10, 0, 2)],
+        "highlight_color": (255, 90, 90),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Bayern**", "O quiz definitivo sobre Champions, Bundesligas e a história do Rekordmeister"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Beckenbauer e Gerd Müller a Lewandowski e o elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Bayern"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "de": [
+                ("Teste dein Wissen über **Bayern**", "Das ultimative Quiz über Meisterschaften, Champions-League-Titel und die Geschichte des Rekordmeisters"),
+                ("Fragen zu **Titeln, Legenden und Klassikern**", "Von Beckenbauer und Gerd Müller bis Lewandowski und dem aktuellen Kader"),
+                ("Fordere einen Freund **per Link** heraus", "Schick das Spiel und finde heraus, wer Bayern am besten kennt"),
+                ("Dein Ergebnis sofort, **Runde für Runde**", "Punkte, Trefferquote und Fortschritt in jeder Runde"),
+                ("Wer mehr weiß, **steht ganz oben**", "Ranking in Echtzeit zwischen dir und deinen Freunden"),
+                ("Falsch geraten? Die Antwort wird **erklärt**", "Jede Frage zeigt die richtige Lösung und das Warum"),
+                ("Nicht weiter? **Nutze einen Hinweis**", "Eine Hilfe pro Frage, wann immer du sie brauchst"),
+                ("Komm täglich zurück und **halte deinen Streak**", "Täglicher Streak, Ranking und Verlauf deiner Runden")
+            ]
+        }
+    },
     "barcelona": {
         "name": "Quiz para Fãs do Barcelona",
         "colors": [(43, 0, 24), (165, 0, 68), (13, 0, 7)],
@@ -961,6 +988,60 @@ TENANT_CONFIGS = {
                 ("¿Te equivocaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
                 ("¿Te trabaste? **Usá una pista**", "Una ayuda por pregunta, cuando la necesites"),
                 ("Volvé todos los días y **mantené tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
+    },
+    "clubamerica": {
+        "name": "Quiz para Fãs do Club América",
+        "colors": [(0, 16, 51), (0, 13, 41), (0, 4, 13)],
+        "highlight_color": (254, 225, 43),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Club América**", "O quiz definitivo sobre títulos, ídolos e história Azulcrema"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Cuauhtémoc Blanco ao elenco atual do Estádio Azteca"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do América"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "es": [
+                ("Ponte a prueba con **el Club América**", "El quiz definitivo sobre títulos, ídolos e historia Azulcrema"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Cuauhtémoc Blanco al plantel actual del Azteca"),
+                ("Reta a un amigo **por enlace**", "Envíale la partida y descubre quién sabe más del América"),
+                ("Tu puntaje al instante, **partida a partida**", "Puntos, porcentaje de acierto y evolución en cada ronda"),
+                ("El que más sabe **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Te equivocaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te trabaste? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve todos los días y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
+    },
+    "chivas": {
+        "name": "Quiz para Fãs do Chivas",
+        "colors": [(38, 3, 8), (13, 1, 3), (8, 0, 2)],
+        "highlight_color": (200, 16, 46),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Chivas Guadalajara**", "O quiz definitivo sobre títulos, ídolos e história do Rebaño Sagrado"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "Do Chava Reyes ao elenco atual do Estádio Akron"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Chivas"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "es": [
+                ("Ponte a prueba con **el Chivas Guadalajara**", "El quiz definitivo sobre títulos, ídolos e historia del Rebaño Sagrado"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Chava Reyes al plantel actual del Estadio Akron"),
+                ("Reta a un amigo **por enlace**", "Envíale la partida y descubre quién sabe más del Chivas"),
+                ("Tu puntaje al instante, **partida a partida**", "Puntos, porcentaje de acierto y evolución en cada ronda"),
+                ("El que más sabe **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Te equivocaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te trabaste? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve todos los días y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     }
@@ -1689,6 +1770,8 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
 TENANT_STORE_LOCALE_OVERRIDES = {
     "bocajuniors": {"es": "es-419"},
     "riverplate": {"es": "es-419"},
+    "clubamerica": {"es": "es-419"},
+    "chivas": {"es": "es-419"},
 }
 
 # Content-locale (used by slides_by_locale / capture-multilocale-screenshots.sh
@@ -1755,10 +1838,12 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                 # locale folder is tried first for every tenant (flamengo has slides in pt only
                 # here but pt/en/es in the seed; its fresh captures live in screenshots/pt/).
                 candidates = [os.path.join(base_output_dir, tenant, *sub, locale),
-                              os.path.join(base_output_dir, tenant, *sub)]
+                              os.path.join(base_output_dir, tenant, *sub),
+                              os.path.join(base_output_dir, tenant, *sub, "pt")]
                 if platform == "android":
                     candidates += [os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", locale),
-                                   os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone")]
+                                   os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone"),
+                                   os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", "pt")]
                 raw_screenshots_dir = next((d for d in candidates if glob.glob(f"{d}/*.png")), None)
 
                 if not raw_screenshots_dir:
@@ -1777,7 +1862,13 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                 for i, (headline, subheadline) in enumerate(slides):
                     if use_slide_sources:
                         candidate = os.path.join(raw_screenshots_dir, SLIDE_SOURCES[i]["file"])
-                        input_file = candidate if os.path.exists(candidate) else None
+                        if candidate and os.path.exists(candidate):
+                            input_file = candidate
+                        elif i < len(LEGACY_SLIDE_FILES) and os.path.exists(os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])):
+                            input_file = os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])
+                        else:
+                            avail = sorted(glob.glob(f"{raw_screenshots_dir}/*.png"))
+                            input_file = avail[min(i, len(avail)-1)] if avail else None
                     elif i < len(LEGACY_SLIDE_FILES) and os.path.exists(os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])):
                         input_file = os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])
                     else:
