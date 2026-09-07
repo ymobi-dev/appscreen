@@ -1051,7 +1051,7 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 255, 255),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Al-Hilal**", "O quiz definitivo sobre o Patrão da Ásia, seus títulos e sua história"),
+                ("Desafie seus conhecimentos **do Al-Hilal**", "O quiz completo sobre o Al-Hilal, seus títulos e sua história"),
                 ("Perguntas sobre **títulos, ídolos e o Derby de Riad**", "Da hegemonia na AFC Champions League a ídolos como Sami Al-Jaber"),
                 ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Al-Hilal"),
                 ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
@@ -1061,7 +1061,7 @@ TENANT_CONFIGS = {
                 ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
-                ("Test your **Al-Hilal** knowledge", "The ultimate quiz on the Leader of Asia, its titles and history"),
+                ("Test your **Al-Hilal** knowledge", "The comprehensive quiz on Al-Hilal, its titles and history"),
                 ("Questions on **titles, legends and the Riyadh Derby**", "From AFC Champions League dominance to legends like Sami Al-Jaber"),
                 ("Challenge a friend **by link**", "Send the match and see who knows Al-Hilal best"),
                 ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
@@ -1071,7 +1071,7 @@ TENANT_CONFIGS = {
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ],
             "ar": [
-                ("اختبر معلوماتك عن **الهلال**", "أفضل اختبار عن قائد آسيا وألقابه وتاريخه العريق"),
+                ("اختبر معلوماتك عن **الهلال**", "كويز شامل عن الهلال وألقابه وتاريخه العريق"),
                 ("أسئلة عن **الألقاب والأساطير وديربي الرياض**", "من هيمنة دوري أبطال آسيا إلى أساطير مثل سامي الجابر"),
                 ("تحدَّ صديقًا **عبر رابط**", "أرسل الجولة واكتشف من يعرف الهلال أكثر"),
                 ("نتيجتك فورًا، **جولة بعد جولة**", "النقاط ونسبة الإجابات الصحيحة والتقدم في كل جولة"),
@@ -1170,6 +1170,70 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ]
+        }
+    },
+    "rangers": {
+        "name": "Quiz para Fãs do Rangers",
+        "colors": [(0, 26, 48), (0, 102, 178), (0, 13, 24)],
+        "highlight_color": (255, 255, 255),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Rangers**", "O quiz definitivo sobre títulos, ídolos e história dos Gers"),
+                ("Perguntas sobre **títulos, lendas e o Old Firm**", "Dos 55 títulos escoceses à Recopa de 1972 e clássicos com o Celtic"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Rangers"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Rangers** knowledge", "The ultimate quiz on titles, legends and the Gers' history"),
+                ("Questions on **titles, legends and the Old Firm**", "From 55 league titles and the 1972 Cup Winners' Cup to Ibrox glory"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Rangers best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ]
+        }
+    },
+    "alnassr": {
+        "name": "Quiz para Fãs do Al-Nassr",
+        "colors": [(6, 19, 36), (10, 34, 64), (2, 7, 13)],
+        "highlight_color": (246, 185, 0),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Al-Nassr**", "O quiz definitivo sobre títulos, ídolos e história do Al-Alami"),
+                ("Perguntas sobre **títulos, lendas e o Derby de Riad**", "De Majed Abdullah a Cristiano Ronaldo e a história dos Cavaleiros de Najd"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Al-Nassr"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Al-Nassr** knowledge", "The ultimate quiz on Al-Alami's titles, legends and history"),
+                ("Questions on **titles, legends and Riyadh derbies**", "From Majed Abdullah to Cristiano Ronaldo and the FIFA Club World Cup"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Al-Nassr best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "ar": [
+                ("اختبر معلوماتك عن **نادي النصر**", "الكويز الشامل عن بطولات العالمي، الأساطير وتاريخ فرسان نجد"),
+                ("أسئلة عن **البطولات، الأساطير وديربي الرياض**", "من ماجد عبد الله إلى كريستيانو رونالدو ومشاركات كأس العالم للأندية"),
+                ("تحدَّ صديقك **عبر الرابط**", "أرسل التحدي واكتشف من يعرف النصر أكثر"),
+                ("نتيجتك فورية، **جولة بعد جولة**", "النقاط، دقة الإجابات وتطور مستواك في كل مباراة"),
+                ("من يعرف أكثر **يتصدر الترتيب**", "ترتيب مباشر بينك وبين أصدقائك المشجعين"),
+                ("أخطأت؟ الإجابة تأتيك **مشروحة**", "كل سؤال يوضح لك الإجابة الصحيحة والسبب"),
+                ("واجهت صعوبة؟ **استخدم تلميحاً**", "مساعدة في كل سؤال عندما تحتاجها"),
+                ("عد يومياً و**حافظ على سلسلتك**", "سلسلة يومية، لوحة الشرف وتاريخ جولاتك")
             ]
         }
     }
@@ -1901,6 +1965,7 @@ TENANT_STORE_LOCALE_OVERRIDES = {
     "clubamerica": {"es": "es-419"},
     "chivas": {"es": "es-419"},
     "celtic": {"en": "en-GB"},
+    "rangers": {"en": "en-GB"},
 }
 
 # Content-locale (used by slides_by_locale / capture-multilocale-screenshots.sh
