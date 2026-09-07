@@ -1179,7 +1179,7 @@ TENANT_CONFIGS = {
         "highlight_color": (255, 255, 255),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Rangers**", "O quiz definitivo sobre títulos, ídolos e história dos Gers"),
+                ("Desafie seus conhecimentos **do Rangers**", "O quiz completo sobre títulos, ídolos e história dos Gers"),
                 ("Perguntas sobre **títulos, lendas e o Old Firm**", "Dos 55 títulos escoceses à Recopa de 1972 e clássicos com o Celtic"),
                 ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Rangers"),
                 ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
@@ -1189,7 +1189,7 @@ TENANT_CONFIGS = {
                 ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
-                ("Test your **Rangers** knowledge", "The ultimate quiz on titles, legends and the Gers' history"),
+                ("Test your **Rangers** knowledge", "The comprehensive quiz on titles, legends and the Gers' history"),
                 ("Questions on **titles, legends and the Old Firm**", "From 55 league titles and the 1972 Cup Winners' Cup to Ibrox glory"),
                 ("Challenge a friend **by link**", "Send the match and see who knows Rangers best"),
                 ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
@@ -1206,7 +1206,7 @@ TENANT_CONFIGS = {
         "highlight_color": (246, 185, 0),
         "slides_by_locale": {
             "pt": [
-                ("Desafie seus conhecimentos **do Al-Nassr**", "O quiz definitivo sobre títulos, ídolos e história do Al-Alami"),
+                ("Desafie seus conhecimentos **do Al-Nassr**", "O quiz completo sobre títulos, ídolos e história do Al-Alami"),
                 ("Perguntas sobre **títulos, lendas e o Derby de Riad**", "De Majed Abdullah a Cristiano Ronaldo e a história dos Cavaleiros de Najd"),
                 ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Al-Nassr"),
                 ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
@@ -1216,7 +1216,7 @@ TENANT_CONFIGS = {
                 ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
-                ("Test your **Al-Nassr** knowledge", "The ultimate quiz on Al-Alami's titles, legends and history"),
+                ("Test your **Al-Nassr** knowledge", "The comprehensive quiz on Al-Alami's titles, legends and history"),
                 ("Questions on **titles, legends and Riyadh derbies**", "From Majed Abdullah to Cristiano Ronaldo and the FIFA Club World Cup"),
                 ("Challenge a friend **by link**", "Send the match and see who knows Al-Nassr best"),
                 ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
