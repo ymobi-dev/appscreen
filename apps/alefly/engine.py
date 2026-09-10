@@ -1990,6 +1990,17 @@ STORE_LOCALE_BY_CONTENT_LOCALE = {
     "it": "it-IT",
 }
 
+def resolve_store_locales(tenant: str, locale: str) -> list[str]:
+    """Store-listing locale folders for a given content locale. A tenant override
+    may be a single string (existing behavior, one country) or a list of strings
+    (multiple country storefronts sharing the same content/screenshots)."""
+    override = TENANT_STORE_LOCALE_OVERRIDES.get(tenant, {}).get(locale)
+    if override is None:
+        return [STORE_LOCALE_BY_CONTENT_LOCALE.get(locale, "pt-BR")]
+    if isinstance(override, str):
+        return [override]
+    return list(override)
+
 def run_factory(target_tenant=None, target_platform="all", target_locale=None):
     platforms = ["android", "ios", "ipad"] if target_platform == "all" else [target_platform]
 
@@ -2020,8 +2031,7 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
 
             for locale in locales:
                 slides = config["slides_by_locale"][locale] if is_multi_locale else config["slides"]
-                store_locale = TENANT_STORE_LOCALE_OVERRIDES.get(tenant, {}).get(locale) \
-                    or STORE_LOCALE_BY_CONTENT_LOCALE.get(locale, "pt-BR")
+                store_locales = resolve_store_locales(tenant, locale)
 
                 sub = ("android", "screenshots") if platform == "android" else ("ios", "screenshots", "ipad" if platform == "ipad" else "iphone")
                 # Per-locale folder first; then the unsuffixed legacy folder (a tenant that
@@ -2044,45 +2054,47 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                     print(f"  ⚠️ Raw screenshots folder not found ({locale}): {candidates[0]}")
                     continue
 
-                screenshots_dir = os.path.join(ALEFLY_STORE_ASSETS, tenant, store_locale, "screenshots")
-                output_dir = os.path.join(screenshots_dir, platform)
-
                 # Tenants migrated to the eight-slot spec declare eight captions and are
                 # driven by SLIDE_SOURCES, which names the capture and region per slot.
                 # Legacy four-caption tenants keep the old positional mapping untouched
                 # until they are migrated one at a time.
                 use_slide_sources = len(slides) == len(SLIDE_SOURCES)
 
-                for i, (headline, subheadline) in enumerate(slides):
-                    if use_slide_sources:
-                        candidate = os.path.join(raw_screenshots_dir, SLIDE_SOURCES[i]["file"])
-                        if candidate and os.path.exists(candidate):
-                            input_file = candidate
+                for store_locale in store_locales:
+                    screenshots_dir = os.path.join(ALEFLY_STORE_ASSETS, tenant, store_locale, "screenshots")
+                    output_dir = os.path.join(screenshots_dir, platform)
+                    os.makedirs(output_dir, exist_ok=True)
+
+                    for i, (headline, subheadline) in enumerate(slides):
+                        if use_slide_sources:
+                            candidate = os.path.join(raw_screenshots_dir, SLIDE_SOURCES[i]["file"])
+                            if candidate and os.path.exists(candidate):
+                                input_file = candidate
+                            elif i < len(LEGACY_SLIDE_FILES) and os.path.exists(os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])):
+                                input_file = os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])
+                            else:
+                                avail = sorted(glob.glob(f"{raw_screenshots_dir}/*.png"))
+                                input_file = avail[min(i, len(avail)-1)] if avail else None
                         elif i < len(LEGACY_SLIDE_FILES) and os.path.exists(os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])):
                             input_file = os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])
                         else:
+                            # Fallback to available files in directory
                             avail = sorted(glob.glob(f"{raw_screenshots_dir}/*.png"))
                             input_file = avail[min(i, len(avail)-1)] if avail else None
-                    elif i < len(LEGACY_SLIDE_FILES) and os.path.exists(os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])):
-                        input_file = os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])
-                    else:
-                        # Fallback to available files in directory
-                        avail = sorted(glob.glob(f"{raw_screenshots_dir}/*.png"))
-                        input_file = avail[min(i, len(avail)-1)] if avail else None
 
-                    output_file = os.path.join(output_dir, f"slide_{i+1}.png")
+                        output_file = os.path.join(output_dir, f"slide_{i+1}.png")
 
-                    if not input_file or not os.path.exists(input_file):
-                        failures.append(f"{tenant}/{locale}/{platform} slide {i + 1}: raw capture missing ({input_file})")
-                        print(f"    ⚠️ Input screenshot not found ({locale}): {input_file}")
-                        continue
-                    try:
-                        process_screenshot(tenant, i, headline, subheadline, input_file, output_file,
-                                           platform=platform, use_slide_sources=use_slide_sources,
-                                           locale=locale)
-                    except Exception as exc:  # keep rendering the rest, report everything at the end
-                        failures.append(f"{tenant}/{locale}/{platform} slide {i + 1}: {exc!r}")
-                        print(f"    ❌ Failed to render slide {i + 1} ({locale}): {exc!r}")
+                        if not input_file or not os.path.exists(input_file):
+                            failures.append(f"{tenant}/{locale}/{platform} slide {i + 1}: raw capture missing ({input_file})")
+                            print(f"    ⚠️ Input screenshot not found ({locale}): {input_file}")
+                            continue
+                        try:
+                            process_screenshot(tenant, i, headline, subheadline, input_file, output_file,
+                                               platform=platform, use_slide_sources=use_slide_sources,
+                                               locale=locale)
+                        except Exception as exc:  # keep rendering the rest, report everything at the end
+                            failures.append(f"{tenant}/{locale}/{platform} slide {i + 1}: {exc!r}")
+                            print(f"    ❌ Failed to render slide {i + 1} ({locale}): {exc!r}")
 
     if failures:
         print("\n❌ Missing or failed slides:")
@@ -2114,6 +2126,14 @@ def _selfcheck():
         checked += 1
     assert checked, "no seeds found"
     print(f"✅ selfcheck ok: {checked} tenants, every text role >= {MIN_TEXT_CONTRAST}:1 on its band")
+
+    # resolve_store_locales: backward compat (no override or string) + new list form
+    assert resolve_store_locales("flamengo", "pt") == ["pt-BR"]  # no override, falls back to the global default
+    assert resolve_store_locales("bocajuniors", "es") == ["es-419"]  # existing string override becomes a 1-item list
+    TENANT_STORE_LOCALE_OVERRIDES["_selfcheck_multi"] = {"en": ["en-US", "en-GB", "en-PH"]}
+    assert resolve_store_locales("_selfcheck_multi", "en") == ["en-US", "en-GB", "en-PH"]
+    del TENANT_STORE_LOCALE_OVERRIDES["_selfcheck_multi"]
+    print("✅ resolve_store_locales: backward compat + multi-country list ok")
 
 
 if __name__ == "__main__":
