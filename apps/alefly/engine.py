@@ -1487,6 +1487,16 @@ TENANT_CONFIGS = {
                 ("أخطأت؟ الإجابة **مشروحة**", "كل سؤال يعرض الإجابة الصحيحة وسببها"),
                 ("توقفت؟ **استخدم تلميحًا**", "مساعدة واحدة لكل سؤال، وقتما تحتاجها"),
                 ("عد كل يوم **وحافظ على تتابعك**", "تتابع يومي وترتيب وسجل لجولاتك")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Al-Hilal**", "El quiz definitivo sobre el Al-Hilal, sus títulos y su historia"),
+                ("Preguntas sobre **títulos, ídolos y el Derbi de Riad**", "De la hegemonía en la AFC Champions League a ídolos como Sami Al-Jaber"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y mira quién sabe más del Al-Hilal"),
+                ("Tu marcador al instante, **ronda a ronda**", "Puntuación, porcentaje de aciertos y evolución en cada partida"),
+                ("Quien sabe más **llega a la cima**", "Ranking en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta **viene explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te trabaste? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, ranking e historial de tus partidas")
             ]
         }
     },
@@ -2538,6 +2548,7 @@ TENANT_STORE_LOCALE_OVERRIDES = {
     "barcelona": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ca": "ca", "de": "de-DE", "fr": ["fr-FR", "fr-CA"], "id": "id", "nl": "nl-NL", "pl": "pl-PL"},
     "celtic": {"en": "en-GB"},
     "rangers": {"en": "en-GB"},
+    "alhilal": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ar": "ar"},
 }
 
 # Content-locale (used by slides_by_locale / capture-multilocale-screenshots.sh
