@@ -56,46 +56,132 @@ TENANT_CONFIGS = {
         "name": "Quiz para Fãs do Fla",
         "colors": [(26, 0, 0), (122, 0, 0), (26, 26, 26)],
         "highlight_color": (255, 70, 70),
-        "slides": [
-            ("Desafie seus conhecimentos **do Flamengo**", "O quiz definitivo sobre títulos, ídolos e história rubro-negra"),
-            ("Perguntas sobre **títulos, ídolos e clássicos**", "De Zico a Arrascaeta e ao elenco atual"),
-            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Flamengo"),
-            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
-            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
-            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
-            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
-            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Flamengo**", "O quiz definitivo sobre títulos, ídolos e história rubro-negra"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Zico a Arrascaeta e ao elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Flamengo"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Flamengo** knowledge", "The ultimate quiz on titles, legends and Rubro-Negro history"),
+                ("Questions on **titles, legends and classics**", "From Zico to Arrascaeta and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Flamengo best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Flamengo**", "El quiz definitivo sobre títulos, ídolos e historia rubro-negra"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Zico a Arrascaeta y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Flamengo"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
     },
     "botafogo": {
         "name": "Quiz para Fãs do Botafogo",
         "colors": [(13, 11, 6), (30, 26, 16), (10, 10, 10)],
         "highlight_color": (232, 232, 232),
-        "slides": [
-            ("Desafie seus conhecimentos **do Botafogo**", "O quiz definitivo sobre títulos, ídolos e história alvinegra"),
-            ("Perguntas sobre **títulos, ídolos e clássicos**", "De Garrincha a Luiz Henrique e ao elenco atual"),
-            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Botafogo"),
-            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
-            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
-            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
-            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
-            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Botafogo**", "O quiz definitivo sobre títulos, ídolos e história alvinegra"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Garrincha a Luiz Henrique e ao elenco atual"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Botafogo"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Botafogo** knowledge", "The ultimate quiz on titles, legends and Alvinegra history"),
+                ("Questions on **titles, legends and classics**", "From Garrincha to Luiz Henrique and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Botafogo best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Botafogo**", "El quiz definitivo sobre títulos, ídolos e historia alvinegra"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Garrincha a Luiz Henrique y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Botafogo"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "ar": [
+                ("اختبر معلوماتك عن **بوتافوغو**", "أفضل اختبار عن الألقاب والأساطير وتاريخ الفريق الأسود والأبيض"),
+                ("أسئلة عن **الألقاب والأساطير والكلاسيكيات**", "من غارينشا إلى لويز هنريكي والتشكيلة الحالية"),
+                ("تحدَّ صديقًا **عبر رابط**", "أرسل الجولة واكتشف من يعرف بوتافوغو أكثر"),
+                ("نتيجتك فورًا، **جولة بعد جولة**", "النقاط ونسبة الإجابات الصحيحة والتقدم في كل جولة"),
+                ("الأكثر معرفة **يتصدر الترتيب**", "ترتيب مباشر بينك وبين أصدقائك"),
+                ("أخطأت؟ الإجابة **مشروحة**", "كل سؤال يعرض الإجابة الصحيحة وسببها"),
+                ("توقفت؟ **استخدم تلميحًا**", "مساعدة واحدة لكل سؤال، وقتما تحتاجها"),
+                ("عد كل يوم **وحافظ على تتابعك**", "تتابع يومي وترتيب وسجل لجولاتك")
+            ],
+            "fr": [
+                ("Défiez vos connaissances sur **Botafogo**", "Le quiz ultime sur les titres, les légendes et l'histoire alvinegra"),
+                ("Questions sur les **titres, légendes et classiques**", "De Garrincha à Luiz Henrique jusqu'à l'effectif actuel"),
+                ("Défiez un ami **par lien**", "Envoyez la partie et voyez qui connaît le mieux Botafogo"),
+                ("Votre score à l'instant, **match après match**", "Points, pourcentage de réussite et progression à chaque manche"),
+                ("Le plus fort **grimpe au sommet**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
+            ]
+        }
     },
     "fluminense": {
         "name": "Quiz para Fãs do Fluminense",
         "colors": [(13, 4, 5), (74, 14, 26), (10, 5, 5)],
         "highlight_color": (0, 168, 107),
-        "slides": [
-            ("Desafie seus conhecimentos **do Fluminense**", "O quiz definitivo sobre títulos, ídolos e história tricolor"),
-            ("Perguntas sobre **títulos, ídolos e clássicos**", "De Castilho e Didi ao time campeão da Libertadores 2023"),
-            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Fluminense"),
-            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
-            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
-            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
-            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
-            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Fluminense**", "O quiz definitivo sobre títulos, ídolos e história tricolor"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Castilho e Didi ao time campeão da Libertadores 2023"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Fluminense"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Fluminense** knowledge", "The ultimate trivia about titles, legends and Tricolor history"),
+                ("Questions on **titles, legends and derbies**", "From Castilho and Didi to the 2023 Libertadores champions"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Fluminense best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Fluminense**", "El quiz definitivo sobre títulos, ídolos e historia tricolor"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Castilho y Didi al equipo campeón de la Libertadores 2023"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Fluminense"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
     },
     "vasco": {
         "name": "Quiz para Fãs do Vasco",
@@ -153,16 +239,38 @@ TENANT_CONFIGS = {
         "name": "Quiz da Bíblia",
         "colors": [(8, 21, 40), (22, 46, 84), (6, 15, 30)],
         "highlight_color": (201, 149, 44),
-        "slides": [
-            ("Desafie seus conhecimentos **da Bíblia**", "O quiz definitivo sobre o Antigo e o Novo Testamento"),
-            ("Perguntas sobre **personagens, livros e ensinamentos**", "De Gênesis ao Apocalipse, com contexto para aprender"),
-            ("Desafie um amigo **por link**", "Envie a partida e veja quem conhece mais as Escrituras"),
-            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
-            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
-            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
-            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
-            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **da Bíblia**", "O quiz definitivo sobre o Antigo e o Novo Testamento"),
+                ("Perguntas sobre **personagens, livros e ensinamentos**", "De Gênesis ao Apocalipse, com contexto para aprender"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem conhece mais as Escrituras"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Bible** knowledge", "The ultimate trivia on the Old and New Testaments"),
+                ("Questions on **people, books and verses**", "From Genesis to Revelation, with context to learn"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Scripture best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Pon a prueba tu conocimiento **de la Biblia**", "El quiz definitivo sobre el Antiguo y el Nuevo Testamento"),
+                ("Preguntas sobre **personajes, libros y versículos**", "De Génesis a Apocalipsis, con contexto para aprender"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién conoce más las Escrituras"),
+                ("Tu puntaje al instante, **partida a partida**", "Puntos, precisión y progreso en cada ronda"),
+                ("El que sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Atascado? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de partidas")
+            ]
+        }
     },
     "geography-world": {
         "name": "Quiz Geografia Mundial",
@@ -263,6 +371,26 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Manchester United**", "El quiz definitivo sobre títulos, leyendas e historia de los Red Devils"),
+                ("Preguntas sobre **títulos, ídolos y rivalidades**", "De Cristiano Ronaldo a Bruno Fernandes y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Manchester United"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La resposta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "id": [
+                ("Uji pengetahuanmu tentang **Manchester United**", "Kuis definitif tentang gelar, legenda, dan sejarah Red Devils"),
+                ("Pertanyaan tentang **gelar, ikon, dan rivalitas**", "Dari Cristiano Ronaldo hingga Bruno Fernandes dan skuad saat ini"),
+                ("Tantang teman **lewat tautan**", "Kirim pertandingan dan buktikan siapa yang paling tahu tentang Manchester United"),
+                ("Skormu langsung muncul, **ronde demi ronde**", "Poin, akurasi, dan progres di setiap putaran"),
+                ("Yang paling tahu **berada di puncak**", "Peringkat langsung antara kamu dan teman-temanmu"),
+                ("Salah jawab? Jawabannya ada **penjelasannya**", "Setiap soal menampilkan jawaban yang benar beserta alasannya"),
+                ("Buntu? **Gunakan petunjuk**", "Satu bantuan per soal saat kamu membutuhkannya"),
+                ("Kembali tiap hari dan **jaga rentetanmu**", "Rentetan harian, peringkat, dan riwayat pertandinganmu")
             ]
         }
     },
@@ -290,6 +418,36 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Manchester City**", "El quiz definitivo sobre el Triplete, leyendas e historia de los Cityzens"),
+                ("Preguntas sobre **títulos, ídolos y rivalidades**", "De Agüero y De Bruyne a Haaland y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Manchester City"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La resposta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "no": [
+                ("Test kunnskapen din **om Manchester City**", "Den ultimate quizen om The Treble, legender og Cityzens-historie"),
+                ("Spørsmål om **titler, legender og rivaler**", "Fra Agüero og De Bruyne til Haaland og dagens tropp"),
+                ("Utfordre en venn **med lenke**", "Del kampen og se hvem som kan mest om Manchester City"),
+                ("Poengsummen din, **runde for runde**", "Poeng, treffsikkerhet og fremgang i hver omgang"),
+                ("Den beste **når toppen**", "Direkteleaderboard mellom deg og vennene dine"),
+                ("Svarte du feil? Svaret blir **forklart**", "Hvert spørsmål viser det rette svaret og hvorfor"),
+                ("Står du fast? **Bruk et hint**", "Én hjelp per spørsmål, når du trenger det"),
+                ("Kom tilbake daglig og **hold rekken i gang**", "Daglig streak, rangering og kamphistorikk")
+            ],
+            "ar": [
+                ("اختبر معلوماتك **عن مانشستر سيتي**", "الكويز الشامل عن الثلاثية التاريخية، الأساطير وتاريخ السيتيزنز"),
+                ("أسئلة عن **الألقاب، النجوم والكلاسيكيات**", "من أغويرو ودي بروين إلى هالاند والتشكيلة الحالية"),
+                ("تحدَّ صديقك **عبر الرابط**", "أرسل المواجهة واكتشف من يعرف مانشستر سيتي أكثر"),
+                ("نتيجتك فوراً، **جولة بجولة**", "النقاط، نسبة الدقة وتطور مستواك في كل مباراة"),
+                ("الأكثر معرفة **في الصدارة**", "ترتيب فوري بينك وبين أصدقائك"),
+                ("أخطأت؟ الإجابة تأتي **مع الشرح**", "كل سؤال يعرض الإجابة الصحيحة مع بيان السبب"),
+                ("عالق؟ **استخدم تلميحاً**", "مساعدة واحدة لكل سؤال متى احتجت إليها"),
+                ("عد يومياً وحافظ على **سلسلة أيامك**", "سلسلة متواصلة، ترتيب وسجل مواجهاتك")
             ]
         }
     },
@@ -317,6 +475,16 @@ TENANT_CONFIGS = {
                 ("Hai sbagliato? La risposta arriva **spiegata**", "Ogni domanda mostra quella giusta e il motivo"),
                 ("Bloccato? **Usa un suggerimento**", "Un aiuto per domanda, quando ne hai bisogno"),
                 ("Torna ogni giorno e **mantieni la serie**", "Serie giornaliera, classifica e cronologia delle tue partite")
+            ],
+            "en": [
+                ("Test your **Juventus** knowledge", "The ultimate quiz on Scudetti, legends and Vecchia Signora history"),
+                ("Questions on **titles, legends and derbies**", "From Del Piero and Buffon to Cristiano Ronaldo and Dybala"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Juventus best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ]
         }
     },
@@ -354,6 +522,16 @@ TENANT_CONFIGS = {
                 ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
                 ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
                 ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "nl": [
+                ("Test je kennis over **Corinthians**", "De ultieme quiz over de 2 wereldtitels, ongeslagen Libertadores en idolen"),
+                ("Vragen over **titels, legendes en derby's**", "Van Sócrates en Rivellino tot Cássio en het huidige elftal"),
+                ("Daag een vriend uit **via link**", "Stuur de wedstrijd en ontdek wie Corinthians het beste kent"),
+                ("Je score **direct, wedstrijd na wedstrijd**", "Punten, nauwkeurigheid en voortgang in elke ronde"),
+                ("Klim naar **de top van het klassement**", "Real-time ranglijst tussen jou en je vrienden"),
+                ("Fout? Het antwoord wordt **uitgelegd**", "Elke vraag toont het juiste antwoord en waarom"),
+                ("Vastgelopen? **Gebruik een hint**", "Één hulp per vraag, wanneer je het nodig hebt"),
+                ("Kom dagelijks terug en **houd je reeks bij**", "Dagelijkse reeks, ranglijst en wedstrijdgeschiedenis")
             ]
         }
     },
@@ -502,6 +680,16 @@ TENANT_CONFIGS = {
                 ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
                 ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
                 ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "da": [
+                ("Test din viden om **Grêmio**", "Den ultimative quiz om VM-titlen 1983, 3 Libertadores og Tricolor-legender"),
+                ("Spørgsmål om **titler, legender og derbyer**", "Fra Renato Gaúcho til Ronaldinho Gaúcho og det nuværende hold"),
+                ("Udfordr en ven **via link**", "Send kampen og se, hvem der kender Grêmio bedst"),
+                ("Din score **med det samme, kamp efter kamp**", "Point, nøjagtighed og fremskridt i hver runde"),
+                ("Klatr til **toppen af ranglisten**", "Realtidsrangering mellem dig og dine venner"),
+                ("Forkert? Svaret kommer **forklaret**", "Hvert spørgsmål viser det rigtige svar og hvorfor"),
+                ("Kørt fast? **Brug et hint**", "Én hjælp per spørgsmål, når du har brug for det"),
+                ("Kom tilbage dagligt og **hold din streak**", "Daglig streak, rangering og kamphistorik")
             ]
         }
     },
@@ -804,6 +992,16 @@ TENANT_CONFIGS = {
                 ("Falsch geraten? Die Antwort wird **erklärt**", "Jede Frage zeigt die richtige Lösung und das Warum"),
                 ("Nicht weiter? **Nutze einen Hinweis**", "Eine Hilfe pro Frage, wann immer du sie brauchst"),
                 ("Komm täglich zurück und **halte deinen Streak**", "Täglicher Streak, Ranking und Verlauf deiner Runden")
+            ],
+            "en": [
+                ("Test your **Bayern** knowledge", "The ultimate quiz on Champions League, Bundesligas and Rekordmeister history"),
+                ("Questions on **titles, legends and classics**", "From Beckenbauer and Gerd Müller to Lewandowski and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Bayern best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ]
         }
     },
@@ -851,6 +1049,56 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "de": [
+                ("Teste dein Wissen **über den FC Barcelona**", "Das ultimative Quiz über Titel, Legenden und Blaugrana-Geschichte"),
+                ("Fragen zu **Titeln, Ikonen und Clásicos**", "Von Cruyff bis zu den heutigen Barça-Stars"),
+                ("Fordere Freunde **per Link heraus**", "Teile das Spiel und finde heraus, wer Barça am besten kennt"),
+                ("Dein Punktestand sofort, **Runde für Runde**", "Punkte, Genauigkeit und Fortschritt in jedem Spiel"),
+                ("Wer am meisten weiß, **steht ganz oben**", "Live-Rangliste zwischen dir und deinen Freunden"),
+                ("Falsch gelegen? Die Antwort wird **erklärt**", "Jede Frage zeigt die richtige Lösung und warum"),
+                ("Kommst du nicht weiter? **Nutz einen Tipp**", "Ein Joker pro Frage, wann immer du ihn brauchst"),
+                ("Komm täglich wieder und **halte deine Serie**", "Tägliche Serie, Bestenliste und Spielverlauf")
+            ],
+            "fr": [
+                ("Défiez vos connaissances sur le **FC Barcelone**", "Le quiz ultime sur les titres, les légendes et l'histoire blaugrana"),
+                ("Questions sur les **titres, légendes et Clásicos**", "De Cruyff aux stars actuelles du Barça"),
+                ("Défiez un ami **par lien**", "Envoyez la partie et voyez qui connaît le mieux Barcelone"),
+                ("Votre score à l'instant, **match après match**", "Points, pourcentage de réussite et progression à chaque manche"),
+                ("Le plus fort **grimpe au sommet**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
+            ],
+            "id": [
+                ("Uji pengetahuanmu tentang **FC Barcelona**", "Kuis definitif tentang gelar, legenda, dan sejarah Blaugrana") ,
+                ("Pertanyaan tentang **gelar, ikon, dan El Clásico**", "Dari Cruyff hingga bintang-bintang Barça saat ini"),
+                ("Tantang teman **lewat tautan**", "Kirim pertandingan dan buktikan siapa yang paling tahu tentang Barcelona"),
+                ("Skormu langsung muncul, **ronde demi ronde**", "Poin, akurasi, dan progres di setiap putaran"),
+                ("Yang paling tahu **berada di puncak**", "Peringkat langsung antara kamu dan teman-temanmu"),
+                ("Salah jawab? Jawabannya ada **penjelasannya**", "Setiap soal menampilkan jawaban yang benar beserta alasannya"),
+                ("Buntu? **Gunakan petunjuk**", "Satu bantuan per soal saat kamu membutuhkannya"),
+                ("Kembali tiap hari dan **jaga rentetanmu**", "Rentetan harian, peringkat, dan riwayat pertandinganmu")
+            ],
+            "nl": [
+                ("Test je kennis over **FC Barcelona**", "De ultieme quiz over titels, legendes en de Blaugrana-historie"),
+                ("Vragen over **titels, iconen en Clásicos**", "Van Cruyff tot de huidige Barça-sterren"),
+                ("Daag een vriend uit **via een link**", "Deel de match en zie wie Barcelona het beste kent"),
+                ("Je score direct in beeld, **ronde na ronde**", "Punten, nauwkeurigheid en voortgang in elk potje"),
+                ("Wie het meeste weet, **staat aan de top**", "Realtime klassement tussen jou en je vrienden"),
+                ("Fout geantwoord? Het antwoord wordt **uitgelegd**", "Elke vraag toont de juiste keuze en waarom"),
+                ("Zit je vast? **Gebruik een hint**", "Eén hulpmiddel per vraag, wanneer je het nodig hebt"),
+                ("Kom dagelijks terug en **behoud je reeks**", "Dagelijkse streak, ranglijst en wedstrijdgeschiedenis")
+            ],
+            "pl": [
+                ("Sprawdź swoją wiedzę o **FC Barcelona**", "Ostateczny quiz o tytułach, legendach i historii Blaugrany"),
+                ("Pytania o **tytuły, ikony i El Clásico**", "Od Cruyffa po współczesne gwiazdy Barçy"),
+                ("Rzuć wyzwanie znajomemu **przez link**", "Wyślij mecz i sprawdź, kto wie więcej o Barcelonie"),
+                ("Twój wynik na bieżąco, **runda po rundzie**", "Punkty, celność i postępy w każdym meczu"),
+                ("Kto wie najwięcej, **trafia na szczyt**", "Ranking na żywo między Tobą a znajomymi"),
+                ("Pomyłka? Odpowiedź ma **wyjaśnienie**", "Każde pytanie pokazuje prawidłową opcję i dlaczego"),
+                ("Uknąłeś? **Użyj podpowiedzi**", "Jedna pomoc na pytanie, kiedy jej potrzebujesz"),
+                ("Wracaj codziennie i **utrzymuj passę**", "Codzienna passa, ranking i historia Twoich gier")
             ]
         }
     },
@@ -878,6 +1126,36 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Chelsea**", "El quiz definitivo sobre títulos, leyendas e historia del Chelsea FC"),
+                ("Preguntas sobre **títulos, ídolos y rivalidades**", "De Lampard y Drogba a Hazard y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Chelsea"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "fr": [
+                ("Défiez vos connaissances sur **Chelsea**", "Le quiz ultime sur les titres, les légendes et l'histoire de Chelsea FC"),
+                ("Questions sur les **titres, légendes et rivalités**", "De Lampard et Drogba à Hazard jusqu'à l'effectif actuel"),
+                ("Défiez un ami **par lien**", "Envoyez la partie et voyez qui connaît le mieux Chelsea"),
+                ("Votre score à l'instant, **match après match**", "Points, pourcentage de réussite et progression à chaque manche"),
+                ("Le plus fort **grimpe au sommet**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
+            ],
+            "id": [
+                ("Uji pengetahuanmu tentang **Chelsea**", "Kuis definitif tentang gelar, legenda, dan sejarah Chelsea FC"),
+                ("Pertanyaan tentang **gelar, ikon, dan rivalitas**", "Dari Lampard dan Drogba hingga Hazard dan skuad saat ini"),
+                ("Tantang teman **lewat tautan**", "Kirim pertandingan dan buktikan siapa yang paling tahu tentang Chelsea"),
+                ("Skormu langsung muncul, **ronde demi ronde**", "Poin, akurasi, dan progres di setiap putaran"),
+                ("Yang paling tahu **berada di puncak**", "Peringkat langsung antara kamu dan teman-temanmu"),
+                ("Salah jawab? Jawabannya ada **penjelasannya**", "Setiap soal menampilkan jawaban yang benar beserta alasannya"),
+                ("Buntu? **Gunakan petunjuk**", "Satu bantuan per soal saat kamu membutuhkannya"),
+                ("Kembali tiap hari dan **jaga rentetanmu**", "Rentetan harian, peringkat, dan riwayat pertandinganmu")
             ]
         }
     },
@@ -905,6 +1183,46 @@ TENANT_CONFIGS = {
                 ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et pourquoi"),
                 ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin"),
                 ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
+            ],
+            "en": [
+                ("Test your **PSG** knowledge", "The ultimate quiz on titles, legends and Paris Saint-Germain history"),
+                ("Questions on **titles, legends and classics**", "From Mbappé and Neymar to Marquinhos and today's squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows PSG best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del PSG**", "El quiz definitivo sobre títulos, leyendas e historia del Paris Saint-Germain"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Mbappé y Neymar a Marquinhos y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del PSG"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "de": [
+                ("Teste dein Wissen über **PSG**", "Das ultimative Quiz über Titel, Legenden und die Geschichte von Paris Saint-Germain"),
+                ("Fragen zu **Titeln, Ikonen und Klassikern**", "Von Mbappé und Neymar bis Marquinhos und dem aktuellen Kader"),
+                ("Fordere Freunde **per Link** heraus", "Sende das Spiel und finde heraus, wer PSG am besten kennt"),
+                ("Dein Punktestand sofort, **Runde für Runde**", "Punkte, Genauigkeit und Fortschritt in jedem Spiel"),
+                ("Wer am meisten weiß, **steht ganz oben**", "Live-Rangliste zwischen dir und deinen Freunden"),
+                ("Falsch geantwortet? Die Antwort wird **erklärt**", "Jede Frage zeigt die richtige Lösung und warum"),
+                ("Kommst du nicht weiter? **Nimm einen Tipp**", "Ein Joker pro Frage, wenn du Hilfe brauchst"),
+                ("Komm täglich wieder und **halte deine Serie**", "Tägliche Serie, Rangliste und dein Spielverlauf")
+            ],
+            "id": [
+                ("Uji pengetahuanmu tentang **PSG**", "Kuis definitif tentang gelar, legenda, dan sejarah Paris Saint-Germain"),
+                ("Pertanyaan tentang **gelar, ikon, dan laga klasik**", "Dari Mbappé dan Neymar hingga Marquinhos dan skuad saat ini"),
+                ("Tantang teman **lewat tautan**", "Kirim pertandingan dan buktikan siapa yang paling tahu tentang PSG"),
+                ("Skormu langsung muncul, **ronde demi ronde**", "Poin, akurasi, dan progres di setiap putaran"),
+                ("Yang paling tahu **berada di puncak**", "Peringkat langsung antara kamu dan teman-temanmu"),
+                ("Salah jawab? Jawabannya ada **penjelasannya**", "Setiap soal menampilkan jawaban yang benar beserta alasannya"),
+                ("Buntu? **Gunakan petunjuk**", "Satu bantuan per soal saat kamu membutuhkannya"),
+                ("Kembali tiap hari dan **jaga rentetanmu**", "Rentetan harian, peringkat, dan riwayat pertandinganmu")
             ]
         }
     },
@@ -934,6 +1252,56 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Liverpool**", "El quiz definitivo sobre títulos, leyendas e historia de los Reds"),
+                ("Preguntas sobre **títulos, ídolos y rivalidades**", "De Shankly y Gerrard a Salah y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Liverpool"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La resposta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, quando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "de": [
+                ("Teste dein Wissen **über den FC Liverpool**", "Das ultimative Quiz über Titel, Legenden und die Geschichte der Reds"),
+                ("Fragen zu **Titeln, Ikonen und Derbys**", "Von Shankly und Gerrard bis zu Salah und dem aktuellen Kader"),
+                ("Fordere Freunde **per Link heraus**", "Teile das Spiel und finde heraus, wer Liverpool am besten kennt"),
+                ("Dein Punktestand sofort, **Runde für Runde**", "Punkte, Genauigkeit und Fortschritt in jedem Spiel"),
+                ("Wer am meisten weiß, **steht ganz oben**", "Live-Rangliste zwischen dir und deinen Freunden"),
+                ("Falsch gelegen? Die Antwort wird **erklärt**", "Jede Frage zeigt die richtige Lösung und warum"),
+                ("Kommst du nicht weiter? **Nutz einen Tipp**", "Ein Joker pro Frage, wann immer du ihn brauchst"),
+                ("Komm täglich wieder und **halte deine Serie**", "Tägliche Serie, Bestenliste und Spielverlauf")
+            ],
+            "id": [
+                ("Uji pengetahuanmu tentang **Liverpool FC**", "Kuis definitif tentang gelar, legenda, dan sejarah Anfield"),
+                ("Pertanyaan tentang **gelar, ikon, dan rivalitas**", "Dari Shankly dan Gerrard hingga Salah dan skuad saat ini"),
+                ("Tantang teman **lewat tautan**", "Kirim pertandingan dan buktikan siapa yang paling tahu tentang Liverpool"),
+                ("Skormu langsung muncul, **ronde demi ronde**", "Poin, akurasi, dan progres di setiap putaran"),
+                ("Yang paling tahu **berada di puncak**", "Peringkat langsung antara kamu dan teman-temanmu"),
+                ("Salah jawab? Jawabannya ada **penjelasannya**", "Setiap soal menampilkan jawaban yang benar beserta alasannya"),
+                ("Buntu? **Gunakan petunjuk**", "Satu bantuan per soal saat kamu membutuhkannya"),
+                ("Kembali tiap hari dan **jaga rentetanmu**", "Rentetan harian, peringkat, dan riwayat pertandinganmu")
+            ],
+            "nl": [
+                ("Test je kennis over **Liverpool FC**", "De ultieme quiz over titels, legendes en de historie van Anfield"),
+                ("Vragen over **titels, iconen en rivaliteiten**", "Van Shankly en Gerrard tot Salah en de huidige selectie"),
+                ("Daag een vriend uit **via een link**", "Deel de match en zie wie Liverpool het beste kent"),
+                ("Je score direct in beeld, **ronde na ronde**", "Punten, nauwkeurigheid en voortgang in elk potje"),
+                ("Wie het meeste weet, **staat aan de top**", "Realtime klassement tussen jou en je vrienden"),
+                ("Fout geantwoord? Het antwoord wordt **uitgelegd**", "Elke vraag toont de juiste keuze en waarom"),
+                ("Zit je vast? **Gebruik een hint**", "Eén hulpmiddel per vraag, wanneer je het nodig hebt"),
+                ("Kom dagelijks terug en **behoud je reeks**", "Dagelijkse streak, ranglijst en wedstrijdgeschiedenis")
+            ],
+            "ar": [
+                ("اختبر معلوماتك **عن ليفربول**", "الكويز الشامل عن الألقاب، الأساطير وتاريخ الأنفيلد"),
+                ("أسئلة عن **الألقاب، النجوم والكلاسيكيات**", "من شانكلي وجيرارد إلى صلاح والتشكيلة الحالية"),
+                ("تحدَّ صديقك **عبر الرابط**", "أرسل المواجهة واكتشف من يعرف ليفربول أكثر"),
+                ("نتيجتك فوراً، **جولة بجولة**", "النقاط، نسبة الدقة وتطور مستواك في كل مباراة"),
+                ("الأكثر معرفة **في الصدارة**", "ترتيب فوري بينك وبين أصدقائك"),
+                ("أخطأت؟ الإجابة تأتي **مع الشرح**", "كل سؤال يعرض الإجابة الصحيحة مع بيان السبب"),
+                ("عالق؟ **استخدم تلميحاً**", "مساعدة واحدة لكل سؤال متى احتجت إليها"),
+                ("عد يومياً وحافظ على **سلسلة أيامك**", "سلسلة متواصلة، ترتيب وسجل مواجهاتك")
             ]
         }
     },
@@ -959,8 +1327,18 @@ TENANT_CONFIGS = {
                 ("Tu puntaje al instante, **partida a partida**", "Puntos, porcentaje de acierto y evolución en cada ronda"),
                 ("El que más sabe **llega a la cima**", "Clasificación en tiempo real entre vos y tus amigos"),
                 ("¿Te equivocaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
-                ("¿Te trabaste? **Usá una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("¿Te trabaste? **Usá una pista**", "Una ayuda por pregunta, quando a necesites"),
                 ("Volvé todos los días y **mantené tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "en": [
+                ("Test your **Boca Juniors** knowledge", "The ultimate quiz on titles, legends and Xeneize history"),
+                ("Questions on **titles, legends and Superclásicos**", "From Maradona and Riquelme to the squad at La Bombonera"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Boca best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ]
         }
     },
@@ -988,6 +1366,16 @@ TENANT_CONFIGS = {
                 ("¿Te equivocaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
                 ("¿Te trabaste? **Usá una pista**", "Una ayuda por pregunta, cuando la necesites"),
                 ("Volvé todos los días y **mantené tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "en": [
+                ("Test your **River Plate** knowledge", "The ultimate quiz on titles, legends and Millonario history"),
+                ("Questions on **titles, legends and Superclásicos**", "From Di Stéfano and Francescoli to the squad at El Monumental"),
+                ("Challenge a friend **by link**", "Send the match and see who knows River best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ]
         }
     },
@@ -1015,6 +1403,16 @@ TENANT_CONFIGS = {
                 ("¿Te equivocaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
                 ("¿Te trabaste? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
                 ("Vuelve todos los días y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "en": [
+                ("Test your **Club América** knowledge", "The ultimate quiz on titles, legends and Azulcrema history"),
+                ("Questions on **titles, legends and derbies**", "From Cuauhtémoc Blanco to today's squad at Estadio Azteca"),
+                ("Challenge a friend **by link**", "Send the match and see who knows América best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ]
         }
     },
@@ -1040,8 +1438,18 @@ TENANT_CONFIGS = {
                 ("Tu puntaje al instante, **partida a partida**", "Puntos, porcentaje de acierto y evolución en cada ronda"),
                 ("El que más sabe **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
                 ("¿Te equivocaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
-                ("¿Te trabaste? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("¿Te trabaste? **Usa una pista**", "Una ajuda por pregunta, quando a necesites"),
                 ("Vuelve todos los días y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "en": [
+                ("Test your **Chivas Guadalajara** knowledge", "The ultimate quiz on titles, legends and Rebaño Sagrado history"),
+                ("Questions on **titles, legends and Clásicos**", "From Chava Reyes to today's squad at Estadio Akron"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Chivas best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ]
         }
     },
@@ -1143,6 +1551,16 @@ TENANT_CONFIGS = {
                 ("Yanlış mı bildin? Cevap **açıklamalı gelir**", "Her soru doğru cevabı ve nedenini gösterir"),
                 ("Takıldın mı? **İpucu kullan**", "Her soru için bir yardım, ihtiyacın olduğunda"),
                 ("Her gün geri gel, **serini koru**", "Günlük seri, sıralama ve tur geçmişin")
+            ],
+            "en": [
+                ("Test your **Galatasaray** knowledge", "The ultimate quiz on titles, legends and Cimbom history"),
+                ("Questions on **titles, legends and classics**", "From the 2000 UEFA Cup win to today's Aslan squad"),
+                ("Challenge a friend **by link**", "Send the match and see who knows Galatasaray best"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
             ]
         }
     },
@@ -1234,6 +1652,130 @@ TENANT_CONFIGS = {
                 ("أخطأت؟ الإجابة تأتيك **مشروحة**", "كل سؤال يوضح لك الإجابة الصحيحة والسبب"),
                 ("واجهت صعوبة؟ **استخدم تلميحاً**", "مساعدة في كل سؤال عندما تحتاجها"),
                 ("عد يومياً و**حافظ على سلسلتك**", "سلسلة يومية، لوحة الشرف وتاريخ جولاتك")
+            ]
+        }
+    },
+    "flagsworld": {
+        "name": "Quiz Bandeiras do Mundo",
+        "colors": [(8, 46, 56), (14, 77, 92), (5, 29, 35)],
+        "highlight_color": (232, 145, 45),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de Bandeiras**", "O quiz completo sobre bandeiras de todos os países do mundo"),
+                ("Bandeiras de **todos os continentes**", "De mais de 250 países e territórios ao redor do planeta"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem reconhece mais bandeiras"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **World Flags** knowledge", "The comprehensive quiz on flags from every country and territory"),
+                ("Flags from **every continent**", "Over 250 countries and territories across the globe"),
+                ("Challenge a friend **by link**", "Send the match and see who recognizes the most flags"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Pon a prueba tu conocimiento **de Banderas**", "El quiz definitivo sobre banderas de todos los países do mundo"),
+                ("Banderas de **todos los continentes**", "De más de 250 países y territorios de todo el planeta"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién reconoce más banderas"),
+                ("Tu puntaje al instante, **partida a partida**", "Puntos, precisión y progreso en cada ronda"),
+                ("El que sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Atascado? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de partidas")
+            ],
+            "fr": [
+                ("Testez vos connaissances sur les **Drapeaux**", "Le quiz complet sur les drapeaux de tous les pays du monde"),
+                ("Drapeaux de **tous les continents**", "Plus de 250 pays et territoires à travers le monde"),
+                ("Défiez un ami **par lien**", "Partagez la partie et voyez qui reconnaît le plus de drapeaux"),
+                ("Votre score en direct, **manche après manche**", "Points, précision et progression à chaque partie"),
+                ("Le plus fort **au sommet**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
+            ],
+            "de": [
+                ("Teste dein Wissen über **Flaggen der Welt**", "Das umfassende Quiz über Flaggen aller Länder und Gebiete"),
+                ("Flaggen aus **allen Kontinenten**", "Über 250 Länder und Territorien rund um den Globus"),
+                ("Fordere Freunde **per Link** heraus", "Teile das Spiel und finde heraus, wer die meisten Flaggen kennt"),
+                ("Dein Punktestand, **Runde für Runde**", "Punkte, Trefferquote und Fortschritt in jedem Spiel"),
+                ("Wer am meisten weiß, **steht ganz oben**", "Echtzeit-Bestenliste unter dir und deinen Freunden"),
+                ("Falsch geantwortet? Antwort mit **Erklärung**", "Jede Frage zeigt die richtige Antwort und den Grund"),
+                ("Kommst du nicht weiter? **Nimm einen Hinweis**", "Ein Tipp pro Frage, wann immer du Hilfe brauchst"),
+                ("Komm täglich wieder und **halte die Serie**", "Tägliche Serie, Rangliste und Spielverlauf")
+            ],
+            "it": [
+                ("Metti alla prova le tue conoscenze sulle **Bandiere**", "Il quiz completo sulle bandiere di tutti i paesi del mondo"),
+                ("Bandiere di **tutti i continenti**", "Oltre 250 paesi e territori in tutto il pianeta"),
+                ("Sfida un amico **tramite link**", "Invia la partita e scopri chi riconosce più bandiere"),
+                ("Il tuo punteggio, **round dopo round**", "Punti, percentuale di successo ed evoluzione in ogni partita"),
+                ("Chi sa di più **arriva in cima**", "Classifica in tempo reale tra te e i tuoi amici"),
+                ("Hai sbagliato? La risposta è **spiegata**", "Ogni domanda mostra la risposta corretta e il perché"),
+                ("Bloccato? **Usa un suggerimento**", "Un aiuto per domanda quando ne hai bisogno"),
+                ("Torna ogni giorno e **mantieni la serie**", "Serie giornaliera, classifica e cronologia delle tue partite")
+            ],
+            "id": [
+                ("Uji pengetahuanmu tentang **Bendera Dunia**", "Kuis lengkap tentang bendera semua negara dan wilayah di dunia"),
+                ("Bendera dari **semua benua**", "Lebih dari 250 negara dan wilayah di seluruh penjuru dunia"),
+                ("Tantang teman **lewat tautan**", "Kirim putaran permainan dan lihat siapa yang mengenali lebih banyak bendera"),
+                ("Skor langsung, **ronde demi ronde**", "Poin, akurasi, dan perkembangan di setiap permainan"),
+                ("Yang paling tahu **berada di puncak**", "Papan peringkat waktu nyata antara kamu dan teman-temanmu"),
+                ("Salah jawab? Ada **penjelasannya**", "Setiap soal menunjukkan jawaban benar dan alasannya"),
+                ("Buntu? **Gunakan petunjuk**", "Satu bantuan per soal saat kamu membutuhkannya"),
+                ("Main tiap hari dan **jaga rekor streak**", "Streak harian, peringkat, dan riwayat permainanmu")
+            ],
+            "tr": [
+                ("Dünya **Bayrakları** bilginizi test edin", "Dünyadaki tüm ülke ve bölgelerin bayraklarını içeren kapsamlı bilgi yarışması"),
+                ("Tüm kıtalardan **bayraklar**", "Gezegenin dört bir yanından 250'den fazla ülke ve bölge"),
+                ("Bir arkadaşına **bağlantıyla** meydan oku", "Oyunu gönder ve kimin daha çok bayrak bildiğini gör"),
+                ("Puanın anında, **tur tur cebinde**", "Her oyunda puan, doğruluk oranı ve gelişim grafiği"),
+                ("En çok bilen **zirveye çıkar**", "Arkadaşlarınla aranda gerçek zamanlı sıralama"),
+                ("Bilemedin mi? Cevap **açıklamasıyla** gelir", "Her soruda doğru cevap ve gerekçesi gösterilir"),
+                ("Takıldın mı? **İpucu kullan**", "İhtiyaç duyduğunda her soru için bir yardım hakkı"),
+                ("Her gün gel و**serini koru**", "Günlük seri, sıralama tablosu وmaç geçmişi")
+            ]
+        }
+    },
+    "worldclubs": {
+        "name": "Quiz de Clubes do Mundo",
+        "colors": [(107, 29, 46), (140, 53, 71), (61, 15, 26)],
+        "highlight_color": (232, 184, 48),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de Clubes**", "O quiz completo sobre clubes de futebol de mais de 90 países"),
+                ("Escudos, estádios **e curiosidades**", "Identidade visual e história dos maiores clubes do mundo"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem conhece mais clubes"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **World Clubs** knowledge", "The comprehensive quiz on football clubs from over 90 countries"),
+                ("Badges, stadiums **and trivia**", "The visual identity and history of the world's biggest clubs"),
+                ("Challenge a friend **by link**", "Send the match and see who knows more clubs"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **de Clubes**", "El quiz completo sobre clubes de fútbol de más de 90 países"),
+                ("Escudos, estadios **y curiosidades**", "Identidad visual e historia de los clubes más grandes del mundo"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién conoce más clubes"),
+                ("Tu puntaje al instante, **ronda a ronda**", "Puntuación, porcentaje de acierto y progreso en cada partida"),
+                ("Quien sabe más **llega a la cima**", "Ranking en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Atascado? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, ranking e historial de tus partidas")
             ]
         }
     }
@@ -1449,14 +1991,14 @@ ZOOM_WIDE = 0.76
 ZOOM_TALL = 0.64
 
 SLIDE_CONFIGS = {
-    0: {"scale": ZOOM_WIDE, "angle": 0, "x_off": 0},
-    1: {"scale": ZOOM_WIDE, "angle": 0, "x_off": 0},
-    2: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
-    3: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
-    4: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
-    5: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
-    6: {"scale": ZOOM_WIDE, "angle": 0, "x_off": 0},
-    7: {"scale": ZOOM_TALL, "angle": 0, "x_off": 0},
+    0: {"scale": ZOOM_WIDE, "ios_scale": 0.86, "angle": 0, "x_off": 0},
+    1: {"scale": ZOOM_WIDE, "ios_scale": 0.88, "angle": 0, "x_off": 0},
+    2: {"scale": ZOOM_TALL, "ios_scale": 0.80, "angle": 0, "x_off": 0},
+    3: {"scale": ZOOM_TALL, "ios_scale": 0.84, "angle": 0, "x_off": 0},
+    4: {"scale": ZOOM_TALL, "ios_scale": 0.78, "angle": 0, "x_off": 0},
+    5: {"scale": ZOOM_TALL, "ios_scale": 0.86, "angle": 0, "x_off": 0},
+    6: {"scale": ZOOM_WIDE, "ios_scale": 0.88, "angle": 0, "x_off": 0},
+    7: {"scale": ZOOM_TALL, "ios_scale": 0.80, "angle": 0, "x_off": 0},
 }
 
 # Store slot -> which Maestro capture it shows. Every slot is a whole screen inside the
@@ -1893,7 +2435,12 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
             screen = screen.crop((int(x1 * w), int(y1 * h), int(x2 * w), int(y2 * h)))
 
         draw_frame = source.get("frame", True) if use_slide_sources else True
-        target_w = int(cw * (conf["scale"] if platform != "ipad" else 0.82))
+        if platform == "ipad":
+            target_w = int(cw * 0.82)
+        elif platform == "ios":
+            target_w = int(cw * conf.get("ios_scale", 0.86))
+        else:
+            target_w = int(cw * conf["scale"])
         aspect = screen.height / screen.width
         target_h = int(target_w * aspect)
         screen = screen.resize((target_w, target_h), Image.LANCZOS)
@@ -1943,8 +2490,13 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
             if platform == "android":
                 ImageDraw.Draw(device_layer).ellipse([cam_x-10, 80, cam_x+10, 100], fill=(15,15,15))
             elif platform == "ios":
-                island_w, island_h = 135, 38
-                ImageDraw.Draw(device_layer).rounded_rectangle([cam_x-(island_w//2), 75, cam_x+(island_w//2), 75+island_h], radius=18, fill=(10,10,10))
+                island_w = int(target_w * 0.29)
+                island_h = int(island_w * 0.28)
+                island_y = pad + int(target_h * 0.014)
+                island_r = island_h // 2
+                ImageDraw.Draw(device_layer).rounded_rectangle(
+                    [cam_x - (island_w // 2), island_y, cam_x + (island_w // 2), island_y + island_h],
+                    radius=island_r, fill=(10, 10, 10))
 
         if draw_frame and conf["angle"] != 0 and platform != "ipad":
             device_layer = device_layer.rotate(conf["angle"], resample=Image.BICUBIC, expand=True)
@@ -1961,10 +2513,29 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
 # not "es-ES" (Spain) -- the global default used by Spain-based tenants like realmadrid/barcelona.
 TENANT_STORE_LOCALE_OVERRIDES = {
     "bible": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU"], "es": ["es-419", "es-ES", "es-US"]},
+    "corinthians": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "nl": "nl-NL"},
+    "saopaulo": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "es": "es-419"},
+    "palmeiras": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "es": "es-419"},
+    "santos": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "es": "es-419"},
+    "vasco": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "es": "es-419"},
+    "botafogo": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "ar": "ar"},
+    "fluminense": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "es": ["es-419", "es-ES", "es-US"]},
     "bocajuniors": {"es": "es-419"},
     "riverplate": {"es": "es-419"},
     "clubamerica": {"es": "es-419"},
     "chivas": {"es": "es-419"},
+    "atleticomg": {"es": "es-419"},
+    "cruzeiro": {"es": "es-419"},
+    "internacional": {"es": "es-419"},
+    "flagsworld": {"pt": "pt-BR", "en": ["en-US", "en-GB", "en-IN"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "de": "de-DE", "id": "id", "it": "it-IT", "tr": "tr"},
+    "worldclubs": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
+    "realmadrid": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "de": "de-DE", "id": "id", "ar": "ar", "hr": "hr", "tr": ["tr", "tr-TR"], "zh": "zh-CN", "ca": "ca"},
+    "psg": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "fr": ["fr-FR", "fr-CA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE", "id": "id"},
+    "chelsea": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "id": "id"},
+    "manchesterunited": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "id": "id"},
+    "manchestercity": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "no": "no-NO", "ar": "ar"},
+    "liverpool": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE", "id": "id", "nl": "nl-NL", "ar": "ar"},
+    "barcelona": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ca": "ca", "de": "de-DE", "fr": ["fr-FR", "fr-CA"], "id": "id", "nl": "nl-NL", "pl": "pl-PL"},
     "celtic": {"en": "en-GB"},
     "rangers": {"en": "en-GB"},
 }
@@ -1989,6 +2560,10 @@ STORE_LOCALE_BY_CONTENT_LOCALE = {
     "zh": "zh-CN",
     "tr": "tr",
     "it": "it-IT",
+    "nl": "nl-NL",
+    "da": "da-DK",
+    "no": "no-NO",
+    "pl": "pl-PL",
 }
 
 def resolve_store_locales(tenant: str, locale: str) -> list[str]:
@@ -2049,7 +2624,14 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                     candidates += [os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", locale),
                                    os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone"),
                                    os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", "pt")]
-                raw_screenshots_dir = next((d for d in candidates if glob.glob(f"{d}/*.png")), None)
+                elif platform in ("ios", "ipad"):
+                    candidates += [os.path.join(base_output_dir, tenant, "android", "screenshots", locale),
+                                   os.path.join(base_output_dir, tenant, "android", "screenshots"),
+                                   os.path.join(base_output_dir, tenant, "android", "screenshots", "pt")]
+                # Prefer candidate that has at least 8 files (the full 8-slide set)
+                raw_screenshots_dir = next((d for d in candidates if len(glob.glob(f"{d}/*.png")) >= len(SLIDE_SOURCES)), None)
+                if not raw_screenshots_dir:
+                    raw_screenshots_dir = next((d for d in candidates if glob.glob(f"{d}/*.png")), None)
 
                 if not raw_screenshots_dir:
                     print(f"  ⚠️ Raw screenshots folder not found ({locale}): {candidates[0]}")
