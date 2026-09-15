@@ -441,6 +441,16 @@ TENANT_CONFIGS = {
                 ("間違えても安心、**解説付きで学べる**", "全問で正解と詳しい理由を表示"),
                 ("困ったときは？**ヒントを活用**", "1問につき1回、必要なときに使えるアシスト"),
                 ("毎日挑戦して**デイリーストリークを維持しよう**", "デイリーストリーク、ランキング、対戦履歴を記録")
+            ],
+            "ur": [
+                ("**مانچسٹر یونائیٹڈ** کے اپنے علم کو پرکھیں", "ٹائٹلز، لیجنڈز اور ریڈ ڈیولز کی تاریخ پر حتمی کوئز"),
+                ("**ٹائٹلز، لیجنڈز اور روایتی حریفوں** پر سوالات", "کرسٹیانو رونالڈو سے لے کر برونو فرنانڈس اور موجودہ اسکواڈ تک"),
+                ("کسی دوست کو **لنک کے ذریعے** چیلنج کریں", "میچ شیئر کریں اور دیکھیں کہ مانچسٹر یونائیٹڈ کو کون زیادہ جانتا ہے"),
+                ("آپ کا اسکور فوری طور پر، **راؤنڈ در راؤنڈ**", "ہر راؤنڈ میں پوائنٹس، درستگی اور آپ کی پیش رفت"),
+                ("سب سے زیادہ جاننے والا **سب سے اوپر رہتا ہے**", "آپ اور آپ کے دوستوں کے درمیان ریئل ٹائم رینکنگ"),
+                ("غلط جواب؟ جواب **وضاحت کے ساتھ** آتا ہے", "ہر سوال درست جواب اور اس کی وجہ دکھاتا ہے"),
+                ("اٹک گئے؟ **اشارہ استعمال کریں**", "جب بھی آپ کو ضرورت ہو، فی سوال ایک مدد"),
+                ("روزانہ واپس آئیں اور **اپنا تسلسل برقرار رکھیں**", "روزانہ کا تسلسل، رینکنگ اور میچوں کی ہسٹری")
             ]
         }
     },
@@ -2222,7 +2232,7 @@ LEGACY_SLIDE_FILES = ["01-home.png", "02-question.png", "03-answer-feedback.png"
 # Locales written right-to-left. Nunito carries no Arabic glyphs at all — an "ar"
 # slide rendered with it comes out as a row of .notdef boxes, which measures a normal
 # width so only looking at the image catches it.
-RTL_LOCALES = {"ar", "fa"}
+RTL_LOCALES = {"ar", "fa", "ur"}
 ARABIC_FONTS = ("/System/Library/Fonts/SFArabic.ttf", "/System/Library/Fonts/GeezaPro.ttc")
 
 # Same .notdef-box failure as Arabic: Nunito carries no CJK glyphs.
@@ -2743,7 +2753,7 @@ TENANT_STORE_LOCALE_OVERRIDES = {
     "realmadrid": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "de": "de-DE", "id": "id", "ar": "ar", "hr": "hr", "tr": ["tr", "tr-TR"], "zh": "zh-CN", "ca": "ca"},
     "psg": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "fr": ["fr-FR", "fr-CA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE", "id": "id", "fa": "fa"},
     "chelsea": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "id": "id"},
-    "manchesterunited": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "id": "id", "ar": "ar", "zh": "zh-CN", "hi": "hi-IN", "ko": "ko-KR", "ja": "ja-JP"},
+    "manchesterunited": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "id": "id", "ar": "ar", "zh": "zh-CN", "hi": "hi-IN", "ko": "ko-KR", "ja": "ja-JP", "ur": "ur"},
     "manchestercity": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "no": "no-NO", "ar": "ar"},
     "liverpool": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE", "id": "id", "nl": "nl-NL", "ar": "ar"},
     "barcelona": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ca": "ca", "de": "de-DE", "fr": ["fr-FR", "fr-CA"], "id": "id", "nl": "nl-NL", "pl": "pl-PL", "ar": "ar", "zh": "zh-CN"},
@@ -2782,6 +2792,7 @@ STORE_LOCALE_BY_CONTENT_LOCALE = {
     "no": "no-NO",
     "pl": "pl-PL",
     "ja": "ja-JP",
+    "ur": "ur",
 }
 
 def resolve_store_locales(tenant: str, locale: str) -> list[str]:
