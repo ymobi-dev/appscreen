@@ -431,6 +431,16 @@ TENANT_CONFIGS = {
                 ("틀려도 괜찮아요, **정답 해설 제공**", "모든 문제의 정답과 상세한 이유를 확인"),
                 ("막힐 땐? **힌트 사용**", "필요할 때 문제마다 제공되는 힌트 찬스"),
                 ("매일 도전하고 **연속 기록을 유지하세요**", "데일리 스트릭, 랭킹, 매치 기록까지")
+            ],
+            "ja": [
+                ("**マンチェスター・ユナイテッド**の知識を試そう", "タイトル、伝説の選手、赤い悪魔の歴史を網羅した決定版クイズ"),
+                ("**タイトル、伝説、ライバル対決**に挑む", "クリスティアーノ・ロナウドからブルーノ・フェルナンデス、現役スカッドまで"),
+                ("**リンクで**友達に対戦を申し込もう", "マッチを共有して、誰が一番マンUに詳しいか勝負"),
+                ("**ラウンドごとに即時**スコアを表示", "各ラウンドの得点、正解率、上達をリアルタイムで確認"),
+                ("最高スコアで**ランキング1位**を目指せ", "友達とリアルタイムで競い合うランキング"),
+                ("間違えても安心、**解説付きで学べる**", "全問で正解と詳しい理由を表示"),
+                ("困ったときは？**ヒントを活用**", "1問につき1回、必要なときに使えるアシスト"),
+                ("毎日挑戦して**デイリーストリークを維持しよう**", "デイリーストリーク、ランキング、対戦履歴を記録")
             ]
         }
     },
@@ -2216,7 +2226,7 @@ RTL_LOCALES = {"ar", "fa"}
 ARABIC_FONTS = ("/System/Library/Fonts/SFArabic.ttf", "/System/Library/Fonts/GeezaPro.ttc")
 
 # Same .notdef-box failure as Arabic: Nunito carries no CJK glyphs.
-CJK_LOCALES = {"zh"}
+CJK_LOCALES = {"zh", "ja"}
 CJK_FONT = "/System/Library/Fonts/Hiragino Sans GB.ttc"
 
 KOREAN_LOCALES = {"ko"}
@@ -2280,9 +2290,9 @@ def get_fonts(platform="ios", locale="pt", scale=1.0):
     return Fonts(_nunito(size_h, HEADLINE_WEIGHT), _nunito(size_h, HIGHLIGHT_WEIGHT),
                  _nunito(size_s, SUBHEAD_WEIGHT))
 
-# CJK Unified Ideographs + common fullwidth punctuation. These scripts carry no spaces
-# between words, so wrapping has to break per character instead of per \S+ token.
-CJK_RE = re.compile(r'[一-鿿㐀-䶿豈-﫿　-〿＀-￯]')
+# CJK Unified Ideographs, Hiragana, Katakana + common fullwidth punctuation.
+# These scripts carry no spaces between words, so wrapping has to break per character.
+CJK_RE = re.compile(r'[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3000-\u303F\uFF00-\uFFEF]')
 
 def _is_cjk_char(s):
     return len(s) == 1 and bool(CJK_RE.match(s))
@@ -2733,7 +2743,7 @@ TENANT_STORE_LOCALE_OVERRIDES = {
     "realmadrid": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "de": "de-DE", "id": "id", "ar": "ar", "hr": "hr", "tr": ["tr", "tr-TR"], "zh": "zh-CN", "ca": "ca"},
     "psg": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "fr": ["fr-FR", "fr-CA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE", "id": "id", "fa": "fa"},
     "chelsea": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "id": "id"},
-    "manchesterunited": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "id": "id", "ar": "ar", "zh": "zh-CN", "hi": "hi-IN", "ko": "ko-KR"},
+    "manchesterunited": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "id": "id", "ar": "ar", "zh": "zh-CN", "hi": "hi-IN", "ko": "ko-KR", "ja": "ja-JP"},
     "manchestercity": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "no": "no-NO", "ar": "ar"},
     "liverpool": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE", "id": "id", "nl": "nl-NL", "ar": "ar"},
     "barcelona": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ca": "ca", "de": "de-DE", "fr": ["fr-FR", "fr-CA"], "id": "id", "nl": "nl-NL", "pl": "pl-PL", "ar": "ar", "zh": "zh-CN"},
@@ -2771,6 +2781,7 @@ STORE_LOCALE_BY_CONTENT_LOCALE = {
     "da": "da-DK",
     "no": "no-NO",
     "pl": "pl-PL",
+    "ja": "ja-JP",
 }
 
 def resolve_store_locales(tenant: str, locale: str) -> list[str]:
