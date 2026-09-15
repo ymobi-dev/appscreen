@@ -391,6 +391,46 @@ TENANT_CONFIGS = {
                 ("Salah jawab? Jawabannya ada **penjelasannya**", "Setiap soal menampilkan jawaban yang benar beserta alasannya"),
                 ("Buntu? **Gunakan petunjuk**", "Satu bantuan per soal saat kamu membutuhkannya"),
                 ("Kembali tiap hari dan **jaga rentetanmu**", "Rentetan harian, peringkat, dan riwayat pertandinganmu")
+            ],
+            "ar": [
+                ("اختبر معلوماتك عن **مانشستر يونايتد**", "الكويز الشامل عن الألقاب، أساطير الشياطين الحمر وتاريخ أولد ترافورد"),
+                ("أسئلة عن **البطولات، الأساطير والكلاسيكيات**", "من كريستيانو رونالدو إلى برونو فيرنانديز والتشكيلة الحالية"),
+                ("تحدَّ صديقاً **عبر الرابط**", "أرسل التحدي واكتشف من يعرف مانشستر يونايتد أكثر"),
+                ("نتيجتك فوراً، **جولة بعد جولة**", "النقاط ونسبة الإجابات الصحيحة والتطور في كل مباراة"),
+                ("من يعرف أكثر **يتصدر الترتيب**", "ترتيب فوري بينك وبين أصدقائك"),
+                ("أخطأت؟ الإجابة تأتيك **مشروحة**", "كل سؤال يوضح الإجابة الصحيحة وسببها"),
+                ("توقفت؟ **استخدم تلميحاً**", "مساعدة واحدة لكل سؤال، متى احتجت إليها"),
+                ("عد يومياً و**حافظ على سلسلتك**", "سلسلة يومية وترتيب وسجل مبارياتك")
+            ],
+            "zh": [
+                ("测试你对**曼联**的了解程度", "关于三冠王、传奇球星与红魔历史的终极问答"),
+                ("题目涵盖**冠军、传奇球星与经典对决**", "从弗格森时代、C罗到现今红魔阵容"),
+                ("**通过链接**挑战好友", "发送对局链接，看看谁更懂曼联"),
+                ("成绩**即时呈现，一轮接一轮**", "每轮的得分、正确率与进步一目了然"),
+                ("登上**排行榜**榜首", "你与好友之间的实时排名"),
+                ("答错了？答案**附带解析**", "每道题都会显示正确答案及原因"),
+                ("卡住了？**使用提示**", "每题一次提示，随时可用"),
+                ("每天回来，**保持连续答题**", "每日连续答题、排行榜与对局历史")
+            ],
+            "hi": [
+                ("**मैनचेस्टर यूनाइटेड** के अपने ज्ञान को परखें", "खिताबों, दिग्गजों और रेड डेविल्स के इतिहास पर अंतिम क्विज़"),
+                ("**खिताबों, दिग्गजों और प्रतिद्वंद्विता** पर प्रश्न", "क्रिस्टियानो रोनाल्डो से लेकर ब्रूनो फर्नांडीस और वर्तमान टीम तक"),
+                ("एक दोस्त को **लिंक द्वारा** चुनौती दें", "मैच भेजें और देखें कि मैनचेस्टर यूनाइटेड को कौन बेहतर जानता है"),
+                ("आपका स्कोर तुरंत, **राउंड दर राउंड**", "प्रत्येक राउंड में अंक, सटीकता और प्रगति"),
+                ("जो सबसे ज्यादा जानता है **शीर्ष पर रहता है**", "आपके और आपके दोस्तों के बीच रीयल-टाइम रैंकिंग"),
+                ("गलत उत्तर? उत्तर **स्पष्टीकरण के साथ** आता है", "प्रत्येक प्रश्न सही उत्तर और कारण दिखाता है"),
+                ("अटक गए? **संकेत का उपयोग करें**", "जब भी आपको आवश्यकता हो, प्रति प्रश्न एक सहायता"),
+                ("हर दिन वापस आएं और **अपनी लकीर बनाए रखें**", "दैनिक स्ट्रीक, रैंकिंग और मैचों का इतिहास")
+            ],
+            "ko": [
+                ("**맨체스터 유나이티드** 상식을 테스트해보세요", "우승 타이틀, 레전드, 붉은 악마 역사를 다룬 최고의 퀴즈"),
+                ("**우승, 레전드, 라이벌전**에 관한 문제", "크리스티아누 호날두부터 브루누 페르난드스와 현재 선수단까지"),
+                ("**링크로** 친구에게 도전하세요", "매치를 공유하고 맨유를 누가 더 잘 아는지 겨뤄보세요"),
+                ("**라운드마다 즉시** 확인하는 내 점수", "매 라운드 점수, 정답률, 실력 향상을 한눈에"),
+                ("가장 많이 맞힌 사람이 **1위 달성**", "친구들과 실시간으로 겨루는 랭킹"),
+                ("틀려도 괜찮아요, **정답 해설 제공**", "모든 문제의 정답과 상세한 이유를 확인"),
+                ("막힐 땐? **힌트 사용**", "필요할 때 문제마다 제공되는 힌트 찬스"),
+                ("매일 도전하고 **연속 기록을 유지하세요**", "데일리 스트릭, 랭킹, 매치 기록까지")
             ]
         }
     },
@@ -485,6 +525,36 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **de la Juventus**", "El quiz definitivo sobre Scudetti, ídolos e historia de la Vecchia Signora"),
+                ("Preguntas sobre **títulos, ídolos y derbis**", "De Del Piero y Buffon a Cristiano Ronaldo y Dybala"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más de la Juventus"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "fr": [
+                ("Défiez vos connaissances sur la **Juventus**", "Le quiz ultime sur les Scudetti, les légendes et l'histoire bianconera"),
+                ("Questions sur les **titres, légendes et derbys**", "De Del Piero et Buffon à Cristiano Ronaldo et Dybala"),
+                ("Défiez un ami **par lien**", "Envoyez la partie et voyez qui connaît le mieux la Juventus"),
+                ("Votre score à l'instant, **match après match**", "Points, pourcentage de réussite et progression à chaque manche"),
+                ("Le plus fort **grimpe au sommet**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
+            ],
+            "ar": [
+                ("اختبر معلوماتك عن **يوفنتوس**", "الكويز الشامل عن ألقاب سكوديتو، الأساطير وتاريخ السيدة العجوز"),
+                ("أسئلة عن **البطولات، الأساطير والديربي**", "من ديل بييرو وبوفون إلى كريستيانو رونالدو وديبالا"),
+                ("تحدَّ صديقاً **عبر الرابط**", "أرسل التحدي واكتشف من يعرف يوفنتوس أكثر"),
+                ("نتيجتك فوراً، **جولة بعد جولة**", "النقاط ونسبة الإجابات الصحيحة والتطور في كل مباراة"),
+                ("من يعرف أكثر **يتصدر الترتيب**", "ترتيب فوري بينك وبين أصدقائك"),
+                ("أخطأت؟ الإجابة تأتيك **مشروحة**", "كل سؤال يوضح الإجابة الصحيحة وسببها"),
+                ("توقفت؟ **استخدم تلميحاً**", "مساعدة واحدة لكل سؤال، متى احتجت إليها"),
+                ("عد يومياً و**حافظ على سلسلتك**", "سلسلة يومية وترتيب وسجل مبارياتك")
             ]
         }
     },
@@ -1002,6 +1072,16 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Bayern**", "El quiz definitivo sobre Champions, Bundesligas e historia del Rekordmeister"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De Beckenbauer y Gerd Müller a Lewandowski y la plantilla actual"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Bayern"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto e evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -1099,6 +1179,26 @@ TENANT_CONFIGS = {
                 ("Pomyłka? Odpowiedź ma **wyjaśnienie**", "Każde pytanie pokazuje prawidłową opcję i dlaczego"),
                 ("Uknąłeś? **Użyj podpowiedzi**", "Jedna pomoc na pytanie, kiedy jej potrzebujesz"),
                 ("Wracaj codziennie i **utrzymuj passę**", "Codzienna passa, ranking i historia Twoich gier")
+            ],
+            "ar": [
+                ("اختبر معلوماتك عن **برشلونة**", "الكويز الشامل عن الألقاب، أساطير البلوغرانا وتاريخ النادي الكتالوني"),
+                ("أسئلة عن **البطولات، الأساطير والكلاسيكو**", "من كرويف وميسي إلى نجوم البلوغرانا الحاليين"),
+                ("تحدَّ صديقاً **عبر الرابط**", "أرسل التحدي واكتشف من يعرف برشلونة أكثر"),
+                ("نتيجتك فوراً، **جولة بعد جولة**", "النقاط ونسبة الإجابات الصحيحة والتطور في كل مباراة"),
+                ("من يعرف أكثر **يتصدر الترتيب**", "ترتيب فوري بينك وبين أصدقائك"),
+                ("أخطأت؟ الإجابة تأتيك **مشروحة**", "كل سؤال يوضح الإجابة الصحيحة وسببها"),
+                ("توقفت؟ **استخدم تلميحاً**", "مساعدة واحدة لكل سؤال، متى احتجت إليها"),
+                ("عد يومياً و**حافظ على سلسلتك**", "سلسلة يومية وترتيب وسجل مبارياتك")
+            ],
+            "zh": [
+                ("测试你对**巴塞罗那**的了解程度", "关于六冠王、传奇球星与红蓝军团历史的终极问答"),
+                ("题目涵盖**冠军、传奇球星与国家德比**", "从克鲁伊夫、梅西到当今红蓝军团主力阵容"),
+                ("**通过链接**挑战好友", "发送对局链接，看看谁更懂巴萨"),
+                ("成绩**即时呈现，一轮接一轮**", "每轮的得分、正确率与进步一目了然"),
+                ("登上**排行榜**榜首", "你与好友之间的实时排名"),
+                ("答错了？答案**附带解析**", "每道题都会显示正确答案及原因"),
+                ("卡住了？**使用提示**", "每题一次提示，随时可用"),
+                ("每天回来，**保持连续答题**", "每日连续答题、排行榜与对局历史")
             ]
         }
     },
@@ -1223,6 +1323,16 @@ TENANT_CONFIGS = {
                 ("Salah jawab? Jawabannya ada **penjelasannya**", "Setiap soal menampilkan jawaban yang benar beserta alasannya"),
                 ("Buntu? **Gunakan petunjuk**", "Satu bantuan per soal saat kamu membutuhkannya"),
                 ("Kembali tiap hari dan **jaga rentetanmu**", "Rentetan harian, peringkat, dan riwayat pertandinganmu")
+            ],
+            "fa": [
+                ("اطلاعات خود را درباره **PSG** بسنجید", "کوییز جامع درباره جام‌ها، اسطوره‌ها و تاریخ پاری سن ژرمن"),
+                ("سوالات درباره **جام‌ها، اسطوره‌ها و بازی‌های بزرگ**", "از امباپه و نیمار تا مارکینیوس و ترکیب فعلی"),
+                ("دوستت را **با لینک** به چالش بکش", "مسابقه را بفرست و ببین چه کسی PSG را بهتر می‌شناسد"),
+                ("امتیازت در لحظه، **دور به دور**", "امتیاز، درصد پاسخ درست و پیشرفت در هر مسابقه"),
+                ("هر که بیشتر بداند **در صدر جدول است**", "رتبه‌بندی لحظه‌ای بین شما و دوستانتان"),
+                ("اشتباه پاسخ دادی؟ جواب **همراه با توضیح** است", "هر سوال گزینه درست و دلیل آن را نشان می‌دهد"),
+                ("گیر کردی؟ **از راهنما استفاده کن**", "یک راهنمایی برای هر سوال، هر زمان که نیاز داشتی"),
+                ("هر روز برگرد و **روند روزانه‌ات را حفظ کن**", "روند روزانه، جدول امتیازات و سابقه بازی‌ها")
             ]
         }
     },
@@ -1534,6 +1644,16 @@ TENANT_CONFIGS = {
                 ("أخطأت؟ الإجابة **مشروحة**", "كل سؤال يعرض الإجابة الصحيحة وسببها"),
                 ("توقفت؟ **استخدم تلميحًا**", "مساعدة واحدة لكل سؤال، وقتما تحتاجها"),
                 ("عد كل يوم **وحافظ على تتابعك**", "تتابع يومي وترتيب وسجل لجولاتك")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Al Ahly**", "El quiz definitivo sobre el Club del Siglo, sus títulos y su historia"),
+                ("Preguntas sobre **títulos, ídolos y el Derbi de El Cairo**", "De la hegemonía en la CAF Champions League a ídolos como Aboutrika"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Al Ahly"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -1571,6 +1691,26 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Galatasaray**", "El quiz definitivo sobre títulos, ídolos e historia del Cimbom"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De la Copa de la UEFA en 2000 al plantel actual de los Leones"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Galatasaray"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "de": [
+                ("Teste dein Wissen über **Galatasaray**", "Das ultimative Quiz über Titel, Ikonen und die Geschichte von Cimbom"),
+                ("Fragen zu **Titeln, Legenden und Klassikern**", "Vom UEFA-Pokalsieg 2000 bis zum aktuellen Kader der Löwen"),
+                ("Fordere einen Freund **per Link heraus**", "Teile das Spiel und finde heraus, wer Galatasaray am besten kennt"),
+                ("Dein Punktestand sofort, **Runde für Runde**", "Punkte, Genauigkeit und Fortschritt in jedem Spiel"),
+                ("Wer am meisten weiß, **steht ganz oben**", "Live-Rangliste zwischen dir und deinen Freunden"),
+                ("Falsch gelegen? Die Antwort wird **erklärt**", "Jede Frage zeigt die richtige Lösung und warum"),
+                ("Kommst du nicht weiter? **Nutz einen Tipp**", "Ein Joker pro Frage, wann immer du ihn brauchst"),
+                ("Komm täglich wieder und **halte deine Serie**", "Tägliche Serie, Bestenliste und Spielverlauf")
             ]
         }
     },
@@ -1598,6 +1738,16 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Celtic**", "El quiz definitivo sobre títulos, ídolos e historia de los Bhoys"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "De los Lisbon Lions de 1967 al Old Firm contra el Rangers"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Celtic"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -1625,6 +1775,16 @@ TENANT_CONFIGS = {
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Rangers**", "El quiz completo sobre títulos, ídolos e historia de los Gers"),
+                ("Preguntas sobre **títulos, leyendas y el Old Firm**", "De los 55 títulos de liga a la Recopa de 1972 y clásicos ante el Celtic"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Rangers"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -1662,6 +1822,16 @@ TENANT_CONFIGS = {
                 ("أخطأت؟ الإجابة تأتيك **مشروحة**", "كل سؤال يوضح لك الإجابة الصحيحة والسبب"),
                 ("واجهت صعوبة؟ **استخدم تلميحاً**", "مساعدة في كل سؤال عندما تحتاجها"),
                 ("عد يومياً و**حافظ على سلسلتك**", "سلسلة يومية، لوحة الشرف وتاريخ جولاتك")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **del Al-Nassr**", "El quiz completo sobre títulos, ídolos e historia del Al-Alami"),
+                ("Preguntas sobre **títulos, leyendas y el Derbi de Riad**", "De Majed Abdullah a Cristiano Ronaldo y los Caballeros de Najd"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más del Al-Nassr"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto e evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -2042,7 +2212,7 @@ LEGACY_SLIDE_FILES = ["01-home.png", "02-question.png", "03-answer-feedback.png"
 # Locales written right-to-left. Nunito carries no Arabic glyphs at all — an "ar"
 # slide rendered with it comes out as a row of .notdef boxes, which measures a normal
 # width so only looking at the image catches it.
-RTL_LOCALES = {"ar"}
+RTL_LOCALES = {"ar", "fa"}
 ARABIC_FONTS = ("/System/Library/Fonts/SFArabic.ttf", "/System/Library/Fonts/GeezaPro.ttc")
 
 # Same .notdef-box failure as Arabic: Nunito carries no CJK glyphs.
@@ -2540,15 +2710,20 @@ TENANT_STORE_LOCALE_OVERRIDES = {
     "flagsworld": {"pt": "pt-BR", "en": ["en-US", "en-GB", "en-IN"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "de": "de-DE", "id": "id", "it": "it-IT", "tr": "tr"},
     "worldclubs": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
     "realmadrid": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "de": "de-DE", "id": "id", "ar": "ar", "hr": "hr", "tr": ["tr", "tr-TR"], "zh": "zh-CN", "ca": "ca"},
-    "psg": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "fr": ["fr-FR", "fr-CA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE", "id": "id"},
+    "psg": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "fr": ["fr-FR", "fr-CA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE", "id": "id", "fa": "fa"},
     "chelsea": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "id": "id"},
-    "manchesterunited": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "id": "id"},
+    "manchesterunited": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "id": "id", "ar": "ar", "zh": "zh-CN", "hi": "hi-IN", "ko": "ko-KR"},
     "manchestercity": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "no": "no-NO", "ar": "ar"},
     "liverpool": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE", "id": "id", "nl": "nl-NL", "ar": "ar"},
-    "barcelona": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ca": "ca", "de": "de-DE", "fr": ["fr-FR", "fr-CA"], "id": "id", "nl": "nl-NL", "pl": "pl-PL"},
-    "celtic": {"en": "en-GB"},
-    "rangers": {"en": "en-GB"},
+    "barcelona": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ca": "ca", "de": "de-DE", "fr": ["fr-FR", "fr-CA"], "id": "id", "nl": "nl-NL", "pl": "pl-PL", "ar": "ar", "zh": "zh-CN"},
+    "celtic": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
+    "rangers": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
+    "alahly": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ar": "ar"},
+    "alnassr": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ar": "ar"},
+    "galatasaray": {"tr": ["tr", "tr-TR"], "pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE"},
     "alhilal": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ar": "ar"},
+    "juventus": {"it": "it-IT", "pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "ar": "ar"},
+    "bayern": {"de": "de-DE", "pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
 }
 
 # Content-locale (used by slides_by_locale / capture-multilocale-screenshots.sh
