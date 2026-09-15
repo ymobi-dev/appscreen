@@ -2219,6 +2219,15 @@ ARABIC_FONTS = ("/System/Library/Fonts/SFArabic.ttf", "/System/Library/Fonts/Gee
 CJK_LOCALES = {"zh"}
 CJK_FONT = "/System/Library/Fonts/Hiragino Sans GB.ttc"
 
+KOREAN_LOCALES = {"ko"}
+KOREAN_FONT = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
+
+DEVANAGARI_LOCALES = {"hi"}
+DEVANAGARI_FONTS = (
+    "/System/Library/Fonts/Supplemental/ITFDevanagari.ttc",
+    "/System/Library/Fonts/Supplemental/DevanagariMT.ttc"
+)
+
 
 Fonts = namedtuple("Fonts", "headline highlight subhead")
 
@@ -2257,6 +2266,17 @@ def get_fonts(platform="ios", locale="pt", scale=1.0):
         # for the subhead. No heavier face than W6 in the .ttc, so highlight == headline.
         head = ImageFont.truetype(CJK_FONT, size_h, index=2)
         return Fonts(head, head, ImageFont.truetype(CJK_FONT, size_s, index=0))
+    if locale in KOREAN_LOCALES and os.path.exists(KOREAN_FONT):
+        # index 6/0 = Bold / Regular in AppleSDGothicNeo.ttc
+        head = ImageFont.truetype(KOREAN_FONT, size_h, index=6)
+        return Fonts(head, head, ImageFont.truetype(KOREAN_FONT, size_s, index=0))
+    if locale in DEVANAGARI_LOCALES:
+        devanagari = next((f for f in DEVANAGARI_FONTS if os.path.exists(f)), None)
+        if devanagari:
+            # index 1/0 = Bold / Book in ITFDevanagari.ttc
+            idx_b = 1 if "ITF" in devanagari else 0
+            head = ImageFont.truetype(devanagari, size_h, index=idx_b)
+            return Fonts(head, head, ImageFont.truetype(devanagari, size_s, index=0))
     return Fonts(_nunito(size_h, HEADLINE_WEIGHT), _nunito(size_h, HIGHLIGHT_WEIGHT),
                  _nunito(size_s, SUBHEAD_WEIGHT))
 
