@@ -2712,6 +2712,7 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
 # (voseo, Rioplatense Spanish) targets Google Play's "es-419" (Latin America) listing locale,
 # not "es-ES" (Spain) -- the global default used by Spain-based tenants like realmadrid/barcelona.
 TENANT_STORE_LOCALE_OVERRIDES = {
+    "flamengo": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
     "bible": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU"], "es": ["es-419", "es-ES", "es-US"]},
     "corinthians": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "nl": "nl-NL"},
     "saopaulo": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "es": "es-419"},
