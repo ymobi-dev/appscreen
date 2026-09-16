@@ -272,6 +272,43 @@ TENANT_CONFIGS = {
             ]
         }
     },
+    "emoji": {
+        "name": "Quiz de Emoji",
+        "colors": [(35, 18, 53), (61, 31, 92), (24, 12, 36)],
+        "highlight_color": (255, 201, 51),
+        "slides_by_locale": {
+            "pt": [
+                ("Decifre o significado **dos emojis**", "O quiz definitivo com perguntas visuais, lógicas e divertidas"),
+                ("Desafios de **lógica, emoções e bandeiras**", "De significados clássicos a charadas visuais surpreendentes"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem decifra mais emojis"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem decifra mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra o significado oficial e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Decode the meaning **of emojis**", "The ultimate quiz with visual, logic and fun trivia"),
+                ("Challenges on **logic, emotions & flags**", "From classic meanings to surprising visual riddles"),
+                ("Challenge a friend **by link**", "Send the match and see who decodes the most emojis"),
+                ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the official meaning and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Descifra el significado **de los emojis**", "El quiz definitivo con preguntas visuales, lógicas y divertidas"),
+                ("Retos de **lógica, emociones y banderas**", "De significados clásicos a acertijos visuales sorprendentes"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién descifra más emojis"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien descifra más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra el significado oficial y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
+    },
     "geography-world": {
         "name": "Quiz Geografia Mundial",
         "colors": [(15, 43, 31), (27, 67, 50), (10, 30, 20)],
@@ -2732,6 +2769,7 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
 # (voseo, Rioplatense Spanish) targets Google Play's "es-419" (Latin America) listing locale,
 # not "es-ES" (Spain) -- the global default used by Spain-based tenants like realmadrid/barcelona.
 TENANT_STORE_LOCALE_OVERRIDES = {
+    "emoji": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU"], "es": ["es-419", "es-ES", "es-US"]},
     "flamengo": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
     "bible": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU"], "es": ["es-419", "es-ES", "es-US"]},
     "corinthians": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "nl": "nl-NL"},
