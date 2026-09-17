@@ -52,6 +52,40 @@ APPSCREEN_ROOT = "/Users/yuripacheco/Projetos/appscreen"
 
 # TENANTS ATIVOS NAS LOJAS E SUAS CONFIGURAÇÕES DE DESIGN
 TENANT_CONFIGS = {
+    "nba": {
+        "name": "NBA Quiz",
+        "colors": [(16, 30, 51), (31, 58, 95), (10, 20, 32)],
+        "highlight_color": (255, 122, 26),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de NBA**", "O quiz definitivo sobre jogadores, MVPs, draft e franquias da liga"),
+                ("Perguntas sobre **estrelas, prêmios e draft**", "De Jordan e LeBron a Curry, Jokić e os maiores campeões"),
+                ("Desafie um amigo **por link**", "Envie a rodada e veja quem sabe mais de basquete"),
+                ("Seu placar na hora, **lance a lance**", "Pontuação, percentual de acerto e evolução a cada rodada"),
+                ("Quem sabe mais **crava a liderança**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar no clutch time"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ]
+        }
+    },
+    "f1": {
+        "name": "F1 Quiz",
+        "colors": [(16, 21, 28), (27, 36, 48), (11, 15, 20)],
+        "highlight_color": (242, 169, 0),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de Fórmula 1**", "O quiz definitivo sobre pilotos, campeões, circuitos e história"),
+                ("Perguntas sobre **pilotos, recordes e GPs**", "De Senna e Fangio a Hamilton, Verstappen e os grandes circuitos"),
+                ("Desafie um amigo **por link**", "Envie a corrida e veja quem sabe mais de Fórmula 1"),
+                ("Seu placar na hora, **volta a volta**", "Pontuação, percentual de acerto e evolução a cada rodada"),
+                ("Quem sabe mais **fica na pole**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar no grid"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ]
+        }
+    },
     "flamengo": {
         "name": "Quiz para Fãs do Fla",
         "colors": [(26, 0, 0), (122, 0, 0), (26, 26, 26)],
