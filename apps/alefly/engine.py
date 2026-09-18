@@ -52,6 +52,171 @@ APPSCREEN_ROOT = "/Users/yuripacheco/Projetos/appscreen"
 
 # TENANTS ATIVOS NAS LOJAS E SUAS CONFIGURAÇÕES DE DESIGN
 TENANT_CONFIGS = {
+    "cricketindia": {
+        "name": "Indian Cricket Quiz",
+        "colors": [(7, 26, 62), (13, 46, 107), (5, 19, 43)],
+        "highlight_color": (255, 153, 51),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de Críquete**", "O quiz definitivo sobre jogadores, títulos, recordes e história da Índia"),
+                ("Perguntas sobre **craques, Copas e recordes**", "De Gavaskar e Tendulkar a Kohli, Rohit e Bumrah"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais de críquete"),
+                ("Seu placar na hora, **lance a lance**", "Pontuação, percentual de acerto e evolução a cada rodada"),
+                ("Quem sabe mais **lidera a tabela**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your Indian **cricket knowledge**", "The ultimate trivia on players, trophies, records and history"),
+                ("Questions on **stars, World Cups and records**", "From Gavaskar and Tendulkar to Kohli, Rohit and Bumrah"),
+                ("Challenge a friend **by link**", "Send the match and see who knows cricket best"),
+                ("Your score, **instantly, ball by ball**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "hi": [
+                ("भारतीय **क्रिकेट ज्ञान** को परखें", "खिलाड़ियों, ट्रॉफियों, रिकॉर्ड और इतिहास पर अंतिम क्विज़"),
+                ("**सितारों, वर्ल्ड कप और रिकॉर्ड** पर सवाल", "गावस्कर और तेंदुलकर से लेकर कोहली, रोहित और बुमराह तक"),
+                ("दोस्तों को **लिंक से चुनौती** दें", "मैच भेजें और देखें कि क्रिकेट को कौन बेहतर जानता है"),
+                ("आपका स्कोर तुरंत, **गेंद दर गेंद**", "प्रत्येक राउंड में अंक, सटीकता और प्रगति"),
+                ("लीडरबोर्ड के **शीर्ष पर पहुंचें**", "आपके और आपके दोस्तों के बीच रीयल-टाइम रैंकिंग"),
+                ("गलत उत्तर? जवाब **व्याख्या के साथ**", "हर सवाल सही उत्तर और उसका कारण दिखाता है"),
+                ("अटक गए? **संकेत लें**", "जब भी जरूरत हो, प्रति प्रश्न एक सहायता"),
+                ("रोज़ खेलें और **स्ट्रीक बनाए रखें**", "दैनिक स्ट्रीक, रैंकिंग और मैचों का इतिहास")
+            ]
+        }
+    },
+    "cars": {
+        "name": "Car Quiz",
+        "colors": [(11, 11, 11), (35, 35, 38), (1, 1, 1)],
+        "highlight_color": (232, 64, 42),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **sobre Carros**", "O quiz definitivo sobre marcas, modelos, motores e supercarros"),
+                ("Perguntas sobre **marcas, modelos e potência**", "Do JDM aos clássicos e hipercarros modernos"),
+                ("Desafie um amigo **por link**", "Envie a disputa e veja quem manja mais de carros"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada desafio"),
+                ("Quem sabe mais **assume a liderança**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your automotive **knowledge & skills**", "The ultimate trivia on car brands, models, engines and supercars"),
+                ("Questions on **brands, specs and power**", "From JDM legends to classics and modern hypercars"),
+                ("Challenge a friend **by link**", "Send the match and see who knows cars best"),
+                ("Your score, **instantly, round after round**", "Points, accuracy and progress in every challenge"),
+                ("Take the **top spot**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **sobre Autos**", "El quiz definitivo sobre marcas, modelos, motores y superdeportivos"),
+                ("Preguntas sobre **marcas, modelos y potencia**", "Del JDM a los clásicos y los hiperdeportivos modernos"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más de autos"),
+                ("Tu marcador al instante, **ronda a ronda**", "Puntuación, porcentaje de acierto y evolución en cada desafío"),
+                ("Quien sabe más **toma el liderato**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "it": [
+                ("Metti alla prova le tue conoscenze **sulle Auto**", "Il quiz definitivo su marchi, modelli, motori e supercar"),
+                ("Domande su **marchi, modelli e potenza**", "Dal JDM ai classici e alle hypercar moderne"),
+                ("Sfida un amico **tramite link**", "Invia la sfida e scopri chi ne sa di più di auto"),
+                ("Il tuo punteggio all'istante, **round dopo round**", "Punti, precisione e progressi in ogni sfida"),
+                ("Chi ne sa di più **conquista la vetta**", "Classifica in tempo real tra te e i tuoi amici"),
+                ("Hai sbagliato? La risposta è **spiegata**", "Ogni domanda mostra la risposta corretta e il motivo"),
+                ("Bloccato? **Usa un indizio**", "Un aiuto per domanda, quando ne hai bisogno"),
+                ("Torna ogni giorno e **mantieni la serie**", "Serie giornaliera, classifica e cronologia delle sfide")
+            ],
+            "de": [
+                ("Teste dein Wissen **über Autos**", "Das ultimative Quiz über Marken, Modelle, Motoren und Supercars"),
+                ("Fragen zu **Marken, Modellen und Leistung**", "Von JDM-Klassikern bis zu modernen Hypercars"),
+                ("Fordere einen Freund **per Link heraus**", "Teile das Duell und finde heraus, wer Autos am besten kennt"),
+                ("Dein Punktestand sofort, **Runde für Runde**", "Punkte, Trefferquote und Entwicklung bei jeder Herausforderung"),
+                ("Wer mehr weiß, **übernimmt die Spitze**", "Echtzeit-Rangliste zwischen dir und deinen Freunden"),
+                ("Falsch geantwortet? Die Erklärung **folgt sofort**", "Jede Frage zeigt die richtige Antwort und den Grund"),
+                ("Kommst du nicht weiter? **Nimm einen Tipp**", "Eine Hilfe pro Frage, wann immer du sie brauchst"),
+                ("Komm täglich wieder und **halte die Serie**", "Tägliche Serie, Rangliste und Spielverlauf")
+            ]
+        }
+    },
+    "worldhistory": {
+        "name": "World History Quiz",
+        "colors": [(28, 19, 13), (62, 42, 30), (14, 9, 7)],
+        "highlight_color": (184, 115, 46),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de História**", "O quiz definitivo sobre civilizações antigas, impérios e guerras"),
+                ("Perguntas sobre **impérios, revoluções e guerras**", "Da Antiguidade e Idade Média ao século XX"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais de história"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada desafio"),
+                ("Quem sabe mais **lidera o ranking**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ]
+        }
+    },
+    "worldfood": {
+        "name": "World Food Quiz",
+        "colors": [(102, 42, 33), (140, 58, 46), (86, 36, 28)],
+        "highlight_color": (255, 107, 74),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de Culinária**", "O quiz definitivo sobre pratos, ingredientes e gastronomia mundial"),
+                ("Perguntas sobre **pratos típicos e temperos**", "Sabores e tradições de todos os continentes"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem manja mais de gastronomia"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada desafio"),
+                ("Quem sabe mais **assume o topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ]
+        }
+    },
+    "animals": {
+        "name": "Animals Quiz",
+        "colors": [(11, 24, 16), (27, 59, 39), (5, 10, 7)],
+        "highlight_color": (224, 165, 39),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **sobre Animais**", "O quiz definitivo sobre fauna, espécies, habitats e curiosidades"),
+                ("Perguntas sobre **espécies, habitats e recordes**", "Mamíferos, aves, répteis e vida marinha"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais sobre a vida selvagem"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada desafio"),
+                ("Quem sabe mais **lidera o ranking**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your wildlife **knowledge**", "The ultimate trivia on species, habitats, diet and taxonomy"),
+                ("Questions on **species, habitats and fauna**", "Mammals, birds, reptiles, marine life and insects"),
+                ("Challenge a friend **by link**", "Send the match and see who knows world wildlife best"),
+                ("Your score, **instantly, round after round**", "Points, accuracy and progress in every challenge"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **sobre Animales**", "El quiz definitivo sobre fauna, especies, hábitats y curiosidades"),
+                ("Preguntas sobre **especies, hábitats y fauna**", "Mamíferos, aves, reptiles, vida marina e insectos"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más sobre vida salvaje"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada reto"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
+    },
     "nba": {
         "name": "NBA Quiz",
         "colors": [(16, 30, 51), (31, 58, 95), (10, 20, 32)],
@@ -66,6 +231,26 @@ TENANT_CONFIGS = {
                 ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
                 ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar no clutch time"),
                 ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your basketball **IQ & knowledge**", "The ultimate trivia on players, MVPs, draft and NBA history"),
+                ("Questions on **superstars, arenas and draft**", "From Jordan and LeBron to Curry, Jokić and modern legends"),
+                ("Challenge a friend **by link**", "Send the match and see who knows hoops best"),
+                ("Your score, **instantly, shot by shot**", "Points, shooting accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right answer and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it in crunch time"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **de NBA**", "El quiz definitivo sobre jugadores, MVPs, draft y franquicias"),
+                ("Preguntas sobre **estrellas, pabellones y draft**", "De Jordan y LeBron a Curry, Jokić y los grandes campeones"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más de basquetbol"),
+                ("Tu marcador al instante, **jugada a jugada**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -83,6 +268,46 @@ TENANT_CONFIGS = {
                 ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
                 ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar no grid"),
                 ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **Formula 1** knowledge", "The ultimate trivia on drivers, champions, tracks and Grand Prix history"),
+                ("Questions on **drivers, records and tracks**", "From Senna and Fangio to Hamilton, Verstappen and iconic circuits"),
+                ("Challenge a friend **by link**", "Send the race and see who knows Formula 1 best"),
+                ("Your score, **instantly, lap after lap**", "Points, accuracy and progress in every round"),
+                ("Claim the **pole position**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it on the grid"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and race history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **de Fórmula 1**", "El quiz definitivo sobre pilotos, campeones, circuitos e historia"),
+                ("Preguntas sobre **pilotos, récords y grandes premios**", "De Senna y Fangio a Hamilton, Verstappen y los grandes trazados"),
+                ("Desafía a un amigo **por enlace**", "Envía la carrera y descubre quién sabe más de Fórmula 1"),
+                ("Tu marcador al instante, **vuelta a vuelta**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **se lleva la pole**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites en la parrilla"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "it": [
+                ("Metti alla prova le tue conoscenze **sulla Formula 1**", "Il quiz definitivo su piloti, campioni, circuiti e storia"),
+                ("Domande su **piloti, record e Gran Premi**", "Da Senna e Fangio a Hamilton, Verstappen e le piste storiche"),
+                ("Sfida un amico **tramite link**", "Invia la gara e scopri chi ne sa di più di Formula 1"),
+                ("Il tuo punteggio all'istante, **giro dopo giro**", "Punti, precisione e progressi in ogni manche"),
+                ("Chi ne sa di più **conquista la pole**", "Classifica in tempo reale tra te e i tuoi amici"),
+                ("Hai sbagliato? La risposta è **spiegata**", "Ogni domanda mostra la risposta corretta e il motivo"),
+                ("Bloccato? **Usa un indizio**", "Un aiuto per domanda, quando ne hai bisogno sulla griglia"),
+                ("Torna ogni giorno e **mantieni la serie**", "Serie giornaliera, classifica e cronologia delle gare")
+            ],
+            "de": [
+                ("Teste dein Wissen **über die Formel 1**", "Das ultimative Quiz über Fahrer, Weltmeister, Strecken und Rennsport-Geschichte"),
+                ("Fragen zu **Fahrern, Rekorden und Grand Prix**", "Von Senna und Fangio bis Hamilton, Verstappen und Traditionskursen"),
+                ("Fordere einen Freund **per Link heraus**", "Teile das Rennen und finde heraus, wer die Formel 1 am besten kennt"),
+                ("Dein Punktestand sofort, **Runde für Runde**", "Punkte, Trefferquote und Leistungssteigerung in jedem Match"),
+                ("Wer am meisten weiß, **holt die Pole Position**", "Echtzeit-Rangliste zwischen dir und deinen Freunden"),
+                ("Falsch geantwortet? Die Lösung wird **erklärt**", "Jede Frage zeigt die richtige Antwort und die Hintergründe"),
+                ("Kommst du nicht weiter? **Nutze einen Tipp**", "Ein Joker pro Frage, wann immer du ihn im Startfeld brauchst"),
+                ("Komm täglich wieder und **halte deine Serie**", "Tägliche Serie, Rangliste und Renn-Verlauf")
             ]
         }
     },
@@ -2803,6 +3028,11 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
 # (voseo, Rioplatense Spanish) targets Google Play's "es-419" (Latin America) listing locale,
 # not "es-ES" (Spain) -- the global default used by Spain-based tenants like realmadrid/barcelona.
 TENANT_STORE_LOCALE_OVERRIDES = {
+    "cars": {"pt": "pt-BR", "en": "en-US", "es": ["es-419", "es-ES"], "it": "it-IT", "de": "de-DE"},
+    "cricketindia": {"pt": "pt-BR", "en": "en-US", "hi": "hi-IN"},
+    "animals": {"pt": "pt-BR", "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN"], "es": ["es-419", "es-ES", "es-US"]},
+    "nba": {"pt": "pt-BR", "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-PH", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
+    "f1": {"pt": "pt-BR", "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "it": "it-IT", "de": "de-DE"},
     "emoji": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU"], "es": ["es-419", "es-ES", "es-US"]},
     "flamengo": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
     "bible": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU"], "es": ["es-419", "es-ES", "es-US"]},
