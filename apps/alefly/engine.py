@@ -3204,14 +3204,14 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
 
                     for i, (headline, subheadline) in enumerate(slides):
                         if use_slide_sources:
+                            # Never fall back to "whichever PNG happens to be Nth alphabetically"
+                            # for named slots -- confirmed live (realmadrid, 2026-09-22) that this
+                            # silently substitutes an unrelated screen (challenge-share) for a
+                            # named one (hint-used) whenever its own Maestro step failed to fire,
+                            # with no failure signal anywhere: the workflow's own "8 PNGs present"
+                            # check still passes, since a file did get written, just the wrong one.
                             candidate = os.path.join(raw_screenshots_dir, SLIDE_SOURCES[i]["file"])
-                            if candidate and os.path.exists(candidate):
-                                input_file = candidate
-                            elif i < len(LEGACY_SLIDE_FILES) and os.path.exists(os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])):
-                                input_file = os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])
-                            else:
-                                avail = sorted(glob.glob(f"{raw_screenshots_dir}/*.png"))
-                                input_file = avail[min(i, len(avail)-1)] if avail else None
+                            input_file = candidate if os.path.exists(candidate) else None
                         elif i < len(LEGACY_SLIDE_FILES) and os.path.exists(os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])):
                             input_file = os.path.join(raw_screenshots_dir, LEGACY_SLIDE_FILES[i])
                         else:
