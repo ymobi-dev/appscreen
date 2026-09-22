@@ -2277,7 +2277,7 @@ TENANT_CONFIGS = {
     }
 }
 
-ALEFLY_SEEDS = "/Users/yuripacheco/Projetos/alefly/infra/firebase/seeds/tenants"
+ALEFLY_SEEDS = os.environ.get("ALEFLY_SEEDS", os.path.join(ALEFLY_REPO_ROOT, "infra/firebase/seeds/tenants"))
 
 
 def _hex_to_rgb(value):
@@ -3108,6 +3108,29 @@ def resolve_store_locales(tenant: str, locale: str) -> list[str]:
         return [override]
     return list(override)
 
+def dump_locales(tenant: str) -> dict:
+    """JSON-serializable map of every content locale this tenant supports to its
+    resolved store locales and whether slide copy exists for it. Consumed by
+    alefly's CI (scripts/ci/store-assets-gap.mjs) so the store-locale map and
+    slide-copy availability never get duplicated in JS."""
+    if tenant not in TENANT_CONFIGS:
+        raise KeyError(tenant)
+    config = TENANT_CONFIGS[tenant]
+    is_multi_locale = "slides_by_locale" in config
+    content_locales = list(config["slides_by_locale"].keys()) if is_multi_locale else ["pt"]
+
+    with open(os.path.join(ALEFLY_SEEDS, f"{tenant}.json"), encoding="utf-8") as fh:
+        seed = json.load(fh)
+    seed_locales = seed.get("supportedLocales") or ["pt"]
+
+    result = {}
+    for locale in seed_locales:
+        result[locale] = {
+            "storeLocales": resolve_store_locales(tenant, locale),
+            "hasSlides": locale in content_locales,
+        }
+    return result
+
 def run_factory(target_tenant=None, target_platform="all", target_locale=None):
     platforms = ["android", "ios", "ipad"] if target_platform == "all" else [target_platform]
 
@@ -3249,6 +3272,16 @@ def _selfcheck():
     del TENANT_STORE_LOCALE_OVERRIDES["_selfcheck_multi"]
     print("✅ resolve_store_locales: backward compat + multi-country list ok")
 
+    # ALEFLY_SEEDS env override (path-bug fix)
+    assert "ALEFLY_SEEDS" in globals() and ALEFLY_SEEDS.endswith("infra/firebase/seeds/tenants"), \
+        "ALEFLY_SEEDS must resolve relative to ALEFLY_REPO_ROOT, not a hardcoded path"
+
+    # dump_locales: known tenant returns the expected shape
+    realmadrid_dump = dump_locales("realmadrid")
+    assert realmadrid_dump["pt"]["storeLocales"] == ["pt-BR", "pt-PT"], realmadrid_dump["pt"]
+    assert realmadrid_dump["pt"]["hasSlides"] is True
+    print("✅ dump_locales: realmadrid pt -> pt-BR/pt-PT, hasSlides true")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -3256,7 +3289,19 @@ if __name__ == "__main__":
     parser.add_argument("--platform", choices=["android", "ios", "ipad", "all"], default="all")
     parser.add_argument("--locale", default=None, help="Locale específico (pt/es/ca) para tenants multi-idioma; default processa todos os locales do tenant")
     parser.add_argument("--selfcheck", action="store_true", help="Assert text contrast on every tenant seed and exit")
+    parser.add_argument("--dump-locales", metavar="TENANT", default=None, help="Print {contentLocale: {storeLocales, hasSlides}} as JSON for TENANT and exit")
     args = parser.parse_args()
+
+    if args.dump_locales:
+        try:
+            print(json.dumps(dump_locales(args.dump_locales)))
+        except KeyError:
+            print(json.dumps({"error": f"tenant '{args.dump_locales}' not found in TENANT_CONFIGS or has no seed file"}), file=sys.stderr)
+            sys.exit(1)
+        except FileNotFoundError:
+            print(json.dumps({"error": f"no seed file for tenant '{args.dump_locales}' at {ALEFLY_SEEDS}"}), file=sys.stderr)
+            sys.exit(1)
+        sys.exit(0)
 
     if args.selfcheck:
         _selfcheck()
