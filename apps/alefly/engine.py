@@ -7,6 +7,7 @@ import re
 import argparse
 import colorsys
 import itertools
+import shutil
 import numpy as np
 from collections import namedtuple
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
@@ -48,6 +49,11 @@ SUBHEAD_STYLE = TextStyle(color=(220, 225, 235))
 # Base paths
 ALEFLY_REPO_ROOT = os.environ.get("ALEFLY_REPO_ROOT", "/Users/yuripacheco/Projetos/alefly")
 ALEFLY_STORE_ASSETS = os.path.join(ALEFLY_REPO_ROOT, "store-assets")
+# Ephemeral, gitignored, pre-framed Maestro output -- named "raw-captures", not
+# "store-assets", so it's never confused with ALEFLY_STORE_ASSETS (committed,
+# store-ready content). Written by alefly's capture-multilocale-screenshots.sh,
+# consumed here as this factory's own raw material.
+ALEFLY_RAW_CAPTURES = os.path.join(ALEFLY_REPO_ROOT, "output/raw-captures")
 APPSCREEN_ROOT = "/Users/yuripacheco/Projetos/appscreen"
 
 # TENANTS ATIVOS NAS LOJAS E SUAS CONFIGURAÇÕES DE DESIGN
@@ -2506,6 +2512,18 @@ SLIDE_CONFIGS = {
 # results and carry most of the install decision, so brand, core loop and the
 # differentiator go there. Streak and stats are generic mechanics and sit at the end.
 #
+# TODO (2026-09-23, ~/Projetos/alefly's CLAUDE.md TODO section has the full research):
+# reorder to lead with real gameplay (slot 1 = question, not home) and the challenge
+# differentiator (slot 2), mirroring the now-approved alefly promo-video beat order. NOT a
+# safe drop-in reorder of this array alone -- `slides`/`slides_by_locale` below is a
+# PER-TENANT, PER-LOCALE, POSITION-INDEXED caption list (matched to SLIDE_SOURCES by
+# `enumerate()` index, not by content), hardcoded for dozens of tenant/locale
+# combinations. Reordering SLIDE_SOURCES without reordering every one of those caption
+# arrays in lockstep silently misaligns captions to the wrong screenshot across the whole
+# fleet -- confirmed by reading process_screenshot()'s indexing before attempting this the
+# first time, reverted before it shipped. Needs a proper task: a script that reorders
+# every tenant's caption array programmatically alongside this one, not a hand edit.
+#
 # Files 05 to 08 are not captured yet — .maestro/android/store-screenshots.yaml already
 # walks through three of those screens without calling takeScreenshot. Missing files are
 # skipped with a warning rather than falling back to a duplicate.
@@ -3157,8 +3175,6 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                     print(f"  ⚠️ Tenant '{tenant}' only has pt slides — ignoring --locale {target_locale}.")
                 locales = ["pt"]
 
-            base_output_dir = os.path.join(ALEFLY_REPO_ROOT, "output/store-assets")
-
             for locale in locales:
                 slides = config["slides_by_locale"][locale] if is_multi_locale else config["slides"]
                 store_locales = resolve_store_locales(tenant, locale)
@@ -3166,22 +3182,15 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                 sub = ("android", "screenshots") if platform == "android" else ("ios", "screenshots", "ipad" if platform == "ipad" else "iphone")
                 # Per-locale folder first; then the unsuffixed legacy folder (a tenant that
                 # became multi-locale after its captures were taken — 14 clubs on 2026-09-03
-                # were silently skipped here); Android last falls back to iPhone captures.
-                # The capture script archives per locale whenever the SEED lists several
-                # locales, independent of whether TENANT_CONFIGS has slides_by_locale — so the
-                # locale folder is tried first for every tenant (flamengo has slides in pt only
-                # here but pt/en/es in the seed; its fresh captures live in screenshots/pt/).
-                candidates = [os.path.join(base_output_dir, tenant, *sub, locale),
-                              os.path.join(base_output_dir, tenant, *sub),
-                              os.path.join(base_output_dir, tenant, *sub, "pt")]
-                if platform == "android":
-                    candidates += [os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", locale),
-                                   os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone"),
-                                   os.path.join(base_output_dir, tenant, "ios", "screenshots", "iphone", "pt")]
-                elif platform in ("ios", "ipad"):
-                    candidates += [os.path.join(base_output_dir, tenant, "android", "screenshots", locale),
-                                   os.path.join(base_output_dir, tenant, "android", "screenshots"),
-                                   os.path.join(base_output_dir, tenant, "android", "screenshots", "pt")]
+                # were silently skipped here); then the "pt" folder (single-locale tenants,
+                # or a locale whose own capture hasn't been re-run yet). No cross-platform
+                # (ios<->android) fallback anymore -- that silently produced a platform's
+                # published screenshots from the OTHER platform's raw capture (real risk:
+                # the wrong device frame/status-bar baked into a "final" image), removed as
+                # part of the 2026-09-23 raw-captures reorg rather than kept as a safety net.
+                candidates = [os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub, locale),
+                              os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub),
+                              os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub, "pt")]
                 # Prefer candidate that has at least 8 files (the full 8-slide set)
                 raw_screenshots_dir = next((d for d in candidates if len(glob.glob(f"{d}/*.png")) >= len(SLIDE_SOURCES)), None)
                 if not raw_screenshots_dir:
@@ -3201,6 +3210,21 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                     screenshots_dir = os.path.join(ALEFLY_STORE_ASSETS, tenant, store_locale, "screenshots")
                     output_dir = os.path.join(screenshots_dir, platform)
                     os.makedirs(output_dir, exist_ok=True)
+
+                    # Persist the raw (pre-framed) captures alongside the framed store-listing
+                    # slides -- the promo-video pipeline (alefly's render-promo-frames.mjs)
+                    # composes directly from these, not from the framed slide_N.png (which has
+                    # a device bezel baked in, wrong for that renderer's own phone-mockup frame).
+                    # Android + eight-slot tenants only: PROMO_VIDEO_BEATS needs the full named
+                    # set (01-home.png..08-challenge-share.png), which only exists for tenants
+                    # already migrated to SLIDE_SOURCES naming (use_slide_sources).
+                    if platform == "android" and use_slide_sources:
+                        raw_persist_dir = os.path.join(output_dir, "raw")
+                        os.makedirs(raw_persist_dir, exist_ok=True)
+                        for slide_source in SLIDE_SOURCES:
+                            src = os.path.join(raw_screenshots_dir, slide_source["file"])
+                            if os.path.exists(src):
+                                shutil.copyfile(src, os.path.join(raw_persist_dir, slide_source["file"]))
 
                     for i, (headline, subheadline) in enumerate(slides):
                         if use_slide_sources:
