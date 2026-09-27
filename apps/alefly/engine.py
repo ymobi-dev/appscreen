@@ -2330,6 +2330,40 @@ TENANT_CONFIGS = {
                 ("Vuelve cada día y **mantén tu racha**", "Racha diaria, ranking e historial de tus partidas")
             ]
         }
+    },
+    "dinokids": {
+        "name": "Dino Kids Quiz",
+        "colors": [(10, 40, 70), (18, 66, 118), (6, 24, 48)],
+        "highlight_color": (255, 111, 89),
+        "slides_by_locale": {
+            "pt": [
+                ("Descubra o mundo **dos Dinossauros**", "Quiz de dinossauros pra crianças, com fatos reais de paleontologia"),
+                ("Perguntas sobre **dieta, silhuetas e curiosidades**", "Espécies, tamanhos e hábitos de um jeito fácil de entender"),
+                ("Chame um amigo **pra brincar junto**", "Manda o link do desafio e descubra quem conhece mais dinossauros"),
+                ("Veja seu placar **na hora**", "Cada resposta certa conta na hora, rodada após rodada"),
+                ("Suba no **topo do ranking**", "Compare sua pontuação com a dos amigos em tempo real"),
+                ("Errou a resposta? **Sem problema**", "A explicação certinha aparece na hora, pra aprender brincando"),
+                ("Ficou em dúvida? **Peça uma dica**", "Uma ajudinha disponível sempre que precisar"),
+                ("Não perca nenhum dia **de descoberta**", "Cada rodada fica guardada no seu histórico, com uma sequência especial pra comemorar")
+            ]
+        }
+    },
+    "dinosaurs": {
+        "name": "Dinosaurs Quiz",
+        "colors": [(20, 27, 22), (40, 52, 45), (12, 16, 13)],
+        "highlight_color": (215, 162, 58),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de Dinossauros**", "O quiz definitivo de paleontologia, espécie por espécie"),
+                ("Perguntas sobre **tempo geológico e descobertas**", "Espécies, períodos e curiosidades da paleontologia real"),
+                ("Desafie um colega **por link**", "Compartilhe a partida e veja quem domina mais a paleontologia"),
+                ("Acompanhe sua evolução **desafio após desafio**", "Pontuação e percentual de acerto atualizados em tempo real"),
+                ("Assuma a liderança **do ranking**", "Compare seu desempenho com o de outros jogadores"),
+                ("Resposta errada? **Entenda o porquê**", "Toda questão vem com a explicação da resposta correta"),
+                ("Precisa de ajuda? **Use uma dica**", "Um recurso disponível quando o desafio for difícil"),
+                ("Sua constância **também conta pontos**", "Um contador de sequência diária acompanha cada partida registrada")
+            ]
+        }
     }
 }
 
