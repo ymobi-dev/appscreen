@@ -2331,6 +2331,80 @@ TENANT_CONFIGS = {
             ]
         }
     },
+    "ufc": {
+        "name": "UFC Quiz",
+        "colors": [(18, 18, 18), (52, 12, 12), (10, 10, 10)],
+        "highlight_color": (230, 30, 30),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de UFC**", "O quiz sobre lutadores, regras, categorias de peso e momentos históricos"),
+                ("Perguntas sobre **campeões, finalizações e cinturões**", "Da história das lutas às regras unificadas, rodada após rodada"),
+                ("Desafie um amigo **por link**", "Envie a rodada e veja quem entende mais de MMA"),
+                ("Seu placar na hora, **round a round**", "Pontuação, percentual de acerto e evolução a cada rodada"),
+                ("Quem sabe mais **leva o cinturão**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **UFC knowledge**", "The quiz on fighters, rules, weight classes and historic moments"),
+                ("Questions on **champions, submissions and belts**", "From fight history to the unified rules, round after round"),
+                ("Challenge a friend **by link**", "Send the round and see who knows MMA best"),
+                ("Your score, **instantly, round by round**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right answer and why"),
+                ("Stuck? **Use a hint**", "One hint per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **de UFC**", "El quiz sobre peleadores, reglas, categorías de peso y momentos históricos"),
+                ("Preguntas sobre **campeones, sumisiones y cinturones**", "De la historia de las peleas a las reglas unificadas, ronda tras ronda"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más de MMA"),
+                ("Tu marcador al instante, **round a round**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **se lleva el cinturón**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
+    },
+    "nfl": {
+        "name": "NFL Quiz",
+        "colors": [(23, 27, 31), (28, 62, 48), (14, 18, 22)],
+        "highlight_color": (72, 170, 120),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de NFL**", "O quiz sobre regras, equipes, estrelas e a história do futebol americano"),
+                ("Perguntas sobre **times, jogadas e recordes**", "Das regras do jogo aos grandes nomes da liga, rodada após rodada"),
+                ("Desafie um amigo **por link**", "Envie a rodada e veja quem entende mais de futebol americano"),
+                ("Seu placar na hora, **jogada a jogada**", "Pontuação, percentual de acerto e evolução a cada rodada"),
+                ("Quem sabe mais **chega ao topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **NFL knowledge**", "The quiz on rules, teams, stars and the history of football"),
+                ("Questions on **teams, plays and records**", "From the rules of the game to the league's greats, round after round"),
+                ("Challenge a friend **by link**", "Send the round and see who knows football best"),
+                ("Your score, **instantly, play by play**", "Points, accuracy and progress in every round"),
+                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right answer and why"),
+                ("Stuck? **Use a hint**", "One hint per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **de NFL**", "El quiz sobre reglas, equipos, estrellas e historia del fútbol americano"),
+                ("Preguntas sobre **equipos, jugadas y récords**", "De las reglas del juego a los grandes nombres de la liga, ronda tras ronda"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más de fútbol americano"),
+                ("Tu marcador al instante, **jugada a jugada**", "Puntuación, porcentaje de acierto y evolución en cada ronda"),
+                ("Quien sabe más **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
+    },
     "dinokids": {
         "name": "Dino Kids Quiz",
         "colors": [(10, 40, 70), (18, 66, 118), (6, 24, 48)],
