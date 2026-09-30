@@ -149,6 +149,16 @@ TENANT_CONFIGS = {
                 ("Falsch geantwortet? Die Erklärung **folgt sofort**", "Jede Frage zeigt die richtige Antwort und den Grund"),
                 ("Kommst du nicht weiter? **Nimm einen Tipp**", "Eine Hilfe pro Frage, wann immer du sie brauchst"),
                 ("Komm täglich wieder und **halte die Serie**", "Tägliche Serie, Rangliste und Spielverlauf")
+            ],
+            "fr": [
+                ("Testez vos connaissances **sur les Voitures**", "Le quiz ultime sur les marques, modèles, moteurs et supercars"),
+                ("Des questions sur **marques, modèles et puissance**", "Du JDM aux classiques et aux hypercars modernes"),
+                ("Défiez un ami **par lien**", "Envoyez le défi et voyez qui s'y connaît le plus en voitures"),
+                ("Votre score à l'instant, **manche après manche**", "Points, taux de réussite et progression à chaque défi"),
+                ("Celui qui en sait le plus **prend la tête**", "Classement en temps réel entre vous et vos amis"),
+                ("Raté ? La réponse est **expliquée**", "Chaque question montre la bonne réponse et le pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Un coup de pouce par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
             ]
         }
     },
@@ -166,6 +176,26 @@ TENANT_CONFIGS = {
                 ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
                 ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
                 ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your knowledge **of History**", "A quiz on ancient civilizations, empires and wars"),
+                ("Questions on **empires, revolutions and wars**", "From Antiquity and the Middle Ages to the 20th century"),
+                ("Challenge a friend **by link**", "Send the match and see who knows more history"),
+                ("Your score instantly, **round by round**", "Score, accuracy rate and progress with every challenge"),
+                ("Know more? **Lead the leaderboard**", "Real-time leaderboard between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right answer and why"),
+                ("Stuck? **Use a hint**", "One hint per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, leaderboard and history of your rounds")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **de Historia**", "Quiz sobre civilizaciones antiguas, imperios y guerras"),
+                ("Preguntas sobre **imperios, revoluciones y guerras**", "De la Antigüedad y la Edad Media al siglo XX"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más de historia"),
+                ("Tu marcador al instante, **partida a partida**", "Puntuación, porcentaje de acierto y evolución en cada reto"),
+                ("Quien sabe más **lidera la clasificación**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
             ]
         }
     },
@@ -183,6 +213,36 @@ TENANT_CONFIGS = {
                 ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
                 ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
                 ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **culinary knowledge**", "The ultimate quiz on dishes, ingredients and world cuisine"),
+                ("Questions on **classic dishes and spices**", "Flavors and traditions from every continent"),
+                ("Challenge a friend **by link**", "Send the match and see who knows food best"),
+                ("Your score, **instantly, round after round**", "Points, accuracy and progress in every challenge"),
+                ("Whoever knows more **takes the lead**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
+            ],
+            "es": [
+                ("Desafía tus conocimientos **de Cocina**", "Un quiz sobre platos, ingredientes y gastronomía del mundo"),
+                ("Preguntas sobre **platos típicos y especias**", "Sabores y tradiciones de todos los continentes"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más de gastronomía"),
+                ("Tu marcador al instante, **ronda a ronda**", "Puntuación, porcentaje de aciertos y progreso en cada desafío"),
+                ("Quien sabe más **llega a lo más alto**", "Ranking en tiempo real entre tus amigos y tú"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te bloqueaste? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén la racha**", "Racha diaria, ranking e historial de tus rondas")
+            ],
+            "fr": [
+                ("Testez vos connaissances **en gastronomie**", "Le quiz complet sur les plats, ingrédients et cuisines du monde"),
+                ("Questions sur **plats typiques et épices**", "Saveurs et traditions de tous les continents"),
+                ("Défiez un ami **par lien**", "Envoyez la partie et voyez qui s'y connaît le plus en cuisine"),
+                ("Votre score à l'instant, **manche après manche**", "Points, taux de réussite et progression à chaque défi"),
+                ("Qui en sait le plus **prend la tête**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question montre la bonne réponse et pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos parties")
             ]
         }
     },
@@ -314,6 +374,16 @@ TENANT_CONFIGS = {
                 ("Falsch geantwortet? Die Lösung wird **erklärt**", "Jede Frage zeigt die richtige Antwort und die Hintergründe"),
                 ("Kommst du nicht weiter? **Nutze einen Tipp**", "Ein Joker pro Frage, wann immer du ihn im Startfeld brauchst"),
                 ("Komm täglich wieder und **halte deine Serie**", "Tägliche Serie, Rangliste und Renn-Verlauf")
+            ],
+            "fr": [
+                ("Testez vos connaissances **sur la Formule 1**", "Le quiz sur les pilotes, champions, circuits et l'histoire de la F1"),
+                ("Questions sur **pilotes, records et Grands Prix**", "De Senna et Fangio à Hamilton et Verstappen, sans oublier les circuits mythiques"),
+                ("Défiez un ami **par lien**", "Envoyez la course et voyez qui connaît le mieux la Formule 1"),
+                ("Votre score en direct, **tour après tour**", "Points, taux de réussite et progression à chaque manche"),
+                ("Qui en sait le plus **prend la pole**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et le pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin sur la grille"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
             ]
         }
     },
@@ -489,16 +559,38 @@ TENANT_CONFIGS = {
         "name": "Quiz para fãs da Copa",
         "colors": [(8, 21, 40), (21, 57, 97), (6, 15, 30)],
         "highlight_color": (46, 204, 113),
-        "slides": [
-            ("Desafie seus conhecimentos **de Copa**", "O quiz definitivo sobre seleções, craques e história do futebol mundial"),
-            ("Perguntas sobre **craques, seleções e finais**", "De Garrincha e Pelé a Mbappé e o futebol de hoje"),
-            ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais de futebol mundial"),
-            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
-            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
-            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
-            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
-            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de Copa**", "O quiz definitivo sobre seleções, craques e história do futebol mundial"),
+                ("Perguntas sobre **craques, seleções e finais**", "De Garrincha e Pelé a Mbappé e o futebol de hoje"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais de futebol mundial"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **World Cup** knowledge", "The ultimate trivia on national teams, stars and world football history"),
+                ("Questions on **stars, teams and finals**", "From Garrincha and Pelé to Mbappé and football today"),
+                ("Challenge a friend **by link**", "Send the match and see who knows more about world football"),
+                ("Your score, **round after round**", "Points, accuracy and progress in every match"),
+                ("Whoever knows more **tops the board**", "Real-time ranking between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
+                ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, ranking and history of your rounds")
+            ],
+            "es": [
+                ("Pon a prueba tus conocimientos **del Mundial**", "El quiz sobre selecciones, cracks e historia del fútbol mundial"),
+                ("Preguntas sobre **cracks, selecciones y finales**", "De Garrincha y Pelé a Mbappé y el fútbol de hoy"),
+                ("Desafía a un amigo **por enlace**", "Envía la partida y descubre quién sabe más de fútbol mundial"),
+                ("Tu marcador al instante, **ronda a ronda**", "Puntuación, porcentaje de aciertos y evolución en cada partida"),
+                ("Quien sabe más **lidera la clasificación**", "Ranking en tiempo real entre tus amigos y tú"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te bloqueaste? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén tu racha**", "Racha diaria, ranking e historial de tus rondas")
+            ]
+        }
     },
     "bible": {
         "name": "Quiz da Bíblia",
@@ -578,16 +670,38 @@ TENANT_CONFIGS = {
         "name": "Quiz Geografia Mundial",
         "colors": [(15, 43, 31), (27, 67, 50), (10, 30, 20)],
         "highlight_color": (82, 183, 136),
-        "slides": [
-            ("Desafie seus conhecimentos **de Geografia**", "O quiz definitivo sobre bandeiras, capitais e países do mundo"),
-            ("Perguntas sobre **bandeiras, capitais e mapas**", "De países vizinhos a nações do outro lado do planeta"),
-            ("Desafie um amigo **por link**", "Envie a partida e veja quem conhece mais o mundo"),
-            ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
-            ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
-            ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
-            ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
-            ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
-        ]
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **de Geografia**", "O quiz definitivo sobre bandeiras, capitais e países do mundo"),
+                ("Perguntas sobre **bandeiras, capitais e mapas**", "De países vizinhos a nações do outro lado do planeta"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem conhece mais o mundo"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "en": [
+                ("Test your **geography knowledge**", "The ultimate quiz on world flags, capitals and countries"),
+                ("Questions on **flags, capitals and maps**", "From neighboring countries to nations across the planet"),
+                ("Challenge a friend **by link**", "Send the match and see who knows the world better"),
+                ("Your score instantly, **round by round**", "Points, accuracy rate and progress in every match"),
+                ("Whoever knows more **stays on top**", "Real-time leaderboard between you and your friends"),
+                ("Got it wrong? The answer comes **explained**", "Every question shows the right answer and why"),
+                ("Stuck? **Use a hint**", "One hint per question, whenever you need it"),
+                ("Come back daily and **keep your streak**", "Daily streak, leaderboard and history of your rounds")
+            ],
+            "es": [
+                ("Pon a prueba tus conocimientos **de geografía**", "El quiz definitivo sobre banderas, capitales y países del mundo"),
+                ("Preguntas sobre **banderas, capitales y mapas**", "De países vecinos a naciones al otro lado del planeta"),
+                ("Reta a un amigo **por enlace**", "Envía la partida y descubre quién conoce mejor el mundo"),
+                ("Tu marcador al instante, **ronda a ronda**", "Puntuación, porcentaje de aciertos y evolución en cada partida"),
+                ("Quien más sabe **se queda arriba**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te atascaste? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve cada día y **mantén la racha**", "Racha diaria, clasificación e historial de tus rondas")
+            ]
+        }
     },
     "enem-matematica": {
         "name": "ENEM Matemática: Questões",
@@ -1434,6 +1548,16 @@ TENANT_CONFIGS = {
                 ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
                 ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
                 ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "fr": [
+                ("Testez vos connaissances sur **le Bayern**", "Le quiz sur la Ligue des champions, les Bundesligas et l'histoire du Rekordmeister"),
+                ("Questions sur **titres, légendes et classiques**", "De Beckenbauer et Gerd Müller à Lewandowski et l'effectif actuel"),
+                ("Défiez un ami **par lien**", "Envoyez la partie et voyez qui connaît le mieux le Bayern"),
+                ("Votre score en direct, **manche après manche**", "Points, taux de réussite et progression à chaque partie"),
+                ("Celui qui en sait le plus **prend la tête**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et le pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Un coup de pouce par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos parties")
             ]
         }
     },
@@ -2365,6 +2489,16 @@ TENANT_CONFIGS = {
                 ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
                 ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
                 ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "fr": [
+                ("Testez vos connaissances **sur l'UFC**", "Le quiz sur les combattants, les règles, les catégories de poids et les moments historiques"),
+                ("Des questions sur **champions, soumissions et ceintures**", "De l'histoire des combats aux règles unifiées, manche après manche"),
+                ("Défiez un ami **par lien**", "Envoyez la manche et voyez qui s'y connaît le plus en MMA"),
+                ("Votre score en direct, **round après round**", "Points, taux de réussite et progression à chaque manche"),
+                ("Celui qui en sait le plus **remporte la ceinture**", "Classement en temps réel entre vous et vos amis"),
+                ("Une erreur ? La réponse est **expliquée**", "Chaque question affiche la bonne réponse et le pourquoi"),
+                ("Bloqué ? **Utilisez un indice**", "Une aide par question, quand vous en avez besoin"),
+                ("Revenez chaque jour et **gardez votre série**", "Série quotidienne, classement et historique de vos manches")
             ]
         }
     },
@@ -2436,6 +2570,26 @@ TENANT_CONFIGS = {
                 ("Resposta errada? **Entenda o porquê**", "Toda questão vem com a explicação da resposta correta"),
                 ("Precisa de ajuda? **Use uma dica**", "Um recurso disponível quando o desafio for difícil"),
                 ("Sua constância **também conta pontos**", "Um contador de sequência diária acompanha cada partida registrada")
+            ],
+            "en": [
+                ("Test your knowledge **of Dinosaurs**", "A paleontology quiz, species by species"),
+                ("Questions on **geological time and discoveries**", "Species, periods and curiosities from real paleontology"),
+                ("Challenge a friend **by link**", "Share the match and see who knows paleontology better"),
+                ("Track your progress **challenge after challenge**", "Score and accuracy rate updated in real time"),
+                ("Take the lead **on the leaderboard**", "Compare your performance with other players"),
+                ("Wrong answer? **Understand why**", "Every question comes with an explanation of the correct answer"),
+                ("Need help? **Use a hint**", "A tool available when the challenge gets tough"),
+                ("Your consistency **counts too**", "A daily streak counter tracks every match you play")
+            ],
+            "es": [
+                ("Pon a prueba tus conocimientos **de Dinosaurios**", "El quiz de paleontología, especie por especie"),
+                ("Preguntas sobre **tiempo geológico y descubrimientos**", "Especies, períodos y curiosidades de la paleontología real"),
+                ("Reta a un amigo **con un enlace**", "Comparte la partida y mira quién domina más la paleontología"),
+                ("Sigue tu evolución **desafío tras desafío**", "Puntuación y porcentaje de aciertos actualizados en tiempo real"),
+                ("Toma la delantera **del ranking**", "Compara tu rendimiento con el de otros jugadores"),
+                ("¿Respuesta incorrecta? **Entiende por qué**", "Cada pregunta incluye la explicación de la respuesta correcta"),
+                ("¿Necesitas ayuda? **Usa una pista**", "Un recurso disponible cuando el desafío se complica"),
+                ("Tu constancia **también suma puntos**", "Un contador de racha diaria acompaña cada partida registrada")
             ]
         }
     }
