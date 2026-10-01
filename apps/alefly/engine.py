@@ -2226,11 +2226,11 @@ TENANT_CONFIGS = {
                 ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
             ],
             "en": [
-                ("Test your **Celtic** knowledge", "The ultimate quiz on titles, legends and the Hoops' history"),
+                ("The **football quiz** for Celtic fans", "Trivia on titles, legends and the Hoops' history"),
                 ("Questions on **titles, legends and the Old Firm**", "From the 1967 Lisbon Lions to today's clashes with Rangers"),
-                ("Challenge a friend **by link**", "Send the match and see who knows Celtic best"),
+                ("Challenge a friend **by link**", "Send the match and see who knows more about Celtic"),
                 ("Your score, **instantly, match after match**", "Points, accuracy and progress in every round"),
-                ("Top the **leaderboard**", "Real-time ranking between you and your friends"),
+                ("Climb the **leaderboard**", "Real-time ranking between you and your friends"),
                 ("Got it wrong? The answer comes **explained**", "Every question shows the right one and why"),
                 ("Stuck? **Use a hint**", "One assist per question, whenever you need it"),
                 ("Come back daily and **keep your streak**", "Daily streak, ranking and match history")
