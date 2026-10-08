@@ -2922,6 +2922,16 @@ def validate_scene_captures(scenes, capture_dir):
     return paths
 
 
+def remove_stale_slide_outputs(output_dir, selected_count):
+    if not os.path.isdir(output_dir):
+        return
+    for filename in os.listdir(output_dir):
+        match = re.fullmatch(r"slide_(\d+)\.png", filename)
+        path = os.path.join(output_dir, filename)
+        if match and int(match.group(1)) > selected_count and os.path.isfile(path):
+            os.remove(path)
+
+
 def candidates_for_tenant(tenant, platform, locale):
     sub = ("android", "screenshots") if platform == "android" else (
         "ios", "screenshots", "ipad" if platform == "ipad" else "iphone"
@@ -3316,7 +3326,7 @@ def _paste_with_shadow(canvas, layer, x, y, blur=28, offset=18, opacity=0.45):
     canvas.paste(layer, (x, y), layer)
 
 
-def process_screenshot(tenant_key, idx, headline, subheadline, input_path, output_path, platform="android", use_slide_sources=False, locale="pt"):
+def process_screenshot(tenant_key, idx, headline, subheadline, input_path, output_path, platform="android", use_slide_sources=False, locale="pt", action=None):
     config = TENANT_CONFIGS[tenant_key]
     if platform == "ipad":
         cw, ch = 2048, 2732
@@ -3326,6 +3336,8 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
         cw, ch = WIDTH, HEIGHT
     canvas = Image.new('RGB', (cw, ch))
     palette = derive_palette(tenant_key)
+    if action:
+        subheadline = f"{subheadline} **{action}**"
     layout = layout_text_block(canvas, headline, subheadline, platform=platform, locale=locale)
     top_margin = 190 if platform == "ipad" else TEXT_TOP_MARGIN
     device_y = top_margin + layout.total_h + MIN_TEXT_DEVICE_GAP
@@ -3608,6 +3620,7 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None, m
                             output_dir = os.path.join(
                                 ALEFLY_STORE_ASSETS, tenant, store_locale, "screenshots", "android"
                             )
+                            remove_stale_slide_outputs(output_dir, len(scenes))
                             os.makedirs(output_dir, exist_ok=True)
                             raw_persist_dir = os.path.join(output_dir, "raw")
                             os.makedirs(raw_persist_dir, exist_ok=True)
@@ -3618,6 +3631,7 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None, m
                                     tenant, idx, scene["headline"], scene["subheadline"], input_file,
                                     os.path.join(output_dir, f"slide_{idx + 1}.png"),
                                     platform="android", use_slide_sources=False, locale=locale,
+                                    action=scene.get("action"),
                                 )
                     except Exception as exc:
                         failures.append(f"{tenant}/{locale}/android dynamic scenes: {exc!r}")

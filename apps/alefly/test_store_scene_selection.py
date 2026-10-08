@@ -6,6 +6,7 @@ import unittest
 from unittest.mock import patch
 
 import engine
+from PIL import Image
 
 
 def manifest(tenant="bible", games=("quiz", "profile"), locale="pt"):
@@ -91,15 +92,17 @@ class StoreSceneSelectionTest(unittest.TestCase):
 
     def test_missing_required_capture_fails_before_output_directory_is_created(self):
         with tempfile.TemporaryDirectory() as temp_dir:
-            captures = os.path.join(temp_dir, "captures")
-            os.makedirs(captures)
             selected = engine.select_store_scenes(manifest())
+            raw_capture_root = os.path.join(temp_dir, "raw")
+            captures = os.path.join(raw_capture_root, "bible", "android", "screenshots", "pt")
+            os.makedirs(captures)
             for scene in selected[:-1]:
                 open(os.path.join(captures, scene["sourceFile"]), "wb").close()
-            raw_capture_root = os.path.join(temp_dir, "raw")
-            os.makedirs(os.path.join(raw_capture_root, "bible", "android", "screenshots", "pt"))
             output_root = os.path.join(temp_dir, "store-assets")
             output = os.path.join(output_root, "bible", "pt-BR", "screenshots", "android")
+            os.makedirs(output)
+            with open(os.path.join(output, "slide_9.png"), "wb") as fh:
+                fh.write(b"stale")
             with patch.object(engine, "ALEFLY_RAW_CAPTURES", raw_capture_root), \
                     patch.object(engine, "ALEFLY_STORE_ASSETS", output_root), \
                     contextlib.redirect_stdout(io.StringIO()), \
@@ -108,7 +111,70 @@ class StoreSceneSelectionTest(unittest.TestCase):
                     target_tenant="bible", target_platform="android", target_locale="pt",
                     manifest_data=manifest(),
                 )
-            self.assertFalse(os.path.exists(output))
+            self.assertTrue(os.path.exists(os.path.join(output, "slide_9.png")))
+
+    def test_successful_profile_render_removes_only_stale_numbered_slides(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            profile_manifest = manifest("bible", ("profile",))
+            selected = engine.select_store_scenes(profile_manifest)
+            raw_capture_root = os.path.join(temp_dir, "raw")
+            captures = os.path.join(raw_capture_root, "bible", "android", "screenshots", "pt")
+            os.makedirs(captures)
+            for scene in selected:
+                open(os.path.join(captures, scene["sourceFile"]), "wb").close()
+            output_root = os.path.join(temp_dir, "store-assets")
+            output = os.path.join(output_root, "bible", "pt-BR", "screenshots", "android")
+            os.makedirs(output)
+            for name in ("slide_1.png", "slide_5.png", "slide_8.png", "slide_9.png", "slide_notes.png"):
+                with open(os.path.join(output, name), "wb") as fh:
+                    fh.write(b"old")
+            raw_output = os.path.join(output, "raw")
+            os.makedirs(raw_output)
+            with open(os.path.join(raw_output, "legacy-capture.png"), "wb") as fh:
+                fh.write(b"keep")
+            calls = []
+
+            def render(*args, **kwargs):
+                calls.append(kwargs)
+                with open(args[5], "wb") as fh:
+                    fh.write(b"rendered")
+
+            with patch.object(engine, "ALEFLY_RAW_CAPTURES", raw_capture_root), \
+                    patch.object(engine, "ALEFLY_STORE_ASSETS", output_root), \
+                    patch.object(engine, "process_screenshot", side_effect=render), \
+                    contextlib.redirect_stdout(io.StringIO()):
+                engine.run_factory(
+                    target_tenant="bible", target_platform="android", target_locale="pt",
+                    manifest_data=profile_manifest,
+                )
+
+            self.assertEqual(len(calls), len(selected))
+            self.assertIn("Revelar próxima dica", [call.get("action") for call in calls])
+            self.assertTrue(os.path.exists(os.path.join(output, "slide_4.png")))
+            self.assertFalse(os.path.exists(os.path.join(output, "slide_5.png")))
+            self.assertFalse(os.path.exists(os.path.join(output, "slide_8.png")))
+            self.assertFalse(os.path.exists(os.path.join(output, "slide_9.png")))
+            self.assertTrue(os.path.exists(os.path.join(output, "slide_notes.png")))
+            self.assertTrue(os.path.exists(os.path.join(raw_output, "legacy-capture.png")))
+
+    def test_action_is_included_in_the_text_block_drawn_by_renderer(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source = os.path.join(temp_dir, "capture.png")
+            output = os.path.join(temp_dir, "slide.png")
+            Image.new("RGB", (120, 180), "white").save(source)
+            profile_round = next(
+                scene for scene in engine.select_store_scenes(manifest())
+                if scene["sceneId"] == "profile-hints"
+            )
+            with patch.object(engine, "draw_text_block", wraps=engine.draw_text_block) as draw:
+                engine.process_screenshot(
+                    "bible", 0, profile_round["headline"], profile_round["subheadline"],
+                    source, output, platform="android", action=profile_round["action"],
+                )
+
+            text_lines = draw.call_args.args[1].s_lines
+            rendered_copy = " ".join(text_lines).replace("**", "")
+            self.assertIn("Revelar próxima dica", rendered_copy)
 
 
 if __name__ == "__main__":
