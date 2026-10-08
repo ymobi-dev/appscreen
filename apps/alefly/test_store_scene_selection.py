@@ -60,12 +60,12 @@ class StoreSceneSelectionTest(unittest.TestCase):
                 scene["sourceFile"] for scene in selected
             ])
 
-    def test_profile_round_copy_uses_four_hints_and_next_hint_action(self):
+    def test_profile_round_copy_uses_progressive_hints_and_next_hint_action(self):
         selected = engine.select_store_scenes(manifest())
         round_scene = next(scene for scene in selected if scene["sceneId"] == "profile-hints")
 
         self.assertEqual(round_scene["headline"], "Revele pistas e encontre a resposta")
-        self.assertIn("4 pistas", round_scene["subheadline"])
+        self.assertIn("aos poucos", round_scene["subheadline"])
         self.assertEqual(round_scene["action"], "Revelar próxima dica")
         self.assertNotIn("profile-answer", [scene["sceneId"] for scene in selected])
         self.assertNotIn("profile-result", [scene["sceneId"] for scene in selected])
