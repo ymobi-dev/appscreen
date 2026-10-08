@@ -2536,6 +2536,16 @@ TENANT_CONFIGS = {
                 ("¿Fallaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
                 ("¿Te atascas? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
                 ("Vuelve cada día y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ],
+            "de": [
+                ("Testen Sie Ihr **NFL-Wissen**", "Das Quiz zu Regeln, Teams, Stars und zur Geschichte des American Football"),
+                ("Fragen zu **Teams, Spielzügen und Rekorden**", "Von den Spielregeln bis zu den größten Namen der Liga, Runde für Runde"),
+                ("Fordern Sie Freunde **per Link heraus**", "Senden Sie eine Runde und finden Sie heraus, wer sich im Football besser auskennt"),
+                ("Ihr Punktestand, **Spielzug für Spielzug**", "Punkte, Trefferquote und Fortschritt in jeder Runde"),
+                ("Klettern Sie in der **Rangliste nach oben**", "Vergleichen Sie sich in Echtzeit mit Ihren Freunden"),
+                ("Falsch beantwortet? Die Lösung wird **erklärt**", "Zu jeder Frage sehen Sie die richtige Antwort und die Erklärung"),
+                ("Keine Ahnung? **Nutzen Sie einen Hinweis**", "Ein Hinweis pro Frage, wann immer Sie ihn brauchen"),
+                ("Kommen Sie täglich zurück und **halten Sie Ihre Serie am Laufen**", "Tägliche Serie, Rangliste und Verlauf Ihrer Spielrunden")
             ]
         }
     },
