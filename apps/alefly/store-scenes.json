@@ -6,7 +6,7 @@
   {"sceneId":"quiz-ranking","gameId":"quiz","sourceFile":"07-ranking.png","priority":50,"copy":{"pt":{"headline":"Suba no ranking","subheadline":"Compare seus resultados com os de seus amigos."}}},
   {"sceneId":"quiz-hint","gameId":"quiz","sourceFile":"06-hint-used.png","priority":60,"copy":{"pt":{"headline":"Use dicas durante o quiz","subheadline":"Peça uma ajuda quando precisar continuar."}}},
   {"sceneId":"profile-lobby","gameId":"profile","sourceFile":"09-profile-lobby.png","priority":70,"copy":{"pt":{"headline":"Descubra quem ou o que é","subheadline":"Leia as pistas e tente acertar antes dos seus amigos."}}},
-  {"sceneId":"profile-hints","gameId":"profile","sourceFile":"10-profile-hints.png","priority":80,"copy":{"pt":{"headline":"Revele pistas e encontre a resposta","subheadline":"Use as 4 pistas progressivas para descobrir a resposta.","action":"Revelar próxima dica"}}},
+  {"sceneId":"profile-hints","gameId":"profile","sourceFile":"10-profile-hints.png","priority":80,"copy":{"pt":{"headline":"Revele pistas e encontre a resposta","subheadline":"Revele as pistas aos poucos para descobrir a resposta.","action":"Revelar próxima dica"}}},
   {"sceneId":"quiz-answer-feedback","gameId":"quiz","sourceFile":"03-answer-feedback.png","priority":90,"copy":{"pt":{"headline":"Entenda cada resposta","subheadline":"Confira a resposta certa e aprenda com a explicação."}}},
   {"sceneId":"game-list-scrolled","gameId":null,"sourceFile":"05-home-scrolled.png","priority":100,"copy":{"pt":{"headline":"Mais formas de jogar","subheadline":"Encontre novos desafios e continue aprendendo."}}}
 ]
