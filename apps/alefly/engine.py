@@ -2860,6 +2860,98 @@ SLIDE_SOURCES = [
     {"file": "05-home-scrolled.png",   "crop": None, "frame": True},
 ]
 
+STORE_SCENES_PATH = os.path.join(os.path.dirname(__file__), "store-scenes.json")
+STORE_SCENE_LIMIT = 8
+
+
+def select_store_scenes(manifest, tenant=None, locale=None):
+    """Resolve localized Android scenes by active game ID and editorial priority."""
+    if not isinstance(manifest, dict):
+        raise ValueError("manifest must be a JSON object")
+    if tenant and manifest.get("tenantId") != tenant:
+        raise ValueError(f"manifest tenantId '{manifest.get('tenantId')}' does not match --tenant '{tenant}'")
+    if locale and manifest.get("contentLocale") != locale:
+        raise ValueError(
+            f"manifest contentLocale '{manifest.get('contentLocale')}' does not match --locale '{locale}'"
+        )
+
+    game_ids = manifest.get("activeGameIds")
+    if (not isinstance(game_ids, list) or not game_ids
+            or any(not isinstance(game_id, str) or not game_id for game_id in game_ids)):
+        raise ValueError("manifest activeGameIds must be a non-empty list of game IDs")
+    if len(set(game_ids)) != len(game_ids):
+        raise ValueError("manifest activeGameIds must be a non-empty list of unique game IDs")
+
+    with open(STORE_SCENES_PATH, encoding="utf-8") as fh:
+        catalog = json.load(fh)
+    content_locale = manifest.get("contentLocale")
+    candidates = []
+    for scene in catalog:
+        if scene["gameId"] is not None and scene["gameId"] not in game_ids:
+            continue
+        localized = scene.get("copy", {}).get(content_locale)
+        if not localized:
+            continue
+        candidates.append({
+            **scene,
+            "headline": localized["headline"],
+            "subheadline": localized["subheadline"],
+            "action": localized.get("action"),
+        })
+
+    catalog_game_ids = {scene["gameId"] for scene in catalog if scene["gameId"] is not None}
+    unsupported = set(game_ids) - catalog_game_ids
+    if unsupported:
+        raise ValueError(f"no screenshot scenes for active game IDs: {', '.join(sorted(unsupported))}")
+
+    mandatory_ids = {"quiz-question"} if "quiz" in game_ids else set()
+    if "profile" in game_ids:
+        mandatory_ids.update({"profile-lobby", "profile-hints"})
+    by_id = {scene["sceneId"]: scene for scene in candidates}
+    missing = mandatory_ids - by_id.keys()
+    if missing:
+        raise ValueError(f"missing localized copy for required scenes: {', '.join(sorted(missing))}")
+
+    selected = [by_id[scene_id] for scene_id in mandatory_ids]
+    selected_ids = {scene["sceneId"] for scene in selected}
+    selected.extend(
+        scene for scene in sorted(candidates, key=lambda item: item["priority"])
+        if scene["sceneId"] not in selected_ids and len(selected) < STORE_SCENE_LIMIT
+    )
+    if len(selected) > STORE_SCENE_LIMIT:
+        raise ValueError(f"required game scenes exceed Android limit of {STORE_SCENE_LIMIT}")
+    return sorted(selected, key=lambda item: item["priority"])
+
+
+def validate_scene_captures(scenes, capture_dir):
+    """Return selected capture paths only when every required scene is available."""
+    paths = [os.path.join(capture_dir, scene["sourceFile"]) for scene in scenes]
+    missing = [path for path in paths if not os.path.isfile(path)]
+    if missing:
+        raise FileNotFoundError(f"required scene capture missing: {missing[0]}")
+    return paths
+
+
+def remove_stale_slide_outputs(output_dir, selected_count):
+    if not os.path.isdir(output_dir):
+        return
+    for filename in os.listdir(output_dir):
+        match = re.fullmatch(r"slide_(\d+)\.png", filename)
+        path = os.path.join(output_dir, filename)
+        if match and int(match.group(1)) > selected_count and os.path.isfile(path):
+            os.remove(path)
+
+
+def candidates_for_tenant(tenant, platform, locale):
+    sub = ("android", "screenshots") if platform == "android" else (
+        "ios", "screenshots", "ipad" if platform == "ipad" else "iphone"
+    )
+    return [
+        os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub, locale),
+        os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub),
+        os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub, "pt"),
+    ]
+
 # Four-caption tenants (not yet on the eight-slot spec above) map captions positionally
 # onto these captures. Deliberately a different order from SLIDE_SOURCES: slot 3 there is
 # the share sheet, here it is the answer feedback. Retire together with the last legacy tenant.
@@ -3244,7 +3336,7 @@ def _paste_with_shadow(canvas, layer, x, y, blur=28, offset=18, opacity=0.45):
     canvas.paste(layer, (x, y), layer)
 
 
-def process_screenshot(tenant_key, idx, headline, subheadline, input_path, output_path, platform="android", use_slide_sources=False, locale="pt"):
+def process_screenshot(tenant_key, idx, headline, subheadline, input_path, output_path, platform="android", use_slide_sources=False, locale="pt", action=None):
     config = TENANT_CONFIGS[tenant_key]
     if platform == "ipad":
         cw, ch = 2048, 2732
@@ -3254,6 +3346,8 @@ def process_screenshot(tenant_key, idx, headline, subheadline, input_path, outpu
         cw, ch = WIDTH, HEIGHT
     canvas = Image.new('RGB', (cw, ch))
     palette = derive_palette(tenant_key)
+    if action:
+        subheadline = f"{subheadline} **{action}**"
     layout = layout_text_block(canvas, headline, subheadline, platform=platform, locale=locale)
     top_margin = 190 if platform == "ipad" else TEXT_TOP_MARGIN
     device_y = top_margin + layout.total_h + MIN_TEXT_DEVICE_GAP
@@ -3471,7 +3565,24 @@ def dump_locales(tenant: str) -> dict:
         }
     return result
 
-def run_factory(target_tenant=None, target_platform="all", target_locale=None):
+def run_factory(target_tenant=None, target_platform="all", target_locale=None, manifest_data=None):
+    if manifest_data is not None:
+        if not isinstance(manifest_data, dict):
+            raise ValueError("manifest must be a JSON object")
+        if target_platform != "android" or not target_tenant or not target_locale:
+            raise ValueError("--manifest requires --tenant, --locale and --platform android")
+        if manifest_data.get("tenantId") != target_tenant:
+            raise ValueError("manifest tenantId does not match --tenant")
+        if manifest_data.get("contentLocale") != target_locale:
+            raise ValueError("manifest contentLocale does not match --locale")
+        game_ids = manifest_data.get("activeGameIds")
+        if not isinstance(game_ids, list) or not game_ids or any(not isinstance(game_id, str) for game_id in game_ids):
+            raise ValueError("manifest activeGameIds must be a non-empty list of game IDs")
+        if len(set(game_ids)) != len(game_ids):
+            raise ValueError("manifest activeGameIds must not contain duplicates")
+        if manifest_data.get("storeLocale") not in resolve_store_locales(target_tenant, target_locale):
+            raise ValueError("manifest storeLocale is not configured for this tenant and locale")
+    use_dynamic_scenes = bool(manifest_data is not None and "profile" in manifest_data["activeGameIds"])
     platforms = ["android", "ios", "ipad"] if target_platform == "all" else [target_platform]
 
     print(f"🚀 Alefly screenshot factory (platforms: {', '.join(platforms).upper()})...")
@@ -3490,7 +3601,9 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
             print(f"  📦 App: {config['name']} ({tenant})")
 
             is_multi_locale = "slides_by_locale" in config
-            if is_multi_locale:
+            if use_dynamic_scenes:
+                locales = [target_locale]
+            elif is_multi_locale:
                 locales = [target_locale] if target_locale else list(config["slides_by_locale"].keys())
             else:
                 if target_locale and target_locale != "pt":
@@ -3498,6 +3611,43 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None):
                 locales = ["pt"]
 
             for locale in locales:
+                if use_dynamic_scenes:
+                    try:
+                        scenes = select_store_scenes(manifest_data, tenant=tenant, locale=locale)
+                        required_paths = None
+                        capture_dir = None
+                        for candidate_dir in candidates_for_tenant(tenant, platform, locale):
+                            try:
+                                required_paths = validate_scene_captures(scenes, candidate_dir)
+                                capture_dir = candidate_dir
+                                break
+                            except FileNotFoundError:
+                                continue
+                        if capture_dir is None:
+                            validate_scene_captures(scenes, candidates_for_tenant(tenant, platform, locale)[0])
+                        store_locales = [manifest_data["storeLocale"]]
+                        for store_locale in store_locales:
+                            output_dir = os.path.join(
+                                ALEFLY_STORE_ASSETS, tenant, store_locale, "screenshots", "android"
+                            )
+                            remove_stale_slide_outputs(output_dir, len(scenes))
+                            os.makedirs(output_dir, exist_ok=True)
+                            raw_persist_dir = os.path.join(output_dir, "raw")
+                            os.makedirs(raw_persist_dir, exist_ok=True)
+                            for scene, input_file in zip(scenes, required_paths):
+                                shutil.copyfile(input_file, os.path.join(raw_persist_dir, scene["sourceFile"]))
+                            for idx, (scene, input_file) in enumerate(zip(scenes, required_paths)):
+                                process_screenshot(
+                                    tenant, idx, scene["headline"], scene["subheadline"], input_file,
+                                    os.path.join(output_dir, f"slide_{idx + 1}.png"),
+                                    platform="android", use_slide_sources=False, locale=locale,
+                                    action=scene.get("action"),
+                                )
+                    except Exception as exc:
+                        failures.append(f"{tenant}/{locale}/android dynamic scenes: {exc!r}")
+                        print(f"    ❌ Failed to render dynamic scenes ({locale}): {exc!r}")
+                    continue
+
                 slides = config["slides_by_locale"][locale] if is_multi_locale else config["slides"]
                 store_locales = resolve_store_locales(tenant, locale)
 
@@ -3634,6 +3784,7 @@ if __name__ == "__main__":
     parser.add_argument("--tenant", default=None, help="Tenant específico para gerar (ex: flamengo, vasco, worldcup, etc)")
     parser.add_argument("--platform", choices=["android", "ios", "ipad", "all"], default="all")
     parser.add_argument("--locale", default=None, help="Locale específico (pt/es/ca) para tenants multi-idioma; default processa todos os locales do tenant")
+    parser.add_argument("--manifest", default=None, help="Manifesto de jogos ativos para screenshots Android")
     parser.add_argument("--selfcheck", action="store_true", help="Assert text contrast on every tenant seed and exit")
     parser.add_argument("--dump-locales", metavar="TENANT", default=None, help="Print {contentLocale: {storeLocales, hasSlides}} as JSON for TENANT and exit")
     args = parser.parse_args()
@@ -3652,4 +3803,17 @@ if __name__ == "__main__":
     if args.selfcheck:
         _selfcheck()
     else:
-        run_factory(target_tenant=args.tenant, target_platform=args.platform, target_locale=args.locale)
+        manifest_data = None
+        if args.manifest:
+            try:
+                with open(args.manifest, encoding="utf-8") as fh:
+                    manifest_data = json.load(fh)
+            except (OSError, json.JSONDecodeError) as exc:
+                parser.error(f"cannot read --manifest: {exc}")
+        try:
+            run_factory(
+                target_tenant=args.tenant, target_platform=args.platform,
+                target_locale=args.locale, manifest_data=manifest_data,
+            )
+        except ValueError as exc:
+            parser.error(str(exc))
