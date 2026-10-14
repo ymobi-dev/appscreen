@@ -2892,6 +2892,22 @@ def select_store_scenes(manifest, tenant=None, locale=None):
         localized = scene.get("copy", {}).get(content_locale)
         if not localized:
             continue
+        if scene["sceneId"] == "game-list" and content_locale == "pt":
+            if len(game_ids) > 1:
+                localized = {
+                    **localized,
+                    "headline": "Escolha seu **próximo jogo**",
+                }
+            else:
+                game_label = {"quiz": "quiz", "profile": "Perfil"}.get(game_ids[0])
+                if game_label:
+                    localized = {
+                        **localized,
+                        "headline": f"Jogue o **{game_label}**",
+                        "subheadline": "Teste seus conhecimentos e desafie seus amigos."
+                        if game_ids[0] == "quiz"
+                        else "Descubra personagens e lugares com pistas progressivas.",
+                    }
         candidates.append({
             **scene,
             "headline": localized["headline"],

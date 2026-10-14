@@ -1,5 +1,6 @@
 import contextlib
 import io
+import json
 import os
 import tempfile
 import unittest
@@ -44,6 +45,41 @@ class StoreSceneSelectionTest(unittest.TestCase):
         self.assertEqual(selected[-2]["gameId"], "profile")
         self.assertEqual(selected[-1]["sourceFile"], "10-profile-hints.png")
 
+    def test_game_list_headline_highlights_tenant_accent_for_multi_game_tenants(self):
+        selected = engine.select_store_scenes(manifest())
+        scene = next(scene for scene in selected if scene["sceneId"] == "game-list")
+
+        self.assertEqual(scene["headline"], "Escolha seu **próximo jogo**")
+
+    def test_bible_scene_headlines_mark_key_phrases_for_brand_emphasis(self):
+        for scene in engine.select_store_scenes(manifest()):
+            with self.subTest(scene=scene["sceneId"]):
+                self.assertRegex(scene["headline"], r"\*\*[^*]+\*\*")
+
+    def test_single_game_home_copy_adapts_to_active_game_and_highlights_it(self):
+        selected = engine.select_store_scenes(manifest("botafogo", ("quiz",)))
+        scene = next(scene for scene in selected if scene["sceneId"] == "game-list")
+
+        self.assertEqual(scene["headline"], "Jogue o **quiz**")
+        self.assertNotIn("próximo jogo", scene["headline"])
+
+    def test_game_list_copy_stays_localized_outside_portuguese(self):
+        catalog = [
+            {"sceneId": "game-list", "gameId": None, "sourceFile": "01-home.png", "priority": 10,
+             "copy": {"en": {"headline": "Choose your **next game**", "subheadline": "Pick a challenge."}}},
+            {"sceneId": "quiz-question", "gameId": "quiz", "sourceFile": "02-question.png", "priority": 20,
+             "copy": {"en": {"headline": "Try the quiz", "subheadline": "Answer a question."}}},
+        ]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = os.path.join(temp_dir, "store-scenes.json")
+            with open(path, "w", encoding="utf-8") as fh:
+                json.dump(catalog, fh)
+            with patch.object(engine, "STORE_SCENES_PATH", path):
+                selected = engine.select_store_scenes(manifest(games=("quiz",), locale="en"))
+
+        scene = next(scene for scene in selected if scene["sceneId"] == "game-list")
+        self.assertEqual(scene["headline"], "Choose your **next game**")
+
     def test_scene_order_is_priority_based_not_capture_file_order(self):
         selected = engine.select_store_scenes(manifest())
 
@@ -64,7 +100,7 @@ class StoreSceneSelectionTest(unittest.TestCase):
         selected = engine.select_store_scenes(manifest())
         round_scene = next(scene for scene in selected if scene["sceneId"] == "profile-hints")
 
-        self.assertEqual(round_scene["headline"], "Revele pistas e encontre a resposta")
+        self.assertEqual(round_scene["headline"], "Revele **pistas** e encontre a resposta")
         self.assertIn("pistas", round_scene["subheadline"])
         self.assertEqual(round_scene["action"], "Revelar próxima dica")
         self.assertNotIn("profile-answer", [scene["sceneId"] for scene in selected])
