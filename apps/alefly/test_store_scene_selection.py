@@ -39,6 +39,37 @@ class StoreSceneSelectionTest(unittest.TestCase):
             ],
         )
 
+    def test_top5_manifest_reserves_the_localized_lobby_and_answers_scenes(self):
+        for locale, store_locale in (("pt", "pt-BR"), ("en", "en-US")):
+            data = manifest("f1", ("quiz", "top5"), locale)
+            data["storeLocale"] = store_locale
+            selected = engine.select_store_scenes(data)
+            scene_ids = {scene["sceneId"] for scene in selected}
+
+            self.assertIn("top5-lobby", scene_ids)
+            self.assertIn("top5-answers", scene_ids)
+            self.assertNotIn("top5-round", scene_ids)
+            self.assertEqual(sum(1 for scene in selected if scene["gameId"] == "top5"), 2)
+            self.assertLessEqual(len(selected), engine.STORE_SCENE_LIMIT)
+
+    def test_top5_captures_resolve_from_the_locale_specific_game_capture_folder(self):
+        selected = engine.select_store_scenes(manifest("f1", ("quiz", "top5"), "pt"))
+        with tempfile.TemporaryDirectory() as temp_dir:
+            standard_dir = os.path.join(temp_dir, "f1", "android", "screenshots", "pt")
+            top5_dir = os.path.join(temp_dir, "f1", "android", "top5-game", "pt")
+            os.makedirs(standard_dir)
+            os.makedirs(top5_dir)
+            for scene in selected:
+                capture_dir = top5_dir if scene["gameId"] == "top5" else standard_dir
+                open(os.path.join(capture_dir, scene["sourceFile"]), "wb").close()
+
+            with patch.object(engine, "ALEFLY_RAW_CAPTURES", temp_dir):
+                paths = engine.validate_scene_captures(
+                    selected, standard_dir, tenant="f1", locale="pt"
+                )
+
+        self.assertTrue(all(path.startswith(top5_dir) for path in paths if "/top5-game/" in path))
+
     def test_profile_selection_depends_on_game_ids_not_tenant_name(self):
         selected = engine.select_store_scenes(manifest("another-tenant"))
 

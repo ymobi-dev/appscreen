@@ -2923,6 +2923,8 @@ def select_store_scenes(manifest, tenant=None, locale=None):
     mandatory_ids = {"quiz-question"} if "quiz" in game_ids else set()
     if "profile" in game_ids:
         mandatory_ids.update({"profile-lobby", "profile-hints"})
+    if "top5" in game_ids:
+        mandatory_ids.update({"top5-lobby", "top5-answers"})
     by_id = {scene["sceneId"]: scene for scene in candidates}
     missing = mandatory_ids - by_id.keys()
     if missing:
@@ -2939,9 +2941,16 @@ def select_store_scenes(manifest, tenant=None, locale=None):
     return sorted(selected, key=lambda item: item["priority"])
 
 
-def validate_scene_captures(scenes, capture_dir):
+def validate_scene_captures(scenes, capture_dir, tenant=None, platform="android", locale=None):
     """Return selected capture paths only when every required scene is available."""
-    paths = [os.path.join(capture_dir, scene["sourceFile"]) for scene in scenes]
+    paths = []
+    for scene in scenes:
+        capture_subdir = scene.get("captureDirByLocale", {}).get(locale)
+        scene_dir = (
+            os.path.join(ALEFLY_RAW_CAPTURES, tenant, platform, capture_subdir)
+            if capture_subdir else capture_dir
+        )
+        paths.append(os.path.join(scene_dir, scene["sourceFile"]))
     missing = [path for path in paths if not os.path.isfile(path)]
     if missing:
         raise FileNotFoundError(f"required scene capture missing: {missing[0]}")
@@ -3598,7 +3607,7 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None, m
             raise ValueError("manifest activeGameIds must not contain duplicates")
         if manifest_data.get("storeLocale") not in resolve_store_locales(target_tenant, target_locale):
             raise ValueError("manifest storeLocale is not configured for this tenant and locale")
-    use_dynamic_scenes = bool(manifest_data is not None and "profile" in manifest_data["activeGameIds"])
+    use_dynamic_scenes = bool(manifest_data is not None and set(manifest_data["activeGameIds"]) & {"profile", "top5"})
     platforms = ["android", "ios", "ipad"] if target_platform == "all" else [target_platform]
 
     print(f"🚀 Alefly screenshot factory (platforms: {', '.join(platforms).upper()})...")
@@ -3634,13 +3643,18 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None, m
                         capture_dir = None
                         for candidate_dir in candidates_for_tenant(tenant, platform, locale):
                             try:
-                                required_paths = validate_scene_captures(scenes, candidate_dir)
+                                required_paths = validate_scene_captures(
+                                    scenes, candidate_dir, tenant=tenant, platform=platform, locale=locale
+                                )
                                 capture_dir = candidate_dir
                                 break
                             except FileNotFoundError:
                                 continue
                         if capture_dir is None:
-                            validate_scene_captures(scenes, candidates_for_tenant(tenant, platform, locale)[0])
+                            validate_scene_captures(
+                                scenes, candidates_for_tenant(tenant, platform, locale)[0],
+                                tenant=tenant, platform=platform, locale=locale,
+                            )
                         store_locales = [manifest_data["storeLocale"]]
                         for store_locale in store_locales:
                             output_dir = os.path.join(
