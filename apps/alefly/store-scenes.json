@@ -1,14 +1,365 @@
 [
-  {"sceneId":"game-list","gameId":null,"sourceFile":"01-home.png","priority":10,"copy":{"pt":{"headline":"Escolha seu próximo jogo","subheadline":"Entre em um quiz e desafie seus conhecimentos."},"en":{"headline":"Choose your next game","subheadline":"Pick a quiz and test what you know."}}},
-  {"sceneId":"quiz-question","gameId":"quiz","sourceFile":"02-question.png","priority":20,"copy":{"pt":{"headline":"Teste seus **conhecimentos no quiz**","subheadline":"Aprenda com perguntas e explicações em cada resposta."},"en":{"headline":"Test your **quiz knowledge**","subheadline":"Learn from questions and explanations after each answer."}}},
-  {"sceneId":"quiz-share","gameId":"quiz","sourceFile":"08-challenge-share.png","priority":30,"copy":{"pt":{"headline":"Desafie seus **amigos**","subheadline":"Compartilhe uma partida e descubra quem sabe mais."},"en":{"headline":"Challenge your **friends**","subheadline":"Share a game and find out who knows more."}}},
-  {"sceneId":"quiz-result","gameId":"quiz","sourceFile":"04-result-summary.png","priority":40,"copy":{"pt":{"headline":"Acompanhe seu **resultado**","subheadline":"Veja sua pontuação e evolução a cada rodada."},"en":{"headline":"Track your **results**","subheadline":"See your score and progress after every round."}}},
-  {"sceneId":"quiz-ranking","gameId":"quiz","sourceFile":"07-ranking.png","priority":50,"copy":{"pt":{"headline":"Suba no **ranking**","subheadline":"Compare seus resultados com os de seus amigos."},"en":{"headline":"Climb the **leaderboard**","subheadline":"Compare your scores with your friends."}}},
-  {"sceneId":"quiz-hint","gameId":"quiz","sourceFile":"06-hint-used.png","priority":60,"copy":{"pt":{"headline":"Use **dicas** durante o quiz","subheadline":"Peça uma ajuda quando precisar continuar."},"en":{"headline":"Use **hints** during the quiz","subheadline":"Get help when you need another clue."}}},
-  {"sceneId":"profile-lobby","gameId":"profile","sourceFile":"09-profile-lobby.png","priority":70,"copy":{"pt":{"headline":"Descubra **quem ou o que é**","subheadline":"Leia as pistas e tente acertar antes dos seus amigos."}}},
-  {"sceneId":"profile-hints","gameId":"profile","sourceFile":"10-profile-hints.png","priority":80,"copy":{"pt":{"headline":"Revele **pistas** e encontre a resposta","subheadline":"Revele as pistas aos poucos para descobrir a resposta.","action":"Revelar próxima dica"}}},
-  {"sceneId":"top5-lobby","gameId":"top5","sourceFile":"lobby.png","captureDirByLocale":{"en":"top5-game","pt":"top5-game/pt"},"priority":75,"copy":{"pt":{"headline":"Configure seus **desafios Top 5**","subheadline":"Escolha uma categoria e tente acertar os cinco primeiros."},"en":{"headline":"Set up your **Top 5 challenge**","subheadline":"Choose a category and name the top five entries."}}},
-  {"sceneId":"top5-answers","gameId":"top5","sourceFile":"answers.png","captureDirByLocale":{"en":"top5-game","pt":"top5-game/pt"},"priority":85,"copy":{"pt":{"headline":"Veja o **Top 5 da F1**","subheadline":"Confira as respostas certas de cada lista."},"en":{"headline":"See the **F1 Top 5**","subheadline":"Check the right answers for each list."}}},
-  {"sceneId":"quiz-answer-feedback","gameId":"quiz","sourceFile":"03-answer-feedback.png","priority":90,"copy":{"pt":{"headline":"Entenda **cada resposta**","subheadline":"Confira a resposta certa e aprenda com a explicação."},"en":{"headline":"Understand **every answer**","subheadline":"Check the right answer and learn from its explanation."}}},
-  {"sceneId":"game-list-scrolled","gameId":null,"sourceFile":"05-home-scrolled.png","priority":100,"copy":{"pt":{"headline":"Mais formas de **jogar**","subheadline":"Encontre novos desafios e continue aprendendo."},"en":{"headline":"More ways to **play**","subheadline":"Find new challenges and keep learning."}}}
+  {
+    "sceneId": "game-list",
+    "gameId": null,
+    "sourceFile": "01-home.png",
+    "priority": 10,
+    "copy": {
+      "pt": {
+        "headline": "Escolha seu próximo jogo",
+        "subheadline": "Entre em um quiz e desafie seus conhecimentos."
+      },
+      "en": {
+        "headline": "Choose your next game",
+        "subheadline": "Pick a quiz and test what you know."
+      },
+      "it": {
+        "headline": "Scegli il tuo **prossimo quiz**",
+        "subheadline": "Metti alla prova le tue conoscenze e sfida i tuoi amici."
+      },
+      "ru": {
+        "headline": "Выберите **следующую викторину**",
+        "subheadline": "Проверьте свои знания и бросьте вызов друзьям."
+      }
+    }
+  },
+  {
+    "sceneId": "quiz-question",
+    "gameId": "quiz",
+    "sourceFile": "02-question.png",
+    "priority": 20,
+    "copy": {
+      "pt": {
+        "headline": "Teste seus **conhecimentos no quiz**",
+        "subheadline": "Aprenda com perguntas e explicações em cada resposta."
+      },
+      "en": {
+        "headline": "Test your **quiz knowledge**",
+        "subheadline": "Learn from questions and explanations after each answer."
+      },
+      "it": {
+        "headline": "Domande su **campioni e trofei**",
+        "subheadline": "Rispondi e scopri subito la spiegazione."
+      },
+      "ru": {
+        "headline": "Вопросы о **легендах и трофеях**",
+        "subheadline": "Отвечайте и сразу читайте объяснение."
+      }
+    }
+  },
+  {
+    "sceneId": "quiz-share",
+    "gameId": "quiz",
+    "sourceFile": "08-challenge-share.png",
+    "priority": 30,
+    "copy": {
+      "pt": {
+        "headline": "Desafie seus **amigos**",
+        "subheadline": "Compartilhe uma partida e descubra quem sabe mais."
+      },
+      "en": {
+        "headline": "Challenge your **friends**",
+        "subheadline": "Share a game and find out who knows more."
+      },
+      "it": {
+        "headline": "Sfida gli amici **con un link**",
+        "subheadline": "Condividi una partita con le stesse domande."
+      },
+      "ru": {
+        "headline": "Бросьте друзьям вызов **по ссылке**",
+        "subheadline": "Поделитесь раундом с одинаковыми вопросами."
+      }
+    }
+  },
+  {
+    "sceneId": "quiz-result",
+    "gameId": "quiz",
+    "sourceFile": "04-result-summary.png",
+    "priority": 40,
+    "copy": {
+      "pt": {
+        "headline": "Acompanhe seu **resultado**",
+        "subheadline": "Veja sua pontuação e evolução a cada rodada."
+      },
+      "en": {
+        "headline": "Track your **results**",
+        "subheadline": "See your score and progress after every round."
+      },
+      "it": {
+        "headline": "Scopri il tuo **punteggio**",
+        "subheadline": "Controlla risposte corrette, percentuale e tempo."
+      },
+      "ru": {
+        "headline": "Узнайте свой **результат**",
+        "subheadline": "Посмотрите верные ответы, точность и время."
+      }
+    }
+  },
+  {
+    "sceneId": "quiz-ranking",
+    "gameId": "quiz",
+    "sourceFile": "07-ranking.png",
+    "priority": 50,
+    "copy": {
+      "pt": {
+        "headline": "Suba no **ranking**",
+        "subheadline": "Compare seus resultados com os de seus amigos."
+      },
+      "en": {
+        "headline": "Climb the **leaderboard**",
+        "subheadline": "Compare your scores with your friends."
+      },
+      "it": {
+        "headline": "Confronta i **risultati**",
+        "subheadline": "Scopri chi ne sa di più tra i tuoi amici."
+      },
+      "ru": {
+        "headline": "Сравните **результаты**",
+        "subheadline": "Проверьте, кто из друзей знает больше."
+      }
+    }
+  },
+  {
+    "sceneId": "quiz-hint",
+    "gameId": "quiz",
+    "sourceFile": "06-hint-used.png",
+    "priority": 60,
+    "copy": {
+      "pt": {
+        "headline": "Use **dicas** durante o quiz",
+        "subheadline": "Peça uma ajuda quando precisar continuar."
+      },
+      "en": {
+        "headline": "Use **hints** during the quiz",
+        "subheadline": "Get help when you need another clue."
+      },
+      "it": {
+        "headline": "Un **indizio** quando serve",
+        "subheadline": "Usa un aiuto per trovare la risposta."
+      },
+      "ru": {
+        "headline": "**Подсказка**, когда она нужна",
+        "subheadline": "Воспользуйтесь помощью, чтобы найти ответ."
+      }
+    }
+  },
+  {
+    "sceneId": "profile-lobby",
+    "gameId": "profile",
+    "sourceFile": "09-profile-lobby.png",
+    "priority": 70,
+    "copy": {
+      "pt": {
+        "headline": "Descubra **quem ou o que é**",
+        "subheadline": "Leia as pistas e tente acertar antes dos seus amigos."
+      }
+    }
+  },
+  {
+    "sceneId": "profile-hints",
+    "gameId": "profile",
+    "sourceFile": "10-profile-hints.png",
+    "priority": 80,
+    "copy": {
+      "pt": {
+        "headline": "Revele **pistas** e encontre a resposta",
+        "subheadline": "Revele as pistas aos poucos para descobrir a resposta.",
+        "action": "Revelar próxima dica"
+      }
+    }
+  },
+  {
+    "sceneId": "top5-lobby",
+    "gameId": "top5",
+    "sourceFile": "11-top5-lobby.png",
+    "priority": 110,
+    "copy": {
+      "ar": {
+        "headline": "اكتشف تحدي أفضل 5",
+        "subheadline": "اعثر على أول خمسة في تصنيفات ريال مدريد.",
+        "action": "ابدأ"
+      },
+      "ca": {
+        "headline": "Descobreix el repte Top 5",
+        "subheadline": "Troba els cinc primers de cada rànquing del Real Madrid.",
+        "action": "Comença"
+      },
+      "de": {
+        "headline": "Entdecke die Top-5-Challenge",
+        "subheadline": "Finde die ersten fünf in den Real-Madrid-Ranglisten.",
+        "action": "Starten"
+      },
+      "en": {
+        "headline": "Discover the Top 5 challenge",
+        "subheadline": "Find the top five in Real Madrid player and opponent rankings.",
+        "action": "Start"
+      },
+      "es": {
+        "headline": "Descubre el reto Top 5",
+        "subheadline": "Encuentra los cinco primeros de cada ranking del Real Madrid.",
+        "action": "Empezar"
+      },
+      "fr": {
+        "headline": "Découvre le défi Top 5",
+        "subheadline": "Trouve les cinq premiers des classements du Real Madrid.",
+        "action": "Commencer"
+      },
+      "hr": {
+        "headline": "Otkrij Top 5 izazov",
+        "subheadline": "Pronađi prvih pet na ljestvicama Real Madrida.",
+        "action": "Počni"
+      },
+      "id": {
+        "headline": "Coba tantangan Top 5",
+        "subheadline": "Temukan lima teratas dalam berbagai peringkat Real Madrid.",
+        "action": "Mulai"
+      },
+      "it": {
+        "headline": "Scopri la sfida Top 5",
+        "subheadline": "Trova i primi cinque nelle classifiche del Real Madrid.",
+        "action": "Inizia"
+      },
+      "pt": {
+        "headline": "Descubra o desafio Top 5",
+        "subheadline": "Encontre os cinco primeiros de cada ranking do Real Madrid.",
+        "action": "Começar"
+      },
+      "ru": {
+        "headline": "Попробуй испытание Топ-5",
+        "subheadline": "Найди первую пятёрку в рейтингах «Реал Мадрид».",
+        "action": "Начать"
+      },
+      "tr": {
+        "headline": "Top 5 mücadelesini keşfet",
+        "subheadline": "Real Madrid sıralamalarındaki ilk beş ismi bul.",
+        "action": "Başla"
+      },
+      "zh": {
+        "headline": "体验 Top 5 挑战",
+        "subheadline": "找出皇家马德里球员与对手排行榜的前五名。",
+        "action": "开始"
+      }
+    }
+  },
+  {
+    "sceneId": "top5-round",
+    "gameId": "top5",
+    "sourceFile": "12-top5-round.png",
+    "priority": 120,
+    "copy": {
+      "ar": {
+        "headline": "خمّن أول خمسة",
+        "subheadline": "أدخل إجاباتك بأي ترتيب تريده.",
+        "action": "أرسل الإجابة"
+      },
+      "ca": {
+        "headline": "Endevina els cinc primers",
+        "subheadline": "Escriu les respostes en l’ordre que prefereixis.",
+        "action": "Envia la resposta"
+      },
+      "de": {
+        "headline": "Errate die Top fünf",
+        "subheadline": "Gib deine Antworten in beliebiger Reihenfolge ein.",
+        "action": "Antwort senden"
+      },
+      "en": {
+        "headline": "Guess the top five",
+        "subheadline": "Enter your answers in any order.",
+        "action": "Submit answer"
+      },
+      "es": {
+        "headline": "Adivina los cinco primeros",
+        "subheadline": "Escribe tus respuestas en el orden que prefieras.",
+        "action": "Enviar respuesta"
+      },
+      "fr": {
+        "headline": "Devine les cinq premiers",
+        "subheadline": "Saisis tes réponses dans l’ordre de ton choix.",
+        "action": "Envoyer la réponse"
+      },
+      "hr": {
+        "headline": "Pogodi prvih pet",
+        "subheadline": "Unesi odgovore redoslijedom koji želiš.",
+        "action": "Pošalji odgovor"
+      },
+      "id": {
+        "headline": "Tebak lima teratas",
+        "subheadline": "Masukkan jawaban dalam urutan apa pun.",
+        "action": "Kirim jawaban"
+      },
+      "it": {
+        "headline": "Indovina i primi cinque",
+        "subheadline": "Inserisci le risposte nell’ordine che preferisci.",
+        "action": "Invia la risposta"
+      },
+      "pt": {
+        "headline": "Adivinhe os cinco primeiros",
+        "subheadline": "Digite suas respostas na ordem que preferir.",
+        "action": "Enviar resposta"
+      },
+      "ru": {
+        "headline": "Угадай первую пятёрку",
+        "subheadline": "Вводи ответы в любом порядке.",
+        "action": "Отправить ответ"
+      },
+      "tr": {
+        "headline": "İlk beşi tahmin et",
+        "subheadline": "Cevaplarını istediğin sırayla gir.",
+        "action": "Cevabı gönder"
+      },
+      "zh": {
+        "headline": "猜出前五名",
+        "subheadline": "按任意顺序填写答案。",
+        "action": "提交答案"
+      }
+    }
+  },
+  {
+    "sceneId": "quiz-answer-feedback",
+    "gameId": "quiz",
+    "sourceFile": "03-answer-feedback.png",
+    "priority": 90,
+    "copy": {
+      "pt": {
+        "headline": "Entenda **cada resposta**",
+        "subheadline": "Confira a resposta certa e aprenda com a explicação."
+      },
+      "en": {
+        "headline": "Understand **every answer**",
+        "subheadline": "Check the right answer and learn from its explanation."
+      },
+      "it": {
+        "headline": "Ogni risposta **ha una spiegazione**",
+        "subheadline": "Scopri subito la risposta corretta e il perché."
+      },
+      "ru": {
+        "headline": "К каждому ответу есть **объяснение**",
+        "subheadline": "Сразу узнайте правильный ответ и почему он верный."
+      }
+    }
+  },
+  {
+    "sceneId": "game-list-scrolled",
+    "gameId": null,
+    "sourceFile": "05-home-scrolled.png",
+    "priority": 100,
+    "copy": {
+      "pt": {
+        "headline": "Mais formas de **jogar**",
+        "subheadline": "Encontre novos desafios e continue aprendendo."
+      },
+      "en": {
+        "headline": "More ways to **play**",
+        "subheadline": "Find new challenges and keep learning."
+      },
+      "it": {
+        "headline": "Scegli il tuo **prossimo gioco**",
+        "subheadline": "Torna quando vuoi per un nuovo round."
+      },
+      "ru": {
+        "headline": "Выберите **следующую игру**",
+        "subheadline": "Возвращайтесь за новым раундом в любое время."
+      }
+    }
+  }
 ]

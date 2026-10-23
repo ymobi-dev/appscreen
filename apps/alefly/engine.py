@@ -1422,6 +1422,26 @@ TENANT_CONFIGS = {
                 ("T'has encallat? **Usa una pista**", "Una ajuda per pregunta, quan la necessitis"),
                 ("Torna cada dia i **manté la teva ratxa**", "Ratxa diària, rànquing i historial de les teves partides")
             ],
+            "it": [
+                ("Metti alla prova **il tuo Real Madrid**", "Quiz su titoli, leggende e grandi sfide"),
+                ("Domande su **campioni e trofei**", "Dalle grandi epoche ai protagonisti di oggi"),
+                ("Sfida un amico **con un link**", "Invia il round e scopri chi conosce meglio il club"),
+                ("Il tuo punteggio, **round dopo round**", "Risposte corrette, percentuale e tempo impiegato"),
+                ("Scala la **classifica**", "Confronta i risultati con i tuoi amici"),
+                ("Hai sbagliato? La risposta è **spiegata**", "Ogni domanda mostra la soluzione e il perché"),
+                ("Ti serve aiuto? **Usa un indizio**", "Un aiuto per ogni domanda, quando vuoi"),
+                ("Sempre una nuova **sfida**", "Quiz rapidi da condividere con i tuoi amici")
+            ],
+            "ru": [
+                ("Проверьте знания о **клубе «Реал Мадрид»**", "Викторина о трофеях, легендах и великих матчах"),
+                ("Вопросы о **легендах и трофеях**", "От великих эпох до игроков сегодняшнего дня"),
+                ("Бросьте вызов другу **по ссылке**", "Отправьте раунд и узнайте, кто лучше знает клуб"),
+                ("Ваш счёт — **в каждом раунде**", "Баллы, точность ответов и затраченное время"),
+                ("Попадите в **рейтинг**", "Сравнивайте результаты с друзьями"),
+                ("Ошибка? Ответ будет **с объяснением**", "В каждом вопросе есть правильный ответ и объяснение"),
+                ("Нужна подсказка? **Используйте её**", "Подсказка к каждому вопросу, когда понадобится"),
+                ("Новая **викторина** — новый вызов", "Быстрые раунды о «Реал Мадрид» для вас и друзей")
+            ],
             "en": [
                 ("Test your **Real Madrid** knowledge", "The ultimate quiz on titles, Galácticos and Merengue history"),
                 ("Questions on **titles, legends and Clásicos**", "From Di Stéfano to the Galácticos and today's squad"),
@@ -2886,10 +2906,18 @@ def select_store_scenes(manifest, tenant=None, locale=None):
         catalog = json.load(fh)
     content_locale = manifest.get("contentLocale")
     candidates = []
+    tenant_slides = TENANT_CONFIGS.get(tenant, {}).get("slides_by_locale", {})
+    slide_indexes = {source["file"]: index for index, source in enumerate(SLIDE_SOURCES)}
     for scene in catalog:
         if scene["gameId"] is not None and scene["gameId"] not in game_ids:
             continue
         localized = scene.get("copy", {}).get(content_locale)
+        if not localized:
+            index = slide_indexes.get(scene["sourceFile"])
+            slides = tenant_slides.get(content_locale, [])
+            if index is not None and index < len(slides):
+                headline, subheadline = slides[index]
+                localized = {"headline": headline, "subheadline": subheadline}
         if not localized:
             continue
         if scene["sceneId"] == "game-list" and content_locale == "pt":
@@ -2924,7 +2952,7 @@ def select_store_scenes(manifest, tenant=None, locale=None):
     if "profile" in game_ids:
         mandatory_ids.update({"profile-lobby", "profile-hints"})
     if "top5" in game_ids:
-        mandatory_ids.update({"top5-lobby", "top5-answers"})
+        mandatory_ids.update({"top5-lobby", "top5-round"})
     by_id = {scene["sceneId"]: scene for scene in candidates}
     missing = mandatory_ids - by_id.keys()
     if missing:
@@ -3535,6 +3563,8 @@ STORE_LOCALE_BY_CONTENT_LOCALE = {
     "pt": "pt-BR",
     "es": "es-ES",
     "ca": "ca",
+    "it": "it-IT",
+    "ru": "ru-RU",
     "en": "en-US",
     # "id" and "tr" stay bare on purpose. store-assets/{tenant}/ carries BOTH id/ and
     # id-ID/, and Play resolves Indonesian as "id" — the longer folder is the one it
@@ -3791,7 +3821,7 @@ def _selfcheck():
     print(f"✅ selfcheck ok: {checked} tenants, every text role >= {MIN_TEXT_CONTRAST}:1 on its band")
 
     # resolve_store_locales: backward compat (no override or string) + new list form
-    assert resolve_store_locales("flamengo", "pt") == ["pt-BR"]  # no override, falls back to the global default
+    assert resolve_store_locales("flamengo", "pt") == ["pt-BR", "pt-PT"]
     assert resolve_store_locales("bocajuniors", "es") == ["es-419"]  # existing string override becomes a 1-item list
     TENANT_STORE_LOCALE_OVERRIDES["_selfcheck_multi"] = {"en": ["en-US", "en-GB", "en-PH"]}
     assert resolve_store_locales("_selfcheck_multi", "en") == ["en-US", "en-GB", "en-PH"]

@@ -21,6 +21,31 @@ def manifest(tenant="bible", games=("quiz", "profile"), locale="pt"):
 
 
 class StoreSceneSelectionTest(unittest.TestCase):
+    def test_realmadrid_top5_scenes_cover_every_supported_locale_and_follow_quiz_scenes(self):
+        locales = ("ar", "ca", "de", "en", "es", "fr", "hr", "id", "it", "pt", "ru", "tr", "zh")
+        for locale in locales:
+            with self.subTest(locale=locale):
+                selected = engine.select_store_scenes(
+                    manifest("realmadrid", ("quiz", "top5"), locale),
+                    tenant="realmadrid",
+                    locale=locale,
+                )
+                top5_scenes = [scene for scene in selected if scene["gameId"] == "top5"]
+
+                self.assertEqual([scene["sceneId"] for scene in top5_scenes], [
+                    "top5-lobby", "top5-round",
+                ])
+                self.assertEqual([scene["sourceFile"] for scene in top5_scenes], [
+                    "11-top5-lobby.png", "12-top5-round.png",
+                ])
+                self.assertEqual([scene["sceneId"] for scene in selected[-2:]], [
+                    "top5-lobby", "top5-round",
+                ])
+
+    def test_selfcheck_accepts_current_multilocale_storefronts(self):
+        with patch("sys.stdout", new_callable=io.StringIO):
+            engine._selfcheck()
+
     def test_profile_manifest_reserves_quiz_and_profile_scenes_and_caps_at_eight(self):
         selected = engine.select_store_scenes(manifest())
 
@@ -39,36 +64,58 @@ class StoreSceneSelectionTest(unittest.TestCase):
             ],
         )
 
-    def test_top5_manifest_reserves_the_localized_lobby_and_answers_scenes(self):
+    def test_top5_scenes_follow_the_quiz_and_use_tenant_independent_screens(self):
         for locale, store_locale in (("pt", "pt-BR"), ("en", "en-US")):
             data = manifest("f1", ("quiz", "top5"), locale)
             data["storeLocale"] = store_locale
             selected = engine.select_store_scenes(data)
             scene_ids = {scene["sceneId"] for scene in selected}
+            top5_scenes = [scene for scene in selected if scene["gameId"] == "top5"]
 
             self.assertIn("top5-lobby", scene_ids)
-            self.assertIn("top5-answers", scene_ids)
-            self.assertNotIn("top5-round", scene_ids)
+            self.assertIn("top5-round", scene_ids)
+            self.assertNotIn("top5-answers", scene_ids)
+            self.assertEqual([scene["sceneId"] for scene in top5_scenes], ["top5-lobby", "top5-round"])
+            self.assertEqual([scene["sceneId"] for scene in selected[-2:]], [
+                "top5-lobby", "top5-round",
+            ])
             self.assertEqual(sum(1 for scene in selected if scene["gameId"] == "top5"), 2)
             self.assertLessEqual(len(selected), engine.STORE_SCENE_LIMIT)
 
-    def test_top5_captures_resolve_from_the_locale_specific_game_capture_folder(self):
+    def test_realmadrid_italian_and_russian_locales_have_store_mapping_and_slide_copy(self):
+        cases = (("it", "it-IT", "domande"), ("ru", "ru-RU", "вопрос"))
+        with tempfile.TemporaryDirectory() as seed_dir:
+            with open(os.path.join(seed_dir, "realmadrid.json"), "w", encoding="utf-8") as fh:
+                json.dump({"supportedLocales": ["it", "ru"]}, fh)
+            with patch.object(engine, "ALEFLY_SEEDS", seed_dir):
+                locales = engine.dump_locales("realmadrid")
+
+        for locale, store_locale, translated_word in cases:
+            self.assertEqual(locales[locale]["storeLocales"], [store_locale])
+            self.assertTrue(locales[locale]["hasSlides"])
+            data = manifest("realmadrid", ("quiz",), locale)
+            data["storeLocale"] = store_locale
+            scenes = engine.select_store_scenes(data)
+            self.assertEqual(len(scenes), 8)
+            question = next(scene for scene in scenes if scene["sceneId"] == "quiz-question")
+            self.assertIn(translated_word, question["headline"].lower())
+
+    def test_top5_captures_resolve_from_the_staged_store_screenshot_folder(self):
         selected = engine.select_store_scenes(manifest("f1", ("quiz", "top5"), "pt"))
         with tempfile.TemporaryDirectory() as temp_dir:
             standard_dir = os.path.join(temp_dir, "f1", "android", "screenshots", "pt")
-            top5_dir = os.path.join(temp_dir, "f1", "android", "top5-game", "pt")
             os.makedirs(standard_dir)
-            os.makedirs(top5_dir)
             for scene in selected:
-                capture_dir = top5_dir if scene["gameId"] == "top5" else standard_dir
-                open(os.path.join(capture_dir, scene["sourceFile"]), "wb").close()
+                open(os.path.join(standard_dir, scene["sourceFile"]), "wb").close()
 
             with patch.object(engine, "ALEFLY_RAW_CAPTURES", temp_dir):
                 paths = engine.validate_scene_captures(
                     selected, standard_dir, tenant="f1", locale="pt"
                 )
 
-        self.assertTrue(all(path.startswith(top5_dir) for path in paths if "/top5-game/" in path))
+        self.assertEqual([os.path.basename(path) for path in paths if "top5" in path], [
+            "11-top5-lobby.png", "12-top5-round.png",
+        ])
 
     def test_profile_selection_depends_on_game_ids_not_tenant_name(self):
         selected = engine.select_store_scenes(manifest("another-tenant"))
