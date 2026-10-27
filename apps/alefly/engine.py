@@ -1108,6 +1108,23 @@ TENANT_CONFIGS = {
             ]
         }
     },
+    "sporting": {
+        "name": "Sporting CP: Quiz e Perguntas",
+        "colors": [(0, 26, 0), (0, 102, 0), (0, 13, 0)],
+        "highlight_color": (255, 255, 255),
+        "slides_by_locale": {
+            "pt": [
+                ("O quiz do **Sporting CP**", "Perguntas sobre a história leonina, os títulos e os ídolos"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "De Alvalade à Academia, um clube cheio de histórias"),
+                ("Desafio entre amigos **por link**", "Enviar a partida e ver quem sabe mais do Sporting"),
+                ("Resultado na hora, **partida a partida**", "Pontuação, taxa de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre os amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada pergunta mostra a certa e o porquê"),
+                ("Travou? **Uma dica ajuda**", "Uma ajuda por pergunta, quando for preciso"),
+                ("Voltar todos os dias e **manter a sequência**", "Sequência diária, ranking e histórico das partidas")
+            ]
+        }
+    },
     "saopaulo": {
         "name": "Quiz para Fãs do São Paulo",
         "colors": [(30, 20, 22), (65, 10, 18), (18, 18, 18)],
@@ -3526,6 +3543,7 @@ TENANT_STORE_LOCALE_OVERRIDES = {
     "corinthians": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "nl": "nl-NL"},
     "saopaulo": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "es": "es-419"},
     "palmeiras": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "es": "es-419"},
+    "sporting": {"pt": ["pt-PT", "pt-BR"]},
     "santos": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "es": "es-419"},
     "vasco": {"pt": ["pt-BR", "pt-PT"], "en": "en-US", "es": "es-419"},
     "botafogo": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "ar": "ar"},
