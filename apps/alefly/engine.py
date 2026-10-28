@@ -8,6 +8,7 @@ import argparse
 import colorsys
 import itertools
 import shutil
+import unicodedata
 import numpy as np
 from collections import namedtuple
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
@@ -1139,6 +1140,33 @@ TENANT_CONFIGS = {
                 ("Errou? A resposta vem **explicada**", "Cada pergunta mostra a certa e o porquê"),
                 ("Travou? **Uma dica ajuda**", "Uma ajuda por pergunta, quando for preciso"),
                 ("Voltar todos os dias e **manter a sequência**", "Sequência diária, ranking e histórico das partidas")
+            ]
+        }
+    },
+    "besiktas": {
+        "name": "Beşiktaş Quiz: Futbol Testi",
+        "colors": [(26, 26, 26), (90, 90, 90), (5, 5, 5)],
+        "highlight_color": (255, 255, 255),
+        "slides_by_locale": {
+            "tr": [
+                ("**Beşiktaş** bilgini test et", "Kulüp tarihi, kupalar ve derbiler üzerine bilgi yarışması"),
+                ("**Tarih, derbiler ve Çarşı** üzerine sorular", "Kuruluştan stadyumlara, Avrupa kupalarından Süper Lig'e"),
+                ("Bir arkadaşını **linkle** meydan oku", "Turu gönder, Beşiktaş'ı kim daha iyi biliyor gör"),
+                ("Skorun anında, **tur be tur**", "Puan, doğru cevap yüzdesi ve her turdaki gelişimin"),
+                ("Daha çok bilen **zirveye çıkar**", "Sen ve arkadaşların arasında gerçek zamanlı sıralama"),
+                ("Yanlış mı bildin? Cevap **açıklamalı gelir**", "Her soru doğru cevabı ve nedenini gösterir"),
+                ("Takıldın mı? **İpucu kullan**", "Her soru için bir yardım, ihtiyacın olduğunda"),
+                ("Her gün geri gel, **serini koru**", "Günlük seri, sıralama ve tur geçmişin")
+            ],
+            "pt": [
+                ("O quiz do **Besiktas**", "Perguntas sobre a história do clube, os títulos e os clássicos"),
+                ("Perguntas sobre **história, clássicos e a Çarşı**", "Da fundação aos estádios e às campanhas europeias"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Besiktas"),
+                ("Resultado na hora, **rodada a rodada**", "Pontuação, taxa de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada pergunta mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por pergunta, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Sequência diária, ranking e histórico das suas rodadas")
             ]
         }
     },
@@ -3100,11 +3128,7 @@ def candidates_for_tenant(tenant, platform, locale):
     sub = ("android", "screenshots") if platform == "android" else (
         "ios", "screenshots", "ipad" if platform == "ipad" else "iphone"
     )
-    return [
-        os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub, locale),
-        os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub),
-        os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub, "pt"),
-    ]
+    return [os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub, locale)]
 
 # Four-caption tenants (not yet on the eight-slot spec above) map captions positionally
 # onto these captures. Deliberately a different order from SLIDE_SOURCES: slot 3 there is
@@ -3115,20 +3139,28 @@ LEGACY_SLIDE_FILES = ["01-home.png", "02-question.png", "03-answer-feedback.png"
 # slide rendered with it comes out as a row of .notdef boxes, which measures a normal
 # width so only looking at the image catches it.
 RTL_LOCALES = {"ar", "fa", "ur"}
-ARABIC_FONTS = ("/System/Library/Fonts/SFArabic.ttf", "/System/Library/Fonts/GeezaPro.ttc")
+ARABIC_FONTS = ("/System/Library/Fonts/Supplemental/Arial Unicode.ttf", "/Library/Fonts/Arial Unicode.ttf")
 
 # Same .notdef-box failure as Arabic: Nunito carries no CJK glyphs.
-CJK_LOCALES = {"zh", "ja"}
 CJK_FONT = "/System/Library/Fonts/Hiragino Sans GB.ttc"
-
-KOREAN_LOCALES = {"ko"}
 KOREAN_FONT = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
-
-DEVANAGARI_LOCALES = {"hi"}
 DEVANAGARI_FONTS = (
     "/System/Library/Fonts/Supplemental/ITFDevanagari.ttc",
     "/System/Library/Fonts/Supplemental/DevanagariMT.ttc"
 )
+MYANMAR_FONTS = ("/System/Library/Fonts/Supplemental/Myanmar Sangam MN.ttc",)
+THAI_FONT = "/System/Library/Fonts/Supplemental/Thonburi.ttc"
+
+# Every locale using a non-Nunito writing system must have its matching typeface.
+# Each candidate is (path, headline face, highlight face, subhead face) in its TTC.
+SCRIPT_FONT_SPECS = {
+    **{locale: tuple((path, 0, 0, 0) for path in ARABIC_FONTS) for locale in RTL_LOCALES},
+    **{locale: ((CJK_FONT, 2, 2, 0),) for locale in {"zh", "ja"}},
+    "ko": ((KOREAN_FONT, 6, 6, 0),),
+    "hi": ((DEVANAGARI_FONTS[0], 1, 1, 0), (DEVANAGARI_FONTS[1], 0, 0, 0)),
+    "my": ((MYANMAR_FONTS[0], 0, 0, 0),),
+    "th": ((THAI_FONT, 1, 1, 0),),
+}
 
 
 Fonts = namedtuple("Fonts", "headline highlight subhead")
@@ -3157,40 +3189,62 @@ def get_fonts(platform="ios", locale="pt", scale=1.0):
     # fallback in layout_text_block, never a per-tenant choice.
     size_h, size_s = (148, 88) if platform == "ipad" else (104, 64)
     size_h, size_s = int(size_h * scale), int(size_s * scale)
-    if locale in RTL_LOCALES:
-        arabic = next((f for f in ARABIC_FONTS if os.path.exists(f)), None)
-        if arabic:
-            head = ImageFont.truetype(arabic, size_h)
-            return Fonts(head, head, ImageFont.truetype(arabic, size_s))
-    if locale in CJK_LOCALES and os.path.exists(CJK_FONT):
-        # index 2/0 = W6 (bold) / W3 (regular) faces inside the .ttc. CJK strokes are
-        # already heavier at a given point size than Latin type, so W3 still reads fine
-        # for the subhead. No heavier face than W6 in the .ttc, so highlight == headline.
-        head = ImageFont.truetype(CJK_FONT, size_h, index=2)
-        return Fonts(head, head, ImageFont.truetype(CJK_FONT, size_s, index=0))
-    if locale in KOREAN_LOCALES and os.path.exists(KOREAN_FONT):
-        # index 6/0 = Bold / Regular in AppleSDGothicNeo.ttc
-        head = ImageFont.truetype(KOREAN_FONT, size_h, index=6)
-        return Fonts(head, head, ImageFont.truetype(KOREAN_FONT, size_s, index=0))
-    if locale in DEVANAGARI_LOCALES:
-        devanagari = next((f for f in DEVANAGARI_FONTS if os.path.exists(f)), None)
-        if devanagari:
-            # index 1/0 = Bold / Book in ITFDevanagari.ttc
-            idx_b = 1 if "ITF" in devanagari else 0
-            head = ImageFont.truetype(devanagari, size_h, index=idx_b)
-            return Fonts(head, head, ImageFont.truetype(devanagari, size_s, index=0))
+    font_candidates = SCRIPT_FONT_SPECS.get(locale)
+    if font_candidates:
+        selected = next((spec for spec in font_candidates if os.path.exists(spec[0])), None)
+        if not selected:
+            raise FileNotFoundError(f"A script-capable typeface is required to render locale {locale}")
+        font_path, headline_index, highlight_index, subhead_index = selected
+        return Fonts(
+            ImageFont.truetype(font_path, size_h, index=headline_index),
+            ImageFont.truetype(font_path, size_h, index=highlight_index),
+            ImageFont.truetype(font_path, size_s, index=subhead_index),
+        )
     return Fonts(_nunito(size_h, HEADLINE_WEIGHT), _nunito(size_h, HIGHLIGHT_WEIGHT),
                  _nunito(size_s, SUBHEAD_WEIGHT))
 
 # CJK Unified Ideographs, Hiragana, Katakana + common fullwidth punctuation.
 # These scripts carry no spaces between words, so wrapping has to break per character.
 CJK_RE = re.compile(r'[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3000-\u303F\uFF00-\uFFEF]')
+THAI_RE = re.compile(r'[\u0E00-\u0E7F]')
+THAI_PRE_VOWELS = set("เแโใไ")
+THAI_POST_VOWELS = set("ะาำ")
 
 def _is_cjk_char(s):
     return len(s) == 1 and bool(CJK_RE.match(s))
 
+def _is_no_space_unit(s):
+    return _is_cjk_char(s) or bool(THAI_RE.search(s))
+
+def _thai_cluster_end(text, index):
+    end = index + (text[index] in THAI_PRE_VOWELS)
+    if end < len(text) and THAI_RE.match(text[end]):
+        end += 1
+    while end < len(text) and (
+        unicodedata.category(text[end]).startswith("M") or text[end] in THAI_POST_VOWELS
+    ):
+        end += 1
+    return max(end, index + 1)
+
+def _split_thai_units(text):
+    units, index = [], 0
+    while index < len(text):
+        if THAI_RE.match(text[index]):
+            end = _thai_cluster_end(text, index)
+            units.append(text[index:end])
+            index = end
+        else:
+            end = index + 1
+            while end < len(text) and not THAI_RE.match(text[end]):
+                end += 1
+            units.extend(text[index:end].split())
+            index = end
+    return units
+
 def _split_words(text):
-    return list(text) if CJK_RE.search(text) else text.split()
+    if CJK_RE.search(text):
+        return list(text)
+    return _split_thai_units(text) if THAI_RE.search(text) else text.split()
 
 def expand_bold_spans(text):
     """Rewrites text into a fully space-delimited token stream.
@@ -3217,9 +3271,13 @@ def expand_bold_spans(text):
         elif CJK_RE.match(text[i]):
             out.append(text[i])
             i += 1
+        elif THAI_RE.match(text[i]):
+            end = _thai_cluster_end(text, i)
+            out.append(text[i:end])
+            i = end
         else:
             j = i
-            while j < n and text[j:j + 2] != '**' and not CJK_RE.match(text[j]):
+            while j < n and text[j:j + 2] != '**' and not CJK_RE.match(text[j]) and not THAI_RE.match(text[j]):
                 j += 1
             out.extend(text[i:j].split())
             i = j
@@ -3244,7 +3302,7 @@ def _measure_units(text, draw, font, hl_font, space_w):
             visible = tok.replace('**', '')
             # No gap between two adjacent bare CJK characters — real spacing would look
             # like letter-spaced Latin type, which Chinese headlines don't use.
-            gap = 0 if k == 0 or (_is_cjk_char(prev) and _is_cjk_char(visible)) else space_w
+            gap = 0 if k == 0 or (_is_no_space_unit(prev) and _is_no_space_unit(visible)) else space_w
             width += gap + draw.textlength(visible, font=hl_font if tok.startswith('**') else font)
             prev = visible
         units.append((tokens[i:j], width))
@@ -3256,7 +3314,7 @@ def _greedy_lines(units, max_width, space_w):
     lines, current, current_w = [], [], 0
     for tokens, width in units:
         first, last = tokens[0].replace('**', ''), current[-1].replace('**', '') if current else ''
-        gap = 0 if not current or (_is_cjk_char(last) and _is_cjk_char(first)) else space_w
+        gap = 0 if not current or (_is_no_space_unit(last) and _is_no_space_unit(first)) else space_w
         if current and current_w + gap + width > max_width:
             lines.append(current)
             current, current_w = list(tokens), width
@@ -3272,7 +3330,7 @@ def _line_width(units, space_w):
     width, prev = 0, ''
     for i, (tokens, w) in enumerate(units):
         first = tokens[0].replace('**', '')
-        width += w + (0 if i == 0 or (_is_cjk_char(prev) and _is_cjk_char(first)) else space_w)
+        width += w + (0 if i == 0 or (_is_no_space_unit(prev) and _is_no_space_unit(first)) else space_w)
         prev = tokens[-1].replace('**', '')
     return width
 
@@ -3328,7 +3386,7 @@ def _draw_line_centered(draw, line, font, y, width, style, highlight_color, rtl=
         is_hl = part.startswith('**') and part.endswith('**')
         visible = part.replace('**', '')
         w = draw.textlength(visible, font=hl_font if is_hl else font)
-        gap = 0 if i > 0 and _is_cjk_char(prev_visible) and _is_cjk_char(visible) else (space_w if i > 0 else 0)
+        gap = 0 if i > 0 and _is_no_space_unit(prev_visible) and _is_no_space_unit(visible) else (space_w if i > 0 else 0)
         gaps.append(gap)
         segments.append((visible, is_hl, w))
         total_w += w + gap
@@ -3655,6 +3713,7 @@ TENANT_STORE_LOCALE_OVERRIDES = {
     "alahly": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ar": "ar"},
     "alnassr": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ar": "ar"},
     "galatasaray": {"tr": ["tr", "tr-TR"], "pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE"},
+    "besiktas": {"tr": "tr-TR", "pt": "pt-BR"},
     "alhilal": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ar": "ar"},
     "juventus": {"it": "it-IT", "pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "ar": "ar"},
     "bayern": {"de": "de-DE", "pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
@@ -3765,10 +3824,16 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None, m
             if use_dynamic_scenes:
                 locales = [target_locale]
             elif is_multi_locale:
+                if target_locale and target_locale not in config["slides_by_locale"]:
+                    failures.append(f"{tenant}/{target_locale}: locale has no AppScreen copy")
+                    print(f"  ❌ Locale not configured for tenant: {target_locale}")
+                    continue
                 locales = [target_locale] if target_locale else list(config["slides_by_locale"].keys())
             else:
                 if target_locale and target_locale != "pt":
-                    print(f"  ⚠️ Tenant '{tenant}' only has pt slides — ignoring --locale {target_locale}.")
+                    failures.append(f"{tenant}/{target_locale}: locale has no AppScreen copy")
+                    print(f"  ❌ Tenant '{tenant}' has no slides for locale {target_locale}.")
+                    continue
                 locales = ["pt"]
 
             for locale in locales:
@@ -3818,24 +3883,10 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None, m
                 store_locales = resolve_store_locales(tenant, locale)
 
                 sub = ("android", "screenshots") if platform == "android" else ("ios", "screenshots", "ipad" if platform == "ipad" else "iphone")
-                # Per-locale folder first; then the unsuffixed legacy folder (a tenant that
-                # became multi-locale after its captures were taken — 14 clubs on 2026-09-03
-                # were silently skipped here); then the "pt" folder (single-locale tenants,
-                # or a locale whose own capture hasn't been re-run yet). No cross-platform
-                # (ios<->android) fallback anymore -- that silently produced a platform's
-                # published screenshots from the OTHER platform's raw capture (real risk:
-                # the wrong device frame/status-bar baked into a "final" image), removed as
-                # part of the 2026-09-23 raw-captures reorg rather than kept as a safety net.
-                candidates = [os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub, locale),
-                              os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub),
-                              os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub, "pt")]
-                # Prefer candidate that has at least 8 files (the full 8-slide set)
-                raw_screenshots_dir = next((d for d in candidates if len(glob.glob(f"{d}/*.png")) >= len(SLIDE_SOURCES)), None)
-                if not raw_screenshots_dir:
-                    raw_screenshots_dir = next((d for d in candidates if glob.glob(f"{d}/*.png")), None)
-
-                if not raw_screenshots_dir:
-                    print(f"  ⚠️ Raw screenshots folder not found ({locale}): {candidates[0]}")
+                raw_screenshots_dir = os.path.join(ALEFLY_RAW_CAPTURES, tenant, *sub, locale)
+                if not glob.glob(f"{raw_screenshots_dir}/*.png"):
+                    failures.append(f"{tenant}/{locale}/{platform}: locale raw captures missing ({raw_screenshots_dir})")
+                    print(f"  ❌ Raw screenshots folder not found for {locale}: {raw_screenshots_dir}")
                     continue
 
                 # Tenants migrated to the eight-slot spec declare eight captions and are
