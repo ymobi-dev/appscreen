@@ -30,6 +30,14 @@ class PlanScenesTest(unittest.TestCase):
         self.assertEqual(home["sourceFile"], "01-home.png")
         self.assertTrue(home["headline"])
 
+    def test_a_catalog_scene_without_catalog_copy_in_the_locale_uses_the_tenants_positional_caption(self):
+        """es/de/fr home, result and share: the catalog only carries pt/en/it/ru; the tenant slide list covers the rest."""
+        for locale in ("es", "de", "fr"):
+            with self.subTest(locale=locale):
+                home = self.select([HOME, custom()], locale)[0]
+                expected = engine.TENANT_CONFIGS["f1"]["slides_by_locale"][locale][0]
+                self.assertEqual((home["headline"], home["subheadline"]), expected)
+
     def test_the_plan_order_is_kept_not_the_catalog_priority(self):
         out = self.select([custom(), HOME])
         self.assertEqual([s["sceneId"] for s in out], ["quiz-question", "game-list"])

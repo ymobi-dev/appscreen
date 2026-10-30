@@ -3057,7 +3057,7 @@ def _plan_scene_text(entry, field, index):
     return value
 
 
-def scenes_from_manifest(manifest, catalog, content_locale):
+def scenes_from_manifest(manifest, catalog, content_locale, tenant=None):
     """Scenes the manifest names, in its order. An entry is a catalog scene id, or a full custom scene (plan slide)."""
     entries = manifest["scenes"]
     if not isinstance(entries, list) or not entries:
@@ -3065,6 +3065,8 @@ def scenes_from_manifest(manifest, catalog, content_locale):
     if len(entries) > STORE_SCENE_LIMIT:
         raise ValueError(f"manifest has {len(entries)} scenes, at most {STORE_SCENE_LIMIT} fit the Android store listing")
     by_id = {scene["sceneId"]: scene for scene in catalog}
+    tenant_slides = TENANT_CONFIGS.get(tenant, {}).get("slides_by_locale", {}).get(content_locale, [])
+    slide_indexes = {source["file"]: index for index, source in enumerate(SLIDE_SOURCES)}
     seen, scenes = set(), []
     for index, entry in enumerate(entries):
         if not isinstance(entry, dict) or not entry.get("sceneId"):
@@ -3089,6 +3091,11 @@ def scenes_from_manifest(manifest, catalog, content_locale):
         if catalog_scene is None:
             raise ValueError(f"manifest scenes[{index}]: unknown scene {scene_id!r}")
         localized = catalog_scene.get("copy", {}).get(content_locale)
+        if not localized:
+            # Same fallback the catalog path uses: the tenant's positional caption for that capture slot.
+            slot = slide_indexes.get(catalog_scene["sourceFile"])
+            if slot is not None and slot < len(tenant_slides):
+                localized = {"headline": tenant_slides[slot][0], "subheadline": tenant_slides[slot][1]}
         if not localized:
             raise ValueError(f"manifest scenes[{index}]: scene {scene_id!r} has no copy for locale {content_locale!r}")
         scenes.append({
@@ -3120,7 +3127,7 @@ def select_store_scenes(manifest, tenant=None, locale=None):
         catalog = json.load(fh)
     content_locale = manifest.get("contentLocale")
     if "scenes" in manifest:
-        return scenes_from_manifest(manifest, catalog, content_locale)
+        return scenes_from_manifest(manifest, catalog, content_locale, tenant=tenant)
     candidates = []
     tenant_slides = TENANT_CONFIGS.get(tenant, {}).get("slides_by_locale", {})
     slide_indexes = {source["file"]: index for index, source in enumerate(SLIDE_SOURCES)}
