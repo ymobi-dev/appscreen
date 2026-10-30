@@ -3040,6 +3040,64 @@ STORE_SCENES_PATH = os.path.join(os.path.dirname(__file__), "store-scenes.json")
 STORE_SCENE_LIMIT = 8
 
 
+SCENE_CAPTURE_NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*\.png$")
+
+
+def uses_scene_driven_path(manifest):
+    """Profile/top5 manifests and manifests that carry their own `scenes` (a store screenshot plan) pick scenes."""
+    if not isinstance(manifest, dict):
+        return False
+    return "scenes" in manifest or bool(set(manifest.get("activeGameIds") or []) & {"profile", "top5"})
+
+
+def _plan_scene_text(entry, field, index):
+    value = entry.get(field)
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"manifest scenes[{index}] needs a non-empty {field}")
+    return value
+
+
+def scenes_from_manifest(manifest, catalog, content_locale):
+    """Scenes the manifest names, in its order. An entry is a catalog scene id, or a full custom scene (plan slide)."""
+    entries = manifest["scenes"]
+    if not isinstance(entries, list) or not entries:
+        raise ValueError("manifest scenes must be a non-empty list")
+    if len(entries) > STORE_SCENE_LIMIT:
+        raise ValueError(f"manifest has {len(entries)} scenes, at most {STORE_SCENE_LIMIT} fit the Android store listing")
+    by_id = {scene["sceneId"]: scene for scene in catalog}
+    seen, scenes = set(), []
+    for index, entry in enumerate(entries):
+        if not isinstance(entry, dict) or not entry.get("sceneId"):
+            raise ValueError(f"manifest scenes[{index}] needs a sceneId")
+        scene_id = entry["sceneId"]
+        if scene_id in seen:
+            raise ValueError(f"manifest has a duplicate scene id: {scene_id}")
+        seen.add(scene_id)
+        if "sourceFile" in entry or "headline" in entry:
+            source = entry.get("sourceFile")
+            if not isinstance(source, str) or not SCENE_CAPTURE_NAME.fullmatch(source):
+                raise ValueError(f"manifest scenes[{index}] sourceFile must be a plain .png file name, got {source!r}")
+            scenes.append({
+                "sceneId": scene_id, "gameId": entry.get("gameId", "quiz"), "sourceFile": source,
+                "priority": (index + 1) * 10,
+                "headline": _plan_scene_text(entry, "headline", index),
+                "subheadline": _plan_scene_text(entry, "subheadline", index),
+                "action": entry.get("action"),
+            })
+            continue
+        catalog_scene = by_id.get(scene_id)
+        if catalog_scene is None:
+            raise ValueError(f"manifest scenes[{index}]: unknown scene {scene_id!r}")
+        localized = catalog_scene.get("copy", {}).get(content_locale)
+        if not localized:
+            raise ValueError(f"manifest scenes[{index}]: scene {scene_id!r} has no copy for locale {content_locale!r}")
+        scenes.append({
+            **catalog_scene, "priority": (index + 1) * 10,
+            "headline": localized["headline"], "subheadline": localized["subheadline"], "action": localized.get("action"),
+        })
+    return scenes
+
+
 def select_store_scenes(manifest, tenant=None, locale=None):
     """Resolve localized Android scenes by active game ID and editorial priority."""
     if not isinstance(manifest, dict):
@@ -3061,6 +3119,8 @@ def select_store_scenes(manifest, tenant=None, locale=None):
     with open(STORE_SCENES_PATH, encoding="utf-8") as fh:
         catalog = json.load(fh)
     content_locale = manifest.get("contentLocale")
+    if "scenes" in manifest:
+        return scenes_from_manifest(manifest, catalog, content_locale)
     candidates = []
     tenant_slides = TENANT_CONFIGS.get(tenant, {}).get("slides_by_locale", {})
     slide_indexes = {source["file"]: index for index, source in enumerate(SLIDE_SOURCES)}
@@ -3830,7 +3890,7 @@ def run_factory(target_tenant=None, target_platform="all", target_locale=None, m
             raise ValueError("manifest activeGameIds must not contain duplicates")
         if manifest_data.get("storeLocale") not in resolve_store_locales(target_tenant, target_locale):
             raise ValueError("manifest storeLocale is not configured for this tenant and locale")
-    use_dynamic_scenes = bool(manifest_data is not None and set(manifest_data["activeGameIds"]) & {"profile", "top5"})
+    use_dynamic_scenes = uses_scene_driven_path(manifest_data)
     platforms = ["android", "ios", "ipad"] if target_platform == "all" else [target_platform]
 
     print(f"🚀 Alefly screenshot factory (platforms: {', '.join(platforms).upper()})...")
