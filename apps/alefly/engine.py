@@ -1170,6 +1170,33 @@ TENANT_CONFIGS = {
             ]
         }
     },
+    "fenerbahce": {
+        "name": "Fenerbahçe Quiz: Futbol Testi",
+        "colors": [(0, 20, 50), (0, 45, 114), (0, 8, 24)],
+        "highlight_color": (255, 237, 0),
+        "slides_by_locale": {
+            "tr": [
+                ("**Fenerbahçe** bilgini test et", "Kulüp tarihi, kupalar ve derbiler üzerine bilgi yarışması"),
+                ("**Tarih, derbiler ve stadyum** üzerine sorular", "Kuruluştan Şükrü Saracoğlu'na, kupalardan Süper Lig'e"),
+                ("Bir arkadaşını **linkle** meydan oku", "Turu gönder, Fenerbahçe'yi kim daha iyi biliyor gör"),
+                ("Skorun anında, **tur be tur**", "Puan, doğru cevap yüzdesi ve her turdaki gelişimin"),
+                ("Daha çok bilen **zirveye çıkar**", "Sen ve arkadaşların arasında gerçek zamanlı sıralama"),
+                ("Yanlış mı bildin? Cevap **açıklamalı gelir**", "Her soru doğru cevabı ve nedenini gösterir"),
+                ("Takıldın mı? **İpucu kullan**", "Her soru için bir yardım, ihtiyacın olduğunda"),
+                ("Her gün geri gel, **serini koru**", "Günlük seri, sıralama ve tur geçmişin")
+            ],
+            "pt": [
+                ("O quiz do **Fenerbahçe**", "Perguntas sobre a história do clube, os títulos e os clássicos"),
+                ("Perguntas sobre **história, clássicos e o estádio**", "Da fundação ao Şükrü Saracoğlu, dos títulos à Süper Lig"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Fenerbahçe"),
+                ("Resultado na hora, **rodada a rodada**", "Pontuação, taxa de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada pergunta mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por pergunta, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Sequência diária, ranking e histórico das suas rodadas")
+            ]
+        }
+    },
     "sporting": {
         "name": "Sporting CP: Quiz e Perguntas",
         "colors": [(0, 26, 0), (0, 102, 0), (0, 13, 0)],
@@ -3714,6 +3741,7 @@ TENANT_STORE_LOCALE_OVERRIDES = {
     "alnassr": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ar": "ar"},
     "galatasaray": {"tr": ["tr", "tr-TR"], "pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "de": "de-DE"},
     "besiktas": {"tr": "tr-TR", "pt": "pt-BR"},
+    "fenerbahce": {"tr": "tr-TR", "pt": "pt-BR"},
     "alhilal": {"pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "ar": "ar"},
     "juventus": {"it": "it-IT", "pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"], "fr": ["fr-FR", "fr-CA"], "ar": "ar"},
     "bayern": {"de": "de-DE", "pt": ["pt-BR", "pt-PT"], "en": ["en-US", "en-GB", "en-CA", "en-AU", "en-IN", "en-SG", "en-ZA"], "es": ["es-419", "es-ES", "es-US"]},
