@@ -47,7 +47,10 @@ LOCALE_TO_FOLDER = {
     "fr-FR": "fr", "fr-CA": "fr",
     "id": "id", "fil": "fil", "de-DE": "de", "sw": "sw", "vi": "vi",
     "it-IT": "it", "nl-NL": "nl", "sv-SE": "sv",
-    "pl-PL": "pl", "uk-UA": "uk", "am": "am"
+    "pl-PL": "pl", "uk-UA": "uk", "am": "am", "ru-RU": "ru",
+    "ar-SA": "ar", "ar": "ar",
+    "ro-RO": "ro", "ro": "ro",
+    "ko-KR": "ko", "ko": "ko"
 }
 
 # COREOGRAFIA CINEMATOGRÁFICA (8 SLIDES)
@@ -72,6 +75,18 @@ def get_fonts(locale=None):
         if not os.path.exists(f_semi): f_semi = "/System/Library/Fonts/Supplemental/Arial.ttf"
         return ImageFont.truetype(f_bold, 95), ImageFont.truetype(f_semi, 52)
 
+    # Para árabe, usar Arial Bold (suporte nativo árabe completo)
+    if locale in ("ar", "ar-SA"):
+        f_bold = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
+        f_semi = "/System/Library/Fonts/Supplemental/Arial.ttf"
+        return ImageFont.truetype(f_bold, 85), ImageFont.truetype(f_semi, 48)
+
+    # Para coreano, usar Apple SD Gothic Neo
+    if locale in ("ko", "ko-KR"):
+        f_bold = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
+        f_semi = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
+        return ImageFont.truetype(f_bold, 88), ImageFont.truetype(f_semi, 48)
+
     # Para outros idiomas, usar Montserrat (bold no título, regular no
     # subtítulo -- contraste de peso é o que separa manchete de apoio,
     # não precisa mais do glow pra isso)
@@ -89,7 +104,10 @@ def expand_bold_spans(text):
     dourada em cada uma e deixa a quebra de linha normal funcionar."""
     return re.sub(r'\*\*([^*]+)\*\*', lambda m: ' '.join(f'**{w}**' for w in m.group(1).split()), text)
 
-def wrap_text(text, draw, font, max_width):
+def wrap_text(text, draw, font, max_width, is_rtl=False):
+    import arabic_reshaper
+    from bidi.algorithm import get_display
+
     raw_tokens = re.findall(r'\*\*[^*]+\*\*|\S+', text)
     lines = []
     current = []
@@ -97,6 +115,8 @@ def wrap_text(text, draw, font, max_width):
     space_w = draw.textlength(' ', font=font)
     for tok in raw_tokens:
         visible = tok.replace('**', '')
+        if is_rtl:
+            visible = get_display(arabic_reshaper.reshape(visible))
         tok_w = draw.textlength(visible, font=font)
         added = tok_w + (space_w if current else 0)
         if current and current_w + added > max_width:
@@ -110,7 +130,10 @@ def wrap_text(text, draw, font, max_width):
         lines.append(' '.join(current))
     return lines
 
-def _draw_line_centered(draw, line, font, y, width, style):
+def _draw_line_centered(draw, line, font, y, width, style, is_rtl=False):
+    import arabic_reshaper
+    from bidi.algorithm import get_display
+
     space_w = draw.textlength(' ', font=font)
     parts = re.findall(r'\*\*[^*]+\*\*|\S+', line)
     segments = []
@@ -118,11 +141,16 @@ def _draw_line_centered(draw, line, font, y, width, style):
     for i, part in enumerate(parts):
         is_hl = part.startswith('**') and part.endswith('**')
         visible = part.replace('**', '')
+        if is_rtl:
+            visible = get_display(arabic_reshaper.reshape(visible))
         w = draw.textlength(visible, font=font)
         segments.append((visible, is_hl, w))
         total_w += w
         if i < len(parts) - 1:
             total_w += space_w
+
+    if is_rtl:
+        segments.reverse()
 
     x = (width - total_w) / 2
     for visible, is_hl, w in segments:
@@ -160,25 +188,26 @@ def draw_brand_background(canvas, angle_deg=GRADIENT_ANGLE_DEG):
     img = Image.fromarray(out.astype(np.uint8), mode="RGB")
     canvas.paste(img, (0, 0))
 
-def draw_text_block(canvas, headline, subheadline, f_h, f_s):
+def draw_text_block(canvas, headline, subheadline, f_h, f_s, locale=None):
     """Desenha título + subtítulo centralizados e retorna a altura total
     do bloco, pra quem chamou posicionar o mockup do device logo abaixo."""
     draw = ImageDraw.Draw(canvas)
     headline = expand_bold_spans(headline)
     subheadline = expand_bold_spans(subheadline)
-    h_lines = wrap_text(headline, draw, f_h, TEXT_WIDTH)
-    s_lines = wrap_text(subheadline, draw, f_s, TEXT_WIDTH)
+    is_rtl = locale in ("ar", "ar-SA")
+    h_lines = wrap_text(headline, draw, f_h, TEXT_WIDTH, is_rtl=is_rtl)
+    s_lines = wrap_text(subheadline, draw, f_s, TEXT_WIDTH, is_rtl=is_rtl)
     h_lh = int(f_h.size * HEADLINE_LINE_HEIGHT_RATIO)
     s_lh = int(f_s.size * SUBHEAD_LINE_HEIGHT_RATIO)
     gap = int(f_h.size * HEADLINE_SUBHEAD_GAP_RATIO)
 
     curr_y = TEXT_TOP_MARGIN
     for line in h_lines:
-        _draw_line_centered(draw, line, f_h, curr_y, WIDTH, HEADLINE_STYLE)
+        _draw_line_centered(draw, line, f_h, curr_y, WIDTH, HEADLINE_STYLE, is_rtl=is_rtl)
         curr_y += h_lh
     curr_y += gap
     for line in s_lines:
-        _draw_line_centered(draw, line, f_s, curr_y, WIDTH, SUBHEAD_STYLE)
+        _draw_line_centered(draw, line, f_s, curr_y, WIDTH, SUBHEAD_STYLE, is_rtl=is_rtl)
         curr_y += s_lh
 
     return (len(h_lines) * h_lh) + (len(s_lines) * s_lh) + gap
@@ -188,7 +217,7 @@ def process_screenshot(locale, idx, headline, subheadline, input_path, output_pa
     draw_brand_background(canvas)
 
     f_h, f_s = get_fonts(locale)
-    total_text_h = draw_text_block(canvas, headline, subheadline, f_h, f_s)
+    total_text_h = draw_text_block(canvas, headline, subheadline, f_h, f_s, locale=locale)
 
     device_y = TEXT_TOP_MARGIN + total_text_h + (ANCHOR_MARGIN // 2)
     if device_y > DEVICE_Y_MAX: device_y = DEVICE_Y_FALLBACK
@@ -259,6 +288,8 @@ def run_factory(target_platform=None, target_locale=None, target_slide=None):
         for name in possible_names[slide_idx]:
             p = os.path.join(ASSETS_DIR, platform, folder, name)
             if os.path.exists(p): return p
+            p_fb = os.path.join(ASSETS_DIR, "android", folder, name)
+            if os.path.exists(p_fb): return p_fb
         return None
 
     print(f"🚀 Fábrica Bíblia 365 (Filtro: {target_platform or 'Todas'} / {target_locale or 'Todos'} / slide {target_slide or 'todos'})...")
@@ -273,7 +304,9 @@ def run_factory(target_platform=None, target_locale=None, target_slide=None):
         for locale, folder_name in LOCALE_TO_FOLDER.items():
             if target_locale and locale != target_locale: continue
             if locale not in translations: continue
-            if not os.path.exists(os.path.join(platform_asset_dir, folder_name)): continue
+            has_plat_folder = os.path.exists(os.path.join(platform_asset_dir, folder_name))
+            has_android_folder = os.path.exists(os.path.join(ASSETS_DIR, "android", folder_name))
+            if not has_plat_folder and not has_android_folder: continue
 
             print(f"  📦 Locale: {locale}")
             slides = translations[locale]['slides']

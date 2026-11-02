@@ -22,14 +22,18 @@ def manifest(tenant="bible", games=("quiz", "profile"), locale="pt"):
 
 class StoreSceneSelectionTest(unittest.TestCase):
     def test_realmadrid_top5_scenes_cover_every_supported_locale_and_follow_quiz_scenes(self):
-        locales = ("ar", "ca", "de", "en", "es", "fr", "hr", "id", "it", "pt", "ru", "tr", "zh")
+        catalog_path = os.path.join(
+            engine.ALEFLY_REPO_ROOT,
+            "infra", "firebase", "seeds", "top5-games", "realmadrid.catalog.json",
+        )
+        with open(catalog_path, encoding="utf-8") as catalog_file:
+            locales = json.load(catalog_file)["supportedLocales"]
+
         for locale in locales:
             with self.subTest(locale=locale):
-                selected = engine.select_store_scenes(
-                    manifest("realmadrid", ("quiz", "top5"), locale),
-                    tenant="realmadrid",
-                    locale=locale,
-                )
+                data = manifest("realmadrid", ("quiz", "top5"), locale)
+                data["storeLocale"] = engine.resolve_store_locales("realmadrid", locale)[0]
+                selected = engine.select_store_scenes(data, tenant="realmadrid", locale=locale)
                 top5_scenes = [scene for scene in selected if scene["gameId"] == "top5"]
 
                 self.assertEqual([scene["sceneId"] for scene in top5_scenes], [
