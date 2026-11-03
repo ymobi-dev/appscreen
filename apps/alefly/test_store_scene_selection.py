@@ -104,6 +104,24 @@ class StoreSceneSelectionTest(unittest.TestCase):
             question = next(scene for scene in scenes if scene["sceneId"] == "quiz-question")
             self.assertIn(translated_word, question["headline"].lower())
 
+    def test_russian_club_locales_have_eight_screenshot_slides(self):
+        tenants = (
+            "alnassr", "bayern", "besiktas", "chelsea", "fenerbahce",
+            "galatasaray", "juventus", "liverpool", "manchestercity",
+        )
+
+        for tenant in tenants:
+            with self.subTest(tenant=tenant):
+                slides = engine.TENANT_CONFIGS[tenant].get("slides_by_locale", {}).get("ru")
+                self.assertIsNotNone(slides)
+                self.assertEqual(len(slides), 8)
+                self.assertTrue(all(headline and subhead for headline, subhead in slides))
+                scenes = engine.select_store_scenes(
+                    manifest(tenant, games=("quiz",), locale="ru")
+                )
+                self.assertEqual(len(scenes), 8)
+                self.assertTrue(any("\u0400" <= char <= "\u04ff" for char in scenes[0]["headline"]))
+
     def test_top5_captures_resolve_from_the_staged_store_screenshot_folder(self):
         selected = engine.select_store_scenes(manifest("f1", ("quiz", "top5"), "pt"))
         with tempfile.TemporaryDirectory() as temp_dir:
