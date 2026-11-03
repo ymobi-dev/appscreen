@@ -2215,6 +2215,33 @@ TENANT_CONFIGS = {
             ]
         }
     },
+    "cruzazul": {
+        "name": "Quiz para Fãs do Cruz Azul",
+        "colors": [(0, 18, 48), (0, 9, 24), (0, 7, 20)],
+        "highlight_color": (125, 211, 252),
+        "slides_by_locale": {
+            "pt": [
+                ("Desafie seus conhecimentos **do Cruz Azul**", "O quiz sobre títulos, ídolos e história de La Máquina"),
+                ("Perguntas sobre **títulos, ídolos e clássicos**", "Do Clásico Joven aos grandes nomes da Máquina Cementera"),
+                ("Desafie um amigo **por link**", "Envie a partida e veja quem sabe mais do Cruz Azul"),
+                ("Seu placar na hora, **rodada a rodada**", "Pontuação, percentual de acerto e evolução a cada partida"),
+                ("Quem sabe mais **fica no topo**", "Ranking em tempo real entre você e seus amigos"),
+                ("Errou? A resposta vem **explicada**", "Cada questão mostra a certa e o porquê"),
+                ("Travou? **Use uma dica**", "Uma ajuda por questão, quando você precisar"),
+                ("Volte todo dia e **mantenha a sequência**", "Streak diária, ranking e histórico das suas rodadas")
+            ],
+            "es": [
+                ("Ponte a prueba con **el Cruz Azul**", "El quiz sobre títulos, ídolos e historia de La Máquina"),
+                ("Preguntas sobre **títulos, ídolos y clásicos**", "Del Clásico Joven a los grandes nombres de la Máquina Cementera"),
+                ("Reta a un amigo **por enlace**", "Envíale la partida y descubre quién sabe más del Cruz Azul"),
+                ("Tu puntaje al instante, **partida a partida**", "Puntos, porcentaje de acierto y evolución en cada ronda"),
+                ("El que más sabe **llega a la cima**", "Clasificación en tiempo real entre tú y tus amigos"),
+                ("¿Te equivocaste? La respuesta viene **explicada**", "Cada pregunta muestra la correcta y el porqué"),
+                ("¿Te trabaste? **Usa una pista**", "Una ayuda por pregunta, cuando la necesites"),
+                ("Vuelve todos los días y **mantén tu racha**", "Racha diaria, clasificación e historial de tus partidas")
+            ]
+        }
+    },
     "alhilal": {
         "name": "Quiz para Fãs do Al-Hilal",
         "colors": [(0, 17, 38), (0, 80, 179), (0, 6, 13)],
@@ -3820,6 +3847,7 @@ TENANT_STORE_LOCALE_OVERRIDES = {
     "riverplate": {"es": "es-419"},
     "clubamerica": {"es": "es-419"},
     "chivas": {"es": "es-419"},
+    "cruzazul": {"es": "es-419"},
     "atleticomg": {"es": "es-419"},
     "cruzeiro": {"es": "es-419"},
     "internacional": {"es": "es-419"},
